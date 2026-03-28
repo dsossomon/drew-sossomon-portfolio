@@ -1,0 +1,61 @@
+/* This sets the main look of the page */
+body {
+    margin: 0;
+    font-size: 14px;
+    font-family: 'Happy Monkey', sans-serif;
+    background-color: #E5554E; /* That signature Red */
+    color: #FFFFFF; /* White text for contrast */
+}
+
+/* Centers and styles the main titles */
+h1, h2 {
+    font-family: 'Happy Monkey', sans-serif; /* Using Happy Monkey since it's a reliable Google Font */
+    font-size: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* This creates the "Black Box" look for each goalkeeper */
+div.card {
+    background-color: #000000; /* Solid Black */
+    margin: 20px 75px; /* Creates the 75px side margins you wanted */
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: solid 3px #000000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+/* This makes the names inside the cards pop in red */
+div.card h2 {
+    color: #E5554E;
+    text-align: left;
+    margin-top: 0;
+}
+
+/* Styles the paragraphs inside the black cards */
+div.card p {
+    line-height: 1.6;
+}
+
+/* The horizontal lines between cards */
+hr {
+    margin: 20px 75px;
+    border: 0;
+    border-top: 2px solid #FFFFFF;
+}
+
+/* Styles the footer and the link back home */
+#footer {
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+#footer a {
+    color: #FFFFFF;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+#footer a:hover {
+    color: #000000;
+}
