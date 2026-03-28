@@ -248,3 +248,55 @@ body {
     transform: none !important;
     cursor: default !important;
 }
+
+
+
+
+
+
+
+/* --- Global Theme Variables --- */
+:root {
+    --navy: #0a192f;
+    --navy-light: #112240;
+    --blue: #60a5fa; /* This is your NEW Lighter Blue */
+    --white: #ffffff;
+    --bg-gray: #f4f4f4;
+    --green: #16a34a;
+    --silver: #cbd5e1;
+}
+
+/* --- Navigation Logo --- */
+.logo { 
+    color: var(--white); 
+    font-weight: 800; 
+    font-size: 1.4rem; 
+    letter-spacing: 2px;
+    font-family: 'Big Shoulders Display', sans-serif;
+}
+
+/* This targets the specific word SOSSOMON in your HTML */
+.logo span, .hero h1 span {
+    color: var(--blue) !important;
+}
+
+/* --- The Submission Button Fix (Add to bottom) --- */
+.btn-stamp-submit {
+    background-color: var(--blue) !important; /* Uses the lighter blue */
+    color: #ffffff !important;           /* Keeps text white */
+    padding: 15px 30px !important;
+    text-decoration: none !important;
+    border-radius: 5px !important;
+    font-weight: 800 !important;
+    display: inline-block !important;
+    border: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+.btn-stamp-submit:hover {
+    background-color: var(--blue) !important;
+    color: #ffffff !important;
+    transform: none !important;
+    cursor: default !important;
+}
