@@ -300,3 +300,61 @@ body {
     transform: none !important;
     cursor: default !important;
 }
+
+
+
+
+
+
+
+/* --- About Section Styling --- */
+.about-section {
+    max-width: 900px;
+    margin: 48px auto;
+    padding: 36px 28px;
+    background: #ffffff; /* Using white for better readability of your story */
+    border-radius: 16px;
+    box-shadow: 0 6px 32px rgba(10, 25, 47, 0.15);
+    font-family: 'Outfit', sans-serif; /* Matches your site theme */
+}
+
+.about-section h1 {
+    font-size: 2.8rem;
+    color: var(--navy);
+    margin-bottom: 28px;
+    text-align: center;
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 800;
+}
+
+.about-item h2 {
+    font-size: 1.3rem;
+    color: var(--navy);
+    margin-top: 34px;
+    margin-bottom: 12px;
+    font-weight: 700;
+    border-left: 5px solid var(--blue); /* Your Lighter Blue accent */
+    padding-left: 14px;
+    background: #f0f7ff;
+    border-radius: 4px;
+    display: inline-block;
+    padding-right: 15px;
+}
+
+.about-item p {
+    font-size: 1.1rem;
+    color: #222;
+    line-height: 1.8;
+    margin-bottom: 22px;
+}
+
+/* Responsive fixes for mobile devices */
+@media (max-width: 700px) {
+    .about-section {
+        padding: 20px 15px;
+        margin: 20px 10px;
+    }
+    .about-section h1 {
+        font-size: 2rem;
+    }
+}
