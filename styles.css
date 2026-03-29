@@ -358,3 +358,22 @@ body {
         font-size: 2rem;
     }
 }
+
+
+/* Styling for the new Varsity Note Row */
+.varsity-note-row {
+    background: rgba(96, 165, 250, 0.05); /* Very light blue tint */
+}
+
+.varsity-note-text {
+    padding: 20px;
+    font-size: 0.9rem;
+    color: #64748b; /* Professional slate gray */
+    text-align: center;
+    line-height: 1.6;
+    border-top: 1px solid #eee;
+}
+
+.varsity-note-text strong {
+    color: var(--navy);
+}
