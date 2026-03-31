@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=1250">
     <title>Match Highlights | Drew Sossomon</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
@@ -9,12 +10,12 @@
 <body class="stats-page">
 
     <nav id="nav-menu">
-        <div class="logo">DREW <span style="color: var(--blue);">SOSSOMON</span></div>
+        <div class="logo">DREW <span class="last-name">SOSSOMON</span></div>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li> 
             <li class="dropdown">
-                <a href="stats.html">Stats & Film ▾</a>
+                <a href="stats.html" class="dropbtn">Stats & Film ▾</a>
                 <ul class="dropdown-content">
                     <li><a href="stats.html">Full Career Stats</a></li>
                     <li><a href="highlights.html">Match Highlights</a></li>
@@ -23,38 +24,44 @@
         </ul>
     </nav>
 
-    <main class="container">
+    <main class="container" style="width: 1250px; margin: 40px auto; padding: 0 50px;">
         <div style="margin-bottom: 30px;">
             <a href="index.html" class="btn-primary" style="text-decoration: none;">← Back to Home</a>
         </div>
 
-        <h1 class="stats-title" style="color: var(--navy); font-family: 'Big Shoulders Display'; font-size: 3rem;">Match Highlights & Film</h1>
-        <p class="stats-subtitle" style="color: var(--slate); margin-bottom: 30px;">Wake FC 2009 NPL | "The U.S. Wall"</p>
+        <h1 class="stats-title" style="text-align: center; font-family: 'Big Shoulders Display'; font-size: 3.5rem; color: var(--navy); margin-bottom: 10px;">MATCH HIGHLIGHTS & FILM</h1>
+        <p class="stats-subtitle" style="text-align: center; color: var(--blue-dark); font-weight: 700; text-transform: uppercase; margin-bottom: 40px;">Wake FC 2009 NPL | "The U.S. Wall"</p>
 
-        <div style="background: var(--navy); padding: 40px; border-radius: 15px; text-align: center;">
-            <div style="width: 900px; margin: auto; border: 4px solid var(--blue); border-radius: 10px; overflow: hidden; background: #000;">
+        <div style="background: var(--navy); padding: 60px; border-radius: 20px; text-align: center; border: 2px solid var(--blue); box-shadow: 0 20px 40px rgba(10, 25, 47, 0.2);">
+            
+            <div style="width: 900px; margin: 0 auto; border: 4px solid var(--blue); border-radius: 12px; overflow: hidden; background: #000; box-shadow: 0 0 30px rgba(96, 165, 250, 0.3);">
                 <iframe 
                     src="https://drive.google.com/file/d/15y-CXV1IeFJYpgqGfCcqg6Qf6r_eQhGDgbRgw7nAC3Y/preview" 
                     width="900" 
                     height="506" 
                     allow="autoplay" 
-                    style="border: none;">
+                    style="border: none; display: block;">
                 </iframe>
             </div>
             
-            <div style="margin-top: 30px; color: white; text-align: left; max-width: 900px; margin-left: auto; margin-right: auto;">
-                <h3 style="font-family: 'Big Shoulders Display'; color: var(--blue); font-size: 1.8rem;">Film Analysis Notes:</h3>
-                <ul style="font-family: 'Outfit'; line-height: 1.8; color: #cbd5e1;">
-                    <li><strong>Shot Stopping:</strong> High-volume save capacity with elite reaction times.</li>
-                    <li><strong>Distribution:</strong> Dominant left-footed distribution (Long-ball and tactical build-up).</li>
-                    <li><strong>Penalty Record:</strong> 100% Career PK Save Rate (60/60).</li>
-                    <li><strong>Current Status:</strong> All Goalkeeping Highlights 2017-2025. Currently in elite rehab for ACL/Meniscus (Expected return: Late 2026).</li>
+            <div style="margin-top: 50px; color: white; text-align: left; max-width: 900px; margin-left: auto; margin-right: auto;">
+                <h3 style="font-family: 'Big Shoulders Display'; color: var(--blue); font-size: 2.2rem; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-bottom: 20px;">Film Analysis Notes:</h3>
+                <ul style="font-family: 'Outfit'; line-height: 2; color: #cbd5e1; font-size: 1.2rem; list-style-type: none; padding: 0;">
+                    <li style="margin-bottom: 15px;"><strong style="color: white; border-left: 4px solid var(--blue); padding-left: 15px;">Shot Stopping:</strong> High-volume save capacity with elite reaction times and post-save recovery.</li>
+                    <li style="margin-bottom: 15px;"><strong style="color: white; border-left: 4px solid var(--blue); padding-left: 15px;">Distribution:</strong> Dominant left-footed distribution (Long-ball accuracy and tactical build-up).</li>
+                    <li style="margin-bottom: 15px;"><strong style="color: white; border-left: 4px solid var(--blue); padding-left: 15px;">Penalty Record:</strong> 100% Career PK Save Rate (60/60) in tournament play.</li>
+                    <li style="margin-bottom: 15px;"><strong style="color: white; border-left: 4px solid var(--blue); padding-left: 15px;">Current Status:</strong> Archive includes 2017-2025 footage. Currently in elite rehab for ACL (Expected return: Late 2026).</li>
                 </ul>
             </div>
         </div>
+
+        <div style="margin-top: 50px; text-align: center; background: #f1f5f9; padding: 40px; border-radius: 15px;">
+            <h4 style="font-family: 'Big Shoulders Display'; font-size: 1.8rem; color: var(--navy); margin-bottom: 15px;">Interested in full match footage?</h4>
+            <a href="mailto:dsossomon@gmail.com" class="btn-primary" style="text-decoration: none;">Request Full Game Film</a>
+        </div>
     </main>
 
-    <footer>
+    <footer style="text-align: center; padding: 60px 0; color: var(--slate);">
         <p>&copy; 2026 Drew Sossomon | Goalkeeper Career Portfolio</p>
     </footer>
 
