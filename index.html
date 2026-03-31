@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=1250">
     <title>Drew Sossomon | Goalkeeper Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
@@ -9,84 +10,69 @@
 <body>
 
     <nav id="nav-menu">
-        <div class="logo">DREW <span style="color: var(--blue);">SOSSOMON</span></div>
+        <div class="logo">DREW <span class="last-name">SOSSOMON</span></div>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li> 
             <li class="dropdown">
-                <a href="stats.html">Stats & Film ▾</a>
+                <a href="stats.html" class="dropbtn">Stats & Film ▾</a>
                 <ul class="dropdown-content">
                     <li><a href="stats.html">Full Career Stats</a></li>
                     <li><a href="highlights.html">Match Highlights</a></li>
                 </ul>
             </li>
-            <li class="dropdown">
-                <a href="#">Courses ▾</a>
-                <ul class="dropdown-content">
-                    <li><a href="#">Web-dev/Game theory</a></li>
-                    <li><a href="#">Geometry</a></li> 
-                    <li><a href="#">American History</a></li>
-                </ul>
-            </li>
         </ul>
     </nav>
 
-    <header class="hero">
-        <h1>DREW <span style="color: var(--blue);">SOSSOMON</span></h1>
-        <h3>Goalkeeper | Class of 2028 | "The U.S. Wall"</h3>
-        <p style="font-size: 1.1rem; color: #cbd5e1; margin-bottom: 25px;">Wake FC 2009 NPL | 100% Career PK Save Rate</p>
-        <div class="hero-btns">
-            <a href="stats.html" class="btn-primary">View Full Stats</a>
-            <a href="highlights.html" class="btn-secondary">Watch Highlights</a>
+    <header class="hero" style="width: 1250px; margin: 0 auto; display: flex; align-items: center; padding: 60px 50px; min-height: 80vh;">
+        <div class="hero-content" style="display: flex; gap: 50px; align-items: center;">
+            <div class="hero-text" style="flex: 1;">
+                <span class="badge" style="background: var(--blue); color: var(--navy); padding: 5px 15px; border-radius: 4px; font-weight: 800; text-transform: uppercase; font-size: 0.8rem;">Class of 2028</span>
+                <h1 style="font-family: 'Big Shoulders Display'; font-size: 5rem; line-height: 0.9; margin: 20px 0; color: var(--navy);">ANDREW <span class="last-name">SOSSOMON</span></h1>
+                <p class="tagline" style="font-size: 1.5rem; font-weight: 700; color: var(--blue-dark); margin-bottom: 5px;">"The U.S. Wall" | Left-Footed Goalkeeper</p>
+                <p style="font-size: 1.1rem; color: var(--slate); margin-bottom: 30px;">Wake FC 09 NPL | Elite Shot Stopper | 100% PK Save Rate</p>
+                
+                <div class="hero-actions" style="display: flex; gap: 20px;">
+                    <a href="highlights.html" class="btn-primary" style="padding: 15px 30px; font-size: 1rem;">Watch Match Film</a>
+                    <a href="stats.html" class="btn-secondary" style="padding: 15px 30px; font-size: 1rem; border: 2px solid var(--navy); color: var(--navy); text-decoration: none; font-weight: 700; border-radius: 6px;">View Career Stats</a>
+                </div>
+            </div>
+            <div class="hero-image" style="flex: 1; text-align: right;">
+                <img src="Drew1.png" alt="Drew Sossomon" style="width: 100%; max-width: 500px; border-radius: 20px; box-shadow: 20px 20px 0px var(--navy);">
+            </div>
         </div>
     </header>
 
-    <main class="container">
-        
-        <section id="assignments">
-            <h2 class="section-label">Webpage Submissions</h2>
-            <div class="work-grid">
-                <div class="work-card">
-                    <p>Headings Practice</p>
-                    <a href="./wdsub/heading.html">View Project</a>
-                </div>
-                <div class="work-card">
-                    <p>Recipe Project</p>
-                    <a href="./wdsub/recipe.html">View Project</a>
-                </div>
-                <div class="work-card">
-                    <p>Anchors Demo</p>
-                    <a href="./wdsub/anchors.html">View Project</a>
-                </div>
-                <div class="work-card">
-                    <p>Poem Project</p>
-                    <a href="./wdsub/poem.html">View Project</a>
-                </div>
-                <div class="work-card">
-                    <p>Top 5 Goalkeepers</p>
-                    <a href="./wdsub/reviews.html">View Project</a>
-                </div>
-                <div class="work-card">
-                    <p>Text Formatting</p>
-                    <a href="./wdsub/formatting.html">View Project</a>
-                </div>
-            </div>
-        </section>
+    <section class="quick-stats" style="background: var(--navy); display: flex; justify-content: space-around; padding: 40px 0; color: white; width: 1250px; margin: 0 auto; border-radius: 15px;">
+        <div class="stat-card" style="text-align: center;">
+            <h3 style="font-size: 2.5rem; margin: 0; color: var(--blue);">79-41</h3>
+            <p style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Career Record</p>
+        </div>
+        <div class="stat-card" style="text-align: center;">
+            <h3 style="font-size: 2.5rem; margin: 0; color: var(--blue);">44</h3>
+            <p style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Shutouts</p>
+        </div>
+        <div class="stat-card" style="text-align: center;">
+            <h3 style="font-size: 2.5rem; margin: 0; color: var(--blue);">2,290+</h3>
+            <p style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Career Saves</p>
+        </div>
+        <div class="stat-card" style="text-align: center;">
+            <h3 style="font-size: 2.5rem; margin: 0; color: var(--blue);">60/60</h3>
+            <p style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">PKs Saved</p>
+        </div>
+    </section>
 
-        <footer class="instructor-footer">
-            <h3 style="font-family: 'Big Shoulders Display', sans-serif; font-size: 2rem; margin-bottom: 20px;">Instructor Submission</h3>
-            
-            <a href="mailto:nathaneal.stamp@youngsvilleacademy.org?cc=student.as@youngsvilleacademy.org&subject=Live Code Submission - Sossomon" 
-               class="btn-secondary">
-                Submit Live Code to Mr. Stamp
-            </a>
-            
-            <div style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
-                <p style="color: #cbd5e1; font-size: 0.9rem;">&copy; 2026 Drew Sossomon | Student-Athlete Portfolio</p>
-            </div>
-        </footer>
+    <section style="width: 1250px; margin: 50px auto; padding: 30px; background: #fff; border: 2px solid #e2e8f0; border-radius: 15px; display: flex; align-items: center; gap: 20px;">
+        <div style="font-size: 2.5rem;">🔄</div>
+        <div>
+            <h4 style="margin: 0; color: var(--navy); font-size: 1.2rem;">Current Status: Elite Recovery Phase</h4>
+            <p style="margin: 5px 0 0; color: var(--slate);">Post-Surgery (ACL/Meniscus) - Currently crushing strength & mobility milestones. <strong>Return to Play: Late 2026.</strong></p>
+        </div>
+    </section>
 
-    </main>
+    <footer style="text-align: center; padding: 50px; color: var(--slate);">
+        <p>&copy; 2026 Drew Sossomon | Goalkeeper Career Portfolio</p>
+    </footer>
 
 </body>
 </html>
