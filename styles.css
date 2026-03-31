@@ -12,7 +12,7 @@
 }
 
 /* --- THE DESKTOP LOCK --- */
-/* This forces the page to stay at 1250px regardless of the device */
+/* Forces the page to stay at 1250px to prevent mobile stacking */
 html, body {
     width: 1250px !important;
     min-width: 1250px !important;
@@ -21,7 +21,7 @@ html, body {
     background-color: var(--bg-gray);
     color: #1e293b;
     line-height: 1.6;
-    overflow-x: auto; /* Allows horizontal scrolling if the screen is smaller than 1250px */
+    overflow-x: auto; 
 }
 
 /* Global Branding */
@@ -54,6 +54,7 @@ html, body {
     gap: 30px;
     margin: 0;
     padding: 0;
+    align-items: center;
 }
 
 .nav-links a {
@@ -73,22 +74,24 @@ html, body {
     display: none;
     position: absolute;
     background: var(--navy-light);
-    min-width: 200px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-    border-radius: 4px;
+    min-width: 220px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    border-radius: 6px;
     top: 100%;
     left: 0;
     padding: 10px 0;
     list-style: none;
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
 .dropdown:hover .dropdown-content { display: block; }
 
 .dropdown-content li a {
-    padding: 12px 20px;
+    padding: 10px 20px;
     display: block;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: white;
+    text-decoration: none;
 }
 
 .dropdown-content li a:hover {
@@ -96,7 +99,26 @@ html, body {
     color: var(--blue);
 }
 
-/* --- Stats & Page Layout --- */
+/* Dropdown Headers (For Athletics vs Academics) */
+.dropdown-header {
+    padding: 8px 20px 4px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    opacity: 0.8;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 8px 0;
+}
+
+/* --- Stats & Hero Layout --- */
+.container { width: 1250px; margin: 0 auto; }
+
 .stats-container {
     width: 1150px;
     margin: 40px auto;
@@ -113,15 +135,6 @@ html, body {
     font-size: 3rem; 
     font-family: 'Big Shoulders Display', sans-serif;
     text-transform: uppercase;
-}
-
-.stats-subtitle { 
-    text-align: center; 
-    color: var(--blue-dark); 
-    font-weight: 700;
-    margin-bottom: 40px; 
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
 /* --- Vitals Grid --- */
@@ -142,30 +155,10 @@ html, body {
 .vitals-item span { display: block; font-size: 1.1rem; font-weight: 700; margin-top: 5px; color: white; }
 
 /* --- Table Styling --- */
-.section-label {
-    color: var(--navy);
-    border-left: 6px solid var(--blue);
-    padding-left: 15px;
-    margin: 50px 0 20px;
-    font-size: 1.8rem;
-    font-family: 'Big Shoulders Display', sans-serif;
-    text-transform: uppercase;
-}
-
-.table-wrapper { 
-    margin-bottom: 30px; 
-    border-radius: 8px; 
-    border: 1px solid #e2e8f0; 
-    overflow: hidden;
-}
-
 .navy-theme-table { width: 100%; border-collapse: collapse; }
-.navy-theme-table th { background: var(--navy); color: white; padding: 18px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
-.navy-theme-table td { padding: 15px; border-bottom: 1px solid #e2e8f0; text-align: center; font-size: 1rem; }
-
-.stat-label { text-align: left !important; font-weight: 700; background: #f1f5f9; color: var(--navy); width: 220px; }
-.bold-navy { font-weight: 800; color: var(--navy); font-size: 1.2rem; }
-.record-tag { background: var(--navy); color: white; padding: 4px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: 700; margin-right: 5px; }
+.navy-theme-table th { background: var(--navy); color: white; padding: 18px; text-transform: uppercase; font-size: 0.8rem; }
+.navy-theme-table td { padding: 15px; border-bottom: 1px solid #e2e8f0; text-align: center; }
+.stat-label { text-align: left !important; font-weight: 700; background: #f1f5f9; color: var(--navy); }
 
 /* --- Buttons --- */
 .btn-primary {
@@ -175,9 +168,9 @@ html, body {
     text-decoration: none;
     border-radius: 6px;
     font-weight: 700;
-    display: inline-block;
-    transition: 0.3s ease;
+    transition: 0.3s;
     border: none;
+    cursor: pointer;
 }
 
 .btn-primary:hover {
@@ -185,22 +178,15 @@ html, body {
     transform: translateY(-2px);
 }
 
-.pk-badge {
-    background: var(--green);
-    color: white;
-    padding: 3px 10px;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    font-weight: 800;
-    text-transform: uppercase;
+.btn-secondary {
+    display: inline-block;
+    transition: 0.3s;
 }
 
-/* --- Contact Section --- */
-.contact-section { background: var(--navy); padding: 50px; border-radius: 12px; margin-top: 50px; }
-.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-.contact-card { background: var(--navy-light); color: white; padding: 30px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); }
-.card-tag { background: var(--blue-dark); padding: 5px 15px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; }
+.btn-secondary:hover {
+    background: #f1f5f9;
+    transform: translateY(-2px);
+}
 
-.btn-action { display: inline-block; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: 700; margin-top: 20px; transition: 0.3s; }
-.main-btn { background: var(--blue-dark); color: white; }
-.alt-btn { background: white; color: var(--navy); margin-left: 10px; }
+/* --- Footer --- */
+footer { text-align: center; padding: 60px 0; color: var(--slate); }
