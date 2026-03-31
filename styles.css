@@ -1,54 +1,149 @@
-/* --- 1. THEME VARIABLES --- */
 :root {
     --navy: #0a192f;
-    --navy-light: #112240;
-    --blue-bright: #60a5fa; 
-    --blue-dark: #007bff;
+    --blue: #007bff;
     --white: #ffffff;
     --bg-gray: #f4f4f4;
-    --green: #16a34a;
-    --slate: #64748b;
 }
 
-/* --- 2. GLOBAL RESET --- */
 body {
     margin: 0;
-    padding: 0;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--bg-gray);
     color: #333;
-    line-height: 1.6;
 }
 
-/* --- 3. NAVIGATION --- */
+/* Nav Menu */
 #nav-menu {
     background: var(--navy);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 5%;
+    padding: 10px 5%;
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
-.logo { 
-    color: var(--white); 
-    font-weight: 800; 
-    font-size: 1.6rem; 
-    letter-spacing: 2px;
-    font-family: 'Big Shoulders Display', sans-serif;
-    text-decoration: none;
+.logo { color: white; font-weight: bold; font-size: 1.4rem; letter-spacing: 2px; 
+i;
 }
 
-.logo span { color: var(--blue-bright); }
+.nav-links { list-style: none; display: flex; margin: 0; }
+.nav-links li { padding: 0 15px; position: relative; }
+.nav-links a { color: white; text-decoration: none; font-weight: 500; transition: 0.3s; }
+.nav-links a:hover { color: var(--blue); }
 
-/* --- 4. MAIN STATS CONTAINER --- */
+/* Dropdown Menu */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: white;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    list-style: none;
+    padding: 10px 0;
+    top: 100%;
+    left: 0;
+}
+
+.dropdown-content li { width: 100%; padding: 5px 20px; box-sizing: border-box; }
+.dropdown-content li a { color: var(--navy); display: block; }
+.dropdown:hover .dropdown-content { display: block; }
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.7)), 
+ url('https://mail.google.com/mail/u/0/popout?ver=1kb54q60x21o5#attid%253Datt_19d2c2f8524c008a_0.1_24cf76ec_d346563b_4a31984f_d929d184_d4e0249c%25252FDrew1.JPEG');
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero h1 { font-size: 3.5rem; margin: 0; text-transform: uppercase; }
+
+/* Content Layout */
+.container { max-width: 1000px; margin: auto; padding: 40px 20px; }
+.work-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin-top: 20px; }
+
+.work-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border-top: 4px solid var(--blue);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.work-card a { color: var(--blue); font-weight: bold; text-decoration: none; }
+
+.btn-primary, .btn-contact {
+    background: var(--blue);
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.btn-secondary {
+    border: 2px solid white;
+    color: white;
+    padding: 10px 23px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+
+
+
+
+:root {
+    --navy: #0a192f;
+    --navy-light: #112240;
+    --blue: #007bff;
+    --green: #16a34a; 
+    --white: #ffffff;
+    --bg-gray: #eaeff2;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-gray);
+    margin: 0;
+    padding: 20px;
+}
+
+/* Bright Blue Border Button */
+.btn-primary {
+    background: transparent;
+    color: var(--blue);
+    padding: 10px 22px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    display: inline-block;
+    border: 2px solid var(--blue);
+    transition: 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.btn-primary:hover {
+    background: var(--blue);
+    color: white;
+}
+
 .stats-container {
     max-width: 1150px;
-    margin: 40px auto;
+    margin: auto;
     background: white;
-    padding: 40px;
+    padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 25px rgba(0,0,0,0.1);
 }
@@ -56,196 +151,229 @@ body {
 .stats-title { 
     text-align: center; 
     color: var(--navy); 
-    margin: 0;
+    margin-top: 20px; 
     font-weight: 800; 
-    font-size: 3rem; 
-    font-family: 'Big Shoulders Display', sans-serif;
-    text-transform: uppercase;
+    font-size: 2.2rem; 
 }
 
 .stats-subtitle { 
     text-align: center; 
-    color: var(--blue-dark); 
-    font-weight: 700;
-    margin-bottom: 40px; 
+    color: var(--blue); 
+    font-weight: 600;
+    margin-bottom: 30px; 
 }
 
-/* VITALS GRID (Top Navy Box) */
 .vitals-navy-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 15px;
     background: var(--navy);
     color: white;
-    padding: 30px;
+    padding: 25px;
     border-radius: 8px;
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
-.vitals-item { font-size: 0.75rem; text-transform: uppercase; color: #cbd5e1; letter-spacing: 1px; }
-.vitals-item span { display: block; font-size: 1.1rem; font-weight: bold; margin-top: 5px; color: white; }
+.vitals-item { font-size: 0.8rem; text-transform: uppercase; color: #cbd5e1; }
+.vitals-item span { display: block; font-size: 1.05rem; font-weight: bold; margin-top: 5px; color: white; }
 
-/* --- 5. TABLES --- */
 .section-label {
     color: var(--navy);
-    border-left: 6px solid var(--blue-dark);
+    border-left: 5px solid var(--blue);
     padding-left: 15px;
-    margin: 50px 0 20px;
-    font-size: 1.8rem;
-    font-weight: 800;
-    font-family: 'Big Shoulders Display', sans-serif;
-    text-transform: uppercase;
+    margin: 40px 0 15px;
+    font-size: 1.4rem;
+    font-weight: bold;
 }
 
-.table-wrapper { 
-    overflow-x: auto; 
-    margin-bottom: 30px; 
-    border-radius: 8px; 
-    border: 1px solid #eee; 
-}
+.table-wrapper { overflow-x: auto; margin-bottom: 20px; border-radius: 8px; border: 1px solid #eee; }
+.navy-theme-table { width: 100%; border-collapse: collapse; min-width: 800px; }
+.navy-theme-table th { background: var(--navy); color: white; padding: 15px; text-transform: uppercase; font-size: 0.8rem; }
+.navy-theme-table td { padding: 12px; border-bottom: 1px solid #eee; text-align: center; }
 
-.navy-theme-table { width: 100%; border-collapse: collapse; min-width: 900px; }
-.navy-theme-table th { background: var(--navy); color: white; padding: 18px; text-transform: uppercase; font-size: 0.85rem; }
-.navy-theme-table td { padding: 15px; border-bottom: 1px solid #eee; text-align: center; }
-
+/* Table breakdown styling */
 .stat-label { text-align: left !important; font-weight: bold; background: #f8fafc; color: var(--navy); }
-.bold-navy { font-weight: 800; color: var(--navy); font-size: 1.15rem; }
+.bold-navy { font-weight: bold; color: var(--navy); font-size: 1.1rem; }
+.record-tag { background: var(--navy); color: white; padding: 2px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+.sub-label { color: #64748b; font-size: 0.85rem; font-style: italic; }
 
-/* --- 6. RECRUITMENT CONTACTS (Desktop Layout) --- */
-.contact-section { 
-    background: var(--navy); 
-    padding: 50px; 
-    border-radius: 12px; 
-    margin-top: 50px; 
-}
-
-.contact-grid { 
-    display: flex; 
-    justify-content: center;
-    gap: 30px; 
-}
-
-.contact-card { 
-    flex: 1; 
-    max-width: 500px;
-    background: var(--navy-light); 
-    color: white; 
-    padding: 35px; 
-    border-radius: 12px; 
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.card-tag { 
-    display: inline-block;
-    background: var(--blue-dark); 
-    padding: 5px 12px; 
-    border-radius: 4px; 
-    font-size: 0.7rem; 
-    text-transform: uppercase; 
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.agent-tag { background: var(--slate); }
-
-.contact-card h3 {
-    margin: 0 0 10px 0;
-    font-size: 1.8rem;
-    font-family: 'Big Shoulders Display', sans-serif;
-}
-
-.contact-card p { color: #94a3b8; margin-bottom: 25px; }
-
-.card-actions { display: flex; gap: 15px; }
-
-.btn-action { 
-    padding: 12px 20px; 
-    border-radius: 6px; 
-    text-decoration: none; 
-    font-weight: bold; 
-    transition: 0.3s; 
-}
-
-.main-btn { background: var(--blue-dark); color: white; }
-.alt-btn { background: white; color: var(--navy); }
-
-.main-btn:hover, .alt-btn:hover { opacity: 0.8; transform: translateY(-2px); }
-
-/* --- 7. BUTTONS & BADGES --- */
-.btn-primary {
-    background: transparent;
-    color: var(--blue-dark);
-    padding: 10px 22px;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: bold;
-    display: inline-block;
-    border: 2px solid var(--blue-dark);
-    margin-bottom: 20px;
-}
+/* Contact Cards */
+.contact-section { background: var(--navy); padding: 40px; border-radius: 12px; margin-top: 40px; }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.contact-card { background: var(--navy-light); color: white; padding: 25px; border-radius: 10px; }
+.card-tag { background: var(--blue); padding: 4px 12px; border-radius: 4px; font-size: 0.7rem; text-transform: uppercase; }
+.agent-tag { background: #64748b; }
+.btn-action { display: inline-block; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; margin-top: 15px; }
+.main-btn { background: var(--blue); color: white; }
+.alt-btn { background: white; color: var(--navy); margin-left: 10px; }
 
 .pk-badge {
     background: var(--green);
     color: white;
     padding: 2px 8px;
     border-radius: 4px;
-    font-size: 0.75rem;
-    font-weight: 900;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-left: 10px;
 }
 
-/* --- 8. DROPDOWN NAVIGATION --- */
 
-/* The container for the whole dropdown */
-.dropdown {
-    position: relative;
-    display: inline-block;
+
+
+
+
+/* --- Final Submission Button Fix --- */
+.btn-stamp-submit {
+    background-color: #007bff !important; /* Professional Blue */
+    color: #ffffff !important;           /* Pure White Text */
+    padding: 15px 30px !important;
+    text-decoration: none !important;
+    border-radius: 5px !important;
+    font-weight: 800 !important;
+    display: inline-block !important;
+    border: none !important;
+    
+    /* This removes ALL hover animations and movements */
+    transition: none !important;
+    transform: none !important;
+    box-shadow: none !important;
 }
 
-/* The clickable/hoverable link */
-.dropbtn {
-    color: var(--white);
-    text-decoration: none;
-    font-weight: 600;
-    padding: 10px 15px;
-    transition: 0.3s;
+/* This ensures the button does NOT change when the mouse touches it */
+.btn-stamp-submit:hover {
+    background-color: #007bff !important;
+    color: #ffffff !important;
+    transform: none !important;
+    cursor: default !important;
 }
 
-/* The actual menu (hidden by default) */
-.dropdown-content {
-    display: none; /* Hides the menu */
-    position: absolute;
-    background-color: var(--navy-light);
-    min-width: 200px;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-    z-index: 1001; /* Higher than the nav bar */
+
+
+
+
+
+
+/* --- Global Theme Variables --- */
+:root {
+    --navy: #0a192f;
+    --navy-light: #112240;
+    --blue: #60a5fa; /* This is your NEW Lighter Blue */
+    --white: #ffffff;
+    --bg-gray: #f4f4f4;
+    --green: #16a34a;
+    --silver: #cbd5e1;
+}
+
+/* --- Navigation Logo --- */
+.logo { 
+    color: var(--white); 
+    font-weight: 800; 
+    font-size: 1.4rem; 
+    letter-spacing: 2px;
+    font-family: 'Big Shoulders Display', sans-serif;
+}
+
+/* This targets the specific word SOSSOMON in your HTML */
+.logo span, .hero h1 span {
+    color: var(--blue) !important;
+}
+
+/* --- The Submission Button Fix (Add to bottom) --- */
+.btn-stamp-submit {
+    background-color: var(--blue) !important; /* Uses the lighter blue */
+    color: #ffffff !important;           /* Keeps text white */
+    padding: 15px 30px !important;
+    text-decoration: none !important;
+    border-radius: 5px !important;
+    font-weight: 800 !important;
+    display: inline-block !important;
+    border: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+.btn-stamp-submit:hover {
+    background-color: var(--blue) !important;
+    color: #ffffff !important;
+    transform: none !important;
+    cursor: default !important;
+}
+
+
+
+
+
+
+
+/* --- About Section Styling --- */
+.about-section {
+    max-width: 900px;
+    margin: 48px auto;
+    padding: 36px 28px;
+    background: #ffffff; /* Using white for better readability of your story */
+    border-radius: 16px;
+    box-shadow: 0 6px 32px rgba(10, 25, 47, 0.15);
+    font-family: 'Outfit', sans-serif; /* Matches your site theme */
+}
+
+.about-section h1 {
+    font-size: 2.8rem;
+    color: var(--navy);
+    margin-bottom: 28px;
+    text-align: center;
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 800;
+}
+
+.about-item h2 {
+    font-size: 1.3rem;
+    color: var(--navy);
+    margin-top: 34px;
+    margin-bottom: 12px;
+    font-weight: 700;
+    border-left: 5px solid var(--blue); /* Your Lighter Blue accent */
+    padding-left: 14px;
+    background: #f0f7ff;
     border-radius: 4px;
-    top: 100%; /* Positions it right below the nav */
-    left: 0;
+    display: inline-block;
+    padding-right: 15px;
 }
 
-/* Links inside the dropdown */
-.dropdown-content a {
-    color: var(--white);
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+.about-item p {
+    font-size: 1.1rem;
+    color: #222;
+    line-height: 1.8;
+    margin-bottom: 22px;
+}
+
+/* Responsive fixes for mobile devices */
+@media (max-width: 700px) {
+    .about-section {
+        padding: 20px 15px;
+        margin: 20px 10px;
+    }
+    .about-section h1 {
+        font-size: 2rem;
+    }
+}
+
+
+/* Styling for the new Varsity Note Row */
+.varsity-note-row {
+    background: rgba(96, 165, 250, 0.05); /* Very light blue tint */
+}
+
+.varsity-note-text {
+    padding: 20px;
     font-size: 0.9rem;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: #64748b; /* Professional slate gray */
+    text-align: center;
+    line-height: 1.6;
+    border-top: 1px solid #eee;
 }
 
-/* Hover effect on dropdown links */
-.dropdown-content a:hover {
-    background-color: var(--blue-dark);
-    color: var(--white);
-}
-
-/* SHOW the menu when hovering over the parent */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* Visual cue for the hover state on the main button */
-.dropdown:hover .dropbtn {
-    color: var(--blue-bright);
+.varsity-note-text strong {
+    color: var(--navy);
 }
