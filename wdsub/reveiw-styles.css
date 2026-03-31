@@ -1,50 +1,70 @@
-/* This sets the main look of the page */
+/* --- Original Schoolwork Style & Colors --- */
 body {
     margin: 0;
     font-size: 14px;
     font-family: 'Happy Monkey', sans-serif;
-    background-color: #E5554E; /* That signature Red */
-    color: #FFFFFF; /* White text for contrast */
+    background-color: #E5554E; /* Your Original Red */
+    color: #FFFFFF; /* White text */
 }
 
-/* Centers and styles the main titles */
+/* Navigation area for the button */
+#nav-bar {
+    padding: 20px 75px;
+    background-color: rgba(0,0,0,0.1); /* Subtle dark bar */
+    margin-bottom: 20px;
+}
+
+/* The Blue Button with White Border */
+.back-btn {
+    background-color: #60a5fa; /* Your Lighter Blue */
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: 2px solid #FFFFFF; /* White Border */
+    border-radius: 5px;
+    display: inline-block;
+    font-family: 'Outfit', sans-serif;
+}
+
+.back-btn:hover {
+    background-color: #ffffff;
+    color: #60a5fa;
+}
+
 h1, h2 {
-    font-family: 'Happy Monkey', sans-serif; /* Using Happy Monkey since it's a reliable Google Font */
+    font-family: 'Happy Monkey', sans-serif;
     font-size: 2rem;
     text-align: center;
-    text-transform: uppercase;
 }
 
-/* This creates the "Black Box" look for each goalkeeper */
+/* Original Black Card Style */
 div.card {
     background-color: #000000; /* Solid Black */
-    margin: 20px 75px; /* Creates the 75px side margins you wanted */
+    margin: 20px 75px; /* Your 75px margins */
     padding: 1.5rem;
     border-radius: 8px;
     border: solid 3px #000000;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-/* This makes the names inside the cards pop in red */
+/* Red headings inside cards */
 div.card h2 {
     color: #E5554E;
     text-align: left;
     margin-top: 0;
 }
 
-/* Styles the paragraphs inside the black cards */
 div.card p {
     line-height: 1.6;
 }
 
-/* The horizontal lines between cards */
+/* Original White Lines */
 hr {
     margin: 20px 75px;
     border: 0;
     border-top: 2px solid #FFFFFF;
 }
 
-/* Styles the footer and the link back home */
 #footer {
     text-align: center;
     padding-bottom: 40px;
@@ -53,9 +73,4 @@ hr {
 #footer a {
     color: #FFFFFF;
     font-weight: bold;
-    text-decoration: underline;
-}
-
-#footer a:hover {
-    color: #000000;
 }
