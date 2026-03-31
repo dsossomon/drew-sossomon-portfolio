@@ -1,150 +1,227 @@
-/* --- GLOBAL THEME & VARIABLES --- */
+/* --- Global Theme Variables --- */
 :root {
     --navy: #0a192f;
-    --navy-light: #12243d;
-    --blue: #007bff;
-    --blue-dark: #0056b3;
-    --slate: #64748b;
-    --bg-gray: #f8fafc;
+    --navy-light: #112240;
+    --blue: #60a5fa; 
+    --blue-dark: #007bff;
     --white: #ffffff;
+    --bg-gray: #f8fafc;
+    --green: #16a34a;
+    --slate: #64748b;
+    --gold: #fbbf24;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
+/* --- THE DESKTOP LOCK --- */
+/* Forces the page to stay at 1250px to prevent mobile stacking */
+html, body {
+    width: 1250px !important;
+    min-width: 1250px !important;
+    margin: 0 auto;
     font-family: 'Outfit', sans-serif;
     background-color: var(--bg-gray);
-    color: var(--navy);
+    color: #1e293b;
     line-height: 1.6;
-    width: 1250px; /* Desktop Lock */
-    margin: 0 auto;
-    overflow-x: hidden;
+    overflow-x: auto; 
 }
 
-/* --- NAVIGATION --- */
+/* Global Branding */
+.last-name { color: var(--blue) !important; }
+
+/* --- Navigation Bar --- */
 #nav-menu {
     background: var(--navy);
-    padding: 20px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 15px 50px;
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
-.logo {
-    color: var(--white);
+.logo { 
+    color: var(--white); 
+    font-weight: 800; 
+    font-size: 1.6rem; 
+    letter-spacing: 2px;
     font-family: 'Big Shoulders Display', sans-serif;
-    font-size: 2rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
-
-.last-name {
-    color: var(--blue);
+    text-transform: uppercase;
 }
 
 .nav-links {
-    display: flex;
     list-style: none;
+    display: flex;
     gap: 30px;
+    margin: 0;
+    padding: 0;
     align-items: center;
 }
 
 .nav-links a {
-    color: var(--white);
+    color: white;
     text-decoration: none;
     font-weight: 600;
+    font-size: 1rem;
     transition: 0.3s;
 }
 
-.nav-links a:hover {
-    color: var(--blue);
-}
+.nav-links a:hover { color: var(--blue); }
 
-/* Dropdown Menu Styles */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
+/* --- Dropdown Logic --- */
+.dropdown { position: relative; }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: var(--white);
+    background: var(--navy-light);
     min-width: 220px;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-    z-index: 1;
-    border-radius: 8px;
-    padding: 10px 0;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    border-radius: 6px;
     top: 100%;
-}
-
-.dropdown-content li {
+    left: 0;
+    padding: 10px 0;
     list-style: none;
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
-.dropdown-content a {
-    color: var(--navy) !important;
-    padding: 12px 20px;
+.dropdown:hover .dropdown-content { display: block; }
+
+.dropdown-content li a {
+    padding: 10px 20px;
     display: block;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    color: white;
+    text-decoration: none;
 }
 
-.dropdown-content a:hover {
-    background-color: #f1f5f9;
-    color: var(--blue) !important;
+.dropdown-content li a:hover {
+    background: rgba(96, 165, 250, 0.1);
+    color: var(--blue);
 }
 
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
+/* Dropdown Headers (For Athletics vs Academics) */
 .dropdown-header {
-    padding: 8px 20px;
+    padding: 8px 20px 4px;
     font-size: 0.7rem;
     text-transform: uppercase;
+    color: var(--blue);
     font-weight: 800;
-    color: var(--slate);
+    letter-spacing: 1.5px;
+    opacity: 0.8;
 }
 
 .dropdown-divider {
     height: 1px;
-    background: #e2e8f0;
-    margin: 5px 0;
+    background: rgba(255,255,255,0.1);
+    margin: 8px 0;
 }
 
-/* --- RECRUITMENT CONTACTS (NCSA STYLE) --- */
+/* --- Stats & Hero Layout --- */
+.container { width: 1250px; margin: 0 auto; }
+
+.stats-container {
+    width: 1150px;
+    margin: 40px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.stats-title { 
+    text-align: center; 
+    color: var(--navy); 
+    font-weight: 800; 
+    font-size: 3rem; 
+    font-family: 'Big Shoulders Display', sans-serif;
+    text-transform: uppercase;
+}
+
+/* --- Vitals Grid --- */
+.vitals-navy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    background: var(--navy);
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 4px solid var(--blue);
+}
+
+.vitals-item { font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; letter-spacing: 1px; }
+.vitals-item span { display: block; font-size: 1.1rem; font-weight: 700; margin-top: 5px; color: white; }
+
+/* --- Table Styling --- */
+.navy-theme-table { width: 100%; border-collapse: collapse; }
+.navy-theme-table th { background: var(--navy); color: white; padding: 18px; text-transform: uppercase; font-size: 0.8rem; }
+.navy-theme-table td { padding: 15px; border-bottom: 1px solid #e2e8f0; text-align: center; }
+.stat-label { text-align: left !important; font-weight: 700; background: #f1f5f9; color: var(--navy); }
+
+/* --- Buttons --- */
+.btn-primary {
+    background: var(--blue-dark);
+    color: white;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 700;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: var(--navy);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.btn-secondary:hover {
+    background: #f1f5f9;
+    transform: translateY(-2px);
+}
+
+/* --- Footer --- */
+footer { text-align: center; padding: 60px 0; color: var(--slate); }
+
+
+
+/* --- NCSA Recruitment Section Styling --- */
 .recruitment-container {
-    background-color: var(--navy);
+    background-color: #0b1a2e; /* Dark Navy Background */
     border-radius: 12px;
     padding: 50px 40px;
     margin: 40px auto;
-    color: var(--white);
+    color: white;
     text-align: center;
-    width: 1150px;
+    width: 1100px;
 }
 
 .recruitment-container h2 {
+    font-family: 'Outfit', sans-serif;
     font-weight: 800;
     font-size: 2.2rem;
     margin-bottom: 35px;
+    color: white;
+    letter-spacing: -0.5px;
 }
 
 .contacts-grid {
     display: flex;
     justify-content: center;
-    gap: 25px;
+    gap: 24px;
 }
 
 .contact-box {
-    background-color: var(--navy-light);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: #12243d; /* Lighter box navy */
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 10px;
     padding: 35px;
     width: 480px;
@@ -152,8 +229,8 @@ body {
 }
 
 .badge-blue {
-    background-color: var(--blue);
-    color: var(--white);
+    background-color: #007bff;
+    color: white;
     padding: 6px 14px;
     border-radius: 4px;
     font-size: 0.7rem;
@@ -161,73 +238,57 @@ body {
     text-transform: uppercase;
     display: inline-block;
     margin-bottom: 20px;
+    font-family: 'Outfit', sans-serif;
 }
 
 .name-heading {
+    font-family: 'Outfit', sans-serif;
     font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 8px;
+    color: white;
 }
 
 .email-text {
+    font-family: 'Outfit', sans-serif;
+    color: #ffffff;
     margin-bottom: 30px;
+    font-size: 1.05rem;
 }
 
-/* BORDERED LINK BUTTONS */
+.email-text strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.btn-group {
+    display: flex;
+    gap: 12px;
+}
+
 .btn-recruitment {
-    display: inline-block;
-    padding: 12px 28px;
+    padding: 14px 28px;
     border-radius: 6px;
     text-decoration: none;
     font-weight: 700;
     font-size: 0.95rem;
+    font-family: 'Outfit', sans-serif;
     transition: all 0.2s ease;
-    text-align: center;
+    display: inline-block;
+    border: none;
 }
 
 .btn-blue {
-    background-color: var(--blue);
-    color: var(--white);
-    border: 2px solid var(--blue); /* Bordered link */
+    background-color: #007bff;
+    color: white;
 }
 
 .btn-white {
-    background-color: var(--white);
-    color: var(--navy);
-    border: 2px solid var(--white); /* Bordered link */
+    background-color: #ffffff;
+    color: #0b1a2e;
 }
 
-.btn-blue:hover {
-    background-color: var(--blue-dark);
-    border-color: var(--blue-dark);
+.btn-recruitment:hover {
     transform: translateY(-2px);
-}
-
-.btn-white:hover {
-    background-color: #f1f5f9;
-    transform: translateY(-2px);
-}
-
-/* --- BUTTONS & EXTRAS --- */
-.btn-primary {
-    background: var(--blue);
-    color: var(--white);
-    padding: 15px 30px;
-    border-radius: 6px;
-    font-weight: 700;
-    display: inline-block;
-}
-
-.btn-secondary {
-    border: 2px solid var(--navy);
-    color: var(--navy);
-    padding: 15px 30px;
-    border-radius: 6px;
-    font-weight: 700;
-}
-
-/* --- UTILITIES --- */
-.container {
-    width: 1150px;
-    margin: 0 auto;
+    opacity: 0.9;
 }
