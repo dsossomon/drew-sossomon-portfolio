@@ -1,4 +1,4 @@
-/* --- Global Theme Variables --- */
+/* --- 1. Global Theme Variables --- */
 :root {
     --navy: #0a192f;
     --navy-light: #112240;
@@ -6,32 +6,33 @@
     --blue-dark: #007bff;
     --white: #ffffff;
     --bg-gray: #f8fafc;
+    --green: #16a34a;
     --slate: #64748b;
     --gold: #fbbf24;
 }
 
-/* --- Base Styles --- */
+/* --- 2. Base Styles --- */
 body {
     margin: 0;
     font-family: 'Outfit', sans-serif;
     background-color: var(--bg-gray);
     color: #1e293b;
     line-height: 1.6;
-    /* This forces the phone to show the full desktop width */
+    /* Forces desktop view on all devices */
     min-width: 1200px; 
     overflow-x: auto;
 }
 
-/* --- Navigation --- */
+/* --- 3. Navigation & Dropdowns --- */
 #nav-menu {
     background: var(--navy);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 5%;
-    height: 80px;
-    width: 100%;
-    box-sizing: border-box;
+    padding: 15px 5%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .logo { 
@@ -40,13 +41,12 @@ body {
     font-size: 1.5rem; 
     letter-spacing: 2px;
     font-family: 'Big Shoulders Display', sans-serif;
-    text-decoration: none;
 }
 
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 30px;
+    gap: 25px;
     margin: 0;
     padding: 0;
 }
@@ -55,104 +55,79 @@ body {
     color: white;
     text-decoration: none;
     font-weight: 600;
+    font-size: 0.95rem;
+    transition: 0.3s;
 }
 
-/* Dropdown */
+.nav-links a:hover { color: var(--blue); }
+
 .dropdown { position: relative; }
 .dropdown-content {
     display: none;
     position: absolute;
     background: var(--navy-light);
-    min-width: 200px;
+    min-width: 180px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    border-radius: 4px;
     top: 100%;
+    left: 0;
+    padding: 10px 0;
     z-index: 100;
 }
-.dropdown:hover .dropdown-content { display: block; }
-.dropdown-content a { padding: 12px; display: block; font-size: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
-/* --- Containers --- */
-.container, .stats-container {
-    width: 1100px; /* Locked width so it never shrinks */
+.dropdown:hover .dropdown-content { display: block; }
+.dropdown-content li { list-style: none; }
+.dropdown-content a {
+    padding: 10px 20px;
+    display: block;
+    font-size: 0.85rem;
+    color: white;
+}
+
+/* --- 4. Stats Page Layout --- */
+.stats-container {
+    width: 1100px; /* Fixed width for consistent layout */
     margin: 40px auto;
     background: white;
     padding: 40px;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.05);
 }
 
-/* --- Vitals Grid (STAYS 3 COLUMNS) --- */
+.stats-title { 
+    text-align: center; 
+    color: var(--navy); 
+    margin-top: 10px; 
+    font-weight: 800; 
+    font-size: 2.5rem; 
+    font-family: 'Big Shoulders Display', sans-serif;
+}
+
+.stats-subtitle { 
+    text-align: center; 
+    color: var(--blue-dark); 
+    font-weight: 700;
+    margin-bottom: 40px; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* --- 5. Vitals & Tables --- */
 .vitals-navy-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Locked at 3 columns */
+    grid-template-columns: repeat(3, 1fr); /* Locked 3-column view */
     gap: 20px;
     background: var(--navy);
     color: white;
     padding: 30px;
     border-radius: 10px;
-}
-.vitals-item { font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; }
-.vitals-item span { display: block; font-size: 1.2rem; color: white; font-weight: 700; }
-
-/* --- Work Grid (Index Page - STAYS 3 COLUMNS) --- */
-.work-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Locked at 3 columns */
-    gap: 25px;
-}
-
-.work-card {
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    padding: 20px;
-    border-radius: 10px;
-}
-
-/* --- Tables --- */
-.table-wrapper { width: 100%; margin-bottom: 30px; }
-.navy-theme-table { width: 100%; border-collapse: collapse; }
-.navy-theme-table th { background: var(--navy); color: white; padding: 15px; border: 1px solid #1e293b; }
-.navy-theme-table td { padding: 15px; border: 1px solid #eee; text-align: center; }
-.stat-label { text-align: left; background: #f8fafc; font-weight: 700; }
-.bold-navy { color: var(--navy); font-weight: 800; }
-
-/* --- Hero Section --- */
-.hero {
-    height: 450px;
-    background-color: var(--navy);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     text-align: center;
-    color: white;
-    width: 100%;
+    margin-bottom: 40px;
 }
-.hero h1 { font-family: 'Big Shoulders Display'; font-size: 4rem; margin: 0; }
-.hero-btns { margin-top: 30px; display: flex; gap: 15px; justify-content: center; }
 
-/* --- Buttons --- */
-.btn-primary {
-    background: var(--blue-dark);
-    color: white;
-    padding: 12px 25px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: 700;
-}
-.btn-secondary {
-    border: 2px solid white;
-    color: white;
-    padding: 12px 25px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: 700;
-}
+.vitals-item { font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; letter-spacing: 1px; }
+.vitals-item span { display: block; font-size: 1.1rem; font-weight: 700; margin-top: 5px; color: white; }
 
 .section-label {
-    border-left: 8px solid var(--blue);
-    padding-left: 15px;
-    margin: 40px 0 20px;
-    font-family: 'Big Shoulders Display', sans-serif;
-    font-size: 2rem;
-}
-
-/* REMOVED ALL @MEDIA QUERIES TO PREVENT MOBILE OVERRIDES */
+    color: var(--navy);
+    border-left: 6px solid var(--blue);
