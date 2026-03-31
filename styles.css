@@ -1,25 +1,26 @@
-/* --- 1. COMPUTER-ONLY VIEWPORT LOCK --- */
-html, body {
-    min-width: 1250px; /* Forces desktop view on all screens */
-    overflow-x: auto;  /* Allows scrolling if the window is resized too small */
-    margin: 0;
-    padding: 0;
-    background-color: #eaeff2;
-    font-family: 'Outfit', 'Segoe UI', sans-serif;
-    color: #333;
-}
-
-/* --- 2. GLOBAL THEME VARIABLES --- */
+/* --- 1. GLOBAL THEME VARIABLES --- */
 :root {
     --navy: #0a192f;
     --navy-light: #112240;
-    --blue: #60a5fa;      /* Your lighter blue */
-    --blue-dark: #007bff; /* Professional navy blue */
-    --gold: #ffd700;
+    --blue: #60a5fa;      /* Your NEW Light Blue */
+    --blue-dark: #007bff; /* Professional Navy Blue */
     --white: #ffffff;
+    --bg-gray: #eaeff2;
     --green: #16a34a;
+    --gold: #ffd700;
     --silver: #cbd5e1;
     --slate: #64748b;
+}
+
+/* --- 2. COMPUTER-ONLY VIEWPORT LOCK --- */
+html, body {
+    min-width: 1250px; /* Forces desktop view */
+    overflow-x: auto;  
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-gray);
+    font-family: 'Outfit', 'Segoe UI', Tahoma, sans-serif;
+    color: #333;
 }
 
 /* --- 3. NAVIGATION MENU --- */
@@ -49,7 +50,7 @@ html, body {
 .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: 0.3s; }
 .nav-links a:hover { color: var(--blue); }
 
-/* Dropdown specifically styled for Computer cursors */
+/* Dropdown Menu */
 .dropdown-content {
     display: none;
     position: absolute;
@@ -63,14 +64,24 @@ html, body {
     border-radius: 4px;
 }
 
-.dropdown-content li a { color: var(--navy) !important; display: block; padding: 10px 20px; }
-.dropdown-content li a:hover { background: #f0f7ff; color: var(--blue-dark) !important; }
+.dropdown-content li a { 
+    color: var(--navy) !important; 
+    display: block; 
+    padding: 10px 20px; 
+    text-decoration: none;
+}
+
+.dropdown-content li a:hover { 
+    background: #f0f7ff; 
+    color: var(--blue-dark) !important; 
+}
+
 .dropdown:hover .dropdown-content { display: block; }
 
 /* --- 4. HERO SECTION --- */
 .hero {
     background: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.7)), 
-    url('Drew1.JPEG'); /* Make sure this file is in your folder! */
+    url('Drew1.JPEG'); 
     background-size: cover;
     background-position: center;
     height: 60vh;
@@ -81,27 +92,161 @@ html, body {
     color: white;
 }
 
-.hero h1 { font-family: 'Big Shoulders Display'; font-size: 4rem; margin: 0; text-transform: uppercase; }
-.hero h1 span { color: var(--blue) !important; }
-
-/* --- 5. MAIN CONTAINERS (Fixed Width) --- */
-.container, .stats-container, .about-section { 
-    width: 1100px; /* Fixed width for computer view */
-    margin: 40px auto; 
-    padding: 40px; 
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+.hero h1 { 
+    font-family: 'Big Shoulders Display'; 
+    font-size: 4rem; 
+    margin: 0; 
+    text-transform: uppercase; 
 }
 
-/* --- 6. STATS & TABLES --- */
+.hero h1 span { color: var(--blue) !important; }
+
+/* --- 5. MAIN BUTTONS (Navy with Light Blue Borders) --- */
+.btn-primary {
+    background: var(--navy) !important;
+    color: white !important;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    display: inline-block;
+    border: 3px solid var(--blue) !important; /* Light Blue Border */
+    transition: 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: var(--blue) !important;
+    color: var(--navy) !important;
+    border-color: var(--navy) !important;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    padding: 10px 23px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    display: inline-block;
+    margin-left: 10px;
+    border: 3px solid var(--blue); /* Light Blue Border */
+    transition: 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: rgba(96, 165, 250, 0.2);
+    border-color: white;
+}
+
+/* --- 6. PROJECT CARDS (Navy Frame with Blue Top) --- */
+.container { width: 1100px; margin: auto; padding: 40px 20px; }
+
+.work-grid { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 25px; 
+    margin-top: 30px; 
+}
+
+.work-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid var(--navy); /* Navy Side/Bottom */
+    border-top: 8px solid var(--blue); /* Thick Light Blue Top */
+    box-shadow: 0 4px 12px rgba(10, 25, 47, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.work-card:hover { transform: translateY(-5px); }
+
+.work-card p {
+    font-family: 'Big Shoulders Display';
+    font-size: 1.4rem;
+    color: var(--navy);
+}
+
+.work-card a {
+    color: var(--blue-dark);
+    font-weight: 800;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 8px 16px;
+    border: 1px solid var(--blue);
+    border-radius: 4px;
+}
+
+/* --- 7. STATS & TABLES --- */
+.stats-container {
+    width: 1100px;
+    margin: 40px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.stats-title { text-align: center; color: var(--navy); font-size: 2.2rem; font-weight: 800; }
+.stats-subtitle { text-align: center; color: var(--blue-dark); margin-bottom: 30px; }
+
 .vitals-navy-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 even columns for desktop */
+    grid-template-columns: repeat(4, 1fr);
     gap: 15px;
     background: var(--navy);
     color: white;
     padding: 25px;
-    border-radius: 8px;
+    border-radius: 12px;
     text-align: center;
+    border: 2px solid var(--blue);
+}
+
+.vitals-item span { display: block; font-weight: bold; color: var(--blue); margin-top: 5px; }
+
+.navy-theme-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+.navy-theme-table th { background: var(--navy); color: white; padding: 15px; }
+.navy-theme-table td { padding: 12px; border-bottom: 1px solid #eee; text-align: center; }
+
+/* --- 8. ABOUT SECTION --- */
+.about-section {
+    width: 900px;
+    margin: 48px auto;
+    padding: 40px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 32px rgba(10, 25, 47, 0.15);
+}
+
+.about-item h2 {
+    color: var(--navy);
+    border-left: 5px solid var(--blue);
+    padding-left: 15px;
+    background: #f0f7ff;
+    padding-right: 15px;
+    display: inline-block;
+}
+
+/* --- 9. INSTRUCTOR BUTTON (The "Stamp" Button) --- */
+.btn-stamp-submit {
+    background-color: var(--blue-dark) !important;
+    color: white !important;
+    padding: 15px 30px !important;
+    font-weight: 800 !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    border-radius: 5px !important;
+    border: 3px solid var(--blue) !important;
+    transition: none !important;
+}
+
+/* --- 10. VIDEO WRAPPER --- */
+.video-wrapper {
+    width: 900px;
+    margin: 30px auto;
+    border: 6px solid var(--navy);
+    border-top: 10px solid var(--blue);
+    border-radius: 15px;
+    overflow: hidden;
 }
