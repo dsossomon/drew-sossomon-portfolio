@@ -20,7 +20,7 @@ body {
     line-height: 1.6;
 }
 
-/* --- 3. NAVIGATION --- */
+/* --- 3. NAVIGATION (Desktop Layout) --- */
 #nav-menu {
     background: var(--navy);
     display: flex;
@@ -41,52 +41,113 @@ body {
     text-decoration: none;
 }
 
+/* This targets the <span> inside your logo */
 .logo span { color: var(--blue-bright); }
 
-/* --- 4. MAIN STATS CONTAINER --- */
-.stats-container {
+.nav-links {
+    display: flex;          /* Makes links go side-by-side */
+    list-style: none;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--blue-bright);
+}
+
+/* --- 4. DROPDOWN LOGIC --- */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;          /* Hidden by default */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--navy-light);
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    padding: 10px 0;
+    list-style: none;
+    border-radius: 4px;
+    z-index: 2000;
+}
+
+.dropdown-content li a {
+    padding: 10px 20px;
+    display: block;
+    font-size: 0.9rem;
+    color: white;
+}
+
+.dropdown-content li a:hover {
+    background-color: var(--blue-dark);
+}
+
+/* Trigger the menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* --- 5. HERO & MAIN CONTENT --- */
+.hero {
+    background: var(--navy);
+    padding: 100px 5%;
+    text-align: center;
+    color: white;
+}
+
+.container {
     max-width: 1150px;
-    margin: 40px auto;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* --- 6. WORK GRID (Desktop Columns) --- */
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Desktop grid */
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.work-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.work-card:hover {
+    transform: translateY(-5px);
+}
+
+.work-card a {
+    color: var(--blue-dark);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* --- 7. STATS & TABLES --- */
+.stats-container {
     background: white;
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 4px 25px rgba(0,0,0,0.1);
 }
 
-.stats-title { 
-    text-align: center; 
-    color: var(--navy); 
-    margin: 0;
-    font-weight: 800; 
-    font-size: 3rem; 
-    font-family: 'Big Shoulders Display', sans-serif;
-    text-transform: uppercase;
-}
-
-.stats-subtitle { 
-    text-align: center; 
-    color: var(--blue-dark); 
-    font-weight: 700;
-    margin-bottom: 40px; 
-}
-
-/* VITALS GRID (Top Navy Box) */
-.vitals-navy-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
-    background: var(--navy);
-    color: white;
-    padding: 30px;
-    border-radius: 8px;
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.vitals-item { font-size: 0.75rem; text-transform: uppercase; color: #cbd5e1; letter-spacing: 1px; }
-.vitals-item span { display: block; font-size: 1.1rem; font-weight: bold; margin-top: 5px; color: white; }
-
-/* --- 5. TABLES --- */
 .section-label {
     color: var(--navy);
     border-left: 6px solid var(--blue-dark);
@@ -100,152 +161,26 @@ body {
 
 .table-wrapper { 
     overflow-x: auto; 
-    margin-bottom: 30px; 
     border-radius: 8px; 
     border: 1px solid #eee; 
 }
 
 .navy-theme-table { width: 100%; border-collapse: collapse; min-width: 900px; }
-.navy-theme-table th { background: var(--navy); color: white; padding: 18px; text-transform: uppercase; font-size: 0.85rem; }
+.navy-theme-table th { background: var(--navy); color: white; padding: 18px; text-transform: uppercase; }
 .navy-theme-table td { padding: 15px; border-bottom: 1px solid #eee; text-align: center; }
 
-.stat-label { text-align: left !important; font-weight: bold; background: #f8fafc; color: var(--navy); }
-.bold-navy { font-weight: 800; color: var(--navy); font-size: 1.15rem; }
-
-/* --- 6. RECRUITMENT CONTACTS (Desktop Layout) --- */
-.contact-section { 
-    background: var(--navy); 
-    padding: 50px; 
-    border-radius: 12px; 
-    margin-top: 50px; 
-}
-
-.contact-grid { 
-    display: flex; 
-    justify-content: center;
-    gap: 30px; 
-}
-
-.contact-card { 
-    flex: 1; 
-    max-width: 500px;
-    background: var(--navy-light); 
-    color: white; 
-    padding: 35px; 
-    border-radius: 12px; 
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.card-tag { 
-    display: inline-block;
-    background: var(--blue-dark); 
-    padding: 5px 12px; 
-    border-radius: 4px; 
-    font-size: 0.7rem; 
-    text-transform: uppercase; 
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.agent-tag { background: var(--slate); }
-
-.contact-card h3 {
-    margin: 0 0 10px 0;
-    font-size: 1.8rem;
-    font-family: 'Big Shoulders Display', sans-serif;
-}
-
-.contact-card p { color: #94a3b8; margin-bottom: 25px; }
-
-.card-actions { display: flex; gap: 15px; }
-
-.btn-action { 
-    padding: 12px 20px; 
-    border-radius: 6px; 
-    text-decoration: none; 
-    font-weight: bold; 
-    transition: 0.3s; 
-}
-
-.main-btn { background: var(--blue-dark); color: white; }
-.alt-btn { background: white; color: var(--navy); }
-
-.main-btn:hover, .alt-btn:hover { opacity: 0.8; transform: translateY(-2px); }
-
-/* --- 7. BUTTONS & BADGES --- */
+/* --- 8. BUTTONS & BADGES --- */
 .btn-primary {
     background: transparent;
     color: var(--blue-dark);
-    padding: 10px 22px;
+    padding: 12px 24px;
     text-decoration: none;
     border-radius: 6px;
     font-weight: bold;
     display: inline-block;
     border: 2px solid var(--blue-dark);
-    margin-bottom: 20px;
-}
-
-.pk-badge {
-    background: var(--green);
-    color: white;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    font-weight: 900;
-}
-
-/* --- 8. DROPDOWN NAVIGATION --- */
-
-/* The container for the whole dropdown */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-/* The clickable/hoverable link */
-.dropbtn {
-    color: var(--white);
-    text-decoration: none;
-    font-weight: 600;
-    padding: 10px 15px;
     transition: 0.3s;
 }
 
-/* The actual menu (hidden by default) */
-.dropdown-content {
-    display: none; /* Hides the menu */
-    position: absolute;
-    background-color: var(--navy-light);
-    min-width: 200px;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-    z-index: 1001; /* Higher than the nav bar */
-    border-radius: 4px;
-    top: 100%; /* Positions it right below the nav */
-    left: 0;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-    color: var(--white);
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    font-size: 0.9rem;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-/* Hover effect on dropdown links */
-.dropdown-content a:hover {
-    background-color: var(--blue-dark);
-    color: var(--white);
-}
-
-/* SHOW the menu when hovering over the parent */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* Visual cue for the hover state on the main button */
-.dropdown:hover .dropbtn {
-    color: var(--blue-bright);
-}
+.btn-primary:hover {
+    background: var(--blue
