@@ -4,23 +4,28 @@
     --navy-light: #112240;
     --blue-bright: #60a5fa; 
     --blue-dark: #007bff;
+    --blue: #60a5fa; /* Added this so var(--blue) in your HTML works */
     --white: #ffffff;
     --bg-gray: #f4f4f4;
     --green: #16a34a;
     --slate: #64748b;
 }
 
-/* --- 2. GLOBAL RESET --- */
-body {
+/* --- 2. GLOBAL RESET & DESKTOP LOCK --- */
+html, body {
     margin: 0;
     padding: 0;
     font-family: 'Outfit', sans-serif;
     background-color: var(--bg-gray);
     color: #333;
     line-height: 1.6;
+    
+    /* FORCES DESKTOP VIEW: Prevents mobile "squishing" */
+    min-width: 1200px; 
+    overflow-x: auto;
 }
 
-/* --- 3. NAVIGATION (Desktop Layout) --- */
+/* --- 3. NAVIGATION --- */
 #nav-menu {
     background: var(--navy);
     display: flex;
@@ -30,6 +35,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
+    border-bottom: 2px solid var(--navy-light);
 }
 
 .logo { 
@@ -41,11 +47,10 @@ body {
     text-decoration: none;
 }
 
-/* This targets the <span> inside your logo */
 .logo span { color: var(--blue-bright); }
 
 .nav-links {
-    display: flex;          /* Makes links go side-by-side */
+    display: flex;
     list-style: none;
     gap: 30px;
     margin: 0;
@@ -70,17 +75,18 @@ body {
 }
 
 .dropdown-content {
-    display: none;          /* Hidden by default */
+    display: none;
     position: absolute;
     top: 100%;
     left: 0;
     background-color: var(--navy-light);
-    min-width: 200px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    min-width: 220px; /* Widened for Match Highlights text */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
     padding: 10px 0;
     list-style: none;
     border-radius: 4px;
     z-index: 2000;
+    border: 1px solid var(--blue-bright);
 }
 
 .dropdown-content li a {
@@ -92,31 +98,44 @@ body {
 
 .dropdown-content li a:hover {
     background-color: var(--blue-dark);
+    color: white;
 }
 
-/* Trigger the menu on hover */
 .dropdown:hover .dropdown-content {
     display: block;
 }
 
-/* --- 5. HERO & MAIN CONTENT --- */
+/* --- 5. HERO (Text-Based, No Image) --- */
 .hero {
     background: var(--navy);
     padding: 100px 5%;
     text-align: center;
     color: white;
+    border-bottom: 5px solid var(--blue-bright);
+}
+
+.hero h1 {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 4rem;
+    margin: 0;
+}
+
+.hero h3 {
+    font-weight: 300;
+    color: var(--blue-bright);
+    letter-spacing: 1px;
 }
 
 .container {
     max-width: 1150px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 40px 20px;
 }
 
-/* --- 6. WORK GRID (Desktop Columns) --- */
+/* --- 6. WORK GRID --- */
 .work-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Desktop grid */
+    grid-template-columns: repeat(3, 1fr); /* Forced 3-column desktop layout */
     gap: 25px;
     margin-top: 30px;
 }
@@ -124,63 +143,3 @@ body {
 .work-card {
     background: white;
     padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    text-align: center;
-    transition: 0.3s;
-}
-
-.work-card:hover {
-    transform: translateY(-5px);
-}
-
-.work-card a {
-    color: var(--blue-dark);
-    font-weight: bold;
-    text-decoration: none;
-}
-
-/* --- 7. STATS & TABLES --- */
-.stats-container {
-    background: white;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 25px rgba(0,0,0,0.1);
-}
-
-.section-label {
-    color: var(--navy);
-    border-left: 6px solid var(--blue-dark);
-    padding-left: 15px;
-    margin: 50px 0 20px;
-    font-size: 1.8rem;
-    font-weight: 800;
-    font-family: 'Big Shoulders Display', sans-serif;
-    text-transform: uppercase;
-}
-
-.table-wrapper { 
-    overflow-x: auto; 
-    border-radius: 8px; 
-    border: 1px solid #eee; 
-}
-
-.navy-theme-table { width: 100%; border-collapse: collapse; min-width: 900px; }
-.navy-theme-table th { background: var(--navy); color: white; padding: 18px; text-transform: uppercase; }
-.navy-theme-table td { padding: 15px; border-bottom: 1px solid #eee; text-align: center; }
-
-/* --- 8. BUTTONS & BADGES --- */
-.btn-primary {
-    background: transparent;
-    color: var(--blue-dark);
-    padding: 12px 24px;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: bold;
-    display: inline-block;
-    border: 2px solid var(--blue-dark);
-    transition: 0.3s;
-}
-
-.btn-primary:hover {
-    background: var(--blue
