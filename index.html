@@ -1,151 +1,108 @@
-/* --- Global Theme Variables --- */
-:root {
-    --navy: #0a192f;
-    --navy-light: #112240;
-    --blue: #60a5fa; 
-    --blue-dark: #007bff;
-    --white: #ffffff;
-    --bg-gray: #f8fafc;
-    --slate: #64748b;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drew Sossomon | Goalkeeper Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
 
-/* --- Base Styles --- */
-body {
-    margin: 0;
-    font-family: 'Outfit', sans-serif;
-    background-color: var(--bg-gray);
-    color: #1e293b;
-    /* REMOVED the min-width that ruined the layout */
-}
+    <nav id="nav-menu">
+        <div class="logo">DREW <span style="color: var(--blue);">SOSSOMON</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li> 
+            <li class="dropdown">
+                <a href="stat.html">Stats & Film ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="stat.html">Full Career Stats</a></li>
+                    <li><a href="highlights.html">Match Highlights</a></li>
+                </ul>
+            </li>
 
-/* --- Navigation --- */
-#nav-menu {
-    background: var(--navy);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 5%;
-    height: 80px;
-}
+            <li class="dropdown">
+                <a href="#">Courses ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="#">American History</a></li>
+                    <li><a href="#">Geometry</a></li> 
+                    <li><a href="#">Study Hall</a></li> 
+                    <li><a href="#">Earth Science</a></li> 
+                    <li><a href="#">Web-dev/Game theory</a></li>
+                    <li><a href="#">American Literature</a></li>
+                    <li><a href="#">Latin II</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
 
-.logo { 
-    color: var(--white); 
-    font-weight: 800; 
-    font-size: 1.5rem; 
-    letter-spacing: 2px;
-    font-family: 'Big Shoulders Display', sans-serif;
-}
+    <header class="hero">
+        <div class="hero-overlay">
+            <h1 style="color: white;">DREW <span style="color: var(--blue);">SOSSOMON</span></h1>
+            <h3>Goalkeeper | Class of 2028 | "The U.S. Wall"</h3>
+            <p style="font-size: 1.1rem; color: #cbd5e1; margin-bottom: 25px;">Wake FC 2009 NPL | 100% Career PK Save Rate</p>
+            <div class="hero-btns">
+                <a href="stat.html" class="btn-primary">View Full Stats</a>
+                <a href="about.html" class="btn-secondary">Read My Story</a>
+            </div>
+        </div>
+    </header>
 
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-}
+    <main class="container">
+        
+        <section id="assignments">
+            <h2 class="section-label">Featured Projects & Submissions</h2>
+            <div class="work-grid">
+                <div class="work-card" style="border: 2px solid var(--blue); background: rgba(96, 165, 250, 0.02);">
+                    <p style="font-weight: bold; color: var(--navy); margin-bottom: 10px;">Goalkeeper Stats</p>
+                    <a href="stat.html" style="color: var(--blue-dark); font-weight: 700; text-decoration: none;">View Career Totals →</a>
+                </div>
 
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-}
+                <div class="work-card">
+                    <p style="font-weight: bold; margin-bottom: 10px;">Headings Practice</p>
+                    <a href="./wdsub/heading.html" style="text-decoration: none; color: var(--slate);">View Project</a>
+                </div>
 
-/* Dropdown styling */
-.dropdown { position: relative; }
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background: var(--navy-light);
-    min-width: 200px;
-    top: 100%;
-    z-index: 100;
-}
-.dropdown:hover .dropdown-content { display: block; }
-.dropdown-content a { padding: 12px; display: block; font-size: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+                <div class="work-card">
+                    <p style="font-weight: bold; margin-bottom: 10px;">Recipe Project</p>
+                    <a href="./wdsub/recipe.html" style="text-decoration: none; color: var(--slate);">View Project</a>
+                </div>
 
-/* --- Containers (Fixed to look centered and clean) --- */
-.container, .stats-container {
-    max-width: 1100px; /* Changed from width to max-width to fix stretching */
-    margin: 40px auto;
-    background: white;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
+                <div class="work-card">
+                    <p style="font-weight: bold; margin-bottom: 10px;">Anchors Demo</p>
+                    <a href="./wdsub/anchors.html" style="text-decoration: none; color: var(--slate);">View Project</a>
+                </div>
 
-/* --- Vitals Grid (Stats Page) --- */
-.vitals-navy-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    background: var(--navy);
-    color: white;
-    padding: 30px;
-    border-radius: 10px;
-}
-.vitals-item { font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; }
-.vitals-item span { display: block; font-size: 1.2rem; color: white; font-weight: 700; }
+                <div class="work-card">
+                    <p style="font-weight: bold; margin-bottom: 10px;">Poem Project</p>
+                    <a href="./wdsub/poem.html" style="text-decoration: none; color: var(--slate);">View Project</a>
+                </div>
 
-/* --- Work Grid (Index Page) --- */
-.work-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-}
+                <div class="work-card">
+                    <p style="font-weight: bold; margin-bottom: 10px;">Top 5 Goalkeepers</p>
+                    <a href="./wdsub/reviews.html" style="text-decoration: none; color: var(--slate);">View Project</a>
+                </div>
 
-.work-card {
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    padding: 20px;
-    border-radius: 10px;
-    transition: transform 0.2s;
-}
-.work-card:hover { transform: translateY(-5px); }
+                <div class="work-card" style="grid-column: span 1;">
+                    <p style="font-weight: bold; margin-bottom: 10px;">Text Formatting</p>
+                    <a href="./wdsub/formatting.html" style="text-decoration: none; color: var(--slate);">View Project</a>
+                </div>
+            </div>
+        </section>
 
-/* --- Tables --- */
-.table-wrapper { width: 100%; margin-bottom: 30px; overflow-x: auto; }
-.navy-theme-table { width: 100%; border-collapse: collapse; min-width: 600px; }
-.navy-theme-table th { background: var(--navy); color: white; padding: 15px; border: 1px solid #1e293b; }
-.navy-theme-table td { padding: 15px; border: 1px solid #eee; text-align: center; }
-.stat-label { text-align: left; background: #f8fafc; font-weight: 700; }
-.bold-navy { color: var(--navy); font-weight: 800; }
+        <footer style="text-align: center; margin-top: 80px; padding: 50px; background: var(--navy); border-radius: 15px; color: white;">
+            <h3 style="margin-bottom: 25px; font-family: 'Big Shoulders Display', sans-serif; font-size: 1.8rem;">Instructor Submission</h3>
+            
+            <a href="mailto:nathaneal.stamp@youngsvilleacademy.org?cc=student.as@youngsvilleacademy.org&subject=Live Code Submission - Sossomon&body=Dear Mr. Stamp," 
+               style="display: inline-block; padding: 15px 30px; background: var(--blue-dark); color: white; text-decoration: none; border-radius: 5px; font-weight: 700;">
+                Submit Live Code to Mr. Stamp
+            </a>
+            
+            <p style="margin-top: 25px; font-size: 0.85rem; color: #cbd5e1;">&copy; 2026 Drew Sossomon | Student-Athlete Portfolio</p>
+        </footer>
 
-/* --- Hero Section --- */
-.hero {
-    min-height: 450px;
-    background: linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.8)), url('your-image.jpg'); /* If you have a bg image */
-    background-color: var(--navy);
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-}
-.hero h1 { font-family: 'Big Shoulders Display'; font-size: 4rem; margin: 0; }
-.hero-btns { margin-top: 30px; display: flex; gap: 15px; justify-content: center; }
+    </main>
 
-/* --- Buttons --- */
-.btn-primary {
-    background: var(--blue-dark);
-    color: white;
-    padding: 12px 25px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: 700;
-}
-.btn-secondary {
-    border: 2px solid white;
-    color: white;
-    padding: 12px 25px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: 700;
-}
-
-/* Section Labels */
-.section-label {
-    border-left: 8px solid var(--blue);
-    padding-left: 15px;
-    margin: 40px 0 20px;
-    font-family: 'Big Shoulders Display', sans-serif;
-    font-size: 2rem;
-}
+</body>
+</html>
