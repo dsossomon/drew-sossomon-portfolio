@@ -190,3 +190,105 @@ html, body {
 
 /* --- Footer --- */
 footer { text-align: center; padding: 60px 0; color: var(--slate); }
+
+
+
+/* --- NCSA Recruitment Section Styling --- */
+.recruitment-container {
+    background-color: #0b1a2e; /* Dark Navy Background */
+    border-radius: 12px;
+    padding: 50px 40px;
+    margin: 40px auto;
+    color: white;
+    text-align: center;
+    width: 1100px;
+}
+
+.recruitment-container h2 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    margin-bottom: 35px;
+    color: white;
+    letter-spacing: -0.5px;
+}
+
+.contacts-grid {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+
+.contact-box {
+    background-color: #12243d; /* Lighter box navy */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 35px;
+    width: 480px;
+    text-align: left;
+}
+
+.badge-blue {
+    background-color: #007bff;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 20px;
+    font-family: 'Outfit', sans-serif;
+}
+
+.name-heading {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: white;
+}
+
+.email-text {
+    font-family: 'Outfit', sans-serif;
+    color: #ffffff;
+    margin-bottom: 30px;
+    font-size: 1.05rem;
+}
+
+.email-text strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.btn-group {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-recruitment {
+    padding: 14px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    font-family: 'Outfit', sans-serif;
+    transition: all 0.2s ease;
+    display: inline-block;
+    border: none;
+}
+
+.btn-blue {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-white {
+    background-color: #ffffff;
+    color: #0b1a2e;
+}
+
+.btn-recruitment:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
