@@ -143,3 +143,48 @@ html, body {
 .work-card {
     background: white;
     padding: 30px;
+
+
+
+/* --- UPDATED WORK CARDS WITH BORDERS --- */
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.work-card {
+    background: white;
+    padding: 40px 20px;
+    border-radius: 15px;
+    /* This is the original-style thick border */
+    border: 3px solid var(--navy); 
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.work-card:hover {
+    /* Changes to blue when you hover over it */
+    border-color: var(--blue-bright);
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(10, 25, 47, 0.2);
+}
+
+.work-card p {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--navy);
+    margin-bottom: 15px;
+}
+
+/* --- FOOTER STYLING --- */
+.instructor-footer {
+    text-align: center; 
+    margin-top: 80px; 
+    padding: 60px; 
+    background: var(--navy); 
+    border-radius: 15px; 
+    color: white;
+    border: 2px solid var(--blue-bright);
+}
