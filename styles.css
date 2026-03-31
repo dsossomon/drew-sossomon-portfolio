@@ -7,6 +7,7 @@
     --white: #ffffff;
     --bg-gray: #f8fafc;
     --slate: #64748b;
+    --gold: #fbbf24;
 }
 
 /* --- Base Styles --- */
@@ -15,7 +16,10 @@ body {
     font-family: 'Outfit', sans-serif;
     background-color: var(--bg-gray);
     color: #1e293b;
-    /* REMOVED the min-width that ruined the layout */
+    line-height: 1.6;
+    /* This forces the phone to show the full desktop width */
+    min-width: 1200px; 
+    overflow-x: auto;
 }
 
 /* --- Navigation --- */
@@ -26,6 +30,8 @@ body {
     align-items: center;
     padding: 0 5%;
     height: 80px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .logo { 
@@ -34,12 +40,15 @@ body {
     font-size: 1.5rem; 
     letter-spacing: 2px;
     font-family: 'Big Shoulders Display', sans-serif;
+    text-decoration: none;
 }
 
 .nav-links {
     list-style: none;
     display: flex;
     gap: 30px;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-links a {
@@ -48,7 +57,7 @@ body {
     font-weight: 600;
 }
 
-/* Dropdown styling */
+/* Dropdown */
 .dropdown { position: relative; }
 .dropdown-content {
     display: none;
@@ -61,9 +70,9 @@ body {
 .dropdown:hover .dropdown-content { display: block; }
 .dropdown-content a { padding: 12px; display: block; font-size: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
-/* --- Containers (Fixed to look centered and clean) --- */
+/* --- Containers --- */
 .container, .stats-container {
-    max-width: 1100px; /* Changed from width to max-width to fix stretching */
+    width: 1100px; /* Locked width so it never shrinks */
     margin: 40px auto;
     background: white;
     padding: 40px;
@@ -71,10 +80,10 @@ body {
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 }
 
-/* --- Vitals Grid (Stats Page) --- */
+/* --- Vitals Grid (STAYS 3 COLUMNS) --- */
 .vitals-navy-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* Locked at 3 columns */
     gap: 20px;
     background: var(--navy);
     color: white;
@@ -84,10 +93,10 @@ body {
 .vitals-item { font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; }
 .vitals-item span { display: block; font-size: 1.2rem; color: white; font-weight: 700; }
 
-/* --- Work Grid (Index Page) --- */
+/* --- Work Grid (Index Page - STAYS 3 COLUMNS) --- */
 .work-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr); /* Locked at 3 columns */
     gap: 25px;
 }
 
@@ -96,13 +105,11 @@ body {
     border: 1px solid #e2e8f0;
     padding: 20px;
     border-radius: 10px;
-    transition: transform 0.2s;
 }
-.work-card:hover { transform: translateY(-5px); }
 
 /* --- Tables --- */
-.table-wrapper { width: 100%; margin-bottom: 30px; overflow-x: auto; }
-.navy-theme-table { width: 100%; border-collapse: collapse; min-width: 600px; }
+.table-wrapper { width: 100%; margin-bottom: 30px; }
+.navy-theme-table { width: 100%; border-collapse: collapse; }
 .navy-theme-table th { background: var(--navy); color: white; padding: 15px; border: 1px solid #1e293b; }
 .navy-theme-table td { padding: 15px; border: 1px solid #eee; text-align: center; }
 .stat-label { text-align: left; background: #f8fafc; font-weight: 700; }
@@ -110,15 +117,14 @@ body {
 
 /* --- Hero Section --- */
 .hero {
-    min-height: 450px;
-    background: linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.8)), url('your-image.jpg'); /* If you have a bg image */
+    height: 450px;
     background-color: var(--navy);
-    background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: white;
+    width: 100%;
 }
 .hero h1 { font-family: 'Big Shoulders Display'; font-size: 4rem; margin: 0; }
 .hero-btns { margin-top: 30px; display: flex; gap: 15px; justify-content: center; }
@@ -141,7 +147,6 @@ body {
     font-weight: 700;
 }
 
-/* Section Labels */
 .section-label {
     border-left: 8px solid var(--blue);
     padding-left: 15px;
@@ -149,3 +154,5 @@ body {
     font-family: 'Big Shoulders Display', sans-serif;
     font-size: 2rem;
 }
+
+/* REMOVED ALL @MEDIA QUERIES TO PREVENT MOBILE OVERRIDES */
