@@ -354,3 +354,159 @@ footer { text-align: center; padding: 60px 0; color: var(--slate); }
     background: #2b4fb8;
 }
 
+
+
+
+/* =========================================
+   DROPDOWN NAVIGATION STYLES
+   ========================================= */
+
+/* Hide dropdown by default */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #0a192f; /* Matches your hero dark navy */
+    min-width: 220px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.3);
+    z-index: 1000;
+    border-radius: 8px;
+    padding: 10px 0;
+    text-align: left;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content li {
+    list-style: none;
+    display: block;
+    margin: 0;
+}
+
+.dropdown-content a {
+    color: #94a3b8 !important;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: #007bff;
+    color: white !important;
+}
+
+.dropdown-header {
+    padding: 10px 20px 5px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #60a5fa;
+    letter-spacing: 1px;
+    font-family: 'Outfit', sans-serif;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: rgba(255,255,255,0.1);
+    margin: 10px 0;
+}
+
+/* =========================================
+   COLLEGE SCOUTING TABLE STYLES
+   ========================================= */
+
+.portfolio-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+h1.main-title {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 5.5rem;
+    color: #0a192f;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 0.9;
+    margin-bottom: 60px;
+}
+
+h1.main-title span {
+    color: #007bff;
+}
+
+.table-title {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 2.5rem;
+    color: #0a192f;
+    margin: 40px 0 20px;
+    border-left: 10px solid #007bff;
+    padding-left: 20px;
+    text-transform: uppercase;
+}
+
+.scouting-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 40px;
+}
+
+.scouting-table th {
+    background-color: #0a192f;
+    color: #ffffff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    padding: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.scouting-table th:first-child {
+    text-align: left;
+}
+
+.scouting-table td {
+    padding: 15px;
+    color: #1e293b;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+    text-align: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* Zebra Striping */
+.scouting-table tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+/* School Name Column Highlight */
+.scouting-table td:first-child {
+    text-align: left;
+    background-color: #f1f5f9;
+    color: #0a192f;
+    width: 45%;
+    border-right: 1px solid #e2e8f0;
+}
+
+.scroll-container {
+    max-height: 600px;
+    overflow-y: auto;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: white;
+}
+
+/* Desktop-Only Lock */
+body {
+    min-width: 1250px;
+}
+
