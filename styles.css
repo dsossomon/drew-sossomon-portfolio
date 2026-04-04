@@ -636,3 +636,16 @@ body {
 }
 
 
+
+.recruit-cta {
+    margin-top: 50px;
+    text-align: center;
+    background: #e2e8f0;
+    padding: 40px;
+    border-radius: 15px;
+
+    /* NEW BORDER */
+    border: 3px solid var(--navy);
+}
+
+
