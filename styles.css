@@ -647,3 +647,28 @@ body {
     transform: translateY(-2px);
 }
 
+
+.recovery-extra {
+    margin-top: 25px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--blue);
+}
+
+.recovery-extra h4 {
+    font-family: 'Big Shoulders Display';
+    font-size: 1.4rem;
+    color: var(--blue);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.recovery-extra p {
+    font-family: 'Outfit';
+    color: #cbd5e1;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
