@@ -510,3 +510,129 @@ body {
     min-width: 1250px;
 }
 
+
+
+
+
+
+
+/* ============================================================
+   MATCH HIGHLIGHTS — VIDEO + NOTES SECTION
+   ============================================================ */
+
+/* Video Frame */
+.highlight-video-frame {
+    width: 900px;
+    margin: 0 auto;
+    border: 4px solid var(--blue);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 0 30px rgba(96, 165, 250, 0.3);
+}
+
+/* Film Notes Box */
+.film-notes-box {
+    background: var(--navy);
+    padding: 60px;
+    border-radius: 20px;
+    border: 2px solid var(--blue);
+    box-shadow: 0 20px 40px rgba(10, 25, 47, 0.2);
+    color: white;
+    max-width: 900px;
+    margin: 50px auto;
+}
+
+.film-notes-box h3 {
+    font-family: 'Big Shoulders Display';
+    color: var(--blue);
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.film-notes-box ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1.2rem;
+    line-height: 2;
+    color: #cbd5e1;
+}
+
+.film-notes-box li strong {
+    color: white;
+    border-left: 4px solid var(--blue);
+    padding-left: 15px;
+}
+
+/* Coming Soon Section */
+.coming-soon-box {
+    margin-top: 50px;
+    text-align: center;
+    background: #f1f5f9;
+    padding: 40px;
+    border-radius: 15px;
+}
+
+.coming-soon-box h4 {
+    font-family: 'Big Shoulders Display';
+    font-size: 1.8rem;
+    color: var(--navy);
+    margin-bottom: 15px;
+}
+
+.coming-soon-placeholder {
+    width: 700px;
+    margin: 0 auto;
+    border: 3px dashed var(--navy);
+    border-radius: 12px;
+    padding: 40px;
+    color: var(--navy);
+    font-family: 'Outfit';
+    font-size: 1.2rem;
+}
+
+/* Recruiting CTA */
+.recruit-cta {
+    margin-top: 50px;
+    text-align: center;
+    background: #e2e8f0;
+    padding: 40px;
+    border-radius: 15px;
+}
+
+.recruit-cta h4 {
+    font-family: 'Big Shoulders Display';
+    font-size: 1.8rem;
+    color: var(--navy);
+    margin-bottom: 10px;
+}
+
+.recruit-cta p {
+    font-family: 'Outfit';
+    color: var(--navy);
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.btn-request-match {
+    background: var(--blue-dark);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.btn-request-match:hover {
+    background: var(--navy);
+    transform: translateY(-2px);
+}
+
+
