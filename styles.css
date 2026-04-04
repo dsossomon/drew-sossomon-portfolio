@@ -595,27 +595,39 @@ body {
     font-size: 1.2rem;
 }
 
-/* Recruiting CTA */
+
+
 .recruit-cta {
     margin-top: 50px;
     text-align: center;
-    background: #e2e8f0;
-    padding: 40px;
-    border-radius: 15px;
+
+    /* Match Film Notes Box */
+    background: var(--navy);
+    padding: 60px;
+    border-radius: 20px;
+    border: 2px solid var(--blue);
+    box-shadow: 0 20px 40px rgba(10, 25, 47, 0.2);
+
+    color: white;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .recruit-cta h4 {
     font-family: 'Big Shoulders Display';
-    font-size: 1.8rem;
-    color: var(--navy);
-    margin-bottom: 10px;
+    font-size: 2rem;
+    color: var(--blue);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .recruit-cta p {
     font-family: 'Outfit';
-    color: var(--navy);
-    margin-bottom: 20px;
-    font-size: 1.1rem;
+    color: #cbd5e1;
+    margin-bottom: 25px;
+    font-size: 1.2rem;
 }
 
 .btn-request-match {
@@ -631,21 +643,7 @@ body {
 }
 
 .btn-request-match:hover {
-    background: var(--navy);
+    background: var(--blue);
     transform: translateY(-2px);
 }
-
-
-
-.recruit-cta {
-    margin-top: 50px;
-    text-align: center;
-    background: #e2e8f0;
-    padding: 40px;
-    border-radius: 15px;
-
-    /* NEW BORDER */
-    border: 3px solid var(--navy);
-}
-
 
