@@ -191,11 +191,9 @@ html, body {
 /* --- Footer --- */
 footer { text-align: center; padding: 60px 0; color: var(--slate); }
 
-
-
 /* --- NCSA Recruitment Section Styling --- */
 .recruitment-container {
-    background-color: #0b1a2e; /* Dark Navy Background */
+    background-color: #0b1a2e;
     border-radius: 12px;
     padding: 50px 40px;
     margin: 40px auto;
@@ -220,7 +218,7 @@ footer { text-align: center; padding: 60px 0; color: var(--slate); }
 }
 
 .contact-box {
-    background-color: #12243d; /* Lighter box navy */
+    background-color: #12243d;
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 10px;
     padding: 35px;
@@ -354,18 +352,14 @@ footer { text-align: center; padding: 60px 0; color: var(--slate); }
     background: #2b4fb8;
 }
 
-
-
-
 /* =========================================
    DROPDOWN NAVIGATION STYLES
    ========================================= */
 
-/* Hide dropdown by default */
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #0a192f; /* Matches your hero dark navy */
+    background-color: #0a192f;
     min-width: 220px;
     box-shadow: 0px 8px 16px rgba(0,0,0,0.3);
     z-index: 1000;
@@ -374,7 +368,6 @@ footer { text-align: center; padding: 60px 0; color: var(--slate); }
     text-align: left;
 }
 
-/* Show dropdown on hover */
 .dropdown:hover .dropdown-content {
     display: block;
 }
@@ -510,17 +503,10 @@ body {
     min-width: 1250px;
 }
 
-
-
-
-
-
-
 /* ============================================================
    MATCH HIGHLIGHTS — VIDEO + NOTES SECTION
    ============================================================ */
 
-/* Video Frame */
 .highlight-video-frame {
     width: 900px;
     margin: 0 auto;
@@ -531,7 +517,6 @@ body {
     box-shadow: 0 0 30px rgba(96, 165, 250, 0.3);
 }
 
-/* Film Notes Box */
 .film-notes-box {
     background: var(--navy);
     padding: 60px;
@@ -568,7 +553,6 @@ body {
     padding-left: 15px;
 }
 
-/* Coming Soon Section */
 .coming-soon-box {
     margin-top: 50px;
     text-align: center;
@@ -595,19 +579,14 @@ body {
     font-size: 1.2rem;
 }
 
-
-
 .recruit-cta {
     margin-top: 50px;
     text-align: center;
-
-    /* Match Film Notes Box */
     background: var(--navy);
     padding: 60px;
     border-radius: 20px;
     border: 2px solid var(--blue);
     box-shadow: 0 20px 40px rgba(10, 25, 47, 0.2);
-
     color: white;
     max-width: 900px;
     margin-left: auto;
@@ -635,108 +614,3 @@ body {
     color: white;
     padding: 14px 28px;
     border-radius: 6px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1rem;
-    transition: 0.3s;
-    display: inline-block;
-}
-
-.btn-request-match:hover {
-    background: var(--blue);
-    transform: translateY(-2px);
-}
-
-
-.recovery-extra {
-    margin-top: 25px;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 20px;
-    border-radius: 12px;
-    border: 1px solid var(--blue);
-}
-
-.recovery-extra h4 {
-    font-family: 'Big Shoulders Display';
-    font-size: 1.4rem;
-    color: var(--blue);
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.recovery-extra p {
-    font-family: 'Outfit';
-    color: #cbd5e1;
-    font-size: 1rem;
-    line-height: 1.6;
-}
-
-
-
-/* ============================================================
-   RECOVERY TIMELINE — FUTURISTIC ATHLETE DASHBOARD STYLE
-   ============================================================ */
-
-.recovery-timeline {
-    max-width: 900px;
-    margin: 60px auto 40px;
-    text-align: center;
-    font-family: 'Outfit', sans-serif;
-    color: var(--navy);
-}
-
-.recovery-timeline h2 {
-    font-size: 2.2rem;
-    font-weight: 800;
-    margin-bottom: 20px;
-    color: var(--navy);
-    letter-spacing: -0.5px;
-}
-
-/* Timeline Bar */
-.timeline-bar {
-    position: relative;
-    width: 100%;
-    height: 22px;
-    background: #cbd5e1;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 0 12px rgba(0,0,0,0.15);
-}
-
-/* Progress Fill */
-.timeline-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--blue-dark), var(--blue));
-    box-shadow: 0 0 12px var(--blue);
-    transition: width 1.5s ease;
-}
-
-/* Floating Info Box */
-.timeline-info {
-    position: absolute;
-    top: -75px;
-    left: 42%; /* Matches your current progress */
-    transform: translateX(-50%);
-    background: rgba(30, 58, 138, 0.9);
-    padding: 10px 15px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px var(--blue);
-    font-size: 14px;
-    width: 200px;
-    color: white;
-    backdrop-filter: blur(4px);
-}
-
-/* Labels Under Timeline */
-.timeline-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    opacity: 0.9;
-    margin-top: 10px;
-    color: var(--navy);
-}
-
-
