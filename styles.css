@@ -682,3 +682,69 @@ body {
     text-align: center;
     line-height: 1.4;
 }
+
+
+
+    /* ============================
+   RECOVERY TIMELINE BAR
+   ============================ */
+
+.recovery-timeline {
+    width: 100%;
+    max-width: 900px;
+    margin: 60px auto;
+    text-align: center;
+    font-family: 'Outfit';
+}
+
+.recovery-timeline h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 25px;
+}
+
+/* The bar container */
+.timeline-bar {
+    width: 100%;
+    background: #e2e8f0;
+    border-radius: 12px;
+    height: 26px;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid var(--navy-light);
+    margin-bottom: 20px;
+}
+
+/* The blue fill */
+.timeline-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue-dark), var(--blue));
+    border-radius: 12px 0 0 12px;
+    transition: width 0.4s ease-in-out;
+}
+
+/* Text under the bar */
+.timeline-info p {
+    margin: 4px 0;
+    font-size: 1rem;
+    color: var(--navy);
+    font-weight: 600;
+}
+
+/* Labels under the timeline */
+.timeline-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    font-size: 0.9rem;
+    color: var(--slate);
+    font-weight: 600;
+}
+
+.timeline-labels span {
+    width: 33%;
+    text-align: center;
+    line-height: 1.4;
+}
+
