@@ -672,3 +672,71 @@ body {
     line-height: 1.6;
 }
 
+
+
+/* ============================================================
+   RECOVERY TIMELINE — FUTURISTIC ATHLETE DASHBOARD STYLE
+   ============================================================ */
+
+.recovery-timeline {
+    max-width: 900px;
+    margin: 60px auto 40px;
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    color: var(--navy);
+}
+
+.recovery-timeline h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: var(--navy);
+    letter-spacing: -0.5px;
+}
+
+/* Timeline Bar */
+.timeline-bar {
+    position: relative;
+    width: 100%;
+    height: 22px;
+    background: #cbd5e1;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 12px rgba(0,0,0,0.15);
+}
+
+/* Progress Fill */
+.timeline-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue-dark), var(--blue));
+    box-shadow: 0 0 12px var(--blue);
+    transition: width 1.5s ease;
+}
+
+/* Floating Info Box */
+.timeline-info {
+    position: absolute;
+    top: -75px;
+    left: 42%; /* Matches your current progress */
+    transform: translateX(-50%);
+    background: rgba(30, 58, 138, 0.9);
+    padding: 10px 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--blue);
+    font-size: 14px;
+    width: 200px;
+    color: white;
+    backdrop-filter: blur(4px);
+}
+
+/* Labels Under Timeline */
+.timeline-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    opacity: 0.9;
+    margin-top: 10px;
+    color: var(--navy);
+}
+
+
