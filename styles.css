@@ -634,10 +634,10 @@ body {
     margin-bottom: 25px;
 }
 
-/* The bar container */
+/* The bar container (dark navy background) */
 .timeline-bar {
     width: 100%;
-    background: #e2e8f0;
+    background: var(--navy); /* DARK NAVY */
     border-radius: 12px;
     height: 26px;
     position: relative;
@@ -646,7 +646,7 @@ body {
     margin-bottom: 20px;
 }
 
-/* The blue fill */
+/* The blue fill (gradient stays the same) */
 .timeline-fill {
     height: 100%;
     background: linear-gradient(90deg, var(--blue-dark), var(--blue));
@@ -662,14 +662,14 @@ body {
     font-weight: 600;
 }
 
-/* Labels under the timeline */
+/* Labels under the timeline (light blue text) */
 .timeline-labels {
     display: flex;
     justify-content: space-between;
     margin-top: 25px;
     font-size: 0.9rem;
-    color: var(--slate);
-    font-weight: 600;
+    color: var(--blue); /* LIGHT BLUE */
+    font-weight: 700;
 }
 
 .timeline-labels span {
@@ -677,4 +677,3 @@ body {
     text-align: center;
     line-height: 1.4;
 }
-
