@@ -1,8 +1,7 @@
 /* --- Global Theme Variables --- */
-:root {
-    --navy: #0a192f;
+:root { --navy: #0a192f;
     --navy-light: #112240;
-    --blue: #60a5fa;
+    --blue: #60a5fa; 
     --blue-dark: #007bff;
     --white: #ffffff;
     --bg-gray: #f8fafc;
@@ -11,17 +10,16 @@
     --gold: #fbbf24;
 }
 
-/* --- RESPONSIVE GLOBAL RESET --- */
+/* --- THE DESKTOP LOCK --- */
 html, body {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+    width: 1250px !important;
+    min-width: 1250px !important;
+    margin: 0 auto;
     font-family: 'Outfit', sans-serif;
     background-color: var(--bg-gray);
     color: #1e293b;
     line-height: 1.6;
+    overflow-x: auto; 
 }
 
 /* Global Branding */
@@ -39,10 +37,10 @@ html, body {
     z-index: 1000;
 }
 
-.logo {
-    color: var(--white);
-    font-weight: 800;
-    font-size: 1.6rem;
+.logo { 
+    color: var(--white); 
+    font-weight: 800; 
+    font-size: 1.6rem; 
     letter-spacing: 2px;
     font-family: 'Big Shoulders Display', sans-serif;
     text-transform: uppercase;
@@ -86,20 +84,41 @@ html, body {
 
 .dropdown:hover .dropdown-content { display: block; }
 
-/* --- FIX DROPDOWN TEXT VISIBILITY --- */
-.dropdown-content a {
-    color: #ffffff !important;
+.dropdown-content li a {
+    padding: 10px 20px;
+    display: block;
+    font-size: 0.95rem;
+    color: white;
+    text-decoration: none;
 }
 
-.dropdown-content a:hover {
+.dropdown-content li a:hover {
     background: rgba(96, 165, 250, 0.1);
-    color: var(--blue) !important;
+    color: var(--blue);
 }
 
-/* --- Stats Container --- */
+/* Dropdown Headers */
+.dropdown-header {
+    padding: 8px 20px 4px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    opacity: 0.8;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 8px 0;
+}
+
+/* --- Stats & Hero Layout --- */
+.container { width: 1250px; margin: 0 auto; }
+
 .stats-container {
-    max-width: 1150px;
-    width: 100%;
+    width: 1150px;
     margin: 40px auto;
     background: white;
     padding: 40px;
@@ -107,11 +126,11 @@ html, body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
-.stats-title {
-    text-align: center;
-    color: var(--navy);
-    font-weight: 800;
-    font-size: 3rem;
+.stats-title { 
+    text-align: center; 
+    color: var(--navy); 
+    font-weight: 800; 
+    font-size: 3rem; 
     font-family: 'Big Shoulders Display', sans-serif;
     text-transform: uppercase;
 }
@@ -121,4 +140,614 @@ html, body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    background: var
+    background: var(--navy);
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 4px solid var(--blue);
+}
+
+.vitals-item { font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; letter-spacing: 1px; }
+.vitals-item span { display: block; font-size: 1.1rem; font-weight: 700; margin-top: 5px; color: white; }
+
+/* --- Table Styling --- */
+.navy-theme-table { width: 100%; border-collapse: collapse; }
+.navy-theme-table th { background: var(--navy); color: white; padding: 18px; text-transform: uppercase; font-size: 0.8rem; }
+.navy-theme-table td { padding: 15px; border-bottom: 1px solid #e2e8f0; text-align: center; }
+.stat-label { text-align: left !important; font-weight: 700; background: #f1f5f9; color: var(--navy); }
+
+/* --- Buttons --- */
+.btn-primary {
+    background: var(--blue-dark);
+    color: white;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 700;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: var(--navy);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.btn-secondary:hover {
+    background: #f1f5f9;
+    transform: translateY(-2px);
+}
+
+/* --- Footer --- */
+footer { text-align: center; padding: 60px 0; color: var(--slate); }
+
+/* --- NCSA Recruitment Section Styling --- */
+.recruitment-container {
+    background-color: #0b1a2e;
+    border-radius: 12px;
+    padding: 50px 40px;
+    margin: 40px auto;
+    color: white;
+    text-align: center;
+    width: 1100px;
+}
+
+.recruitment-container h2 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    margin-bottom: 35px;
+    color: white;
+    letter-spacing: -0.5px;
+}
+
+.contacts-grid {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+
+.contact-box {
+    background-color: #12243d;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 35px;
+    width: 480px;
+    text-align: left;
+}
+
+.badge-blue {
+    background-color: #007bff;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 20px;
+    font-family: 'Outfit', sans-serif;
+}
+
+.name-heading {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: white;
+}
+
+.email-text {
+    font-family: 'Outfit', sans-serif;
+    color: #ffffff;
+    margin-bottom: 30px;
+    font-size: 1.05rem;
+}
+
+.email-text strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.btn-group {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-recruitment {
+    padding: 14px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    font-family: 'Outfit', sans-serif;
+    transition: all 0.2s ease;
+    display: inline-block;
+    border: none;
+}
+
+.btn-blue {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-white {
+    background-color: #ffffff;
+    color: #0b1a2e;
+}
+
+.btn-recruitment:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+/* ================================
+   RECRUITMENT CONTACTS SECTION
+   ================================ */
+
+.recruitment-section {
+    background: #0b1e3f;
+    padding: 40px 20px;
+    border-radius: 10px;
+    color: white;
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+.recruitment-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.contact-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+.contact-card h3 {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.contact-card .name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.contact-links a {
+    display: inline-block;
+    margin-right: 12px;
+    margin-top: 10px;
+    padding: 6px 14px;
+    background: #1e3a8a;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.contact-links a:hover {
+    background: #2b4fb8;
+}
+
+/* =========================================
+   DROPDOWN NAVIGATION STYLES
+   ========================================= */
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #0a192f;
+    min-width: 220px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.3);
+    z-index: 1000;
+    border-radius: 8px;
+    padding: 10px 0;
+    text-align: left;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content li {
+    list-style: none;
+    display: block;
+    margin: 0;
+}
+
+.dropdown-content a {
+    color: #94a3b8 !important;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: #007bff;
+    color: white !important;
+}
+
+.dropdown-header {
+    padding: 10px 20px 5px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #60a5fa;
+    letter-spacing: 1px;
+    font-family: 'Outfit', sans-serif;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: rgba(255,255,255,0.1);
+    margin: 10px 0;
+}
+
+/* =========================================
+   COLLEGE SCOUTING TABLE STYLES
+   ========================================= */
+
+.portfolio-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+h1.main-title {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 5.5rem;
+    color: #0a192f;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 0.9;
+    margin-bottom: 60px;
+}
+
+h1.main-title span {
+    color: #007bff;
+}
+
+.table-title {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 2.5rem;
+    color: #0a192f;
+    margin: 40px 0 20px;
+    border-left: 10px solid #007bff;
+    padding-left: 20px;
+    text-transform: uppercase;
+}
+
+.scouting-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 40px;
+}
+
+.scouting-table th {
+    background-color: #0a192f;
+    color: #ffffff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    padding: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.scouting-table th:first-child {
+    text-align: left;
+}
+
+.scouting-table td {
+    padding: 15px;
+    color: #1e293b;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+    text-align: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* Zebra Striping */
+.scouting-table tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+/* School Name Column Highlight */
+.scouting-table td:first-child {
+    text-align: left;
+    background-color: #f1f5f9;
+    color: #0a192f;
+    width: 45%;
+    border-right: 1px solid #e2e8f0;
+}
+
+.scroll-container {
+    max-height: 600px;
+    overflow-y: auto;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: white;
+}
+
+/* Desktop-Only Lock */
+body {
+    min-width: 1250px;
+}
+
+/* ============================================================
+   MATCH HIGHLIGHTS — VIDEO + NOTES SECTION
+   ============================================================ */
+
+.highlight-video-frame {
+    width: 900px;
+    margin: 0 auto;
+    border: 4px solid var(--blue);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 0 30px rgba(96, 165, 250, 0.3);
+}
+
+.film-notes-box {
+    background: var(--navy);
+    padding: 60px;
+    border-radius: 20px;
+    border: 2px solid var(--blue);
+    box-shadow: 0 20px 40px rgba(10, 25, 47, 0.2);
+    color: white;
+    max-width: 900px;
+    margin: 50px auto;
+}
+
+.film-notes-box h3 {
+    font-family: 'Big Shoulders Display';
+    color: var(--blue);
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.film-notes-box ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1.2rem;
+    line-height: 2;
+    color: #cbd5e1;
+}
+
+.film-notes-box li strong {
+    color: white;
+    border-left: 4px solid var(--blue);
+    padding-left: 15px;
+}
+
+.coming-soon-box {
+    margin-top: 50px;
+    text-align: center;
+    background: #f1f5f9;
+    padding: 40px;
+    border-radius: 15px;
+}
+
+.coming-soon-box h4 {
+    font-family: 'Big Shoulders Display';
+    font-size: 1.8rem;
+    color: var(--navy);
+    margin-bottom: 15px;
+}
+
+.coming-soon-placeholder {
+    width: 700px;
+    margin: 0 auto;
+    border: 3px dashed var(--navy);
+    border-radius: 12px;
+    padding: 40px;
+    color: var(--navy);
+    font-family: 'Outfit';
+    font-size: 1.2rem;
+}
+
+.recruit-cta {
+    margin-top: 50px;
+    text-align: center;
+    background: var(--navy);
+    padding: 60px;
+    border-radius: 20px;
+    border: 2px solid var(--blue);
+    box-shadow: 0 20px 40px rgba(10, 25, 47, 0.2);
+    color: white;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.recruit-cta h4 {
+    font-family: 'Big Shoulders Display';
+    font-size: 2rem;
+    color: var(--blue);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.recruit-cta p {
+    font-family: 'Outfit';
+    color: #cbd5e1;
+    margin-bottom: 25px;
+    font-size: 1.2rem;
+}
+
+.btn-request-match {
+    background: var(--blue-dark);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 6px;
+}
+
+/* ============================
+   RECOVERY TIMELINE BAR
+   ============================ */
+
+.recovery-timeline {
+    width: 100%;
+    max-width: 900px;
+    margin: 60px auto;
+    text-align: center;
+    font-family: 'Outfit';
+}
+
+.recovery-timeline h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 25px;
+}
+
+/* The bar container (dark navy background) */
+.timeline-bar {
+    width: 100%;
+    background: var(--navy); /* DARK NAVY */
+    border-radius: 12px;
+    height: 26px;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid var(--navy-light);
+    margin-bottom: 20px;
+}
+
+/* The blue fill (gradient stays the same) */
+.timeline-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue-dark), var(--blue));
+    border-radius: 12px 0 0 12px;
+    transition: width 0.4s ease-in-out;
+}
+
+/* Text under the bar */
+.timeline-info p {
+    margin: 4px 0;
+    font-size: 1rem;
+    color: var(--navy);
+    font-weight: 600;
+}
+
+/* Labels under the timeline (light blue text) */
+.timeline-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    font-size: 0.9rem;
+    color: var(--blue); /* LIGHT BLUE */
+    font-weight: 700;
+}
+
+.timeline-labels span {
+    width: 33%;
+    text-align: center;
+    line-height: 1.4;
+}
+
+
+
+
+body {
+  background: #0A1A2F; /* dark navy */
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
+  padding: 40px;
+}
+
+.updates-wrapper {
+  max-width: 750px;
+  margin: auto;
+}
+
+h1 {
+  font-size: 2.8rem;
+  margin-bottom: 5px;
+  text-align: center;
+  color: #4DB8FF; /* light blue header */
+}
+
+.subtitle {
+  text-align: center;
+  opacity: 0.7;
+  margin-bottom: 40px;
+}
+
+h2 {
+  margin-top: 40px;
+  font-size: 1.8rem;
+  color: #4DB8FF;
+  border-left: 4px solid #4DB8FF;
+  padding-left: 10px;
+}
+
+.timeline {
+  border-left: 2px solid #1f3b57;
+  margin-left: 25px;
+  padding-left: 25px;
+  margin-top: 20px;
+}
+
+.entry {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.dot {
+  width: 16px;
+  height: 16px;
+  background: #4DB8FF;
+  border-radius: 50%;
+  position: absolute;
+  left: -34px;
+  top: 5px;
+  box-shadow: 0 0 10px #4DB8FF;
+}
+
+.dot.soon {
+  background: #ff9800;
+  box-shadow: 0 0 10px #ff9800;
+}
+
+.content h3 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.date {
+  opacity: 0.6;
+  font-size: 0.9rem;
+  margin-top: 3px;
+}
