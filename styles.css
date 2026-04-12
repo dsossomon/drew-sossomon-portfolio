@@ -11,7 +11,7 @@
     --gold: #fbbf24;
 }
 
-/* --- RESPONSIVE GLOBAL RESET (Fixes mobile + layout) --- */
+/* --- RESPONSIVE GLOBAL RESET --- */
 html, body {
     width: 100%;
     max-width: 100%;
@@ -86,7 +86,7 @@ html, body {
 
 .dropdown:hover .dropdown-content { display: block; }
 
-/* FIX DROPDOWN TEXT VISIBILITY */
+/* --- FIX DROPDOWN TEXT VISIBILITY --- */
 .dropdown-content a {
     color: #ffffff !important;
 }
@@ -121,115 +121,4 @@ html, body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    background: var(--navy);
-    color: white;
-    padding: 30px;
-    border-radius: 10px;
-    text-align: center;
-    margin-bottom: 40px;
-    border-bottom: 4px solid var(--blue);
-}
-
-.vitals-item { font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; letter-spacing: 1px; }
-.vitals-item span { display: block; font-size: 1.1rem; font-weight: 700; margin-top: 5px; color: white; }
-
-/* --- Table Styling --- */
-.navy-theme-table { width: 100%; border-collapse: collapse; }
-.navy-theme-table th {
-    background: var(--navy);
-    color: white;
-    padding: 18px;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-}
-.navy-theme-table td {
-    padding: 15px;
-    border-bottom: 1px solid #e2e8f0;
-    text-align: center;
-}
-
-/* FIX INVISIBLE TABLE TEXT */
-.navy-theme-table td,
-.navy-theme-table th {
-    color: #1e293b !important;
-}
-
-.stat-label {
-    text-align: left !important;
-    font-weight: 700;
-    background: #f1f5f9;
-    color: var(--navy) !important;
-}
-
-/* --- TABLE MOBILE SCROLL FIX --- */
-.table-wrapper {
-    overflow-x: auto;
-    width: 100%;
-}
-
-/* --- Buttons --- */
-.btn-primary {
-    background: var(--blue-dark);
-    color: white;
-    padding: 12px 24px;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: 700;
-    transition: 0.3s;
-    border: none;
-    cursor: pointer;
-}
-
-.btn-primary:hover {
-    background: var(--navy);
-    transform: translateY(-2px);
-}
-
-/* --- Recruitment Section --- */
-.recruitment-section {
-    background: #0b1e3f;
-    padding: 40px 20px;
-    border-radius: 10px;
-    color: white;
-    max-width: 900px;
-    margin: 40px auto;
-}
-
-.contact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 25px;
-}
-
-.contact-card {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.15);
-}
-
-/* --- Updates Page Dark Theme (ONLY for updates.html) --- */
-.updates-page {
-    background: #0A1A2F !important;
-    color: #ffffff !important;
-}
-
-/* --- MOBILE RESPONSIVE FIXES --- */
-@media (max-width: 768px) {
-
-    #nav-menu {
-        padding: 15px 20px;
-    }
-
-    .vitals-navy-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .stats-title {
-        font-size: 2.2rem;
-    }
-
-    .stats-container {
-        padding: 20px;
-    }
-}
+    background: var
