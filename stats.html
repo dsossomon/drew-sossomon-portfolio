@@ -8,257 +8,225 @@
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- BRAND VARIABLES --- */
+        /* --- BRAND THEME --- */
         :root {
             --navy: #0a192f;
             --navy-light: #112240;
-            --blue: #007bff;
-            --blue-light: #60a5fa;
+            --energy-blue: #007bff;
+            --energy-accent: #60a5fa;
             --white: #ffffff;
-            --bg-gray: #f8fafc;
-            --border-gray: #e2e8f0;
+            --bg: #f8fafc;
+            --border: #e2e8f0;
         }
 
-        /* --- BASE STYLES --- */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Outfit', sans-serif;
-            background-color: var(--bg-gray);
+            background-color: var(--bg);
             color: var(--navy);
-            line-height: 1.6;
         }
 
-        .stats-container {
-            max-width: 1200px;
+        .container {
+            max-width: 1100px;
             margin: 40px auto;
             padding: 20px;
         }
 
-        /* --- TYPOGRAPHY --- */
+        /* --- HEADER --- */
+        .header-section {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 4px solid var(--energy-blue);
+            padding-bottom: 30px;
+        }
+
         .stats-title {
             font-family: 'Big Shoulders Display', sans-serif;
             font-size: 4rem;
-            margin: 0;
             text-transform: uppercase;
-            text-align: center;
+            margin: 0;
+            color: var(--navy);
         }
 
         .stats-subtitle {
-            text-align: center;
             font-size: 1.2rem;
-            font-weight: 400;
-            color: #64748b;
+            color: var(--energy-blue);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- NAVIGATION BUTTON --- */
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--navy);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover { background: var(--energy-blue); }
+
+        /* --- VITALS GRID --- */
+        .vitals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            background: var(--navy);
+            padding: 25px;
+            border-radius: 12px;
+            color: white;
             margin-bottom: 40px;
         }
 
+        .vital-box { border-left: 3px solid var(--energy-blue); padding-left: 15px; }
+        .vital-box label { display: block; font-size: 0.75rem; color: var(--energy-accent); text-transform: uppercase; }
+        .vital-box span { font-size: 1.1rem; font-weight: 700; }
+
+        /* --- TABLES --- */
         .section-label {
             font-family: 'Big Shoulders Display', sans-serif;
-            font-size: 2rem;
-            margin: 40px 0 20px 0;
-            border-bottom: 2px solid var(--blue);
-            display: inline-block;
+            font-size: 2.2rem;
+            color: var(--navy);
             text-transform: uppercase;
+            margin: 40px 0 15px;
         }
 
-        /* --- BUTTONS --- */
-        .btn-action {
-            display: inline-block;
-            padding: 12px 24px;
-            text-decoration: none;
-            font-weight: 700;
-            border-radius: 6px;
-            transition: 0.3s;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-        }
-
-        .main-btn {
-            background: var(--blue);
-            color: white;
-        }
-
-        .main-btn:hover {
-            background: var(--navy);
-            transform: translateY(-2px);
-        }
-
-        .alt-btn {
-            background: transparent;
-            border: 2px solid var(--blue);
-            color: var(--blue);
-            margin-left: 10px;
-        }
-
-        /* --- VITALS GRID --- */
-        .vitals-navy-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            background: var(--navy);
-            padding: 30px;
-            border-radius: 12px;
-            color: white;
-            box-shadow: 0 10px 30px rgba(10, 25, 47, 0.2);
-        }
-
-        .vitals-item {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            color: #94a3b8;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 5px;
-        }
-
-        .vitals-item span {
-            display: block;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--white);
-            text-transform: none;
-        }
-
-        /* --- THE TABLES --- */
         .table-wrapper {
-            width: 100%;
-            overflow-x: auto;
-            background: var(--white);
+            background: white;
             border-radius: 12px;
+            overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
-        .navy-theme-table {
+        table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 800px;
         }
 
-        .navy-theme-table thead tr {
-            background: var(--navy);
-            color: white;
-        }
+        thead { background: var(--navy); color: white; }
+        th { padding: 15px; text-align: left; font-family: 'Big Shoulders Display'; text-transform: uppercase; letter-spacing: 1px; }
+        td { padding: 12px 15px; border-bottom: 1px solid var(--border); }
+        
+        .stat-name { font-weight: 700; background: #f1f5f9; width: 30%; }
+        .stat-val { font-weight: 800; color: var(--navy); font-size: 1.1rem; }
+        .highlight-blue { color: var(--energy-blue); }
 
-        .navy-theme-table th {
-            padding: 15px;
-            text-align: left;
-            font-family: 'Big Shoulders Display', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 4px solid var(--blue);
-        }
-
-        .navy-theme-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid var(--border-gray);
-        }
-
-        .stat-label {
-            font-weight: 700;
-            background: #f1f5f9;
-            width: 250px;
-        }
-
-        .bold-navy {
-            font-weight: 800;
-            color: var(--navy);
-            font-size: 1.1rem;
-        }
-
-        .pk-badge {
-            background: #16a34a;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            margin-left: 5px;
-        }
-
-        .record-tag {
-            background: var(--blue);
-            color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-        }
-
-        /* --- CONTACT SECTION --- */
-        .contact-section {
-            background: var(--navy);
-            padding: 60px 20px;
-            border-radius: 15px;
-            margin-top: 50px;
-        }
-
+        /* --- CONTACT CARDS --- */
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
-            max-width: 1100px;
-            margin: 0 auto;
+            margin-top: 20px;
         }
 
-        .contact-card {
-            background: var(--navy-light);
+        .card {
+            background: var(--navy);
+            color: white;
             padding: 25px;
             border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1);
             position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            border-top: 5px solid var(--energy-blue);
         }
 
-        .card-tag {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--blue);
-            color: white;
-            font-size: 0.7rem;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
+        .card h3 { font-family: 'Big Shoulders Display'; font-size: 1.8rem; text-transform: uppercase; margin-bottom: 10px; }
+        .card p { margin: 5px 0; color: var(--energy-accent); }
+        .tag { position: absolute; top: 15px; right: 15px; background: var(--energy-blue); font-size: 0.7rem; padding: 3px 8px; border-radius: 3px; font-weight: 800; }
 
-        .agent-tag { background: #9333ea; }
-        .coach-tag { background: #e67e22; }
-
-        .contact-card h3 {
-            color: white;
-            font-family: 'Big Shoulders Display', sans-serif;
-            font-size: 1.6rem;
-            margin: 0 0 10px 0;
-            text-transform: uppercase;
-        }
-
-        .contact-card p {
-            color: #94a3b8;
-            margin: 5px 0;
-            font-size: 0.9rem;
-        }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .stats-title { font-size: 2.5rem; }
-            .vitals-navy-grid { padding: 15px; }
-        }
+        @media (max-width: 768px) { .stats-title { font-size: 2.5rem; } }
     </style>
 </head>
-<body class="stats-page">
+<body>
 
-<div class="stats-container">
-    <div style="margin-bottom: 20px;">
-        <a href="index.html" class="btn-action main-btn">← Back to Home</a>
+<div class="container">
+    <a href="index.html" class="back-btn">← RETURN TO HOME</a>
+
+    <div class="header-section">
+        <h1 class="stats-title">Drew Sossomon</h1>
+        <p class="stats-subtitle">Full Career Performance Analytics</p>
     </div>
-    
-    <h1 class="stats-title">Andrew Branson Garner Sossomon</h1>
-    <p class="stats-subtitle">Goalkeeper Portfolio | Class of 2028 | "The U.S. Wall"</p>
 
-    <div class="vitals-navy-grid">
-        <div class="vitals-item">Preferred Name <span>Drew Sossomon</span></div>
-        <div class="vitals-item">Nationality <span>USA</span></div>
-        <div class="vitals-item">DOB <span>Oct 9, 2009 (Age 16)</span></div>
-        <div class="
+    <div class="vitals-grid">
+        <div class="vital-box"><label>Age</label><span>16 (Class of 2028)</span></div>
+        <div class="vital-box"><label>Dominant Foot</label><span style="color:var(--energy-accent)">LEFT</span></div>
+        <div class="vital-box"><label>Nationality</label><span>USA</span></div>
+        <div class="vital-box"><label>Status</label><span>Rehab (Plyometrics Phase)</span></div>
+    </div>
+
+    <h2 class="section-label">0. Career Summary (Aggregated)</h2>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>Combined Data</th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="stat-name">Career Record</td><td class="stat-val">79 - 41</td><td>Total Wins-Losses</td></tr>
+                <tr><td class="stat-name">Total Shots Faced</td><td class="stat-val">2,446</td><td>Across all seasons</td></tr>
+                <tr><td class="stat-name">Goals Against</td><td class="stat-val" style="color:#ef4444">156</td><td>Total conceded</td></tr>
+                <tr><td class="stat-name">Total Saves</td><td class="stat-val highlight-blue">2,290</td><td>(Shots Faced - GA)</td></tr>
+                <tr><td class="stat-name">Clean Sheets</td><td class="stat-val">44</td><td>Total Shutouts</td></tr>
+                <tr><td class="stat-name">PK Save Rate</td><td class="stat-val" style="color:#16a34a">100%</td><td>60 for 60 Saved</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 class="section-label">1. Club Season History</h2>
+    <div class="table-wrapper">
+        <table style="min-width: 800px;">
+            <thead>
+                <tr>
+                    <th>Stat</th>
+                    <th>2026 Wake FC</th>
+                    <th>2025 Wake FC</th>
+                    <th>2023 MWC</th>
+                    <th>2020 NBT</th>
+                    <th>2017 Swat</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="stat-name">Saves</td><td>8</td><td class="highlight-blue">348</td><td>88</td><td>120</td><td>200</td></tr>
+                <tr><td class="stat-name">Shutouts</td><td>1</td><td>1</td><td>0</td><td>11</td><td>15</td></tr>
+                <tr><td class="stat-name">Save %</td><td>100%</td><td>81.5%</td><td>73.3%</td><td>96.8%</td><td>95.2%</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 class="section-label">Recruitment Contacts</h2>
+    <div class="contact-grid">
+        <div class="card">
+            <span class="tag">ATHLETE</span>
+            <h3>Drew Sossomon</h3>
+            <p>Email: dsossomon@gmail.com</p>
+            <p>NCSA Profile: Class of 2028</p>
+        </div>
+        <div class="card">
+            <span class="tag" style="background:#9333ea">AGENT</span>
+            <h3>Nick Sossomon</h3>
+            <p>Email: nsossomon@gmail.com</p>
+            <p>Role: Soccer Agent / Representation</p>
+        </div>
+        <div class="card">
+            <span class="tag" style="background:#e67e22">COACH</span>
+            <h3>Dominic Gillespie</h3>
+            <p>Email: coachdgillespie@ncsasports.org</p>
+            <p>NCSA Recruiting Coach</p>
+        </div>
+    </div>
+</div>
+
+<footer style="text-align: center; padding: 50px; color: #64748b;">
+    <p>© 2026 Drew Sossomon | Goalkeeper Career Portfolio</p>
+</footer>
+
+</body>
+</html>
