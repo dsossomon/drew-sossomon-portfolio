@@ -193,18 +193,21 @@
 
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 900px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
         .contact-card {
             background: var(--navy-light);
-            padding: 30px;
+            padding: 25px;
             border-radius: 12px;
             border: 1px solid rgba(255,255,255,0.1);
             position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .card-tag {
@@ -221,11 +224,12 @@
         }
 
         .agent-tag { background: #9333ea; }
+        .coach-tag { background: #e67e22; }
 
         .contact-card h3 {
             color: white;
             font-family: 'Big Shoulders Display', sans-serif;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin: 0 0 10px 0;
             text-transform: uppercase;
         }
@@ -233,6 +237,7 @@
         .contact-card p {
             color: #94a3b8;
             margin: 5px 0;
+            font-size: 0.9rem;
         }
 
         /* --- RESPONSIVE --- */
@@ -256,113 +261,4 @@
         <div class="vitals-item">Preferred Name <span>Drew Sossomon</span></div>
         <div class="vitals-item">Nationality <span>USA</span></div>
         <div class="vitals-item">DOB <span>Oct 9, 2009 (Age 16)</span></div>
-        <div class="vitals-item">Dominant Foot <span style="color: #60a5fa;">LEFT</span></div>
-        <div class="vitals-item">School <span>Youngsville Academy</span></div>
-        <div class="vitals-item">Disability <span>Cerebral Palsy (L-Hemiplegia)</span></div>
-        <div class="vitals-item">Grad Year <span>2028</span></div>
-        <div class="vitals-item">Injury <span>ACL/Meniscus/ILL (Surgery: Nov 7, 2025)</span></div>
-        <div class="vitals-item">Status <span style="color: #fbbf24;">In-Progress Rehab / Strength Phase</span></div>
-    </div>
-
-    <h2 class="section-label">1. High School Varsity Statistics</h2>
-    <div class="table-wrapper">
-        <table class="navy-theme-table">
-            <thead>
-                <tr>
-                    <th>Statistic</th>
-                    <th>2025 Varsity</th>
-                    <th>2024 Varsity</th>
-                    <th>Varsity Career</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td class="stat-label">Games Played</td><td>5</td><td>8</td><td class="bold-navy">13</td></tr>
-                <tr><td class="stat-label">Shots on Goal</td><td>2</td><td>2</td><td class="bold-navy">4</td></tr>
-                <tr><td class="stat-label">Total Saves</td><td>0</td><td>6</td><td class="bold-navy">6</td></tr>
-                <tr><td class="stat-label">Goals Against Avg.</td><td>0.00</td><td>16.000</td><td class="bold-navy">---</td></tr>
-                <tr><td class="stat-label">Saves %</td><td>0.00</td><td>0.00</td><td class="bold-navy">---</td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <h2 class="section-label">2. Detailed Club Season Statistics</h2>
-    <div class="table-wrapper">
-        <table class="navy-theme-table">
-            <thead>
-                <tr>
-                    <th>Statistic</th>
-                    <th>2026 Wake FC 09 NPL Academy</th>
-                    <th>2025 Wake FC 09 Fulham</th>
-                    <th>2023 MWC</th>
-                    <th>2022 NBT</th>
-                    <th>2020 NBT</th>
-                    <th>2019 NBT</th>
-                    <th>2017 Swat</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td class="stat-label">Goals</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-                <tr><td class="stat-label">Assists</td><td>0</td><td>0</td><td>0</td><td>0</td><td>3</td><td>0</td><td>9</td></tr>
-                <tr><td class="stat-label">Games Played</td><td>1</td><td>17</td><td>12</td><td>8</td><td>13</td><td>13</td><td>16</td></tr>
-                <tr><td class="stat-label">Shutouts</td><td>1</td><td>1</td><td>0</td><td>0</td><td>11</td><td>8</td><td>15</td></tr>
-                <tr><td class="stat-label">Total Saves</td><td>8</td><td style="font-weight:bold; color:#007bff;">348</td><td>88</td><td>120</td><td>120</td><td>400</td><td>200</td></tr>
-                <tr><td class="stat-label">Saves %</td><td>100%</td><td>81.5%</td><td>73.3%</td><td>92.3%</td><td>96.8%</td><td>95.2%</td><td>95.2%</td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <h2 class="section-label">3. Tournament & Cup Statistics</h2>
-    <div class="table-wrapper">
-        <table class="navy-theme-table">
-            <thead>
-                <tr>
-                    <th>Tournament Metric</th>
-                    <th>Combined Totals</th>
-                    <th>Performance Note</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td class="stat-label">Tournament Record (W-L)</td><td class="bold-navy">20 - 7</td><td>Includes 3 Wake FC Events</td></tr>
-                <tr><td class="stat-label">Tournament Shutouts</td><td class="bold-navy">34</td><td>High-stakes clean sheets</td></tr>
-                <tr><td class="stat-label">Tournament Saves</td><td class="bold-navy">800</td><td>Aggregated tournament stops</td></tr>
-                <tr><td class="stat-label">Penalty Shootouts</td><td class="bold-navy">20</td><td>Unbeaten in PK sessions</td></tr>
-                <tr><td class="stat-label">PKs Saved</td><td class="bold-navy">60 / 60 <span class="pk-badge">Elite</span></td><td>100% Save Rate</td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <h2 class="section-label">4. Overall Career Totals</h2>
-    <div class="table-wrapper">
-        <table class="navy-theme-table">
-            <thead>
-                <tr>
-                    <th>Career Metric</th>
-                    <th>Combined Total</th>
-                    <th>Record Breakdown</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="stat-label">Combined Career Record</td>
-                    <td class="bold-navy" style="font-size: 1.4rem;">79 - 41</td>
-                    <td><span class="record-tag">Total Wins</span></td>
-                </tr>
-                <tr>
-                    <td class="stat-label">Total Minutes in Goal</td>
-                    <td class="bold-navy">11,970</td>
-                    <td><span style="color:#64748b; font-size:0.8rem;">Elite Career Volume</span></td>
-                </tr>
-                <tr><td class="stat-label">Total Career Saves</td><td class="bold-navy">2,290+</td><td>Season + Tournament</td></tr>
-                <tr><td class="stat-label">Total Shutouts</td><td class="bold-navy">44</td><td>Combined Clean Sheets</td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="contact-section">
-        <h2 style="color: white; margin-bottom: 30px; text-align: center; font-family: 'Big Shoulders Display'; font-size: 2.5rem; text-transform: uppercase;">Recruitment Contacts</h2>
-        <div class="contact-grid">
-            <div class="contact-card">
-                <span class="card-tag">Athlete</span>
-                <h3>Drew Sossomon</h3>
-                <p><strong>Email:</strong> dsossomon@gmail.com</p>
-                <div class="card-actions" style="margin-top: 15px;">
+        <div class="
