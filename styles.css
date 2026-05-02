@@ -18,8 +18,8 @@ html, body {
     margin: 0;
     padding: 0;
     font-family: 'Outfit', sans-serif;
-    background-color: var(--bg-gray); /* YOUR ORIGINAL WHITE/GRAY BG */
-    color: var(--navy);              /* NAVY TEXT */
+    background-color: var(--bg-gray);
+    color: var(--navy);
     line-height: 1.6;
     width: 100%;
     overflow-x: hidden;
@@ -60,7 +60,7 @@ html, body {
     font-weight: 700;
 }
 
-/* --- The Dropdown (White with Navy/Blue text) --- */
+/* --- The Dropdown --- */
 .dropdown { position: relative; }
 
 .dropdown-content {
@@ -112,9 +112,9 @@ html, body {
     background: linear-gradient(90deg, var(--blue), var(--blue-light));
 }
 
-/* --- GK ANALYTICS PAGE STYLES --- */
+/* --- GK ANALYTICS & STATS STYLES --- */
 .gk-container {
-    max-width: 700px;
+    max-width: 800px;
     margin: 40px auto;
     padding: 20px;
 }
@@ -128,7 +128,7 @@ html, body {
 }
 
 .gk-card {
-    background: var(--navy); /* Keeps the calculator card dark and professional */
+    background: var(--navy);
     padding: 25px;
     border-radius: 10px;
     color: white;
@@ -163,4 +163,55 @@ html, body {
     border-left: 4px solid var(--blue);
     color: var(--navy);
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* --- UPDATED STATS TABLES --- */
+.stats-container {
+    width: 100%;
+    overflow-x: auto; /* Makes table scrollable on small screens */
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Dark Navy Header Row */
+table thead tr, 
+table tr:first-child {
+    background-color: var(--navy);
+    color: var(--white);
+}
+
+table th {
+    padding: 15px;
+    text-align: left;
+    font-family: 'Big Shoulders Display', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 3px solid var(--blue); /* Blue accent line */
+}
+
+/* Body Cells and Borders */
+table td {
+    padding: 12px 15px;
+    border: 1px solid var(--border-gray);
+    color: var(--navy);
+    font-weight: 500;
+}
+
+/* Zebra Striping */
+table tbody tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+/* Row Hover Effect */
+table tbody tr:hover {
+    background-color: #f1f5f9;
+    transition: 0.2s ease;
 }
