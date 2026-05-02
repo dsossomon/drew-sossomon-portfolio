@@ -23,6 +23,7 @@
         .header { text-align: center; border-bottom: 6px solid var(--energy-blue); padding-bottom: 25px; margin-bottom: 30px; }
         .header h1 { font-family: 'Big Shoulders Display'; font-size: 5rem; text-transform: uppercase; margin: 0; }
 
+        /* VITALS BAR */
         .vitals-banner { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
@@ -32,16 +33,19 @@
             padding: 25px; 
             border-radius: 12px; 
             margin-bottom: 40px;
+            border-left: 8px solid var(--energy-blue);
         }
-        .vital-box { border-left: 3px solid var(--energy-blue); padding-left: 15px; }
-        .vital-box label { display: block; font-size: 0.7rem; text-transform: uppercase; color: var(--energy-accent); font-weight: 700; }
-        .vital-box span { font-size: 1.1rem; font-weight: 700; }
+        .vital-box { padding-left: 15px; }
+        .vital-box label { display: block; font-size: 0.75rem; text-transform: uppercase; color: var(--energy-accent); font-weight: 700; margin-bottom: 5px; }
+        .vital-box span { font-size: 1.2rem; font-weight: 700; }
 
+        /* SUMMARY TILES */
         .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 40px; }
         .stat-card { background: white; padding: 20px; border-radius: 12px; border-bottom: 4px solid var(--energy-blue); text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .stat-card h3 { margin: 0; font-size: 2.2rem; font-family: 'Big Shoulders Display'; color: var(--navy); }
         .stat-card p { margin: 0; text-transform: uppercase; font-size: 0.75rem; font-weight: 800; color: var(--energy-blue); }
 
+        /* TABLES */
         .section-label { font-family: 'Big Shoulders Display'; font-size: 2.5rem; text-transform: uppercase; margin: 45px 0 20px; color: var(--navy); border-left: 6px solid var(--energy-blue); padding-left: 20px; }
         .table-wrapper { background: white; border-radius: 12px; overflow-x: auto; box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-bottom: 40px; }
         table { width: 100%; border-collapse: collapse; min-width: 1000px; }
@@ -49,9 +53,10 @@
         th { padding: 15px; text-align: left; font-family: 'Big Shoulders Display'; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
         td { padding: 12px 15px; border-bottom: 1px solid #f1f5f9; }
         
-        .highlight { color: var(--energy-blue); font-weight: 800; font-size: 1.1rem; }
+        .highlight { color: var(--energy-blue); font-weight: 800; }
         .success { color: #16a34a; font-weight: 800; }
 
+        /* CONTACTS */
         .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 30px; }
         .card { background: var(--navy-light); color: white; padding: 30px; border-radius: 15px; position: relative; border-top: 6px solid var(--energy-blue); }
         .card h3 { font-family: 'Big Shoulders Display'; font-size: 2rem; margin-bottom: 5px; text-transform: uppercase; }
@@ -65,25 +70,24 @@
 
     <div class="header">
         <h1>Drew Sossomon</h1>
-        <p style="font-weight: 800; color: var(--energy-blue); letter-spacing: 2px;">VARSITY GOALKEEPER | 2028 PROSPECT</p>
+        <p style="font-weight: 800; color: var(--energy-blue); letter-spacing: 2px;">VARSITY GOALKEEPER | CLASS OF 2028</p>
     </div>
 
     <div class="vitals-banner">
         <div class="vital-box"><label>Height</label><span>5'6" - 5'7"</span></div> 
-        <div class="vital-box"><label>Career GK Record</label><span>92 - 41 - 0</span></div> 
-        <div class="vital-box"><label>GK Minutes</label><span>11,790 Mins</span></div>
-        <div class="vital-box"><label>Total Clean Sheets</label><span>44</span></div>
-        <div class="vital-box"><label>Grad Year</label><span>2028</span></div>
-    </div>
+        <div class="vital-box"><label>Dominant Foot</label><span>Left-Footed</span></div> 
+        <div class="vital-box"><label>GK Record</label><span>92 - 41 - 0</span></div>
+        <div class="vital-box"><label>GK Experience</label><span>11,790 Mins</span></div>
+        <div class="vital-box"><label>GPA</label><span>---</span></div> </div>
 
     <div class="summary-grid">
-        <div class="stat-card"><p>GK Record (Club/Tourn)</p><h3>92 - 41</h3></div>
-        <div class="stat-card"><p>Career Saves</p><h3 class="highlight">2,290</h3></div>
         <div class="stat-card"><p>Total Shots Faced</p><h3 class="highlight">2,446</h3></div>
+        <div class="stat-card"><p>Career GK Saves</p><h3 class="highlight">2,290</h3></div>
+        <div class="stat-card"><p>Goals Against</p><h3 style="color: #ef4444;">156</h3></div>
         <div class="stat-card"><p>Save Percentage</p><h3 class="success">93.6%</h3></div>
     </div>
 
-    <h2 class="section-label">Complete Career GK Analytics</h2>
+    <h2 class="section-label">Goalkeeper Career Analytics</h2>
     <div class="table-wrapper">
         <table>
             <thead>
@@ -104,62 +108,4 @@
                 <tr><td>2023 MWC</td><td>12</td><td>120</td><td class="highlight">88</td><td>32</td><td>2.67</td><td>73.3%</td><td>0</td></tr>
                 <tr><td>2022 NBT</td><td>8</td><td>130</td><td class="highlight">120</td><td>10</td><td>1.25</td><td>92.3%</td><td>0</td></tr>
                 <tr><td>2020 NBT</td><td>13</td><td>124</td><td class="highlight">120</td><td>4</td><td>0.31</td><td>96.8%</td><td>11</td></tr>
-                <tr><td>2019 NBT</td><td>13</td><td>420</td><td class="highlight">400</td><td>20</td><td>1.54</td><td>95.2%</td><td>8</td></tr>
-                <tr><td>2017 Swat</td><td>16</td><td>210</td><td class="highlight">200</td><td>10</td><td>0.63</td><td>95.2%</td><td>15</td></tr>
-                <tr><td>Tournaments/Showcases</td><td>53</td><td>1,007</td><td class="highlight">1,000</td><td>1</td><td>0.02</td><td>99.9%</td><td>8</td></tr>
-                <tr style="background: #eef2ff; font-weight: 800;">
-                    <td>CAREER GK TOTALS</td>
-                    <td>133</td>
-                    <td class="highlight">2,446</td>
-                    <td class="highlight">2,290</td>
-                    <td>156</td>
-                    <td>1.17 Avg</td>
-                    <td>93.6% Avg</td>
-                    <td>44</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <h2 class="section-label">High School & Specialty Performance</h2>
-    <div class="table-wrapper">
-        <table>
-            <thead>
-                <tr>
-                    <th>Category</th>
-                    <th>Matches Played</th>
-                    <th>Performance Note</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>Varsity (Field Assets)</td><td class="highlight">13 Matches</td><td>Utilized as versatile field player during Varsity season</td></tr>
-                <tr><td>Penalty Shootouts</td><td class="success">20 - 0</td><td>Perfect Career Record in PK Sessions</td></tr>
-                <tr><td>PK Saves</td><td class="success">60 / 60</td><td>100% Save Rate (Scouting Elite)</td></tr>
-                <tr><td>Total Playtime</td><td>11,790 mins</td><td>In-goal experience across all competitive platforms</td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <h2 class="section-label">Recruitment Contacts</h2>
-    <div class="contact-grid">
-        <div class="card">
-            <span class="tag">Athlete</span>
-            <h3>Drew Sossomon</h3>
-            <p><strong>Email:</strong> dsossomon@gmail.com</p>
-            <p><strong>Role:</strong> Class of 2028 | GK</p>
-        </div>
-        <div class="card">
-            <span class="tag" style="background:#e67e22">NCSA Coach</span>
-            <h3>Dominic Gillespie</h3>
-            <p><strong>Email:</strong> coachdgillespie@ncsasports.org</p>
-            <p><strong>Org:</strong> NCSA Recruiting</p>
-        </div>
-    </div>
-</div>
-
-<footer style="text-align: center; padding: 60px; color: #94a3b8;">
-    <p>© 2026 Drew Sossomon | Goalkeeper Career Portfolio</p>
-</footer>
-
-</body>
-</html>
+                <tr><td>2019 NBT</td><td>1
