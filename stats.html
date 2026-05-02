@@ -4,14 +4,249 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drew Sossomon | Full Career Stats</title>
-    <link rel="stylesheet" href="styles.css">
+    
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- BRAND VARIABLES --- */
+        :root {
+            --navy: #0a192f;
+            --navy-light: #112240;
+            --blue: #007bff;
+            --blue-light: #60a5fa;
+            --white: #ffffff;
+            --bg-gray: #f8fafc;
+            --border-gray: #e2e8f0;
+        }
+
+        /* --- BASE STYLES --- */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-gray);
+            color: var(--navy);
+            line-height: 1.6;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        .stats-title {
+            font-family: 'Big Shoulders Display', sans-serif;
+            font-size: 4rem;
+            margin: 0;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .stats-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #64748b;
+            margin-bottom: 40px;
+        }
+
+        .section-label {
+            font-family: 'Big Shoulders Display', sans-serif;
+            font-size: 2rem;
+            margin: 40px 0 20px 0;
+            border-bottom: 2px solid var(--blue);
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-action {
+            display: inline-block;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 6px;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .main-btn {
+            background: var(--blue);
+            color: white;
+        }
+
+        .main-btn:hover {
+            background: var(--navy);
+            transform: translateY(-2px);
+        }
+
+        .alt-btn {
+            background: transparent;
+            border: 2px solid var(--blue);
+            color: var(--blue);
+            margin-left: 10px;
+        }
+
+        /* --- VITALS GRID --- */
+        .vitals-navy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            background: var(--navy);
+            padding: 30px;
+            border-radius: 12px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(10, 25, 47, 0.2);
+        }
+
+        .vitals-item {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: #94a3b8;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 5px;
+        }
+
+        .vitals-item span {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+            text-transform: none;
+        }
+
+        /* --- THE TABLES --- */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .navy-theme-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        .navy-theme-table thead tr {
+            background: var(--navy);
+            color: white;
+        }
+
+        .navy-theme-table th {
+            padding: 15px;
+            text-align: left;
+            font-family: 'Big Shoulders Display', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 4px solid var(--blue);
+        }
+
+        .navy-theme-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        .stat-label {
+            font-weight: 700;
+            background: #f1f5f9;
+            width: 250px;
+        }
+
+        .bold-navy {
+            font-weight: 800;
+            color: var(--navy);
+            font-size: 1.1rem;
+        }
+
+        .pk-badge {
+            background: #16a34a;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-left: 5px;
+        }
+
+        .record-tag {
+            background: var(--blue);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact-section {
+            background: var(--navy);
+            padding: 60px 20px;
+            border-radius: 15px;
+            margin-top: 50px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            background: var(--navy-light);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+
+        .card-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--blue);
+            color: white;
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .agent-tag { background: #9333ea; }
+
+        .contact-card h3 {
+            color: white;
+            font-family: 'Big Shoulders Display', sans-serif;
+            font-size: 1.8rem;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+        }
+
+        .contact-card p {
+            color: #94a3b8;
+            margin: 5px 0;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .stats-title { font-size: 2.5rem; }
+            .vitals-navy-grid { padding: 15px; }
+        }
+    </style>
 </head>
 <body class="stats-page">
 
 <div class="stats-container">
     <div style="margin-bottom: 20px;">
-        <a href="index.html" class="btn-primary">← Back to Home</a>
+        <a href="index.html" class="btn-action main-btn">← Back to Home</a>
     </div>
     
     <h1 class="stats-title">Andrew Branson Garner Sossomon</h1>
@@ -49,14 +284,14 @@
             </tbody>
         </table>
     </div>
-  
-  <h2 class="section-label">2. Detailed Club Season Statistics</h2>
+
+    <h2 class="section-label">2. Detailed Club Season Statistics</h2>
     <div class="table-wrapper">
         <table class="navy-theme-table">
             <thead>
                 <tr>
                     <th>Statistic</th>
-                    <th>2026 Wake FC 09 NPL</th>
+                    <th>2026 Wake FC 09 NPL Academy</th>
                     <th>2025 Wake FC 09 Fulham</th>
                     <th>2023 MWC</th>
                     <th>2022 NBT</th>
@@ -70,24 +305,11 @@
                 <tr><td class="stat-label">Assists</td><td>0</td><td>0</td><td>0</td><td>0</td><td>3</td><td>0</td><td>9</td></tr>
                 <tr><td class="stat-label">Games Played</td><td>1</td><td>17</td><td>12</td><td>8</td><td>13</td><td>13</td><td>16</td></tr>
                 <tr><td class="stat-label">Shutouts</td><td>1</td><td>1</td><td>0</td><td>0</td><td>11</td><td>8</td><td>15</td></tr>
-                <tr><td class="stat-label">Total Saves</td><td>8</td><td style="font-weight:bold; color:#60a5fa;">348</td><td>88</td><td>120</td><td>120</td><td>400</td><td>200</td></tr>
-                <tr>
-                    <td class="stat-label">Goals Against Avg.</td>
-                    <td style="font-weight:bold; color:#60a5fa;">0.00</td>
-                    <td>4.68</td>
-                    <td>1.00</td>
-                    <td>1.25</td>
-                    <td>1.20</td>
-                    <td>0.63</td>
-                    <td>0.63</td>
-                </tr>
+                <tr><td class="stat-label">Total Saves</td><td>8</td><td style="font-weight:bold; color:#007bff;">348</td><td>88</td><td>120</td><td>120</td><td>400</td><td>200</td></tr>
                 <tr><td class="stat-label">Saves %</td><td>100%</td><td>81.5%</td><td>73.3%</td><td>92.3%</td><td>96.8%</td><td>95.2%</td><td>95.2%</td></tr>
             </tbody>
         </table>
     </div>
-  
-
-   
 
     <h2 class="section-label">3. Tournament & Cup Statistics</h2>
     <div class="table-wrapper">
@@ -109,7 +331,7 @@
         </table>
     </div>
 
-    <h2 class="section-label">4. Overall Career Totals (Goalkeeper)</h2>
+    <h2 class="section-label">4. Overall Career Totals</h2>
     <div class="table-wrapper">
         <table class="navy-theme-table">
             <thead>
@@ -121,73 +343,26 @@
             </thead>
             <tbody>
                 <tr>
-                    <td class="stat-label">Overall Career Record</td>
-                    <td class="bold-navy" style="font-size: 1.4rem;">79 - 41 </td>
-       <td><span class="record-tag">71-41 Club + 8 Scrimmage Wins</span></td>
-                </tr>
-                                   <td class="stat-label">Overall Career Record</td>
-                    <td class="bold-navy" style="font-size: 1.4rem;">51 - 34  </td><td><span class="record-tag">71 Club record</span></td>
-                </tr>
-              
-              <tr>
-                  
-                    <td class="stat-label">Scrimmage Record</td>
-                    <td class="bold-navy" style="color: #16a34a;">8 - 0</td>
-                    <td><span class="record-tag" style="background: #16a34a;">Undefeated</span></td>
-                </tr>
-                <tr>
-                    <td class="stat-label">Total Matches Played</td>
-                    <td class="bold-navy">133</td>
-                    <td><span class="sub-label">Club + Varsity + Scrimmage</span></td>
+                    <td class="stat-label">Combined Career Record</td>
+                    <td class="bold-navy" style="font-size: 1.4rem;">79 - 41</td>
+                    <td><span class="record-tag">Total Wins</span></td>
                 </tr>
                 <tr>
                     <td class="stat-label">Total Minutes in Goal</td>
                     <td class="bold-navy">11,970</td>
-                    <td><span class="sub-label">Elite Career Volume</span></td>
+                    <td><span style="color:#64748b; font-size:0.8rem;">Elite Career Volume</span></td>
                 </tr>
-                <tr><td class="stat-label">Total Shots Faced</td><td class="bold-navy">2,446</td><td>Career shots on target</td></tr>
                 <tr><td class="stat-label">Total Career Saves</td><td class="bold-navy">2,290+</td><td>Season + Tournament</td></tr>
-                <tr><td class="stat-label">Total Goals Conceded</td><td class="bold-navy">156</td><td>All-time career total</td></tr>
                 <tr><td class="stat-label">Total Shutouts</td><td class="bold-navy">44</td><td>Combined Clean Sheets</td></tr>
-                
-                <tr style="background: rgba(96, 165, 250, 0.05);">
-                    <td colspan="3" style="padding: 20px; font-size: 0.9rem; color: #64748b; text-align: center; line-height: 1.6; border-top: 1px solid #eee;">
-                        <strong>Appearance Breakdown:</strong> 112 Club Matches, 8 Scrimmages (Undefeated), and 13 Varsity appearances. 
-                        <br><em>Note: Varsity appearances included 25 minutes in goal with the remainder as an outfield contributor.</em> 
-                        <br><strong>Total Career Volume: 11,970 minutes in goal.</strong>
-                    </td>
-                </tr>
             </tbody>
         </table>
     </div>
 
     <div class="contact-section">
-        <h2 style="color: white; margin-bottom: 30px; text-align: center;">Recruitment Contacts</h2>
+        <h2 style="color: white; margin-bottom: 30px; text-align: center; font-family: 'Big Shoulders Display'; font-size: 2.5rem; text-transform: uppercase;">Recruitment Contacts</h2>
         <div class="contact-grid">
             <div class="contact-card">
                 <span class="card-tag">Athlete</span>
                 <h3>Drew Sossomon</h3>
                 <p><strong>Email:</strong> dsossomon@gmail.com</p>
                 <div class="card-actions" style="margin-top: 15px;">
-                    <a href="mailto:dsossomon@gmail.com" class="btn-action main-btn">Email Drew</a>
-                    <a href="https://www.ncsasports.org/mens-soccer-recruiting/north-carolina/youngsville/youngsville-academy/drew-sossomon" target="_blank" class="btn-action alt-btn">NCSA Profile</a>
-                </div>
-            </div>
-            <div class="contact-card">
-                <span class="card-tag agent-tag">Recruiting Coach</span>
-                <h3>Dominic Gillespie</h3>
-                <p><strong>Email:</strong> coachdgillespie@ncsasports.org</p>
-                <div class="card-actions" style="margin-top: 15px;">
-                    <a href="mailto:coachdgillespie@ncsasports.org" class="btn-action main-btn">Email Coach</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<footer style="text-align: center; padding: 40px; color: #64748b;">
-    <p>&copy; 2026 Drew Sossomon | Goalkeeper Career Portfolio</p>
-</footer>
-
-</body>
-</html>
