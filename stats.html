@@ -17,16 +17,28 @@
         body { margin: 0; font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--navy); line-height: 1.6; }
         .container { max-width: 1250px; margin: 40px auto; padding: 20px; }
         
-        /* Navigation */
         .back-btn { display: inline-block; padding: 12px 25px; background: var(--navy); color: white; text-decoration: none; border-radius: 6px; font-weight: 700; margin-bottom: 25px; border-bottom: 4px solid var(--energy-blue); transition: 0.3s; }
         .back-btn:hover { background: var(--energy-blue); transform: translateX(-5px); }
         
-        /* Header */
-        .header { text-align: center; border-bottom: 6px solid var(--energy-blue); padding-bottom: 25px; margin-bottom: 40px; }
+        .header { text-align: center; border-bottom: 6px solid var(--energy-blue); padding-bottom: 25px; margin-bottom: 30px; }
         .header h1 { font-family: 'Big Shoulders Display'; font-size: 5rem; text-transform: uppercase; margin: 0; }
-        .header p { font-weight: 800; color: var(--energy-blue); letter-spacing: 3px; }
 
-        /* Tables */
+        /* VITALS BANNER */
+        .vitals-banner { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 20px; 
+            background: var(--navy); 
+            color: white; 
+            padding: 30px; 
+            border-radius: 12px; 
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(10,25,47,0.15);
+        }
+        .vital-box { border-left: 3px solid var(--energy-blue); padding-left: 20px; }
+        .vital-box label { display: block; font-size: 0.75rem; text-transform: uppercase; color: var(--energy-accent); font-weight: 700; margin-bottom: 5px; }
+        .vital-box span { font-size: 1.2rem; font-weight: 700; }
+
         .section-label { font-family: 'Big Shoulders Display'; font-size: 2.5rem; text-transform: uppercase; margin: 45px 0 20px; color: var(--navy); border-left: 6px solid var(--energy-blue); padding-left: 20px; }
         .table-wrapper { background: white; border-radius: 12px; overflow-x: auto; box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-bottom: 40px; }
         table { width: 100%; border-collapse: collapse; min-width: 1000px; }
@@ -37,12 +49,10 @@
         .highlight { color: var(--energy-blue); font-weight: 800; font-size: 1.1rem; }
         .success { color: #16a34a; font-weight: 800; }
 
-        /* Contact Cards */
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; margin-top: 30px; }
         .card { background: var(--navy-light); color: white; padding: 35px; border-radius: 15px; position: relative; border-top: 6px solid var(--energy-blue); }
         .card h3 { font-family: 'Big Shoulders Display'; font-size: 2.2rem; margin-bottom: 10px; text-transform: uppercase; }
         .card p { margin: 10px 0; color: #cbd5e1; font-size: 1.1rem; }
-        .card strong { color: var(--energy-accent); }
         .tag { position: absolute; top: 20px; right: 20px; background: var(--energy-blue); padding: 4px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; }
     </style>
 </head>
@@ -53,7 +63,14 @@
 
     <div class="header">
         <h1>Drew Sossomon</h1>
-        <p>GOALKEEPER | CLASS OF 2028 | SCOUTING ANALYTICS</p>
+        <p style="font-weight: 800; color: var(--energy-blue); letter-spacing: 2px;">VARSITY GOALKEEPER | CLASS OF 2028</p>
+    </div>
+
+    <div class="vitals-banner">
+        <div class="vital-box"><label>Age</label><span>16</span></div>
+        <div class="vital-box"><label>Dominant Foot</label><span>Left-Footed</span></div>
+        <div class="vital-box"><label>Height</label><span>---</span></div> <div class="vital-box"><label>Nationality</label><span>USA</span></div>
+        <div class="vital-box"><label>Status</label><span style="color:var(--energy-accent)">Rehab / Active PT</span></div>
     </div>
 
     <h2 class="section-label">High School Varsity Statistics</h2>
@@ -87,39 +104,19 @@
                     <th>GP</th>
                     <th>Saves</th>
                     <th>GA</th>
-                    <th>GAA</th>
                     <th>Shutouts</th>
                     <th>Assists</th>
                     <th>Save %</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td>2026 Wake FC</td><td>1</td><td class="highlight">8</td><td>0</td><td>0.00</td><td>1</td><td>0</td><td>100%</td></tr>
-                <tr><td>2025 Wake FC</td><td>17</td><td class="highlight">348</td><td>79</td><td>4.65</td><td>1</td><td>0</td><td>81.5%</td></tr>
-                <tr><td>2023 MWC</td><td>12</td><td class="highlight">88</td><td>32</td><td>2.67</td><td>0</td><td>0</td><td>73.3%</td></tr>
-                <tr><td>2022 NBT</td><td>8</td><td class="highlight">120</td><td>10</td><td>1.25</td><td>0</td><td>0</td><td>92.3%</td></tr>
-                <tr><td>2020 NBT</td><td>13</td><td class="highlight">120</td><td>4</td><td>0.31</td><td>11</td><td>3</td><td>96.8%</td></tr>
-                <tr><td>2019 NBT</td><td>13</td><td class="highlight">400</td><td>20</td><td>1.54</td><td>8</td><td>0</td><td>95.2%</td></tr>
-                <tr><td>2017 Swat</td><td>16</td><td class="highlight">200</td><td>10</td><td>0.63</td><td>15</td><td>9</td><td>95.2%</td></tr>
-            </tbody>
-        </table>
-    </div>
-
-    <h2 class="section-label">Tournament & Specialty Mastery</h2>
-    <div class="table-wrapper">
-        <table>
-            <thead>
-                <tr>
-                    <th>Tournament Metric</th>
-                    <th>Performance Data</th>
-                    <th>Scouting Note</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>Penalty Shootouts</td><td class="highlight">20 - 0</td><td>Unbeaten Career Shootout Record</td></tr>
-                <tr><td>PK Saves</td><td class="success">60 / 60</td><td>100% Save Rate on Penalty Kicks</td></tr>
-                <tr><td>Tournament Saves</td><td class="highlight">800</td><td>Total High-Stakes Stops</td></tr>
-                <tr><td>Total Minutes</td><td class="highlight">11,970</td><td>Aggregated Career Playtime</td></tr>
+                <tr><td>2026 Wake FC</td><td>1</td><td class="highlight">8</td><td>0</td><td>1</td><td>0</td><td>100%</td></tr>
+                <tr><td>2025 Wake FC</td><td>17</td><td class="highlight">348</td><td>79</td><td>1</td><td>0</td><td>81.5%</td></tr>
+                <tr><td>2023 MWC</td><td>12</td><td class="highlight">88</td><td>32</td><td>0</td><td>0</td><td>73.3%</td></tr>
+                <tr><td>2022 NBT</td><td>8</td><td class="highlight">120</td><td>10</td><td>0</td><td>0</td><td>92.3%</td></tr>
+                <tr><td>2020 NBT</td><td>13</td><td class="highlight">120</td><td>4</td><td>11</td><td>3</td><td>96.8%</td></tr>
+                <tr><td>2019 NBT</td><td>13</td><td class="highlight">400</td><td>20</td><td>8</td><td>0</td><td>95.2%</td></tr>
+                <tr><td>2017 Swat</td><td>16</td><td class="highlight">200</td><td>10</td><td>15</td><td>9</td><td>95.2%</td></tr>
             </tbody>
         </table>
     </div>
