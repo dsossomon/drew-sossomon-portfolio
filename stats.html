@@ -17,9 +17,11 @@
         body { margin: 0; font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--navy); line-height: 1.6; }
         .container { max-width: 1250px; margin: 40px auto; padding: 20px; }
         
+        /* Navigation */
         .back-btn { display: inline-block; padding: 12px 25px; background: var(--navy); color: white; text-decoration: none; border-radius: 6px; font-weight: 700; margin-bottom: 25px; border-bottom: 4px solid var(--energy-blue); transition: 0.3s; }
         .back-btn:hover { background: var(--energy-blue); transform: translateX(-5px); }
         
+        /* Header */
         .header { text-align: center; border-bottom: 6px solid var(--energy-blue); padding-bottom: 25px; margin-bottom: 30px; }
         .header h1 { font-family: 'Big Shoulders Display'; font-size: 5rem; text-transform: uppercase; margin: 0; }
 
@@ -45,16 +47,124 @@
         .stat-card p { margin: 0; text-transform: uppercase; font-size: 0.75rem; font-weight: 800; color: var(--energy-blue); }
 
         /* Tables */
-        .section-label { font-family: 'Big Shoulders Display'; font-size: 2.5rem; text-transform: uppercase; margin: 40px 0 15px; color: var(--navy); border-left: 6px solid var(--energy-blue); padding-left: 20px; }
+        .section-label { font-family: 'Big Shoulders Display'; font-size: 2.5rem; text-transform: uppercase; margin: 45px 0 20px; color: var(--navy); border-left: 6px solid var(--energy-blue); padding-left: 20px; }
         .table-wrapper { background: white; border-radius: 12px; overflow-x: auto; box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-bottom: 40px; }
         table { width: 100%; border-collapse: collapse; min-width: 1000px; }
         thead { background: var(--navy); color: white; }
         th { padding: 15px; text-align: left; font-family: 'Big Shoulders Display'; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; }
         td { padding: 12px 15px; border-bottom: 1px solid #f1f5f9; }
         
-        .highlight { color: var(--energy-blue); font-weight: 800; }
+        .highlight { color: var(--energy-blue); font-weight: 800; font-size: 1.1rem; }
         .success { color: #16a34a; font-weight: 800; }
 
         /* Contact Cards */
         .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 30px; }
-        .card { background: var(--navy-light); color: white; padding: 30px; border-radius: 15px; position: relative; border-top: 6px solid var
+        .card { background: var(--navy-light); color: white; padding: 30px; border-radius: 15px; position: relative; border-top: 6px solid var(--energy-blue); }
+        .card h3 { font-family: 'Big Shoulders Display'; font-size: 2rem; margin-bottom: 5px; text-transform: uppercase; }
+        .tag { position: absolute; top: 20px; right: 20px; background: var(--energy-blue); padding: 4px 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="back-btn">← RETURN TO HOME</a>
+
+    <div class="header">
+        <h1>Drew Sossomon</h1>
+        <p style="font-weight: 800; color: var(--energy-blue); letter-spacing: 2px;">VARSITY GOALKEEPER | 2028 PROSPECT</p>
+    </div>
+
+    <div class="vitals-banner">
+        <div class="vital-box"><label>Dominant Foot</label><span>Left-Footed</span></div>
+        <div class="vital-box"><label>Height</label><span>5'6" - 5'7"</span></div> 
+        <div class="vital-box"><label>Position</label><span>Goalkeeper</span></div>
+        <div class="vital-box"><label>Status</label><span>Plyometrics Rehab</span></div>
+        <div class="vital-box"><label>Grad Year</label><span>2028</span></div>
+    </div>
+
+    <div class="summary-grid">
+        <div class="stat-card"><p>Total Shots Faced</p><h3 class="highlight">2,446</h3></div>
+        <div class="stat-card"><p>Career Saves</p><h3 class="highlight">2,290</h3></div>
+        <div class="stat-card"><p>Goals Against</p><h3 style="color: #ef4444;">156</h3></div>
+        <div class="stat-card"><p>PK Save Rate</p><h3 class="success">100%</h3></div>
+    </div>
+
+    <h2 class="section-label">Complete Career Analytics</h2>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Season / Team</th>
+                    <th>GP</th>
+                    <th>Shots Faced</th>
+                    <th>Saves</th>
+                    <th>GA</th>
+                    <th>GAA</th>
+                    <th>Save %</th>
+                    <th>Shutouts</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>2026 Wake FC</td><td>1</td><td>8</td><td class="highlight">8</td><td>0</td><td class="success">0.00</td><td class="success">100%</td><td>1</td></tr>
+                <tr><td>2025 Wake FC</td><td>17</td><td>427</td><td class="highlight">348</td><td>79</td><td>4.65</td><td>81.5%</td><td>1</td></tr>
+                <tr><td>2023 MWC</td><td>12</td><td>120</td><td class="highlight">88</td><td>32</td><td>2.67</td><td>73.3%</td><td>0</td></tr>
+                <tr><td>2022 NBT</td><td>8</td><td>130</td><td class="highlight">120</td><td>10</td><td>1.25</td><td>92.3%</td><td>0</td></tr>
+                <tr><td>2020 NBT</td><td>13</td><td>124</td><td class="highlight">120</td><td>4</td><td>0.31</td><td>96.8%</td><td>11</td></tr>
+                <tr><td>2019 NBT</td><td>13</td><td>420</td><td class="highlight">400</td><td>20</td><td>1.54</td><td>95.2%</td><td>8</td></tr>
+                <tr><td>2017 Swat</td><td>16</td><td>210</td><td class="highlight">200</td><td>10</td><td>0.63</td><td>95.2%</td><td>15</td></tr>
+                <tr><td>High School Varsity</td><td>12</td><td>10</td><td class="highlight">6</td><td>4</td><td>16.00</td><td>60%</td><td>0</td></tr>
+                <tr style="background: #eef2ff; font-weight: 800;">
+                    <td>GRAND TOTALS</td>
+                    <td>92</td>
+                    <td class="highlight">2,446</td>
+                    <td class="highlight">2,290</td>
+                    <td>156</td>
+                    <td>1.69 Avg</td>
+                    <td>93.6% Avg</td>
+                    <td>44</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 class="section-label">Tournament & Specialty Mastery</h2>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Specialty Category</th>
+                    <th>Data Points</th>
+                    <th>Scouting Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Penalty Shootout Record</td><td class="success">20 - 0</td><td>Undefeated in Career Shootouts</td></tr>
+                <tr><td>Penalty Kick Saves</td><td class="success">60 / 60</td><td>100% Career PK Save Rate</td></tr>
+                <tr><td>Tournament Saves</td><td class="highlight">800</td><td>Aggregated Showcase Performance</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 class="section-label">Recruitment Contacts</h2>
+    <div class="contact-grid">
+        <div class="card">
+            <span class="tag">Athlete</span>
+            <h3>Drew Sossomon</h3>
+            <p><strong>Email:</strong> dsossomon@gmail.com</p>
+            <p><strong>Role:</strong> Class of 2028 | GK</p>
+        </div>
+        <div class="card">
+            <span class="tag" style="background:#e67e22">NCSA Coach</span>
+            <h3>Dominic Gillespie</h3>
+            <p><strong>Email:</strong> coachdgillespie@ncsasports.org</p>
+            <p><strong>Org:</strong> NCSA Recruiting</p>
+        </div>
+    </div>
+</div>
+
+<footer style="text-align: center; padding: 60px; color: #94a3b8;">
+    <p>© 2026 Drew Sossomon | Goalkeeper Career Portfolio</p>
+</footer>
+
+</body>
+</html>
