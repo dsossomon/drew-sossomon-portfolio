@@ -1,52 +1,51 @@
-/* --- Global Theme Variables --- */
+/* --- THE "U.S. WALL" BRAND VARIABLES --- */
 :root {
-    --navy: #0a192f;
-    --navy-light: #112240;
-    --blue: #007bff; 
-    --blue-light: #60a5fa;
+    --navy-dark: #0a192f;        /* Deep, professional background */
+    --navy-card: #112240;        /* Slightly lighter navy for cards/sections */
+    --energy-blue: #007bff;      /* High-energy action color */
+    --energy-light: #60a5fa;     /* Accent blue for highlights */
     --white: #ffffff;
-    --bg-gray: #f8fafc;
-    --border-gray: #e2e8f0;
+    --text-main: #f8fafc;        /* Off-white for dark background text */
+    --text-muted: #94a3b8;       /* Slate gray for secondary text */
 }
 
-/* --- Base Styles --- */
+/* --- CORE SETUP --- */
 * {
     box-sizing: border-box;
-}
-
-html, body {
     margin: 0;
     padding: 0;
-    font-family: 'Outfit', sans-serif;
-    background-color: var(--bg-gray);
-    color: var(--navy);
-    line-height: 1.6;
-    width: 100%;
-    overflow-x: hidden;
 }
 
-/* --- Navigation --- */
-#nav-menu {
-    background: var(--white);
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: #f8fafc; /* Keep page background clean/light */
+    color: var(--navy-dark);
+    line-height: 1.6;
+}
+
+/* --- NAVIGATION (NAVY & BLUE) --- */
+nav {
+    background: var(--navy-dark);
+    padding: 15px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 50px;
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 2px solid var(--blue);
+    border-bottom: 3px solid var(--energy-blue); /* Professional accent line */
 }
 
-.logo { 
-    color: var(--navy); 
-    font-weight: 800; 
-    font-size: 1.8rem; 
+.logo {
+    color: var(--white);
     font-family: 'Big Shoulders Display', sans-serif;
-    text-transform: uppercase;
+    font-size: 2rem;
+    letter-spacing: 2px;
 }
 
-.last-name { color: var(--blue); }
+.logo span {
+    color: var(--energy-blue);
+}
 
 .nav-links {
     list-style: none;
@@ -55,163 +54,107 @@ html, body {
 }
 
 .nav-links a {
-    color: var(--navy);
+    color: var(--text-muted);
     text-decoration: none;
     font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    transition: 0.3s;
 }
 
-/* --- The Dropdown --- */
+.nav-links a:hover {
+    color: var(--energy-blue);
+}
+
+/* --- PROFESSIONAL DROPDOWN --- */
 .dropdown { position: relative; }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: var(--white); 
+    background: var(--white);
     min-width: 220px;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
-    border-radius: 6px;
-    z-index: 9999;
     top: 100%;
-    left: 0;
+    right: 0;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    overflow: hidden;
     padding: 10px 0;
-    border: 1px solid var(--border-gray);
 }
 
 .dropdown:hover .dropdown-content { display: block; }
 
 .dropdown-content a {
-    color: var(--navy) !important;
+    color: var(--navy-dark) !important;
     padding: 12px 20px;
     display: block;
-    font-weight: 500;
+    text-transform: none;
+    font-weight: 400;
 }
 
 .dropdown-content a:hover {
-    background-color: var(--bg-gray);
-    color: var(--blue) !important;
+    background: #f1f5f9;
+    color: var(--energy-blue) !important;
 }
 
-/* --- Recovery Timeline Bar --- */
-.recovery-timeline { 
-    width: 100%; 
-    max-width: 900px; 
-    margin: 60px auto; 
-    text-align: center;
-    color: var(--navy); 
+/* --- HERO & SECTION STYLING --- */
+.hero {
+    background: linear-gradient(135deg, var(--navy-dark) 0%, #112240 100%);
+    color: var(--white);
+    border-bottom: 10px solid var(--energy-blue);
 }
-.timeline-bar {
-    width: 100%;
-    background: #e2e8f0;
+
+.section-title {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 3rem;
+    text-transform: uppercase;
+    color: var(--navy-dark);
+    margin-bottom: 20px;
+    border-left: 8px solid var(--energy-blue);
+    padding-left: 20px;
+}
+
+/* --- BUTTONS --- */
+.btn-primary {
+    background: var(--energy-blue);
+    color: var(--white);
+    padding: 14px 32px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 800;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: var(--white);
+    color: var(--energy-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,123,255,0.3);
+}
+
+/* --- UTILITY: DARK CARDS (Professional Look) --- */
+.dark-card {
+    background: var(--navy-dark);
+    color: var(--white);
+    padding: 30px;
     border-radius: 12px;
-    height: 26px;
-    overflow: hidden;
-    border: 2px solid var(--blue);
+    border-top: 5px solid var(--energy-blue);
 }
+
+/* --- TIMELINE ANIMATION --- */
 .timeline-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--blue), var(--blue-light));
+    background: linear-gradient(90deg, var(--energy-blue), var(--energy-light));
+    box-shadow: 0 0 15px var(--energy-blue);
 }
 
-/* --- GK ANALYTICS & STATS STYLES --- */
-.gk-container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-}
-
-.gk-title {
+/* --- FOOTER --- */
+footer {
+    background: var(--navy-dark);
+    color: var(--text-muted);
+    padding: 50px 20px;
     text-align: center;
-    color: var(--navy);
-    font-size: 2.5rem;
-    font-weight: 800;
-    font-family: 'Big Shoulders Display';
-}
-
-.gk-card {
-    background: var(--navy);
-    padding: 25px;
-    border-radius: 10px;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.gk-card input {
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid var(--blue-light);
-}
-
-.gk-btn {
-    background: var(--blue);
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 700;
-}
-
-.gk-btn:hover { background: var(--blue-light); }
-
-.gk-results {
-    margin-top: 30px;
-    background: var(--white);
-    padding: 20px;
-    border-radius: 10px;
-    border-left: 4px solid var(--blue);
-    color: var(--navy);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-/* --- UPDATED STATS TABLES --- */
-.stats-container {
-    width: 100%;
-    overflow-x: auto; /* Makes table scrollable on small screens */
-    margin-top: 20px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: var(--white);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-/* Dark Navy Header Row */
-table thead tr, 
-table tr:first-child {
-    background-color: var(--navy);
-    color: var(--white);
-}
-
-table th {
-    padding: 15px;
-    text-align: left;
-    font-family: 'Big Shoulders Display', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-bottom: 3px solid var(--blue); /* Blue accent line */
-}
-
-/* Body Cells and Borders */
-table td {
-    padding: 12px 15px;
-    border: 1px solid var(--border-gray);
-    color: var(--navy);
-    font-weight: 500;
-}
-
-/* Zebra Striping */
-table tbody tr:nth-child(even) {
-    background-color: #f8fafc;
-}
-
-/* Row Hover Effect */
-table tbody tr:hover {
-    background-color: #f1f5f9;
-    transition: 0.2s ease;
 }
