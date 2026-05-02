@@ -3,25 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GK Analytics Dashboard</title>
+    <title>GK Analytics Dashboard | Drew Sossomon</title>
     
-    <link rel="stylesheet" href="style.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES (Matching your Branding) --- */
+        :root {
+            --navy: #0a192f;
+            --blue: #007bff; 
+            --white: #ffffff;
+            --bg-gray: #f8fafc;
+            --border-gray: #e2e8f0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-gray);
+            color: var(--navy);
+        }
+
+        /* --- DASHBOARD LAYOUT --- */
+        .dashboard-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        /* Back to Home Button */
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--blue);
+            font-weight: 700;
+            margin-bottom: 25px;
+            transition: 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .back-home:hover {
+            color: var(--navy);
+            transform: translateX(-5px);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-family: 'Big Shoulders Display', sans-serif;
+            font-size: 3rem;
+            color: var(--navy);
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        header p {
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        /* The Grid */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        /* Cards Style */
+        .input-card, .results-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            border-top: 6px solid var(--blue); /* Dark Blue Top Bar */
+        }
+
+        h3 {
+            font-family: 'Big Shoulders Display', sans-serif;
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            margin-top: 0;
+            color: var(--navy);
+            border-bottom: 2px solid var(--bg-gray);
+            padding-bottom: 10px;
+        }
+
+        /* Inputs */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .input-group label {
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: #64748b;
+        }
+
+        .input-group input {
+            padding: 12px;
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            background-color: #f1f5f9;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--blue);
+            background-color: white;
+            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
+        }
+
+        .calc-btn {
+            margin-top: 10px;
+            background-color: var(--blue);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .calc-btn:hover {
+            background-color: var(--navy);
+            transform: translateY(-2px);
+        }
+
+        /* Results Display */
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        .stat-item:last-child { border-bottom: none; }
+
+        .stat-item span {
+            font-weight: 700;
+            color: #64748b;
+        }
+
+        .stat-item strong {
+            font-size: 1.6rem;
+            color: var(--blue);
+            font-weight: 800;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            header h1 { font-size: 2.2rem; }
+            .dashboard-container { padding: 15px; }
+        }
+    </style>
 </head>
 <body>
 
 <div class="dashboard-container">
+    
+    <a href="index.html" class="back-home">
+        <i class="fas fa-arrow-left"></i> Back to Portfolio
+    </a>
+
     <header>
-        <h1><i class="fas fa-chart-bar"></i> Goalkeeper Performance Analytics</h1>
-        <p>Input your match data to calculate your season averages.</p>
+        <h1><i class="fas fa-chart-line"></i> GK Performance Analytics</h1>
+        <p>Track your saves, GAA, and clean sheet percentage like a pro.</p>
     </header>
 
     <main class="analytics-grid">
         <section class="input-card">
             <h3>Enter Match Stats</h3>
             <div class="input-group">
-                <label>Minutes Played:</label>
+                <label>Total Minutes Played:</label>
                 <input type="number" id="minutesPlayed" placeholder="e.g. 900">
                 
                 <label>Goals Against:</label>
@@ -46,7 +215,7 @@
         <section class="results-card">
             <h3>Calculated Metrics</h3>
             <div class="stat-item">
-                <span>GAA (Goals Against Avg):</span>
+                <span>GAA (Avg):</span>
                 <strong id="gaaResult">0.00</strong>
             </div>
             <div class="stat-item">
@@ -57,12 +226,14 @@
                 <span>Clean Sheet %:</span>
                 <strong id="csResult">0%</strong>
             </div>
+            <p style="margin-top: 20px; font-size: 0.8rem; color: #94a3b8; text-align: center;">
+                Values update automatically when you click calculate.
+            </p>
         </section>
     </main>
 </div>
 
 <script>
-    // Your JavaScript Logic
     function calculateGKStats() {
         let goals = parseFloat(document.getElementById("goalsAgainst").value) || 0;
         let minutes = parseFloat(document.getElementById("minutesPlayed").value) || 0;
@@ -75,18 +246,24 @@
         if (minutes > 0) {
             let gaa = (goals * 90) / minutes;
             document.getElementById("gaaResult").textContent = gaa.toFixed(2);
+        } else {
+            document.getElementById("gaaResult").textContent = "0.00";
         }
 
         // Save Percentage (Saves / Shots * 100)
         if (shots > 0) {
             let sv = (saves / shots) * 100;
             document.getElementById("svResult").textContent = sv.toFixed(1) + "%";
+        } else {
+            document.getElementById("svResult").textContent = "0%";
         }
 
         // Clean Sheet Percentage (CS / Games * 100)
         if (games > 0) {
             let cs = (cleanSheets / games) * 100;
             document.getElementById("csResult").textContent = cs.toFixed(1) + "%";
+        } else {
+            document.getElementById("csResult").textContent = "0%";
         }
     }
 </script>
