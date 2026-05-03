@@ -1,11 +1,11 @@
 /* --- THE "U.S. WALL" BRAND VARIABLES --- */
 :root {
-    --navy-dark: #0a192f;        /* Main Background */
-    --navy-card: #112240;        /* Card/Section Background */
-    --energy-blue: #007bff;      /* Action Color (Last Name & Accents) */
-    --energy-light: #60a5fa;     /* Soft Blue (Sub-headers) */
-    --white: #ffffff;            /* Headers & First Name */
-    --text-muted: #94a3b8;       /* Slate Gray for secondary text */
+    --navy-dark: #0a192f;        /* Deep background */
+    --navy-card: #112240;        /* Card background */
+    --energy-blue: #007bff;      /* Andrew's Last Name & Bar Color */
+    --energy-light: #60a5fa;     /* Accent Blue */
+    --white: #ffffff;            /* Andrew's First Name & Border Color */
+    --text-muted: #94a3b8;       /* Slate gray */
 }
 
 /* --- CORE SETUP --- */
@@ -68,33 +68,36 @@ nav {
     color: var(--white);
 }
 
-/* --- PROFESSIONAL DROPDOWN --- */
+/* --- DROPDOWN (ACADEMIC & ATHLETIC) --- */
 .dropdown { position: relative; }
 
 .dropdown-content {
     display: none;
     position: absolute;
     background: var(--navy-card);
-    min-width: 240px;
+    min-width: 260px;
     top: 100%;
     right: 0;
     box-shadow: 0 15px 30px rgba(0,0,0,0.5);
     border-radius: 8px;
-    overflow: hidden;
     padding: 10px 0;
-    list-style: none; /* Removes bullets */
+    list-style: none; /* Removes sidebar bullets */
     border: 1px solid var(--energy-blue);
+    z-index: 1001;
 }
 
-.dropdown:hover .dropdown-content { display: block; }
+.dropdown:hover .dropdown-content { 
+    display: block; 
+}
 
 .dropdown-content li a {
     color: var(--white) !important;
-    padding: 12px 20px;
+    padding: 10px 20px;
     display: block;
     text-transform: none;
     font-weight: 400;
     font-size: 0.9rem;
+    border: none;
 }
 
 .dropdown-content li a:hover {
@@ -113,7 +116,6 @@ nav {
 
 /* --- HERO SECTION --- */
 .hero {
-    background: var(--navy-dark);
     padding: 80px 50px;
     min-height: 70vh;
     display: flex;
@@ -126,14 +128,14 @@ nav {
     line-height: 0.9;
     margin: 20px 0;
     text-transform: uppercase;
-    color: var(--white); /* Andrew in White */
+    color: var(--white); /* ANDREW in White */
 }
 
 .hero h1 span {
-    color: var(--energy-blue); /* Sossomon in Energy Blue */
+    color: var(--energy-blue); /* SOSSOMON in Energy Blue */
 }
 
-/* --- BUTTONS --- */
+/* --- BUTTON STYLES --- */
 .btn-primary {
     background: var(--energy-blue);
     color: var(--white);
@@ -157,7 +159,7 @@ nav {
     background: transparent;
     color: var(--white);
     padding: 14px 32px;
-    border: 2px solid var(--white); /* White Border for Highlights */
+    border: 2px solid var(--white); /* WHITE BORDER for Watch Highlights */
     border-radius: 4px;
     text-transform: uppercase;
     font-weight: 800;
@@ -172,7 +174,7 @@ nav {
     transform: translateY(-3px);
 }
 
-/* --- RECOVERY TIMELINE --- */
+/* --- RECOVERY BAR & TIMELINE --- */
 .recovery-timeline {
     max-width: 1200px;
     margin: 40px auto;
@@ -180,30 +182,33 @@ nav {
     background: var(--navy-card);
     border-radius: 15px;
     text-align: center;
-    border-left: 5px solid var(--energy-blue);
+    border: 1px solid rgba(255,255,255,0.05);
 }
 
 .timeline-bar {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.1); /* The empty part of the bar */
     height: 24px;
     border-radius: 12px;
     margin: 20px 0;
     overflow: hidden;
+    position: relative;
 }
 
 .timeline-fill {
     height: 100%;
     background: linear-gradient(90deg, var(--energy-blue), var(--energy-light));
-    box-shadow: 0 0 15px var(--energy-blue);
-    /* Variable logic for the bar fill */
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.6); /* Glow effect */
     transition: width 1.5s cubic-bezier(0.1, 0, 0.3, 1);
+}
+
+.timeline-info {
+    margin-bottom: 10px;
 }
 
 /* --- FOOTER --- */
 footer {
-    background: var(--navy-dark);
-    color: var(--text-muted);
     padding: 60px 20px;
     text-align: center;
     border-top: 1px solid rgba(255,255,255,0.05);
+    color: var(--text-muted);
 }
