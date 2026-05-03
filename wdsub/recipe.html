@@ -2,45 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Recipe Project | Drew Sossomon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drew's Perfect Grilled Cheese</title>
     <link rel="stylesheet" href="../styles.css">
+    <style>
+        /* This fix ensures the text is visible on a light background */
+        body {
+            background-color: #f8fafc; 
+            color: #0a192f; /* Dark Navy text so you can see it */
+            padding: 50px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .recipe-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-top: 5px solid #007bff;
+        }
+        h1 { color: #007bff; font-family: 'Big Shoulders Display'; font-size: 3rem; }
+        ul, ol { margin: 20px 0; padding-left: 20px; }
+        li { margin-bottom: 10px; }
+        .back-link { margin-top: 30px; display: block; color: #007bff; text-decoration: none; font-weight: 700; }
+    </style>
 </head>
 <body>
 
-    <nav id="nav-menu">
-        <div class="logo">DREW SOSSOMON</div>
-        <ul class="nav-links">
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="../stats.html">Stats</a></li>
-        </ul>
-    </nav>
+    <div class="recipe-card">
+        <h1>THE "U.S. WALL" GRILLED CHEESE</h1>
+        <p><em>A goalkeeper's favorite pre-game fuel.</em></p>
+        
+        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
 
-    <div class="container">
-        <div class="work-card" style="background: white; padding: 20px; border-radius: 8px; margin-top: 20px;">
-            <h1>My Famous Grilled Cheese Sandwich</h1>
+        <h3>Ingredients</h3>
+        <ul>
+            <li>2 Slices of Bread</li>
+            <li>2 Slices of Sharp Cheddar Cheese</li>
+            <li>1 Slice of Provolone</li>
+              <li>butter on top of the bread</li>
             
-            <h2>Prep Work and Ingredients</h2>
-            <ol>
-                <li>Preheat oven to 350°F</li>
-                <li>4 pieces of bread</li>
-                <li>Shredded cheddar cheese</li>
-                <li>Oven pan</li>
-            </ol>
+             </ul>
 
-            <h2>Directions</h2>
-            <ol>
-                <li>First you take the oven pan out from the oven</li>
-                <li>Second you put the 4 pieces of bread on the oven pan</li>
-                <li>Third you put the shredded cheddar cheese on the bread</li>
-                <li>Then you take two of the pieces of bread and put them on top of the other two pieces of bread</li>
-                <li>You then put the bread in the oven and watch the cheese melt</li>
-                <li>Take out the pan and put the grilled cheese sandwich on the plate</li>
-                <li>Enjoy</li>
-            </ol>
+        <h3>Instructions</h3>
+        <ol>
+            <li>Heat a non-stick skillet over medium-low heat.</li>
+            <li>Butter one side of each slice of bread generously. Sprinkle a tiny bit of garlic powder on the butter.</li>
+            <li>Place one slice butter-side down in the pan. Layer your cheeses on top.</li>
+            <li>Place the second slice of bread on top, butter-side up.</li>
+            <li>Grill for 3-4 minutes per side until the bread is "Energy Blue" level golden brown and the cheese is melted.</li>
+        </ol>
 
-            <br>
-            <a href="../index.html" style="font-weight: bold; text-decoration: none; color: #007bff;">← Back to Home</a>
-        </div>
+        <a href="../index.html" class="back-link">← Back to Portfolio</a>
     </div>
 
 </body>
