@@ -1,12 +1,11 @@
 /* --- THE "U.S. WALL" BRAND VARIABLES --- */
 :root {
-    --navy-dark: #0a192f;        /* Deep, professional background */
-    --navy-card: #112240;        /* Slightly lighter navy for cards/sections */
-    --energy-blue: #007bff;      /* High-energy action color */
-    --energy-light: #60a5fa;     /* Accent blue for highlights */
-    --white: #ffffff;
-    --text-main: #f8fafc;        /* Off-white for dark background text */
-    --text-muted: #94a3b8;       /* Slate gray for secondary text */
+    --navy-dark: #0a192f;        /* Main Background */
+    --navy-card: #112240;        /* Card/Section Background */
+    --energy-blue: #007bff;      /* Action Color (Last Name & Accents) */
+    --energy-light: #60a5fa;     /* Soft Blue (Sub-headers) */
+    --white: #ffffff;            /* Headers & First Name */
+    --text-muted: #94a3b8;       /* Slate Gray for secondary text */
 }
 
 /* --- CORE SETUP --- */
@@ -18,12 +17,13 @@
 
 body {
     font-family: 'Outfit', sans-serif;
-    background-color: #f8fafc; /* Keep page background clean/light */
-    color: var(--navy-dark);
+    background-color: var(--navy-dark);
+    color: var(--white);
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
-/* --- NAVIGATION (NAVY & BLUE) --- */
+/* --- NAVIGATION --- */
 nav {
     background: var(--navy-dark);
     padding: 15px 50px;
@@ -33,7 +33,7 @@ nav {
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 3px solid var(--energy-blue); /* Professional accent line */
+    border-bottom: 2px solid var(--energy-blue);
 }
 
 .logo {
@@ -41,6 +41,7 @@ nav {
     font-family: 'Big Shoulders Display', sans-serif;
     font-size: 2rem;
     letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 .logo span {
@@ -51,6 +52,7 @@ nav {
     list-style: none;
     display: flex;
     gap: 30px;
+    align-items: center;
 }
 
 .nav-links a {
@@ -63,7 +65,7 @@ nav {
 }
 
 .nav-links a:hover {
-    color: var(--energy-blue);
+    color: var(--white);
 }
 
 /* --- PROFESSIONAL DROPDOWN --- */
@@ -72,46 +74,63 @@ nav {
 .dropdown-content {
     display: none;
     position: absolute;
-    background: var(--white);
-    min-width: 220px;
+    background: var(--navy-card);
+    min-width: 240px;
     top: 100%;
     right: 0;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
     border-radius: 8px;
     overflow: hidden;
     padding: 10px 0;
+    list-style: none; /* Removes bullets */
+    border: 1px solid var(--energy-blue);
 }
 
 .dropdown:hover .dropdown-content { display: block; }
 
-.dropdown-content a {
-    color: var(--navy-dark) !important;
+.dropdown-content li a {
+    color: var(--white) !important;
     padding: 12px 20px;
     display: block;
     text-transform: none;
     font-weight: 400;
+    font-size: 0.9rem;
 }
 
-.dropdown-content a:hover {
-    background: #f1f5f9;
-    color: var(--energy-blue) !important;
+.dropdown-content li a:hover {
+    background: var(--energy-blue);
+    color: var(--white) !important;
 }
 
-/* --- HERO & SECTION STYLING --- */
-.hero {
-    background: linear-gradient(135deg, var(--navy-dark) 0%, #112240 100%);
-    color: var(--white);
-    border-bottom: 10px solid var(--energy-blue);
-}
-
-.section-title {
-    font-family: 'Big Shoulders Display', sans-serif;
-    font-size: 3rem;
+.dropdown-header {
+    padding: 10px 20px 5px;
+    font-size: 0.7rem;
     text-transform: uppercase;
-    color: var(--navy-dark);
-    margin-bottom: 20px;
-    border-left: 8px solid var(--energy-blue);
-    padding-left: 20px;
+    color: var(--energy-light);
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+/* --- HERO SECTION --- */
+.hero {
+    background: var(--navy-dark);
+    padding: 80px 50px;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero h1 {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 5.5rem;
+    line-height: 0.9;
+    margin: 20px 0;
+    text-transform: uppercase;
+    color: var(--white); /* Andrew in White */
+}
+
+.hero h1 span {
+    color: var(--energy-blue); /* Sossomon in Energy Blue */
 }
 
 /* --- BUTTONS --- */
@@ -123,8 +142,8 @@ nav {
     text-transform: uppercase;
     font-weight: 800;
     text-decoration: none;
-    transition: all 0.3s ease;
     display: inline-block;
+    transition: 0.3s;
     border: none;
 }
 
@@ -132,29 +151,59 @@ nav {
     background: var(--white);
     color: var(--energy-blue);
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,123,255,0.3);
 }
 
-/* --- UTILITY: DARK CARDS (Professional Look) --- */
-.dark-card {
-    background: var(--navy-dark);
+.btn-outline {
+    background: transparent;
     color: var(--white);
-    padding: 30px;
-    border-radius: 12px;
-    border-top: 5px solid var(--energy-blue);
+    padding: 14px 32px;
+    border: 2px solid var(--white); /* White Border for Highlights */
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 800;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s;
 }
 
-/* --- TIMELINE ANIMATION --- */
+.btn-outline:hover {
+    background: var(--white);
+    color: var(--navy-dark);
+    transform: translateY(-3px);
+}
+
+/* --- RECOVERY TIMELINE --- */
+.recovery-timeline {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 40px;
+    background: var(--navy-card);
+    border-radius: 15px;
+    text-align: center;
+    border-left: 5px solid var(--energy-blue);
+}
+
+.timeline-bar {
+    background: rgba(255,255,255,0.1);
+    height: 24px;
+    border-radius: 12px;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
 .timeline-fill {
     height: 100%;
     background: linear-gradient(90deg, var(--energy-blue), var(--energy-light));
     box-shadow: 0 0 15px var(--energy-blue);
+    /* Variable logic for the bar fill */
+    transition: width 1.5s cubic-bezier(0.1, 0, 0.3, 1);
 }
 
 /* --- FOOTER --- */
 footer {
     background: var(--navy-dark);
     color: var(--text-muted);
-    padding: 50px 20px;
+    padding: 60px 20px;
     text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
 }
