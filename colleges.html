@@ -3,26 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1250">
-    <title>Interested Colleges | Drew Sossomon</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Interested Colleges/Universities That Really Want Me | Drew Sossomon</title>
+
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --navy: #0a192f;
+            --energy-blue: #00aaff;
+            --white: #ffffff;
+            --light-bg: #f8fafc;
+            --border-light: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1250px;
+            margin: 0 auto;
+            background-color: var(--light-bg);
+            color: var(--navy);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* NAVIGATION */
+        #nav-menu {
+            background-color: var(--navy);
+            color: var(--white);
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #nav-menu .logo {
+            font-family: 'Big Shoulders Display', sans-serif;
+            font-size: 2rem;
+            color: var(--white);
+        }
+
+        #nav-menu .last-name {
+            color: var(--energy-blue);
+        }
+
+        #nav-menu ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        #nav-menu li {
+            position: relative;
+        }
+
+        #nav-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 400;
+            transition: 0.2s;
+        }
+
+        #nav-menu a:hover {
+            color: var(--energy-blue);
+        }
+
+        .nav-links .active-link {
+            font-weight: 700;
+            color: var(--energy-blue);
+        }
+
+        /* DROPDOWN */
+        .dropdown .dropbtn {
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 30px;
+            left: 0;
+            background-color: var(--navy);
+            min-width: 220px;
+            border-radius: 4px;
+            padding: 8px 0;
+            z-index: 10;
+            border: 1px solid var(--energy-blue);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 8px 18px;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgba(0, 170, 255, 0.18);
+        }
+
+        .dropdown-header {
+            color: var(--energy-blue);
+            font-weight: 700;
+            padding: 8px 18px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background-color: var(--energy-blue);
+            margin: 4px 0;
+        }
+
+        /* PAGE LAYOUT */
+        .portfolio-container {
+            padding: 40px;
+        }
+
+        .main-title {
+            text-align: center;
+            font-family: 'Big Shoulders Display', sans-serif;
+            font-size: 3.4rem;
+            color: var(--navy);
+            margin: 10px 0 30px;
+            line-height: 1.1;
+        }
+
+        .main-title span {
+            color: var(--energy-blue);
+        }
+
+        .division-block {
+            margin-top: 40px;
+        }
+
+        .table-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--navy);
+            border-left: 6px solid var(--energy-blue);
+            padding-left: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* TABLES */
+        .scouting-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background-color: var(--white);
+            border: 2px solid var(--navy);
+            font-size: 0.95rem;
+        }
+
+        .scouting-table th {
+            background-color: var(--navy);
+            color: var(--white);
+            padding: 10px 8px;
+            font-weight: 700;
+            text-align: left;
+        }
+
+        .scouting-table td {
+            padding: 8px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .scouting-table tr:nth-child(even) {
+            background-color: #f1f5f9;
+        }
+
+        .scouting-table tr:hover {
+            background-color: rgba(0, 170, 255, 0.12);
+        }
+
+        /* BACK TO PORTFOLIO BUTTON */
+        .back-portfolio-wrapper {
+            text-align: center;
+            margin: 50px 0 20px;
+        }
+
+        .back-portfolio-btn {
+            display: inline-block;
+            padding: 10px 26px;
+            border-radius: 999px;
+            border: 2px solid var(--energy-blue);
+            background-color: var(--navy);
+            color: var(--white);
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .back-portfolio-btn:hover {
+            background-color: var(--energy-blue);
+            color: var(--navy);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 40px 0 50px;
+            background-color: var(--navy);
+            color: var(--white);
+            font-family: 'Outfit', sans-serif;
+            margin-top: 20px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        footer p:first-child {
+            font-weight: 700;
+            color: var(--energy-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        footer p:last-child {
+            margin-top: 10px;
+            margin-bottom: 0;
+            color: var(--white);
+        }
+    </style>
 </head>
-<body style="width: 1250px; margin: 0 auto; background-color: #f8fafc; overflow-x: hidden;">
+<body>
 
     <nav id="nav-menu">
         <div class="logo">DREW <span class="last-name">SOSSOMON</span></div>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li> 
+            <li><a href="about.html">About</a></li>
 
             <li>
-                <a href="mailto:nstamp@youngsvilleacademy.org?subject=Live Code Session - Drew Sossomon" 
-                   style="color: #007bff; font-weight: 700;">
-                   Share Live Code Session
+                <a href="mailto:nstamp@youngsvilleacademy.org?subject=Live Code Session - Drew Sossomon" style="color: var(--energy-blue); font-weight: 700;">
+                    Share Live Code Session
                 </a>
             </li>
 
-            <li><a href="updates.html" style="font-weight: 700; color: #0a192f;">Updates</a></li>
+            <li><a href="updates.html" class="active-link">Updates</a></li>
 
             <li class="dropdown">
                 <a href="#" class="dropbtn">Portfolio & Projects ▾</a>
@@ -45,9 +278,13 @@
         </ul>
     </nav>
 
-    <div class="portfolio-container" style="padding: 40px;">
-        <h1 class="main-title" style="text-align: center; font-family: 'Big Shoulders Display'; font-size: 4rem; color: #0a192f;">Colleges & Universities <br><span style="color: #007bff;">Interested in Me</span></h1>
+    <div class="portfolio-container">
+        <h1 class="main-title">
+            Interested Colleges/Universities<br>
+            <span>That Really Want Me</span>
+        </h1>
 
+        <!-- 1. NCAA Division I Programs -->
         <div class="division-block">
             <div class="table-title">1. NCAA Division I Programs</div>
             <table class="scouting-table">
@@ -103,6 +340,7 @@
             </table>
         </div>
 
+        <!-- 2. NCAA Division II Programs -->
         <div class="division-block">
             <div class="table-title">2. NCAA Division II Programs</div>
             <table class="scouting-table">
@@ -135,6 +373,7 @@
             </table>
         </div>
 
+        <!-- 3. NCAA Division III Programs -->
         <div class="division-block">
             <div class="table-title">3. NCAA Division III Programs</div>
             <table class="scouting-table">
@@ -198,6 +437,7 @@
             </table>
         </div>
 
+        <!-- 4. NAIA & Junior College Programs -->
         <div class="division-block">
             <div class="table-title">4. NAIA & Junior College Programs</div>
             <table class="scouting-table">
@@ -225,6 +465,7 @@
             </table>
         </div>
 
+        <!-- 5. International & Other Programs -->
         <div class="division-block">
             <div class="table-title">5. International & Other Programs</div>
             <table class="scouting-table">
@@ -244,11 +485,16 @@
             </table>
         </div>
 
-        <footer style="text-align: center; padding: 60px 0; color: #94a3b8; font-family: 'Outfit'; border-top: 1px solid #e2e8f0;">
-            <p style="font-weight: 700; color: #0a192f; text-transform: uppercase; letter-spacing: 1px;">Drew Sossomon // Goalkeeper // Class of 2028 // Wake FC 09 NPL</p>
-            <p style="margin-top: 10px;">© 2026 Drew Sossomon | Goalkeeper Career Portfolio</p>
+        <!-- Back to Portfolio Button -->
+        <div class="back-portfolio-wrapper">
+            <a href="index.html" class="back-portfolio-btn">Back to Portfolio</a>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>Wake FC 2009 GK Prospect</p>
+            <p>© 2026 Drew Sossomon</p>
         </footer>
     </div>
 
 </body>
-</html>
