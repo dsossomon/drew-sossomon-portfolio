@@ -1,19 +1,13 @@
-/* --- THE "U.S. WALL" BRAND VARIABLES --- */
 :root {
-    --navy-dark: #0a192f;        /* Deep background */
-    --navy-card: #112240;        /* Card background */
-    --energy-blue: #007bff;      /* Andrew's Last Name & Bar Color */
-    --energy-light: #60a5fa;     /* Accent Blue */
-    --white: #ffffff;            /* Andrew's First Name & Border Color */
-    --text-muted: #94a3b8;       /* Slate gray */
+    --navy-dark: #0a192f;
+    --navy-card: #112240;
+    --energy-blue: #007bff;
+    --energy-light: #60a5fa;
+    --white: #ffffff;
+    --text-muted: #94a3b8;
 }
 
-/* --- CORE SETUP --- */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
     font-family: 'Outfit', sans-serif;
@@ -23,7 +17,6 @@ body {
     overflow-x: hidden;
 }
 
-/* --- NAVIGATION --- */
 nav {
     background: var(--navy-dark);
     padding: 15px 50px;
@@ -36,41 +29,14 @@ nav {
     border-bottom: 2px solid var(--energy-blue);
 }
 
-.logo {
-    color: var(--white);
-    font-family: 'Big Shoulders Display', sans-serif;
-    font-size: 2rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
+.logo { color: var(--white); font-family: 'Big Shoulders Display', sans-serif; font-size: 2rem; letter-spacing: 2px; text-transform: uppercase; }
+.logo span { color: var(--energy-blue); }
 
-.logo span {
-    color: var(--energy-blue);
-}
+.nav-links { list-style: none; display: flex; gap: 30px; align-items: center; }
+.nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; transition: 0.3s; }
+.nav-links a:hover { color: var(--white); }
 
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-    align-items: center;
-}
-
-.nav-links a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    transition: 0.3s;
-}
-
-.nav-links a:hover {
-    color: var(--white);
-}
-
-/* --- DROPDOWN (ACADEMIC & ATHLETIC) --- */
 .dropdown { position: relative; }
-
 .dropdown-content {
     display: none;
     position: absolute;
@@ -80,135 +46,28 @@ nav {
     right: 0;
     box-shadow: 0 15px 30px rgba(0,0,0,0.5);
     border-radius: 8px;
-    padding: 10px 0;
-    list-style: none; /* Removes sidebar bullets */
-    border: 1px solid var(--energy-blue);
-    z-index: 1001;
-}
-
-.dropdown:hover .dropdown-content { 
-    display: block; 
-}
-
-.dropdown-content li a {
-    color: var(--white) !important;
-    padding: 10px 20px;
-    display: block;
-    text-transform: none;
-    font-weight: 400;
-    font-size: 0.9rem;
-    border: none;
-}
-
-.dropdown-content li a:hover {
-    background: var(--energy-blue);
-    color: var(--white) !important;
-}
-
-.dropdown-header {
-    padding: 10px 20px 5px;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    color: var(--energy-light);
-    font-weight: 800;
-    letter-spacing: 1px;
-}
-
-/* --- HERO SECTION --- */
-.hero {
-    padding: 80px 50px;
-    min-height: 70vh;
-    display: flex;
-    align-items: center;
-}
-
-.hero h1 {
-    font-family: 'Big Shoulders Display', sans-serif;
-    font-size: 5.5rem;
-    line-height: 0.9;
-    margin: 20px 0;
-    text-transform: uppercase;
-    color: var(--white); /* ANDREW in White */
-}
-
-.hero h1 span {
-    color: var(--energy-blue); /* SOSSOMON in Energy Blue */
-}
-
-/* --- BUTTON STYLES --- */
-.btn-primary {
-    background: var(--energy-blue);
-    color: var(--white);
-    padding: 14px 32px;
-    border-radius: 4px;
-    text-transform: uppercase;
-    font-weight: 800;
-    text-decoration: none;
-    display: inline-block;
-    transition: 0.3s;
-    border: none;
-}
-
-.btn-primary:hover {
-    background: var(--white);
-    color: var(--energy-blue);
-    transform: translateY(-3px);
-}
-
-.btn-outline {
-    background: transparent;
-    color: var(--white);
-    padding: 14px 32px;
-    border: 2px solid var(--white); /* WHITE BORDER for Watch Highlights */
-    border-radius: 4px;
-    text-transform: uppercase;
-    font-weight: 800;
-    text-decoration: none;
-    display: inline-block;
-    transition: 0.3s;
-}
-
-.btn-outline:hover {
-    background: var(--white);
-    color: var(--navy-dark);
-    transform: translateY(-3px);
-}
-
-/* --- RECOVERY BAR & TIMELINE --- */
-.recovery-timeline {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 40px;
-    background: var(--navy-card);
-    border-radius: 15px;
-    text-align: center;
-    border: 1px solid rgba(255,255,255,0.05);
-}
-
-.timeline-bar {
-    background: rgba(255,255,255,0.1); /* The empty part of the bar */
-    height: 24px;
-    border-radius: 12px;
-    margin: 20px 0;
     overflow: hidden;
-    position: relative;
+    padding: 10px 0;
+    list-style: none;
+    border: 1px solid var(--energy-blue);
 }
+.dropdown:hover .dropdown-content { display: block; }
+.dropdown-content li a { color: var(--white) !important; padding: 10px 20px; display: block; text-transform: none; font-size: 0.9rem; }
+.dropdown-content li a:hover { background: var(--energy-blue); }
+.dropdown-header { padding: 10px 20px 5px; font-size: 0.7rem; text-transform: uppercase; color: var(--energy-light); font-weight: 800; letter-spacing: 1px; }
 
-.timeline-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--energy-blue), var(--energy-light));
-    box-shadow: 0 0 20px rgba(0, 123, 255, 0.6); /* Glow effect */
-    transition: width 1.5s cubic-bezier(0.1, 0, 0.3, 1);
-}
+.hero { padding: 80px 50px; min-height: 70vh; display: flex; align-items: center; }
+.hero h1 { font-family: 'Big Shoulders Display', sans-serif; font-size: 5.5rem; line-height: 0.9; margin: 20px 0; text-transform: uppercase; color: var(--white); }
+.hero h1 span { color: var(--energy-blue); }
 
-.timeline-info {
-    margin-bottom: 10px;
-}
+.btn-primary { background: var(--energy-blue); color: var(--white); padding: 14px 32px; border-radius: 4px; text-transform: uppercase; font-weight: 800; text-decoration: none; display: inline-block; transition: 0.3s; border: none; }
+.btn-primary:hover { background: var(--white); color: var(--energy-blue); transform: translateY(-3px); }
 
-/* --- FOOTER --- */
-footer {
-    padding: 60px 20px;
-    text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    color: var(--text-muted);
-}
+.btn-outline { background: transparent; color: var(--white); padding: 14px 32px; border: 2px solid var(--white); border-radius: 4px; text-transform: uppercase; font-weight: 800; text-decoration: none; display: inline-block; transition: 0.3s; }
+.btn-outline:hover { background: var(--white); color: var(--navy-dark); transform: translateY(-3px); }
+
+.recovery-timeline { max-width: 1200px; margin: 40px auto; padding: 40px; background: var(--navy-card); border-radius: 15px; text-align: center; }
+.timeline-bar { background: rgba(255,255,255,0.1); height: 24px; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.timeline-fill { height: 100%; background: linear-gradient(90deg, var(--energy-blue), var(--energy-light)); box-shadow: 0 0 20px rgba(0, 123, 255, 0.6); transition: width 1.5s ease-in-out; }
+
+footer { padding: 60px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); }
