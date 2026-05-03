@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dark Mode Toggle</title>
+
+  <style>
+    body {
+      transition: background-color 0.3s ease, color 0.3s ease;
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #dark-mode-tgl {
+      padding: 10px 20px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    #nav-bar {
+      margin-top: auto; /* pushes it to the bottom */
+      padding: 20px;
+      text-align: center;
+    }
+
+    .back-btn {
+      text-decoration: none;
+      padding: 10px 15px;
+      background: #444;
+      color: white;
+      border-radius: 5px;
+      display: inline-block;
+      transition: background 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+  <button id="dark-mode-tgl">Click to toggle dark mode</button>
+
+  <div id="on-off-status">
+    <p>Dark mode off</p>
+  </div>
+
+  <!-- NAV BAR AT BOTTOM -->
+  <div id="nav-bar">
+    <a href="../index.html" class="back-btn">BACK TO PORTFOLIO</a>
+  </div>
+
+  <script>
+    let darkModeTgl = document.getElementById("dark-mode-tgl");
+    let onOffStatus = document.getElementById("on-off-status");
+    let navBtn = document.querySelector(".back-btn");
+
+    let isLight = true;
+
+    darkModeTgl.addEventListener("click", () => mngMode());
+
+    function mngMode() {
+
+      if (isLight) {
+        document.body.style.backgroundColor = "black";
+        document.body.style.color = "white";
+        onOffStatus.innerHTML = "<p>Dark mode on</p>";
+        navBtn.style.background = "#888";  // visible on black
+        navBtn.style.color = "black";
+      } else {
+        document.body.style.backgroundColor = "white";
+        document.body.style.color = "black";
+        onOffStatus.innerHTML = "<p>Dark mode off</p>";
+        navBtn.style.background = "#444";  // visible on white
+        navBtn.style.color = "white";
+      }
+
+      isLight = !isLight;
+    }
+  </script>
+
+</body>
+</html>
