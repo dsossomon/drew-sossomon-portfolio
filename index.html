@@ -2,132 +2,104 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1250">
-    <title>Drew Sossomon | Goalkeeper Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drew Sossomon | The US Wall</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
-<body style="width: 1250px; margin: 0 auto; background-color: #f8fafc; overflow-x: hidden;">
+<body style="--recovery-percent: 42%;">
 
     <nav id="nav-menu">
-        <div class="logo">DREW <span class="last-name">SOSSOMON</span></div>
+        <div class="logo">DREW <span>SOSSOMON</span></div>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li> 
 
-            <li>
-                <a href="mailto:nstamp@youngsvilleacademy.org?subject=Live Code Session - Drew Sossomon" 
-                   style="color: #007bff; font-weight: 700;">
-                   Share Live Code Session
-                </a>
-            </li>
-
-            <li><a href="updates.html" style="font-weight: 700; color: #0a192f;">Updates</a></li>
+            <li><a href="updates.html" style="font-weight: 700; color: var(--white);">Updates</a></li>
 
             <li class="dropdown">
                 <a href="#" class="dropbtn">Portfolio & Projects ▾</a>
                 <ul class="dropdown-content">
-
                     <li class="dropdown-header">Athletics</li>
                     <li><a href="stats.html">Full Career Stats</a></li>
                     <li><a href="highlights.html">Match Highlights</a></li>
                     <li><a href="colleges.html">Interested Colleges</a></li>
-                    <li><a href="analytics.html" style="color: #007bff; font-weight: 700;">GK Analytics</a></li>
+                    <li><a href="analytics.html" style="color: var(--energy-blue); font-weight: 700;">GK Analytics</a></li>
 
-                    <li class="dropdown-divider"></li>
+                    <li style="border-top: 1px solid rgba(255,255,255,0.1); margin: 5px 0;"></li>
 
                     <li class="dropdown-header">Academic Projects</li>
                     <li><a href="wdsub/reviews.html">Goalkeeper Reviews</a></li>
-                    <li><a href="wdsub/poem.html">NC State Poem</a></li>
                     <li><a href="wdsub/recipe.html">Grilled Cheese Recipe</a></li>
-                    <li><a href="wdsub/anchors.html">Anchors Practice</a></li>
-                    <li><a href="wdsub/formatting.html">Formatting Practice</a></li>
-                    <li><a href="wdsub/heading.html">Heading Practice</a></li>
-                    <li><a href="wdsub/lists.html">List Practice</a></li>
+                    <li><a href="wdsub/poem.html">NC State Poem</a></li>
                 </ul>
             </li>
+            <li><a href="mailto:dsossomon@gmail.com" style="color: var(--energy-blue); font-weight: 700;">Contact</a></li>
         </ul>
     </nav>
 
-    <header class="hero" style="display: flex; align-items: center; padding: 60px 50px; min-height: 60vh;">
-        <div class="hero-content" style="display: flex; gap: 50px; align-items: center; width: 100%;">
+    <header class="hero">
+        <div class="hero-content" style="display: flex; gap: 50px; align-items: center; width: 100%; max-width: 1200px; margin: 0 auto;">
             <div class="hero-text" style="flex: 1.2;">
-                <span class="badge" style="background: #007bff; color: white; padding: 5px 15px; border-radius: 4px; font-weight: 800; text-transform: uppercase; font-size: 0.8rem; font-family: 'Outfit';">Class of 2028</span>
-                <h1 style="font-family: 'Big Shoulders Display'; font-size: 5.5rem; line-height: 0.9; margin: 20px 0; color: #0a192f;">ANDREW <span style="color: #007bff;">SOSSOMON</span></h1>
-                <p style="font-family: 'Outfit'; font-size: 1.6rem; font-weight: 700; color: #1e293b; margin-bottom: 5px;">"The U.S. Wall" | Left-Footed Goalkeeper</p>
-                <p style="font-family: 'Outfit'; font-size: 1.1rem; color: #64748b; margin-bottom: 35px;">Wake FC 09 NPL North Academy | 348 Saves/Season | Youngsville Academy Varsity</p>
+                <span class="badge" style="background: var(--energy-blue); color: white; padding: 5px 15px; border-radius: 4px; font-weight: 800; text-transform: uppercase; font-size: 0.8rem;">Class of 2028</span>
+                
+                <h1>ANDREW <span>SOSSOMON</span></h1>
+                
+                <p style="font-size: 1.6rem; font-weight: 700; color: var(--energy-light); margin-bottom: 5px;">"The U.S. Wall" | Left-Footed Goalkeeper</p>
+                <p style="color: var(--text-muted); margin-bottom: 35px;">Wake FC 09 NPL North Academy | 348 Saves/Season | Youngsville Academy Varsity</p>
                 
                 <div style="display: flex; gap: 15px;">
-                    <a href="stats.html" class="btn-primary" style="padding: 15px 40px; text-decoration: none; background: #007bff; color: white; border-radius: 6px; font-weight: 700; font-family: 'Outfit';">View Full Stats</a>
-                    <a href="highlights.html" style="padding: 15px 30px; border: 2px solid #0a192f; color: #0a192f; text-decoration: none; font-weight: 700; border-radius: 6px; font-family: 'Outfit';">Watch Highlight Film</a>
+                    <a href="stats.html" class="btn-primary">View Full Stats</a>
+                    <a href="highlights.html" class="btn-outline">Watch Highlights</a>
                 </div>
             </div>
             <div class="hero-image" style="flex: 0.8; text-align: right;">
-                <img src="Drew1.png" alt="Drew Sossomon" style="width: 100%; max-width: 420px; border-radius: 20px; box-shadow: 20px 20px 0px #0a192f;">
+                <img src="Drew1.png" alt="Drew Sossomon" style="width: 100%; max-width: 420px; border-radius: 20px; box-shadow: 20px 20px 0px var(--energy-blue);">
             </div>
         </div>
     </header>
 
     <div class="recovery-timeline">
-        <h2>Recovery Timeline</h2>
+        <h2 style="font-family: 'Big Shoulders Display'; font-size: 3rem; margin-bottom: 10px; color: var(--white);">RECOVERY TIMELINE</h2>
 
         <div class="timeline-bar">
-            <div class="timeline-fill" style="width: 42%;"></div>
+            <div class="timeline-fill" style="width: var(--recovery-percent, 0%);"></div>
         </div>
 
         <div class="timeline-info">
-            <p><strong>42% Recovered</strong></p>
-            <p>5 Months • ~22 Weeks of PT</p>
-            <p>Current Phase: Plyometrics</p>
+            <p style="font-size: 1.2rem; font-weight: 700;">
+                <span>42%</span> Recovered | Phase: Plyometrics
+            </p>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Current Target: Explosive Movement & Lateral Power</p>
         </div>
 
-        <div class="timeline-labels">
+        <div class="timeline-labels" style="display: flex; justify-content: space-between; margin-top: 15px; font-size: 0.8rem; color: var(--text-muted);">
             <span>Surgery<br>Nov 7, 2025</span>
-            <span>Now<br>Apr 2026</span>
+            <span>Now<br>May 2026</span>
             <span>Expected Return<br>Late 2026</span>
         </div>
     </div>
-    <section style="background: #0a192f; display: flex; justify-content: space-around; align-items: center; padding: 40px 10px; color: white; width: 1200px; margin: 0 auto 80px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-        
-        <div style="text-align: center; border-right: 1px solid rgba(255,255,255,0.1); padding: 0 15px; flex: 1;">
-            <h3 style="font-family: 'Outfit'; font-size: 2.2rem; margin: 0; color: #007bff;">92-0-41</h3>
-            <p style="text-transform: uppercase; font-size: 0.6rem; letter-spacing: 1px; color: #94a3b8; margin-top: 5px; font-weight: 700;">Career Record</p>
+
+    <section style="background: var(--navy-card); display: flex; justify-content: space-around; align-items: center; padding: 40px; color: white; max-width: 1200px; margin: 0 auto 80px; border-radius: 15px; border-bottom: 4px solid var(--energy-blue);">
+        <div style="text-align: center;">
+            <h3 style="font-size: 2.2rem; color: var(--energy-blue); margin: 0;">92-41-0</h3>
+            <p style="text-transform: uppercase; font-size: 0.7rem; color: var(--text-muted); font-weight: 700; margin-top: 5px;">Career Record</p>
         </div>
 
-        <div style="text-align: center; border-right: 1px solid rgba(255,255,255,0.1); padding: 0 15px; flex: 1;">
-            <h3 style="font-family: 'Outfit'; font-size: 2.2rem; margin: 0; color: #007bff;">44</h3>
-            <p style="text-transform: uppercase; font-size: 0.6rem; letter-spacing: 1px; color: #94a3b8; margin-top: 5px; font-weight: 700;">Shutouts</p>
+        <div style="text-align: center;">
+            <h3 style="font-size: 2.2rem; color: var(--energy-blue); margin: 0;">2,290</h3>
+            <p style="text-transform: uppercase; font-size: 0.7rem; color: var(--text-muted); font-weight: 700; margin-top: 5px;">Total Saves</p>
         </div>
 
-        <div style="text-align: center; border-right: 1px solid rgba(255,255,255,0.1); padding: 0 15px; flex: 1;">
-            <h3 style="font-family: 'Outfit'; font-size: 2.2rem; margin: 0; color: #007bff;">2,290+</h3>
-            <p style="text-transform: uppercase; font-size: 0.6rem; letter-spacing: 1px; color: #94a3b8; margin-top: 5px; font-weight: 700;">Total Saves</p>
-        </div>
-
-        <div style="text-align: center; border-right: 1px solid rgba(255,255,255,0.1); padding: 0 15px; flex: 1;">
-            <h3 style="font-family: 'Outfit'; font-size: 2.2rem; margin: 0; color: #60a5fa;">683</h3>
-            <p style="text-transform: uppercase; font-size: 0.6rem; letter-spacing: 1px; color: #94a3b8; margin-top: 5px; font-weight: 700;">Coach Searches</p>
-        </div>
-
-        <div style="text-align: center; border-right: 1px solid rgba(255,255,255,0.1); padding: 0 15px; flex: 1;">
-            <h3 style="font-family: 'Outfit'; font-size: 2.2rem; margin: 0; color: #60a5fa;">6</h3>
-            <p style="text-transform: uppercase; font-size: 0.6rem; letter-spacing: 1px; color: #94a3b8; margin-top: 5px; font-weight: 700;">Profile Views</p>
-        </div>
-
-        <div style="text-align: center; border-right: 1px solid rgba(255,255,255,0.1); padding: 0 15px; flex: 1;">
-            <h3 style="font-family: 'Outfit'; font-size: 2.2rem; margin: 0; color: #60a5fa;">45</h3>
-            <p style="text-transform: uppercase; font-size: 0.6rem; letter-spacing: 1px; color: #94a3b8; margin-top: 5px; font-weight: 700;">Coach Follows</p>
-        </div>
-
-        <div style="text-align: center; padding: 0 15px; flex: 1;">
-            <h3 style="font-family: 'Outfit'; font-size: 2.2rem; margin: 0; color: #007bff;">100%</h3>
-            <p style="text-transform: uppercase; font-size: 0.6rem; letter-spacing: 1px; color: #94a3b8; margin-top: 5px; font-weight: 700;">PK Save Rate</p>
+        <div style="text-align: center;">
+            <h3 style="font-size: 2.2rem; color: var(--energy-blue); margin: 0;">100%</h3>
+            <p style="text-transform: uppercase; font-size: 0.7rem; color: var(--text-muted); font-weight: 700; margin-top: 5px;">PK Save Rate</p>
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 60px 0; color: #94a3b8; font-family: 'Outfit'; border-top: 1px solid #e2e8f0;">
-        <p>© 2026 Drew Sossomon | Goalkeeper Career Portfolio</p>
-        <p style="font-size: 0.75rem; margin-top: 10px;">Wake FC 09 NPL Academy| Youngsville Academy Prospect</p>
+    <footer>
+        <p>© 2026 Drew Sossomon | "The U.S. Wall" Portfolio</p>
+        <p style="font-size: 0.75rem; margin-top: 10px; color: var(--text-muted);">Wake FC 09 NPL Academy | Class of 2028 Prospect</p>
     </footer>
 
 </body>
