@@ -35,7 +35,7 @@
                     <li><a href="wdsub/formatting.html">Formatting Practice</a></li>
                     <li><a href="wdsub/heading.html">Heading Practice</a></li>
                     <li><a href="wdsub/lists.html">List Practice</a></li>
-                     <li><a href="wdsub/dark.html">Dark-Mode-Toggle</a></li>
+                    <li><a href="wdsub/dark.html">Dark-Mode-Toggle</a></li>
                 </ul>
             </li>
         </ul>
@@ -49,11 +49,41 @@
                 <p style="font-size: 1.6rem; font-weight: 700; color: var(--energy-light); margin-bottom: 5px;">"The U.S. Wall" | Left-Footed Goalkeeper</p>
                 <p style="color: var(--text-muted); margin-bottom: 35px;">Wake FC 09 NPL North Academy | 348 Saves/Season | Youngsville Academy Varsity</p>
                 
-                <div style="display: flex; gap: 15px;">
+                <div style="display: flex; gap: 15px; margin-bottom: 25px;">
                     <a href="stats.html" class="btn-primary">View Full Stats</a>
                     <a href="highlights.html" class="btn-outline">Watch Highlights</a>
                 </div>
+
+                <div id="countdown" style="margin-bottom: 40px;">
+                    <h2 style="color: var(--energy-blue); font-size: 1.8rem; margin-bottom: 15px;">MLS NEXT Tryouts Countdown</h2>
+
+                    <div id="timer" style="display: flex; gap: 20px;">
+
+                        <div class="time-box">
+                            <span id="days">0</span>
+                            <label>Days</label>
+                        </div>
+
+                        <div class="time-box">
+                            <span id="hours">0</span>
+                            <label>Hours</label>
+                        </div>
+
+                        <div class="time-box">
+                            <span id="minutes">0</span>
+                            <label>Mins</label>
+                        </div>
+
+                        <div class="time-box">
+                            <span id="seconds">0</span>
+                            <label>Secs</label>
+                        </div>
+
+                    </div>
+                </div>
+          
             </div>
+
             <div class="hero-image" style="flex: 0.8; text-align: right;">
                 <img src="Drew1.png" alt="Drew Sossomon" style="width: 100%; max-width: 420px; border-radius: 20px; box-shadow: 20px 20px 0px var(--energy-blue);">
             </div>
@@ -79,12 +109,12 @@
     <section style="background: var(--navy-card); display: flex; flex-wrap: wrap; justify-content: space-around; align-items: center; padding: 40px 20px; color: white; max-width: 1200px; margin: 0 auto 80px; border-radius: 15px; border-bottom: 4px solid var(--energy-blue); gap: 20px;">
         
         <div style="text-align: center; flex: 1; min-width: 120px;">
-            <h3 style="font-size: 2rem; color: var(--energy-blue); margin: 0;"><h3>92-0-41</h3>
+            <h3 style="font-size: 2rem; color: var(--energy-blue); margin: 0;">92-0-41</h3>
             <p style="text-transform: uppercase; font-size: 0.65rem; color: var(--text-muted); font-weight: 700; margin-top: 5px;">Record</p>
         </div>
 
         <div style="text-align: center; flex: 1; min-width: 120px; border-left: 1px solid rgba(255,255,255,0.1);">
-            <h3 style="font-size: 2rem; color: var(--energy-blue); margin: 0;">683</h3>
+            <h3 style="font-size: 2rem; color: var(--energy-blue); margin: 0;">717</h3>
             <p style="text-transform: uppercase; font-size: 0.65rem; color: var(--text-muted); font-weight: 700; margin-top: 5px;">Coach Searches</p>
         </div>
 
@@ -107,6 +137,31 @@
     <footer>
         <p>© 2026 Drew Sossomon | "The U.S. Wall" Portfolio</p>
     </footer>
+
+   
+    <script>
+    const tryoutDate = new Date("August 1, 2026 00:00:00").getTime();
+
+    setInterval(function () {
+        const now = new Date().getTime();
+        const distance = tryoutDate - now;
+
+        if (distance <= 0) {
+            document.getElementById("timer").innerHTML = "Good luck at tryouts!";
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").textContent = days;
+        document.getElementById("hours").textContent = hours;
+        document.getElementById("minutes").textContent = minutes;
+        document.getElementById("seconds").textContent = seconds;
+    }, 1000);
+    </script>
 
 </body>
 </html>
