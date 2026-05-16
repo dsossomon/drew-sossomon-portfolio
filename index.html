@@ -19,11 +19,13 @@
             <li class="dropdown">
                 <a href="#" class="dropbtn">Portfolio & Projects ▾</a>
                 <ul class="dropdown-content">
+
                     <li class="dropdown-header">Athletics</li>
                     <li><a href="stats.html">Full Career Stats</a></li>
                     <li><a href="highlights.html">Match Highlights</a></li>
                     <li><a href="colleges.html">Interested Colleges</a></li>
                     <li><a href="analytics.html" style="color: var(--energy-blue); font-weight: 700;">GK Analytics</a></li>
+                    <li><a href="soccer-calendar.html">Soccer Calendar</a></li>
 
                     <li style="border-top: 1px solid rgba(255,255,255,0.1); margin: 5px 0;"></li>
 
@@ -36,6 +38,12 @@
                     <li><a href="wdsub/heading.html">Heading Practice</a></li>
                     <li><a href="wdsub/lists.html">List Practice</a></li>
                     <li><a href="wdsub/dark.html">Dark-Mode-Toggle</a></li>
+
+                    <li style="border-top: 1px solid rgba(255,255,255,0.1); margin: 5px 0;"></li>
+
+                    <li class="dropdown-header">Personal</li>
+                    <li><a href="personal-calendar.html">My Schedule</a></li>
+
                 </ul>
             </li>
         </ul>
@@ -90,6 +98,14 @@
         </div>
     </header>
 
+    <!-- LIVE MATCH WIDGET -->
+    <section id="live-match-widget" class="live-widget">
+        <h2>Live Match Center</h2>
+        <div id="liveMatchBox" class="live-box">
+            <p>Loading match data...</p>
+        </div>
+    </section>
+
     <div class="recovery-timeline">
         <h2 style="font-family: 'Big Shoulders Display'; font-size: 3rem; margin-bottom: 10px; color: var(--white);">RECOVERY TIMELINE</h2>
         <div class="timeline-bar">
@@ -114,12 +130,12 @@
         </div>
 
         <div style="text-align: center; flex: 1; min-width: 120px; border-left: 1px solid rgba(255,255,255,0.1);">
-            <h3 style="font-size: 2rem; color: var(--energy-blue); margin: 0;">717</h3>
+            <h3 style="font-size: 2rem; color: var(--energy-blue); margin: 0;">721</h3>
             <p style="text-transform: uppercase; font-size: 0.65rem; color: var(--text-muted); font-weight: 700; margin-top: 5px;">Coach Searches</p>
         </div>
 
         <div style="text-align: center; flex: 1; min-width: 120px; border-left: 1px solid rgba(255,255,255,0.1);">
-            <h3 style="font-size: 2rem; color: var(--energy-blue); margin: 0;">45</h3>
+            <h3 style="font-size: 2rem; color: var(--energy-blue); margin: 0;">46</h3>
             <p style="text-transform: uppercase; font-size: 0.65rem; color: var(--text-muted); font-weight: 700; margin-top: 5px;">Coach Follows</p>
         </div>
 
@@ -161,6 +177,74 @@
         document.getElementById("minutes").textContent = minutes;
         document.getElementById("seconds").textContent = seconds;
     }, 1000);
+    </script>
+
+    <!--  LIVE MATCH SCRIPT -->
+    <script>
+    const teamMatches = [
+        {
+            date: "2026-05-25",
+            opponent: "Charlotte Independence 09 Blue",
+            kickoff: "6:30 PM",
+            status: "live",
+            score: "1 - 0",
+            minute: 67
+        },
+        {
+            date: "2026-05-20",
+            opponent: "NCFC Youth 09 Elite",
+            kickoff: "7:00 PM",
+            status: "upcoming"
+        },
+        {
+            date: "2026-05-10",
+            opponent: "Triangle United 09 Gold",
+            kickoff: "5:00 PM",
+            status: "final",
+            score: "3 - 1",
+            result: "win"
+        }
+    ];
+
+    function renderLiveWidget() {
+        const box = document.getElementById("liveMatchBox");
+
+        const live = teamMatches.find(m => m.status === "live");
+        if (live) {
+            box.innerHTML = `
+                <div class="live-status live-now">LIVE — ${live.minute}'</div>
+                <h3>Wake FC 09 NPL North Academy vs ${live.opponent}</h3>
+                <p style="font-size: 1.4rem; margin-top: 10px;">Score: <strong>${live.score}</strong></p>
+                <p style="color: var(--text-muted);">Kickoff: ${live.kickoff}</p>
+            `;
+            return;
+        }
+
+        const upcoming = teamMatches.find(m => m.status === "upcoming");
+        if (upcoming) {
+            box.innerHTML = `
+                <div class="live-status upcoming">Next Match</div>
+                <h3>Wake FC 09 NPL North Academy vs ${upcoming.opponent}</h3>
+                <p style="color: var(--text-muted);">Date: ${upcoming.date}</p>
+                <p style="color: var(--text-muted);">Kickoff: ${upcoming.kickoff}</p>
+            `;
+            return;
+        }
+
+        const final = teamMatches.find(m => m.status === "final");
+        if (final) {
+            box.innerHTML = `
+                <div class="live-status final">Final Score</div>
+                <h3>Wake FC 09 NPL North Academy vs ${final.opponent}</h3>
+                <p style="font-size: 1.4rem; margin-top: 10px;">${final.score}</p>
+            `;
+            return;
+        }
+
+        box.innerHTML = "<p>No match data available.</p>";
+    }
+
+    renderLiveWidget();
     </script>
 
 </body>
