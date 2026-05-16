@@ -4,21 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Schedule | Drew Sossomon</title>
-    <link rel="stylesheet" href="styles.css">
+
+    <!-- ⭐ INLINE CSS (matches your theme) -->
+    <style>
+        :root {
+            --navy-dark: #0a192f;
+            --navy-card: #112240;
+            --energy-blue: #007bff;
+            --energy-light: #60a5fa;
+            --white: #ffffff;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--navy-dark);
+            color: var(--white);
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background: var(--navy-dark);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--energy-blue);
+        }
+
+        .logo {
+            font-family: 'Big Shoulders Display', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--energy-blue);
+        }
+
+        .nav-links a {
+            color: var(--energy-light);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .hero {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .calendar-box {
+            background: var(--navy-card);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid var(--energy-blue);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .day {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .day:last-child {
+            border-bottom: none;
+        }
+
+        .day h3 {
+            margin: 0;
+            font-size: 1.4rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+        }
+    </style>
+
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
-    <!--  NAV BACK TO HOME -->
-    <nav id="nav-menu">
+    <!-- ⭐ NAV -->
+    <nav>
         <div class="logo">DREW <span>SOSSOMON</span></div>
-        <ul class="nav-links">
-            <li><a href="index.html">← Back to Home</a></li>
-        </ul>
+        <div class="nav-links">
+            <a href="index.html">← Back to Home</a>
+        </div>
     </nav>
 
-    <header class="hero" style="padding: 60px 30px; text-align: center;">
+    <!-- ⭐ HEADER -->
+    <header class="hero">
         <h1 style="font-family: 'Big Shoulders Display'; font-size: 4rem; color: var(--energy-blue);">
             My Personal Schedule
         </h1>
@@ -27,65 +110,61 @@
         </p>
     </header>
 
-    <section style="max-width: 900px; margin: 0 auto; padding: 20px;">
+    <!-- ⭐ PERSONAL SCHEDULE -->
+    <section class="calendar-box">
 
-        <!--  PERSONAL CALENDAR BOX -->
-        <div style="background: var(--navy-card); padding: 25px; border-radius: 15px; border-left: 5px solid var(--energy-blue);">
+        <h2 style="font-family: 'Big Shoulders Display'; font-size: 2rem; color: var(--energy-blue); margin-bottom: 20px;">
+            Weekly Schedule
+        </h2>
 
-            <h2 style="font-family: 'Big Shoulders Display'; font-size: 2.2rem; margin-bottom: 20px; color: var(--energy-blue);">
-                Weekly Schedule
-            </h2>
+        <div class="day">
+            <h3>Monday</h3>
+            <p style="color: var(--text-muted);">School • 8:00 AM – 3:00 PM</p>
+            <p style="color: var(--text-muted);">Homework & Study • 4:00 PM</p>
+            <p style="color: var(--energy-light); font-weight: 700;">Recovery Training • 6:00 PM</p>
+        </div>
 
-            <!--  MONDAY -->
-            <div style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                <h3 style="color: var(--white); font-size: 1.4rem;">Monday</h3>
-                <p style="color: var(--text-muted);">School • 8:00 AM – 3:00 PM</p>
-                <p style="color: var(--text-muted);">Homework & Study • 4:00 PM</p>
-                <p style="color: var(--energy-light); font-weight: 700;">Recovery Training • 6:00 PM</p>
-            </div>
+        <div class="day">
+            <h3>Tuesday</h3>
+            <p style="color: var(--text-muted);">School • 8:00 AM – 3:00 PM</p>
+            <p style="color: var(--text-muted);">Homework • 4:00 PM</p>
+            <p style="color: var(--energy-light); font-weight: 700;">Gym Session • 6:30 PM</p>
+        </div>
 
-            <!--  TUESDAY -->
-            <div style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,255,0.1);">
-                <h3 style="color: var(--white); font-size: 1.4rem;">Tuesday</h3>
-                <p style="color: var(--text-muted);">School • 8:00 AM – 3:00 PM</p>
-                <p style="color: var(--text-muted);">Homework • 4:00 PM</p>
-                <p style="color: var(--energy-light); font-weight: 700;">Gym Session • 6:30 PM</p>
-            </div>
+        <div class="day">
+            <h3>Wednesday</h3>
+            <p style="color: var(--text-muted);">School • 8:00 AM – 3:00 PM</p>
+            <p style="color: var(--energy-light); font-weight: 700;">Physical Therapy • 5:00 PM</p>
+        </div>
 
-            <!--  WEDNESDAY -->
-            <div style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                <h3 style="color: var(--white); font-size: 1.4rem;">Wednesday</h3>
-                <p style="color: var(--text-muted);">School • 8:00 AM – 3:00 PM</p>
-                <p style="color: var(--energy-light); font-weight: 700;">Physical Therapy • 5:00 PM</p>
-            </div>
+        <div class="day">
+            <h3>Thursday</h3>
+            <p style="color: var(--text-muted);">School • 8:00 AM – 3:00 PM</p>
+            <p style="color: var(--energy-light); font-weight: 700;">Goalkeeper Drills • 6:00 PM</p>
+        </div>
 
-            <!--  THURSDAY -->
-            <div style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                <h3 style="color: var(--white); font-size: 1.4rem;">Thursday</h3>
-                <p style="color: var(--text-muted);">School • 8:00 AM – 3:00 PM</p>
-                <p style="color: var(--energy-light); font-weight: 700;">Goalkeeper Drills • 6:00 PM</p>
-            </div>
+        <div class="day">
+            <h3>Friday</h3>
+            <p style="color: var(--text-muted);">School • 8:00 AM – 3:00 PM</p>
+            <p style="color: var(--text-muted);">Free Time / Rest • Evening</p>
+        </div>
 
-            <!--  FRIDAY -->
-            <div style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                <h3 style="color: var(--white); font-size: 1.4rem;">Friday</h3>
-                <p style="color: var(--text-muted);">School • 8:00 AM – 3:00 PM</p>
-                <p style="color: var(--text-muted);">Free Time / Rest • Evening</p>
-            </div>
-
-            <!--  WEEKEND -->
-            <div style="padding: 15px;">
-                <h3 style="color: var(--white); font-size: 1.4rem;">Saturday & Sunday</h3>
-                <p style="color: var(--energy-light); font-weight: 700;">Games • Tournaments • Recovery</p>
-            </div>
-
+        <div class="day">
+            <h3>Saturday & Sunday</h3>
+            <p style="color: var(--energy-light); font-weight: 700;">Games • Tournaments • Recovery</p>
         </div>
 
     </section>
 
-    <footer style="margin-top: 60px;">
+    <footer>
         <p>© 2026 Drew Sossomon | Personal Schedule</p>
     </footer>
+
+    <!-- ⭐ INLINE JS (placeholder for future features) -->
+    <script>
+        // Page currently does not need JavaScript.
+        // You can add features later (tabs, animations, etc.)
+    </script>
 
 </body>
 </html>
