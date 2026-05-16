@@ -4,21 +4,137 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soccer Calendar | Drew Sossomon</title>
-    <link rel="stylesheet" href="styles.css">
+
+    <!--  INLINE CSS ( full theme) -->
+    <style>
+        :root {
+            --navy-dark: #0a192f;
+            --navy-card: #112240;
+            --energy-blue: #007bff;
+            --energy-light: #60a5fa;
+            --white: #ffffff;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--navy-dark);
+            color: var(--white);
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background: var(--navy-dark);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--energy-blue);
+        }
+
+        .logo {
+            font-family: 'Big Shoulders Display', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--energy-blue);
+        }
+
+        .nav-links a {
+            color: var(--energy-light);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .hero {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .calendar-box {
+            background: var(--navy-card);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid var(--energy-blue);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .match {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .match:last-child {
+            border-bottom: none;
+        }
+
+        .match h3 {
+            margin: 0;
+            font-size: 1.4rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+        }
+
+        /*  Live Match Widget */
+        .live-widget {
+            background: var(--navy-card);
+            padding: 25px;
+            margin: 40px auto;
+            max-width: 900px;
+            border-radius: 15px;
+            border-left: 5px solid var(--energy-blue);
+        }
+
+        .live-status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .live-now {
+            background: rgba(255,0,0,0.2);
+            color: #ff6b6b;
+        }
+
+        .upcoming {
+            background: rgba(0,170,255,0.2);
+            color: #00aaff;
+        }
+
+        .final {
+            background: rgba(0,255,0,0.2);
+            color: #22c55e;
+        }
+    </style>
+
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
-    <!--  NAV BACK TO HOME -->
-    <nav id="nav-menu">
+    <!--  NAV -->
+    <nav>
         <div class="logo">DREW <span>SOSSOMON</span></div>
-        <ul class="nav-links">
-            <li><a href="index.html">← Back to Home</a></li>
-        </ul>
+        <div class="nav-links">
+            <a href="index.html">← Back to Home</a>
+        </div>
     </nav>
 
-    <header class="hero" style="padding: 60px 30px; text-align: center;">
+    <!--  HEADER -->
+    <header class="hero">
         <h1 style="font-family: 'Big Shoulders Display'; font-size: 4rem; color: var(--energy-blue);">
             Wake FC Soccer Calendar
         </h1>
@@ -27,43 +143,114 @@
         </p>
     </header>
 
-    <section style="max-width: 900px; margin: 0 auto; padding: 20px;">
+    <!--  LIVE MATCH WIDGET -->
+    <section class="live-widget">
+        <h2 style="font-family: 'Big Shoulders Display'; font-size: 2.2rem; color: var(--energy-blue);">
+            Live Match Center
+        </h2>
+        <div id="liveMatchBox">
+            <p>Loading match data...</p>
+        </div>
+    </section>
 
-        <!--  CALENDAR BOX -->
-        <div style="background: var(--navy-card); padding: 25px; border-radius: 15px; border-left: 5px solid var(--energy-blue);">
+    <!--  MATCH LIST -->
+    <section class="calendar-box">
 
-            <h2 style="font-family: 'Big Shoulders Display'; font-size: 2.2rem; margin-bottom: 20px; color: var(--energy-blue);">
-                Upcoming Matches
-            </h2>
+        <h2 style="font-family: 'Big Shoulders Display'; font-size: 2rem; color: var(--energy-blue); margin-bottom: 20px;">
+            Upcoming Matches
+        </h2>
 
-            <!--  MATCH 1 -->
-            <div style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                <h3 style="color: var(--white); font-size: 1.4rem;">vs Charlotte Independence 09 Blue</h3>
-                <p style="color: var(--text-muted);">May 25, 2026 — 6:30 PM</p>
-                <p style="color: var(--energy-light); font-weight: 700;">Status: Live Match</p>
-            </div>
+        <div class="match">
+            <h3>vs Charlotte Independence 09 Blue</h3>
+            <p style="color: var(--text-muted);">May 25, 2026 — 6:30 PM</p>
+            <p style="color: var(--energy-light); font-weight: 700;">Status: Live Match</p>
+        </div>
 
-            <!--  MATCH 2 -->
-            <div style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                <h3 style="color: var(--white); font-size: 1.4rem;">vs NCFC Youth 09 Elite</h3>
-                <p style="color: var(--text-muted);">May 20, 2026 — 7:00 PM</p>
-                <p style="color: var(--energy-light); font-weight: 700;">Status: Upcoming</p>
-            </div>
+        <div class="match">
+            <h3>vs NCFC Youth 09 Elite</h3>
+            <p style="color: var(--text-muted);">May 20, 2026 — 7:00 PM</p>
+            <p style="color: var(--energy-light); font-weight: 700;">Status: Upcoming</p>
+        </div>
 
-            <!--  MATCH 3 -->
-            <div style="padding: 15px;">
-                <h3 style="color: var(--white); font-size: 1.4rem;">vs Triangle United 09 Gold</h3>
-                <p style="color: var(--text-muted);">May 10, 2026 — 5:00 PM</p>
-                <p style="color: #22c55e; font-weight: 700;">Final Score: 3–1 (Win)</p>
-            </div>
-
+        <div class="match">
+            <h3>vs Triangle United 09 Gold</h3>
+            <p style="color: var(--text-muted);">May 10, 2026 — 5:00 PM</p>
+            <p style="color: #22c55e; font-weight: 700;">Final Score: 3–1 (Win)</p>
         </div>
 
     </section>
 
-    <footer style="margin-top: 60px;">
+    <footer>
         <p>© 2026 Drew Sossomon | Wake FC 09 NPL North Academy</p>
     </footer>
+
+    <!--  INLINE JS (Live Match Widget) -->
+    <script>
+        const teamMatches = [
+            {
+                date: "2026-05-25",
+                opponent: "Charlotte Independence 09 Blue",
+                kickoff: "6:30 PM",
+                status: "live",
+                score: "1 - 0",
+                minute: 67
+            },
+            {
+                date: "2026-05-20",
+                opponent: "NCFC Youth 09 Elite",
+                kickoff: "7:00 PM",
+                status: "upcoming"
+            },
+            {
+                date: "2026-05-10",
+                opponent: "Triangle United 09 Gold",
+                kickoff: "5:00 PM",
+                status: "final",
+                score: "3 - 1",
+                result: "win"
+            }
+        ];
+
+        function renderLiveWidget() {
+            const box = document.getElementById("liveMatchBox");
+
+            const live = teamMatches.find(m => m.status === "live");
+            if (live) {
+                box.innerHTML = `
+                    <div class="live-status live-now">LIVE — ${live.minute}'</div>
+                    <h3>Wake FC 09 NPL North Academy vs ${live.opponent}</h3>
+                    <p style="font-size: 1.4rem; margin-top: 10px;">Score: <strong>${live.score}</strong></p>
+                    <p style="color: var(--text-muted);">Kickoff: ${live.kickoff}</p>
+                `;
+                return;
+            }
+
+            const upcoming = teamMatches.find(m => m.status === "upcoming");
+            if (upcoming) {
+                box.innerHTML = `
+                    <div class="live-status upcoming">Next Match</div>
+                    <h3>Wake FC 09 NPL North Academy vs ${upcoming.opponent}</h3>
+                    <p style="color: var(--text-muted);">Date: ${upcoming.date}</p>
+                    <p style="color: var(--text-muted);">Kickoff: ${upcoming.kickoff}</p>
+                `;
+                return;
+            }
+
+            const final = teamMatches.find(m => m.status === "final");
+            if (final) {
+                box.innerHTML = `
+                    <div class="live-status final">Final Score</div>
+                    <h3>Wake FC 09 NPL North Academy vs ${final.opponent}</h3>
+                    <p style="font-size: 1.4rem; margin-top: 10px;">${final.score}</p>
+                `;
+                return;
+            }
+
+            box.innerHTML = "<p>No match data available.</p>";
+        }
+
+        renderLiveWidget();
+    </script>
 
 </body>
 </html>
