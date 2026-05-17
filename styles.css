@@ -66,57 +66,58 @@ nav {
     color: var(--white); 
 }
 
-.dropdown { 
-    position: relative; 
+/* DROPDOWN — UPDATED FOR INDIVIDUAL MENU ITEMS */
+.dropdown {
+    position: relative;
 }
 
-/* FIXED DROPDOWN */
 .dropdown-content {
     display: none;
     position: absolute;
     background: var(--navy-card);
-    min-width: 260px;
+    min-width: 220px;
     top: 100%;
-    right: 0;
+    left: 0; /* DROPDOWN OPENS UNDER EACH ITEM */
     box-shadow: 0 15px 30px rgba(0,0,0,0.5);
     border-radius: 8px;
-    overflow: visible !important; /* FIXED */
+    overflow: visible !important;
     padding: 10px 0;
     list-style: none;
     border: 1px solid var(--energy-blue);
+    z-index: 2000;
 }
 
-.dropdown:hover .dropdown-content { 
-    display: block; 
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
 .dropdown-content li {
-    position: relative; /* REQUIRED FOR SUBMENUS */
+    position: relative;
 }
 
-.dropdown-content li a { 
-    color: var(--white) !important; 
-    padding: 10px 20px; 
-    display: block; 
-    text-transform: none; 
-    font-size: 0.9rem; 
+.dropdown-content li a {
+    color: var(--white) !important;
+    padding: 10px 20px;
+    display: block;
+    text-transform: none;
+    font-size: 0.9rem;
 }
 
-.dropdown-content li a:hover { 
-    background: var(--energy-blue); 
+.dropdown-content li a:hover {
+    background: var(--energy-blue);
 }
 
-/* SUB-MENU FIX */
+/* SUB-MENU (if you ever add deeper levels) */
 .sub-menu {
     position: absolute;
-    left: 0;          /* DROPS DOWN INSTEAD OF RIGHT */
-    top: 100%;
+    left: 100%;
+    top: 0;
     background: var(--navy-card);
     border: 1px solid var(--energy-blue);
     border-radius: 8px;
     display: none;
-    min-width: 220px;
-    z-index: 2000;
+    min-width: 200px;
+    z-index: 3000;
 }
 
 .dropdown-sub:hover .sub-menu {
