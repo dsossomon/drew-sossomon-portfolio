@@ -7,26 +7,9 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
 
-    <!-- UPDATED DROPDOWN CSS (SAFE + ISOLATED) -->
+    <!-- FIXED DROPDOWN CSS (keeps your original behavior) -->
     <style>
-        /* Make dropdown buttons behave like links */
-        .dropbtn,
-        .dropdown-sub > button {
-            background: none;
-            border: none;
-            color: white;
-            font: inherit;
-            cursor: pointer;
-            padding: 10px 20px;
-            width: 100%;
-            text-align: left;
-        }
-
-        /* Main dropdown container */
-        .dropdown {
-            position: relative;
-        }
-
+        /* Main dropdown */
         .dropdown-content {
             position: absolute;
             background: var(--navy-card);
@@ -34,13 +17,10 @@
             border-radius: 8px;
             border: 2px solid var(--energy-blue);
             display: none;
-            min-width: 250px;
             z-index: 1000;
         }
 
-        /* Show dropdown on hover OR focus */
-        .dropdown:hover .dropdown-content,
-        .dropdown:focus-within .dropdown-content {
+        .dropdown:hover .dropdown-content {
             display: block;
         }
 
@@ -49,11 +29,13 @@
             position: relative;
         }
 
-        .dropdown-sub > button {
+        .dropdown-sub > a {
             padding: 10px 20px;
+            display: block;
+            color: white;
         }
 
-        /* Submenu panel */
+        /* Submenu */
         .sub-menu {
             position: absolute;
             left: 100%;
@@ -62,13 +44,11 @@
             border: 2px solid var(--energy-blue);
             border-radius: 8px;
             display: none;
-            min-width: 220px;
+            min-width: 200px;
             z-index: 1000;
         }
 
-        /* Show submenu on hover OR focus */
-        .dropdown-sub:hover .sub-menu,
-        .dropdown-sub:focus-within .sub-menu {
+        .dropdown-sub:hover .sub-menu {
             display: block;
         }
 
@@ -94,13 +74,13 @@
             <li><a href="updates.html">Updates</a></li>
 
             <li class="dropdown">
-                <button class="dropbtn">Portfolio & Projects ▾</button>
+                <a href="#" class="dropbtn">Portfolio & Projects ▾</a>
 
                 <ul class="dropdown-content">
 
                     <!-- ATHLETICS -->
                     <li class="dropdown-sub">
-                        <button>Athletics ▸</button>
+                        <a href="#">Athletics ▸</a>
                         <ul class="sub-menu">
                             <li><a href="stats.html">Full Career Stats</a></li>
                             <li><a href="highlights.html">Match Highlights</a></li>
@@ -111,7 +91,7 @@
 
                     <!-- ACADEMICS -->
                     <li class="dropdown-sub">
-                        <button>Academics ▸</button>
+                        <a href="#">Academics ▸</a>
                         <ul class="sub-menu">
                             <li><a href="wdsub/reviews.html">Goalkeeper Reviews</a></li>
                             <li><a href="wdsub/poem.html">NC State Poem</a></li>
@@ -126,7 +106,7 @@
 
                     <!-- PERSONAL -->
                     <li class="dropdown-sub">
-                        <button>Personal ▸</button>
+                        <a href="#">Personal ▸</a>
                         <ul class="sub-menu">
                             <li><a href="personal-calendar.html">My Schedule</a></li>
                         </ul>
@@ -134,7 +114,7 @@
 
                     <!-- GRADES -->
                     <li class="dropdown-sub">
-                        <button>Grades ▸</button>
+                        <a href="#">Grades ▸</a>
                         <ul class="sub-menu">
                             <li><a href="grades.html">(My Grades)</a></li>
                         </ul>
