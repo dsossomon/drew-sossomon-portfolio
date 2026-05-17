@@ -7,65 +7,37 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
 
-   
+    <!-- FIXED DROPDOWN CSS -->
     <style>
-        /* Main dropdown */
         .dropdown-content {
-            position: absolute;
-            background: var(--navy-card);
-            padding: 10px 0;
-            border-radius: 8px;
-            border: 2px solid var(--energy-blue);
-            display: none;
-            z-index: 1000;
+            overflow: visible !important;
         }
 
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        /* Submenu container */
-        .dropdown-sub {
+        .dropdown-content li {
             position: relative;
         }
 
-        .dropdown-sub > a {
-            padding: 10px 20px;
-            display: block;
-            color: white;
-        }
-
-        /* Submenu */
         .sub-menu {
             position: absolute;
-            left: 100%;
-            top: 0;
+            left: 0;
+            top: 100%;
             background: var(--navy-card);
-            border: 2px solid var(--energy-blue);
+            border: 1px solid var(--energy-blue);
             border-radius: 8px;
             display: none;
-            min-width: 200px;
-            z-index: 1000;
+            min-width: 220px;
+            z-index: 2000;
         }
 
         .dropdown-sub:hover .sub-menu {
             display: block;
-        }
-
-        .sub-menu a {
-            padding: 10px 15px;
-            display: block;
-            color: white;
-        }
-
-        .sub-menu a:hover {
-            background: var(--energy-blue);
         }
     </style>
 </head>
 
 <body style="--recovery-percent: 42%;">
 
+    <!-- NAVIGATION -->
     <nav id="nav-menu">
         <div class="logo">DREW <span>SOSSOMON</span></div>
         <ul class="nav-links">
@@ -78,7 +50,6 @@
 
                 <ul class="dropdown-content">
 
-                    <!-- ATHLETICS -->
                     <li class="dropdown-sub">
                         <a href="#">Athletics ▸</a>
                         <ul class="sub-menu">
@@ -89,7 +60,6 @@
                         </ul>
                     </li>
 
-                    <!-- ACADEMICS -->
                     <li class="dropdown-sub">
                         <a href="#">Academics ▸</a>
                         <ul class="sub-menu">
@@ -104,7 +74,6 @@
                         </ul>
                     </li>
 
-                    <!-- PERSONAL -->
                     <li class="dropdown-sub">
                         <a href="#">Personal ▸</a>
                         <ul class="sub-menu">
@@ -112,7 +81,6 @@
                         </ul>
                     </li>
 
-                    <!-- GRADES -->
                     <li class="dropdown-sub">
                         <a href="#">Grades ▸</a>
                         <ul class="sub-menu">
@@ -125,6 +93,7 @@
         </ul>
     </nav>
 
+    <!-- HERO -->
     <header class="hero">
         <div class="hero-content" style="display: flex; gap: 50px; align-items: center; width: 100%; max-width: 1200px; margin: 0 auto;">
             <div class="hero-text" style="flex: 1.2;">
@@ -182,6 +151,7 @@
         </div>
     </section>
 
+    <!-- RECOVERY TIMELINE -->
     <div class="recovery-timeline">
         <h2 style="font-family: 'Big Shoulders Display'; font-size: 3rem; margin-bottom: 10px; color: var(--white);">RECOVERY TIMELINE</h2>
         <div class="timeline-bar">
@@ -198,6 +168,7 @@
         </div>
     </div>
 
+    <!-- STATS BOXES -->
     <section style="background: var(--navy-card); display: flex; flex-wrap: wrap; justify-content: space-around; align-items: center; padding: 40px 20px; color: white; max-width: 1200px; margin: 0 auto 80px; border-radius: 15px; border-bottom: 4px solid var(--energy-blue); gap: 20px;">
         
         <div style="text-align: center; flex: 1; min-width: 120px;">
@@ -226,11 +197,12 @@
         </div>
     </section>
 
+    <!-- FOOTER -->
     <footer>
         <p>© 2026 Drew Sossomon | "The U.S. Wall" Portfolio</p>
     </footer>
 
-   
+    <!-- COUNTDOWN SCRIPT -->
     <script>
     const tryoutDate = new Date("August 1, 2026 00:00:00").getTime();
 
@@ -255,7 +227,7 @@
     }, 1000);
     </script>
 
-    <!--  LIVE MATCH SCRIPT -->
+    <!-- LIVE MATCH SCRIPT -->
     <script>
     const teamMatches = [
         {
@@ -324,4 +296,3 @@
     </script>
 
 </body>
-</html>
