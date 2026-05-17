@@ -6,7 +6,64 @@
     <title>Drew Sossomon | The US Wall</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- updated dropdown with the css code -->
+    <style>
+        /* Main dropdown */
+        .dropdown-content {
+            position: absolute;
+            background: var(--navy-card);
+            padding: 10px 0;
+            border-radius: 8px;
+            border: 2px solid var(--energy-blue);
+            display: none;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Submenu container */
+        .dropdown-sub {
+            position: relative;
+        }
+
+        .dropdown-sub > a {
+            padding: 10px 20px;
+            display: block;
+            color: white;
+        }
+
+        /* Submenu */
+        .sub-menu {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: var(--navy-card);
+            border: 2px solid var(--energy-blue);
+            border-radius: 8px;
+            display: none;
+            min-width: 200px;
+            z-index: 1000;
+        }
+
+        .dropdown-sub:hover .sub-menu {
+            display: block;
+        }
+
+        .sub-menu a {
+            padding: 10px 15px;
+            display: block;
+            color: white;
+        }
+
+        .sub-menu a:hover {
+            background: var(--energy-blue);
+        }
+    </style>
 </head>
+
 <body style="--recovery-percent: 42%;">
 
     <nav id="nav-menu">
@@ -18,44 +75,50 @@
 
             <li class="dropdown">
                 <a href="#" class="dropbtn">Portfolio & Projects ▾</a>
+
                 <ul class="dropdown-content">
 
-                    <!-- updated  -->
-                    <li class="dropdown-header">Main Sections</li>
-                    <li><a href="athletes.html">Athletes</a></li>
-                    <li><a href="academics.html">Academics</a></li>
-                    <li><a href="personal.html">Personal</a></li>
-                    <li><a href="grades.html">Grades</a></li>
+                    <!-- ATHLETICS -->
+                    <li class="dropdown-sub">
+                        <a href="#">Athletics ▸</a>
+                        <ul class="sub-menu">
+                            <li><a href="stats.html">Full Career Stats</a></li>
+                            <li><a href="highlights.html">Match Highlights</a></li>
+                            <li><a href="analytics.html">GK Analytics</a></li>
+                            <li><a href="soccer-calendar.html">Soccer Calendar</a></li>
+                        </ul>
+                    </li>
 
-                    <li style="border-top: 1px solid rgba(255,255,255,0.1); margin: 5px 0;"></li>
+                    <!-- ACADEMICS -->
+                    <li class="dropdown-sub">
+                        <a href="#">Academics ▸</a>
+                        <ul class="sub-menu">
+                            <li><a href="wdsub/reviews.html">Goalkeeper Reviews</a></li>
+                            <li><a href="wdsub/poem.html">NC State Poem</a></li>
+                            <li><a href="wdsub/recipe.html">Grilled Cheese Recipe</a></li>
+                            <li><a href="wdsub/anchors.html">Anchors Practice</a></li>
+                            <li><a href="wdsub/formatting.html">Formatting Practice</a></li>
+                            <li><a href="wdsub/heading.html">Heading Practice</a></li>
+                            <li><a href="wdsub/lists.html">List Practice</a></li>
+                            <li><a href="wdsub/dark.html">Dark-Mode-Toggle</a></li>
+                        </ul>
+                    </li>
 
-                    <!-- updated dropdown -->
+                    <!-- PERSONAL -->
+                    <li class="dropdown-sub">
+                        <a href="#">Personal ▸</a>
+                        <ul class="sub-menu">
+                            <li><a href="personal-calendar.html">My Schedule</a></li>
+                        </ul>
+                    </li>
 
-                    <li class="dropdown-header">Athletics</li>
-                    <li><a href="stats.html">Full Career Stats</a></li>
-                    <li><a href="highlights.html">Match Highlights</a></li>
-                    <li><a href="colleges.html">Interested Colleges</a></li>
-                    <li><a href="analytics.html" style="color: var(--energy-blue); font-weight: 700;">GK Analytics</a></li>
-                    <li><a href="soccer-calendar.html">Soccer Calendar</a></li>
-
-                    <li style="border-top: 1px solid rgba(255,255,255,0.1); margin: 5px 0;"></li>
-
-                    <li class="dropdown-header">Academic Projects</li>
-                    <li><a href="wdsub/reviews.html">Goalkeeper Reviews</a></li>
-                    <li><a href="wdsub/poem.html">NC State Poem</a></li>
-                    <li><a href="wdsub/recipe.html">Grilled Cheese Recipe</a></li>
-                    <li><a href="wdsub/anchors.html">Anchors Practice</a></li>
-                    <li><a href="wdsub/formatting.html">Formatting Practice</a></li>
-                    <li><a href="wdsub/heading.html">Heading Practice</a></li>
-                    <li><a href="wdsub/lists.html">List Practice</a></li>
-                    <li><a href="wdsub/dark.html">Dark-Mode-Toggle</a></li>
-
-                    <li style="border-top: 1px solid rgba(255,255,255,0.1); margin: 5px 0;"></li>
-
-                    <li class="dropdown-header">Personal</li>
-                    <li><a href="personal-calendar.html">My Schedule</a></li>
-                    <li class="dropdown-header">Grades</li>
-                    <li><a href="">My Grades</a></li>
+                    <!-- GRADES -->
+                    <li class="dropdown-sub">
+                        <a href="#">Grades ▸</a>
+                        <ul class="sub-menu">
+                            <li><a href="#">(Add grade pages here)</a></li>
+                        </ul>
+                    </li>
 
                 </ul>
             </li>
