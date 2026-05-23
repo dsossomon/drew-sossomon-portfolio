@@ -1,362 +1,274 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Drew Sossomon GK Challenge</title>
-
-<style>
-  body {
-    margin: 0;
-    background: #0b1724;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  h1 {
-    margin-top: 10px;
-    font-size: 22px;
-    text-align: center;
-  }
-
-  #info {
-    margin: 5px 0 10px;
-    font-size: 14px;
-    text-align: center;
-    max-width: 600px;
-  }
-
-  #hud {
-    margin: 10px 0;
-    font-size: 14px;
-    text-align: center;
-  }
-
-  #hud span {
-    margin: 0 8px;
-  }
-
-  canvas {
-    background: #1c3b2f;
-    border: 3px solid #ffffff;
-    border-radius: 6px;
-    display: block;
-  }
-
-  #startBtn {
-    margin-top: 8px;
-    padding: 6px 14px;
-    border-radius: 4px;
-    border: none;
-    background: #f5c542;
-    color: #000;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  #homeBtn {
-    margin-top: 6px;
-    padding: 6px 14px;
-    border-radius: 4px;
-    border: none;
-    background: #4aa3ff;
-    color: #000;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  #message {
-    margin-top: 8px;
-    min-height: 20px;
-    font-size: 14px;
-    text-align: center;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drew Sossomon | The US Wall</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body style="--recovery-percent: 42%;">
 
-<h1>Drew Sossomon GK Challenge</h1>
+    <!-- NAVIGATION -->
+  <nav id="nav-menu">
+    <div class="logo">DREW <span>SOSSOMON</span></div>
 
-<div id="info">
-  Move the goalkeeper and try to save as many shots as you can.<br>
-  Only shots on target count toward shots on goal.
-</div>
+    <ul class="nav-links">
 
-<div id="hud">
-  <span>Shots: <span id="shotsThisGame">0</span></span>
-  <span>On target: <span id="onTargetThisGame">0</span></span>
-  <span>Saves: <span id="savesThisGame">0</span></span>
-  <span>Goals against: <span id="goalsAgainst">0</span></span>
-</div>
+        <!-- NO DROPDOWN -->
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="updates.html">Updates</a></li>
 
-<canvas id="game" width="500" height="400"></canvas>
+        <!-- ATHLETICS DROPDOWN -->
+        <li class="dropdown">
+            <a href="#">Athletics ▾</a>
+            <ul class="dropdown-content">
+                <li><a href="stats.html">Full Career Stats</a></li>
+                <li><a href="highlights.html">Match Highlights</a></li>
+                <li><a href="analytics.html">GK Analytics</a></li>
+                <li><a href="soccer-calendar.html">Soccer Calendar</a></li>
+                  <li><a href="colleges.html">Intrested Colleges/Universityies</a></li>
+            </ul>
+        </li>
 
-<button id="startBtn">Start / Restart Game</button>
-<button id="homeBtn">Back to Home</button>
-<div id="message"></div>
+        <!-- ACADEMICS DROPDOWN -->
+        <li class="dropdown">
+            <a href="#">Academics ▾</a>
+            <ul class="dropdown-content">
+                <li><a href="wdsub/reviews.html">Goalkeeper Reviews</a></li>
+                <li><a href="wdsub/poem.html">NC State Poem</a></li>
+                <li><a href="wdsub/recipe.html">Grilled Cheese Recipe</a></li>
+                <li><a href="wdsub/anchors.html">Anchors Practice</a></li>
+                <li><a href="wdsub/formatting.html">Formatting Practice</a></li>
+                <li><a href="wdsub/heading.html">Heading Practice</a></li>
+                <li><a href="wdsub/lists.html">List Practice</a></li>
+                <li><a href="wdsub/dark.html">Dark-Mode-Toggle</a></li>
+            </ul>
+        </li>
 
-<script>
-// ====== CANVAS ======
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
+        <!-- PERSONAL DROPDOWN -->
+        <li class="dropdown">
+            <a href="#">Personal ▾</a>
+            <ul class="dropdown-content">
+                <li><a href="personal-calendar.html">My Schedule</a></li>
+            </ul>
+        </li>
 
-// ====== HUD ======
-const shotsThisGameEl = document.getElementById("shotsThisGame");
-const onTargetThisGameEl = document.getElementById("onTargetThisGame");
-const savesThisGameEl = document.getElementById("savesThisGame");
-const goalsAgainstEl = document.getElementById("goalsAgainst");
-const messageEl = document.getElementById("message");
+        <!-- GRADES DROPDOWN -->
+        <li class="dropdown">
+            <a href="#">games ▾</a>
+            <ul class="dropdown-content">
+                <li><a href="goalie-game.html">(games)</a></li>
+            </ul>
+        </li>
+              <!-- Games DROPDOWN -->
+        <li class="dropdown">
+            <a href="#">Grades ▾</a>
+            <ul class="dropdown-content">
+                <li><a href="grades.html">(My Grades)</a></li>
+            </ul>
+        </li>
 
-// ====== FIELD GEOMETRY ======
-const fieldMargin = 20;
-const fieldX = fieldMargin;
-const fieldY = fieldMargin;
-const fieldWidth = canvas.width - fieldMargin * 2;
-const fieldHeight = canvas.height - fieldMargin * 2;
+    </ul>
+</nav>
 
-// Goal line at bottom
-const goalLineY = fieldY + fieldHeight;
+    <!-- HERO -->
+    <header class="hero">
+        <div class="hero-content" style="display: flex; gap: 50px; align-items: center; width: 100%; max-width: 1200px; margin: 0 auto;">
+            <div class="hero-text" style="flex: 1.2;">
+                <span class="badge" style="background: var(--energy-blue); color: white; padding: 5px 15px; border-radius: 4px; font-weight: 800; text-transform: uppercase; font-size: 0.8rem;">Class of 2028</span>
+                <h1>ANDREW <span>SOSSOMON</span></h1>
+                <p style="font-size: 1.6rem; font-weight: 700; color: var(--energy-light); margin-bottom: 5px;">"The U.S. Wall" | Left-Footed Goalkeeper</p>
+                <p style="color: var(--text-muted); margin-bottom: 35px;">Wake FC 09 NPL North Academy | 348 Saves/Season | Youngsville Academy Varsity</p>
+                
+                <div style="display: flex; gap: 15px; margin-bottom: 25px;">
+                    <a href="stats.html" class="btn-primary">View Full Stats</a>
+                    <a href="highlights.html" class="btn-outline">Watch Highlights</a>
+                </div>
 
-// Goal
-const goalWidth = 300;
-const goalHeight = 16;
-const goalX = fieldX + (fieldWidth - goalWidth) / 2;
-const goalY = goalLineY - goalHeight;
+                <div id="countdown" style="margin-bottom: 40px;">
+                    <h2 style="color: var(--energy-blue); font-size: 1.8rem; margin-bottom: 15px;">MLS NEXT Tryouts Countdown</h2>
 
-// 18-yard box (only one)
-const boxWidth = 440;
-const boxDepth = 140;
-const boxX = fieldX + (fieldWidth - boxWidth) / 2;
-const boxY = goalLineY - boxDepth;
+                    <div id="timer" style="display: flex; gap: 20px;">
 
-// Penalty spot (no arc)
-const pkSpotX = canvas.width / 2;
-const pkSpotY = goalLineY - 90;
+                        <div class="time-box">
+                            <span id="days">0</span>
+                            <label>Days</label>
+                        </div>
 
-// Center circle
-const centerX = fieldX + fieldWidth / 2;
-const centerY = fieldY + fieldHeight / 2;
+                        <div class="time-box">
+                            <span id="hours">0</span>
+                            <label>Hours</label>
+                        </div>
 
-// ====== GOALIE ======
-const goalie = {
-  x: pkSpotX - 35,
-  y: goalY - 10,
-  width: 70,
-  height: 10,
-  speed: 7
-};
+                        <div class="time-box">
+                            <span id="minutes">0</span>
+                            <label>Mins</label>
+                        </div>
 
-// ====== BALL ======
-let ball = null;
-const shotMinSpeed = 4;
-const shotMaxSpeed = 7;
+                        <div class="time-box">
+                            <span id="seconds">0</span>
+                            <label>Secs</label>
+                        </div>
 
-// ====== GAME STATE ======
-let running = false;
-let shotsThisGame = 0;
-let onTargetThisGame = 0;
-let savesThisGame = 0;
-let goalsAgainst = 0;
+                    </div>
+                </div>
+          
+            </div>
 
-let keys = {};
+            <div class="hero-image" style="flex: 0.8; text-align: right;">
+                <img src="Drew1.png" alt="Drew Sossomon" style="width: 100%; max-width: 420px; border-radius: 20px; box-shadow: 20px 20px 0px var(--energy-blue);">
+            </div>
+        </div>
+    </header>
 
-// ====== INPUT ======
-document.addEventListener("keydown", e => keys[e.key] = true);
-document.addEventListener("keyup", e => keys[e.key] = false);
+    <!-- LIVE MATCH WIDGET -->
+    <section id="live-match-widget" class="live-widget">
+        <h2>Live Match Center</h2>
+        <div id="liveMatchBox" class="live-box">
+            <p>Loading match data...</p>
+        </div>
+    </section>
 
-canvas.addEventListener("mousemove", e => {
-  const rect = canvas.getBoundingClientRect();
-  goalie.x = e.clientX - rect.left - goalie.width / 2;
-  clampGoalie();
-});
+    <!-- RECOVERY TIMELINE -->
+    <div class="recovery-timeline">
+        <h2 style="font-family: 'Big Shoulders Display'; font-size: 3rem; margin-bottom: 10px; color: var(--white);">RECOVERY TIMELINE</h2>
+        <div class="timeline-bar">
+            <div class="timeline-fill" style="width: var(--recovery-percent);"></div>
+        </div>
+        <div class="timeline-info">
+            <p style="font-size: 1.2rem; font-weight: 700;">50% Recovered | 6 Months / 12 Months | Phase: Plyometrics</p>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Current Target: Explosive Movement & Lateral Power</p>
+        </div>
+        <div class="timeline-labels" style="display: flex; justify-content: space-between; margin-top: 15px; font-size: 0.8rem; color: var(--text-muted);">
+            <span>Surgery<br>Nov 7, 2025</span>
+            <span>Now<br>June 2026</span>
+            <span>Expected Return<br>Late 2026</span>
+        </div>
+    </div>
 
-// Start / restart
-document.getElementById("startBtn").addEventListener("click", () => {
-  resetGame();
-  startGame();
-});
+    <!-- STATS BOXES -->
+    <section style="background: var(--navy-card); display: flex; flex-wrap: wrap; justify-content: space-around; align-items: center; padding: 40px 20px; color: white; max-width: 1200px; margin: 0 auto 80px; border-radius: 15px; border-bottom: 4px solid var(--energy-blue); gap: 20px;">
+        
+        <div style="text-align: center; flex: 1; min-width: 120px;">
+            <h3 style="font-size: 2rem; color: var(--energy-blue); margin: 0;">92-0-41</h3>
+            <p style="text-transform: uppercase; font-size: 0.65rem; color: var(--text-muted); font-weight: 700; margin-top: 5px;">Record</p>
+        </div>
 
-// Back to home
-document.getElementById("homeBtn").addEventListener("click", () => {
-  window.location.href = "index.html";
-});
+        <div style="text-align: center; flex: 1; min-width: 120px; border-left: 1px solid rgba(255,255,255,0.1);">
+            <h3 style="font-size: 2rem; color: var(--energy-blue); margin: 0;">733</h3>
+            <p style="text-transform: uppercase; font-size: 0.65rem; color: var(--text-muted); font-weight: 700; margin-top: 5px;">Coach Searches</p>
+        </div>
 
-// ====== RESET ======
-function resetGame() {
-  shotsThisGame = 0;
-  onTargetThisGame = 0;
-  savesThisGame = 0;
-  goalsAgainst = 0;
-  updateHUD();
-  messageEl.textContent = "";
-  ball = null;
-}
+        <div style="text-align: center; flex: 1; min-width: 120px; border-left: 1px solid rgba(255,255,255,0.1);">
+            <h3 style="font-size: 2rem; color: var(--energy-blue); margin: 0;">48</h3>
+            <p style="text-transform: uppercase; font-size: 0.65rem; color: var(--text-muted); font-weight: 700; margin-top: 5px;">Coach Follows</p>
+        </div>
 
-// ====== START ======
-function startGame() {
-  running = true;
-  spawnShot();
-  requestAnimationFrame(gameLoop);
-}
+        <div style="text-align: center; flex: 1; min-width: 120px; border-left: 1px solid rgba(255,255,255,0.1);">
+            <h3 style="font-size: 2rem; color: var(--energy-blue); margin: 0;">6</h3>
+            <p style="text-transform: uppercase; font-size: 0.65rem; color: var(--text-muted); font-weight: 700; margin-top: 5px;">Profile Views</p>
+        </div>
 
-// ====== SHOTS ======
-function spawnShot() {
-  const startX = Math.random() * canvas.width;
-  const startY = fieldY;
+        <div style="text-align: center; flex: 1; min-width: 120px; border-left: 1px solid rgba(255,255,255,0.1);">
+            <h3 style="font-size: 2rem; color: var(--energy-blue); margin: 0;">100%</h3>
+            <p style="text-transform: uppercase; font-size: 0.65rem; color: var(--text-muted); font-weight: 700; margin-top: 5px;">PK Save Rate</p>
+        </div>
+    </section>
 
-  const isOnTarget = Math.random() < 0.7;
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Drew Sossomon | "The U.S. Wall" Portfolio</p>
+    </footer>
 
-  let targetX;
-  if (isOnTarget) {
-    targetX = goalX + 20 + Math.random() * (goalWidth - 40);
-  } else {
-    targetX = Math.random() < 0.5
-      ? goalX - 80 - Math.random() * 80
-      : goalX + goalWidth + 80 + Math.random() * 80;
-  }
+    <!-- COUNTDOWN SCRIPT -->
+    <script>
+    const tryoutDate = new Date("August 1, 2026 00:00:00").getTime();
 
-  const targetY = goalLineY - goalHeight / 2;
+    setInterval(function () {
+        const now = new Date().getTime();
+        const distance = tryoutDate - now;
 
-  const dx = targetX - startX;
-  const dy = targetY - startY;
-  const dist = Math.sqrt(dx * dx + dy * dy);
+        if (distance <= 0) {
+            document.getElementById("timer").innerHTML = "Good luck at tryouts!";
+            return;
+        }
 
-  const speed = shotMinSpeed + Math.random() * (shotMaxSpeed - shotMinSpeed);
-  const vx = (dx / dist) * speed;
-  const vy = (dy / dist) * speed;
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  ball = { x: startX, y: startY, radius: 7, vx, vy, isOnTarget };
+        document.getElementById("days").textContent = days;
+        document.getElementById("hours").textContent = hours;
+        document.getElementById("minutes").textContent = minutes;
+        document.getElementById("seconds").textContent = seconds;
+    }, 1000);
+    </script>
 
-  shotsThisGame++;
-  if (isOnTarget) onTargetThisGame++;
-  updateHUD();
-}
+    <!-- LIVE MATCH SCRIPT -->
+    <script>
+    const teamMatches = [
+        {
+            date: "2026-05-25",
+            opponent: "Charlotte Independence 09 Blue",
+            kickoff: "6:30 PM",
+            status: "final",
+            score: "2 - 0",
+            minute: 90
+        },
+       
+        {
+            date: "2026-05-10",
+            opponent: "Triangle United 09 Gold",
+            kickoff: "5:00 PM",
+            status: "final",
+            score: "3 - 1",
+            result: "win"
+        }
+    ];
 
-// ====== HUD ======
-function updateHUD() {
-  shotsThisGameEl.textContent = shotsThisGame;
-  onTargetThisGameEl.textContent = onTargetThisGame;
-  savesThisGameEl.textContent = savesThisGame;
-  goalsAgainstEl.textContent = goalsAgainst;
-}
+    function renderLiveWidget() {
+        const box = document.getElementById("liveMatchBox");
 
-// ====== LIMIT GOALIE ======
-function clampGoalie() {
-  if (goalie.x < boxX) goalie.x = boxX;
-  if (goalie.x + goalie.width > boxX + boxWidth)
-    goalie.x = boxX + boxWidth - goalie.width;
-}
+        const live = teamMatches.find(m => m.status === "live");
+        if (live) {
+            box.innerHTML = `
+                <div class="live-status live-now">LIVE — ${live.minute}'</div>
+                <h3>Wake FC 09 NPL North Academy vs ${live.opponent}</h3>
+                <p style="font-size: 1.4rem; margin-top: 10px;">Score: <strong>${live.score}</strong></p>
+                <p style="color: var(--text-muted);">Kickoff: ${live.kickoff}</p>
+            `;
+            return;
+        }
 
-// ====== UPDATE ======
-function update() {
-  if (keys["ArrowLeft"] || keys["a"]) goalie.x -= goalie.speed;
-  if (keys["ArrowRight"] || keys["d"]) goalie.x += goalie.speed;
-  clampGoalie();
+        const upcoming = teamMatches.find(m => m.status === "upcoming");
+        if (upcoming) {
+            box.innerHTML = `
+                <div class="live-status upcoming">Next Match</div>
+                <h3>Wake FC 09 NPL North Academy vs ${upcoming.opponent}</h3>
+                <p style="color: var(--text-muted);">Date: ${upcoming.date}</p>
+                <p style="color: var(--text-muted);">Kickoff: ${upcoming.kickoff}</p>
+            `;
+            return;
+        }
 
-  if (ball) {
-    ball.x += ball.vx;
-    ball.y += ball.vy;
+        const final = teamMatches.find(m => m.status === "final");
+        if (final) {
+            box.innerHTML = `
+                <div class="live-status final">Final Score</div>
+                <h3>Wake FC 09 NPL North Academy vs ${final.opponent}</h3>
+                <p style="font-size: 1.4rem; margin-top: 10px;">${final.score}</p>
+            `;
+            return;
+        }
 
-    // FIXED COLLISION — ball meets goalie where goalie actually is
-    if (ball.y + ball.radius >= goalie.y) {
-
-      const withinPosts =
-        ball.x >= goalX &&
-        ball.x <= goalX + goalWidth;
-
-      const hitGoalie =
-        ball.x + ball.radius >= goalie.x &&
-        ball.x - ball.radius <= goalie.x + goalie.width;
-
-      if (hitGoalie && ball.isOnTarget) {
-        savesThisGame++;
-        updateHUD();
-        spawnShot();
-      } 
-      else if (withinPosts && ball.isOnTarget) {
-        goalsAgainst++;
-        updateHUD();
-        spawnShot();
-      } 
-      else {
-        spawnShot();
-      }
+        box.innerHTML = "<p>No match data available.</p>";
     }
-  }
-}
 
-// ====== DRAW FIELD ======
-function drawField() {
-  ctx.strokeStyle = "#ffffff";
-  ctx.lineWidth = 2;
-
-  // Outer field
-  ctx.strokeRect(fieldX, fieldY, fieldWidth, fieldHeight);
-
-  // Halfway line
-  ctx.beginPath();
-  ctx.moveTo(fieldX, centerY);
-  ctx.lineTo(fieldX + fieldWidth, centerY);
-  ctx.stroke();
-
-  // Center circle
-  ctx.beginPath();
-  ctx.arc(centerX, centerY, 40, 0, Math.PI * 2);
-  ctx.stroke();
-
-  // Center spot
-  ctx.beginPath();
-  ctx.arc(centerX, centerY, 3, 0, Math.PI * 2);
-  ctx.fill();
-
-  // 18-yard box
-  ctx.strokeRect(boxX, boxY, boxWidth, boxDepth);
-
-  // Goal
-  ctx.strokeRect(goalX, goalY, goalWidth, goalHeight);
-
-  // Penalty spot
-  ctx.beginPath();
-  ctx.arc(pkSpotX, pkSpotY, 3, 0, Math.PI * 2);
-  ctx.fill();
-}
-
-// ====== DRAW GOALIE ======
-function drawGoalie() {
-  ctx.fillStyle = "#f5c542";
-  ctx.fillRect(goalie.x, goalie.y, goalie.width, goalie.height);
-}
-
-// ====== DRAW BALL ======
-function drawBall() {
-  if (!ball) return;
-  ctx.beginPath();
-  ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-  ctx.fillStyle = "#ffffff";
-  ctx.fill();
-  ctx.strokeStyle = "#000000";
-  ctx.stroke();
-}
-
-// ====== GAME LOOP ======
-function gameLoop() {
-  if (!running) return;
-
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  drawField();
-  drawGoalie();
-  drawBall();
-
-  update();
-  requestAnimationFrame(gameLoop);
-}
-
-resetGame();
-</script>
+    renderLiveWidget();
+    </script>
 
 </body>
-</html>
