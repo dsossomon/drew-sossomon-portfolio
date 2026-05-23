@@ -56,6 +56,17 @@
     cursor: pointer;
   }
 
+  #homeBtn {
+    margin-top: 6px;
+    padding: 6px 14px;
+    border-radius: 4px;
+    border: none;
+    background: #4aa3ff;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
   #message {
     margin-top: 8px;
     min-height: 20px;
@@ -84,6 +95,7 @@
 <canvas id="game" width="500" height="400"></canvas>
 
 <button id="startBtn">Start / Restart Game</button>
+<button id="homeBtn">Back to Home</button>
 <div id="message"></div>
 
 <script>
@@ -108,21 +120,25 @@ const fieldHeight = canvas.height - fieldMargin * 2;
 // Goal line at bottom
 const goalLineY = fieldY + fieldHeight;
 
-// Goal (same size as before)
+// Goal
 const goalWidth = 300;
 const goalHeight = 16;
 const goalX = fieldX + (fieldWidth - goalWidth) / 2;
 const goalY = goalLineY - goalHeight;
 
-// 18-yard box (ONLY ONE BOX)
+// 18-yard box (only one)
 const boxWidth = 440;
 const boxDepth = 140;
 const boxX = fieldX + (fieldWidth - boxWidth) / 2;
 const boxY = goalLineY - boxDepth;
 
-// Penalty spot (NO ARC)
+// Penalty spot (no arc)
 const pkSpotX = canvas.width / 2;
 const pkSpotY = goalLineY - 90;
+
+// Center circle
+const centerX = fieldX + fieldWidth / 2;
+const centerY = fieldY + fieldHeight / 2;
 
 // ====== GOALIE ======
 const goalie = {
@@ -157,10 +173,15 @@ canvas.addEventListener("mousemove", e => {
   clampGoalie();
 });
 
-// ====== BUTTON ======
+// Start / restart
 document.getElementById("startBtn").addEventListener("click", () => {
   resetGame();
   startGame();
+});
+
+// Back to home
+document.getElementById("homeBtn").addEventListener("click", () => {
+  window.location.href = "index.html";
 });
 
 // ====== RESET ======
@@ -239,26 +260,28 @@ function update() {
     ball.x += ball.vx;
     ball.y += ball.vy;
 
-    if (ball.y + ball.radius >= goalLineY) {
+    // FIXED COLLISION — ball meets goalie where goalie actually is
+    if (ball.y + ball.radius >= goalie.y) {
+
       const withinPosts =
         ball.x >= goalX &&
         ball.x <= goalX + goalWidth;
 
       const hitGoalie =
         ball.x + ball.radius >= goalie.x &&
-        ball.x - ball.radius <= goalie.x + goalie.width &&
-        ball.y + ball.radius >= goalie.y &&
-        ball.y - ball.radius <= goalie.y + goalie.height;
+        ball.x - ball.radius <= goalie.x + goalie.width;
 
       if (hitGoalie && ball.isOnTarget) {
         savesThisGame++;
         updateHUD();
         spawnShot();
-      } else if (withinPosts && ball.isOnTarget) {
+      } 
+      else if (withinPosts && ball.isOnTarget) {
         goalsAgainst++;
         updateHUD();
         spawnShot();
-      } else {
+      } 
+      else {
         spawnShot();
       }
     }
@@ -275,33 +298,27 @@ function drawField() {
 
   // Halfway line
   ctx.beginPath();
-  ctx.moveTo(fieldX, fieldY + fieldHeight / 2);
-  ctx.lineTo(fieldX + fieldWidth, fieldY + fieldHeight / 2);
+  ctx.moveTo(fieldX, centerY);
+  ctx.lineTo(fieldX + fieldWidth, centerY);
   ctx.stroke();
 
   // Center circle
   ctx.beginPath();
-  ctx.arc(
-    fieldX + fieldWidth / 2,
-    fieldY + fieldHeight / 2,
-    40,
-    0,
-    Math.PI * 2
-  );
+  ctx.arc(centerX, centerY, 40, 0, Math.PI * 2);
   ctx.stroke();
 
   // Center spot
   ctx.beginPath();
-  ctx.arc(fieldX + fieldWidth / 2, fieldY + fieldHeight / 2, 3, 0, Math.PI * 2);
+  ctx.arc(centerX, centerY, 3, 0, Math.PI * 2);
   ctx.fill();
 
-  // 18-yard box (ONLY ONE)
+  // 18-yard box
   ctx.strokeRect(boxX, boxY, boxWidth, boxDepth);
 
   // Goal
   ctx.strokeRect(goalX, goalY, goalWidth, goalHeight);
 
-  // Penalty spot (NO ARC)
+  // Penalty spot
   ctx.beginPath();
   ctx.arc(pkSpotX, pkSpotY, 3, 0, Math.PI * 2);
   ctx.fill();
