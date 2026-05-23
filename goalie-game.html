@@ -56,6 +56,17 @@
     cursor: pointer;
   }
 
+  #homeBtn {
+    margin-top: 6px;
+    padding: 6px 14px;
+    border-radius: 4px;
+    border: none;
+    background: #4aa3ff;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
   #message {
     margin-top: 8px;
     min-height: 20px;
@@ -71,74 +82,88 @@
 
 <div id="info">
   Move the goalkeeper and try to save as many shots as you can.<br>
-  Only shots on target count toward shots on goal. This is built to be hard—like how Drew has to play.
+  Only shots on target count toward shots on goal.
 </div>
 
 <div id="hud">
-  <span>Shots this game: <span id="shotsThisGame">0</span></span>
+  <span>Shots: <span id="shotsThisGame">0</span></span>
   <span>On target: <span id="onTargetThisGame">0</span></span>
-  <span>Saves: <span id="savesThisGame">0</span></span><br>
-  <span>Career target saves: <b>2290</b></span>
-  <span>Career target shots on goal: <b>2446</b></span>
+  <span>Saves: <span id="savesThisGame">0</span></span>
+  <span>Goals against: <span id="goalsAgainst">0</span></span>
 </div>
 
 <canvas id="game" width="500" height="400"></canvas>
 
 <button id="startBtn">Start / Restart Game</button>
+<button id="homeBtn">Back to Home</button>
 <div id="message"></div>
 
 <script>
+// ====== CANVAS ======
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
+// ====== HUD ======
 const shotsThisGameEl = document.getElementById("shotsThisGame");
 const onTargetThisGameEl = document.getElementById("onTargetThisGame");
 const savesThisGameEl = document.getElementById("savesThisGame");
+const goalsAgainstEl = document.getElementById("goalsAgainst");
 const messageEl = document.getElementById("message");
-const startBtn = document.getElementById("startBtn");
 
-// REAL FIELD SCALING
+// ====== FIELD GEOMETRY ======
+const fieldMargin = 20;
+const fieldX = fieldMargin;
+const fieldY = fieldMargin;
+const fieldWidth = canvas.width - fieldMargin * 2;
+const fieldHeight = canvas.height - fieldMargin * 2;
+
+// Goal line at bottom
+const goalLineY = fieldY + fieldHeight;
+
+// Goal
 const goalWidth = 300;
-const goalHeight = 100;
-const goalX = (canvas.width - goalWidth) / 2;
-const goalY = canvas.height - goalHeight - 10;
+const goalHeight = 16;
+const goalX = fieldX + (fieldWidth - goalWidth) / 2;
+const goalY = goalLineY - goalHeight;
 
-// 18-yard box (scaled)
+// 18-yard box (only one)
 const boxWidth = 440;
-const boxHeight = 180;
-const boxX = (canvas.width - boxWidth) / 2;
-const boxY = goalY - boxHeight;
+const boxDepth = 140;
+const boxX = fieldX + (fieldWidth - boxWidth) / 2;
+const boxY = goalLineY - boxDepth;
 
-// Penalty spot (12 yards scaled)
-const pkSpotY = goalY - 120;
+// Penalty spot (no arc)
+const pkSpotX = canvas.width / 2;
+const pkSpotY = goalLineY - 90;
 
-// Penalty arc (10 yards scaled)
-const pkArcRadius = 100;
+// Center circle
+const centerX = fieldX + fieldWidth / 2;
+const centerY = fieldY + fieldHeight / 2;
 
-// Goalie
+// ====== GOALIE ======
 const goalie = {
-  x: canvas.width / 2 - 35,
-  y: goalY + goalHeight - 20,
+  x: pkSpotX - 35,
+  y: goalY - 10,
   width: 70,
   height: 10,
   speed: 7
 };
 
-// Ball
+// ====== BALL ======
 let ball = null;
 const shotMinSpeed = 4;
 const shotMaxSpeed = 7;
 
+// ====== GAME STATE ======
 let running = false;
 let shotsThisGame = 0;
 let onTargetThisGame = 0;
 let savesThisGame = 0;
-
-const TARGET_SAVES = 2290;
-const TARGET_SHOTS_ON_GOAL = 2446;
+let goalsAgainst = 0;
 
 let keys = {};
 
+// ====== INPUT ======
 document.addEventListener("keydown", e => keys[e.key] = true);
 document.addEventListener("keyup", e => keys[e.key] = false);
 
@@ -148,29 +173,39 @@ canvas.addEventListener("mousemove", e => {
   clampGoalie();
 });
 
-startBtn.addEventListener("click", () => {
+// Start / restart
+document.getElementById("startBtn").addEventListener("click", () => {
   resetGame();
   startGame();
 });
 
+// Back to home
+document.getElementById("homeBtn").addEventListener("click", () => {
+  window.location.href = "index.html";
+});
+
+// ====== RESET ======
 function resetGame() {
   shotsThisGame = 0;
   onTargetThisGame = 0;
   savesThisGame = 0;
+  goalsAgainst = 0;
   updateHUD();
   messageEl.textContent = "";
   ball = null;
 }
 
+// ====== START ======
 function startGame() {
   running = true;
   spawnShot();
   requestAnimationFrame(gameLoop);
 }
 
+// ====== SHOTS ======
 function spawnShot() {
   const startX = Math.random() * canvas.width;
-  const startY = 20;
+  const startY = fieldY;
 
   const isOnTarget = Math.random() < 0.7;
 
@@ -183,7 +218,7 @@ function spawnShot() {
       : goalX + goalWidth + 80 + Math.random() * 80;
   }
 
-  const targetY = goalY + goalHeight - 5;
+  const targetY = goalLineY - goalHeight / 2;
 
   const dx = targetX - startX;
   const dy = targetY - startY;
@@ -200,18 +235,22 @@ function spawnShot() {
   updateHUD();
 }
 
+// ====== HUD ======
 function updateHUD() {
   shotsThisGameEl.textContent = shotsThisGame;
   onTargetThisGameEl.textContent = onTargetThisGame;
   savesThisGameEl.textContent = savesThisGame;
+  goalsAgainstEl.textContent = goalsAgainst;
 }
 
+// ====== LIMIT GOALIE ======
 function clampGoalie() {
-  if (goalie.x < goalX) goalie.x = goalX;
-  if (goalie.x + goalie.width > goalX + goalWidth)
-    goalie.x = goalX + goalWidth - goalie.width;
+  if (goalie.x < boxX) goalie.x = boxX;
+  if (goalie.x + goalie.width > boxX + boxWidth)
+    goalie.x = boxX + boxWidth - goalie.width;
 }
 
+// ====== UPDATE ======
 function update() {
   if (keys["ArrowLeft"] || keys["a"]) goalie.x -= goalie.speed;
   if (keys["ArrowRight"] || keys["d"]) goalie.x += goalie.speed;
@@ -221,77 +260,77 @@ function update() {
     ball.x += ball.vx;
     ball.y += ball.vy;
 
-    if (ball.y + ball.radius >= goalY + goalHeight) {
+    // FIXED COLLISION — ball meets goalie where goalie actually is
+    if (ball.y + ball.radius >= goalie.y) {
+
       const withinPosts =
         ball.x >= goalX &&
         ball.x <= goalX + goalWidth;
 
       const hitGoalie =
         ball.x + ball.radius >= goalie.x &&
-        ball.x - ball.radius <= goalie.x + goalie.width &&
-        ball.y + ball.radius >= goalie.y &&
-        ball.y - ball.radius <= goalie.y + goalie.height;
+        ball.x - ball.radius <= goalie.x + goalie.width;
 
       if (hitGoalie && ball.isOnTarget) {
         savesThisGame++;
         updateHUD();
-        checkCareerGoal();
         spawnShot();
-      } else if (withinPosts && ball.isOnTarget) {
+      } 
+      else if (withinPosts && ball.isOnTarget) {
+        goalsAgainst++;
+        updateHUD();
         spawnShot();
-      } else {
+      } 
+      else {
         spawnShot();
       }
     }
-
-    if (
-      ball.y > canvas.height + 50 ||
-      ball.x < -100 ||
-      ball.x > canvas.width + 100
-    ) {
-      spawnShot();
-    }
   }
 }
 
-function checkCareerGoal() {
-  if (
-    savesThisGame >= TARGET_SAVES &&
-    onTargetThisGame >= TARGET_SHOTS_ON_GOAL
-  ) {
-    messageEl.textContent =
-      "You matched Drew’s grind: 2290 saves out of 2446 shots on goal.";
-    running = false;
-  }
-}
-
+// ====== DRAW FIELD ======
 function drawField() {
   ctx.strokeStyle = "#ffffff";
-  ctx.lineWidth = 3;
+  ctx.lineWidth = 2;
+
+  // Outer field
+  ctx.strokeRect(fieldX, fieldY, fieldWidth, fieldHeight);
+
+  // Halfway line
+  ctx.beginPath();
+  ctx.moveTo(fieldX, centerY);
+  ctx.lineTo(fieldX + fieldWidth, centerY);
+  ctx.stroke();
+
+  // Center circle
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, 40, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // Center spot
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, 3, 0, Math.PI * 2);
+  ctx.fill();
 
   // 18-yard box
-  ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
+  ctx.strokeRect(boxX, boxY, boxWidth, boxDepth);
 
   // Goal
   ctx.strokeRect(goalX, goalY, goalWidth, goalHeight);
 
   // Penalty spot
   ctx.beginPath();
-  ctx.arc(canvas.width / 2, pkSpotY, 4, 0, Math.PI * 2);
-  ctx.fillStyle = "#ffffff";
+  ctx.arc(pkSpotX, pkSpotY, 3, 0, Math.PI * 2);
   ctx.fill();
-
-  // Penalty arc
-  ctx.beginPath();
-  ctx.arc(canvas.width / 2, pkSpotY, pkArcRadius, 0.2 * Math.PI, 0.8 * Math.PI);
-  ctx.stroke();
 }
 
+// ====== DRAW GOALIE ======
 function drawGoalie() {
   ctx.fillStyle = "#f5c542";
   ctx.fillRect(goalie.x, goalie.y, goalie.width, goalie.height);
 }
 
+// ====== DRAW BALL ======
 function drawBall() {
   if (!ball) return;
   ctx.beginPath();
@@ -302,6 +341,7 @@ function drawBall() {
   ctx.stroke();
 }
 
+// ====== GAME LOOP ======
 function gameLoop() {
   if (!running) return;
 
