@@ -1,38 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Wolfpack College Soccer - Retro 11v11+</title>
+<title>Drews College Soccer</title>
+
 <style>
-  body {
-    margin: 0;
-    background: #111;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: monospace;
-    color: #fff;
-  }
-  canvas {
-    border: 4px solid #fff;
-    image-rendering: pixelated;
-    background: #1b7f2f;
-  }
+/* ===== PAGE LAYOUT ===== */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #111;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: monospace;
+}
+
+canvas {
+  border: 4px solid #fff;
+  background: #0b4f1a;
+  image-rendering: pixelated;
+}
 </style>
+
 </head>
 <body>
-<canvas id="game" width="640" height="360"></canvas>
+
+<canvas id="game" width="960" height="540"></canvas>
+
 <script>
 // =====================================================
-//  WOLFPACK COLLEGE SOCCER - SINGLE FILE BUILD
-//  - Retro 11v11 top-down engine (simplified)
-//  - Difficulty, Weather, Kit Editor, Youth Team
-//  - League structure with D1 ACC + sample others
-//  - Youth players grow after each season
+//  RETRO BOWL COLLEGE SOCCER (HORIZONTAL, CONTINUOUS)
+//  + Conferences, Conference Tournaments, National Championship
 // =====================================================
 
-
+// -----------------------------------------------------
 //  BASIC SETUP
 // -----------------------------------------------------
 const canvas = document.getElementById("game");
@@ -40,986 +43,472 @@ const ctx = canvas.getContext("2d");
 const W = canvas.width;
 const H = canvas.height;
 
-// virtual field size
-const FIELD_W = 600;
-const FIELD_H = 320;
-
-
+// -----------------------------------------------------
 //  INPUT
 // -----------------------------------------------------
 let keys = {};
-document.addEventListener("keydown", e => {
-  keys[e.key] = true;
-});
-document.addEventListener("keyup", e => {
-  keys[e.key] = false;
-});
+document.addEventListener("keydown", e => keys[e.key] = true);
+document.addEventListener("keyup", e => keys[e.key] = false);
 
-
-//  GAME STATE
 // -----------------------------------------------------
-// states: "title","menu","profile","season","match","seasonOver","settings","kits","youth"
+//  GAME STATES
+// -----------------------------------------------------
 let state = "title";
 
-// back-to-profile click area (bottom-left)
-canvas.addEventListener("click", e => {
-  const r = canvas.getBoundingClientRect();
-  const x = e.clientX - r.left;
-  const y = e.clientY - r.top;
-  if (x >= 10 && x <= 150 && y >= H-40 && y <= H-10) {
-    if (state !== "match" && state !== "title") {
-      state = "profile";
-    }
-  }
-});
-
-
-//  LEAGUES / DIVISIONS (SAMPLE, EXTENSIBLE)
 // -----------------------------------------------------
-let leagues = {
-  D1_ACC: [
-    { name: "Drew University of North Carolina Wolfpack", rating: 80 },
-    { name: "Duke Blue Devils", rating: 82 },
-    { name: "North Carolina Tar Heels", rating: 84 },
-    { name: "NC State Wolfpack", rating: 81 },
-    { name: "Wake Forest Demon Deacons", rating: 83 }
-  ],
-  D1_SEC: [
-    { name: "Alabama Crimson Tide", rating: 80 },
-    { name: "Georgia Bulldogs", rating: 84 },
-    { name: "Florida Gators", rating: 82 }
-  ],
-  D2: [
-    { name: "Carolina Coastal College", rating: 74 },
-    { name: "Piedmont State", rating: 72 }
-  ],
-  D3: [
-    { name: "Franklinton College", rating: 68 },
-    { name: "Triangle Tech", rating: 66 }
-  ],
-  NAIA: [
-    { name: "Raleigh Baptist University", rating: 70 },
-    { name: "Southern Pines College", rating: 69 }
-  ],
-  JUCO: [
-    { name: "North Carolina Community College", rating: 65 },
-    { name: "Cape Fear CC", rating: 64 }
-  ],
-  INTERNATIONAL: [
-    { name: "London City FC U", rating: 82 },
-    { name: "Madrid Academy", rating: 84 },
-    { name: "Tokyo Institute FC", rating: 80 }
-  ]
+//  SETTINGS (DIFFICULTY + WEATHER)
+// -----------------------------------------------------
+const difficulties = ["Easy","Normal","Hard"];
+const weathers = ["Clear","Rain","Snow","Windy"];
+
+let settings = {
+  difficultyIndex: 1,
+  weatherIndex: 0
 };
 
-// your main team is always this one:
-let teamIdentity = {
-  name: "Drew University of North Carolina Wolfpack",
-  primaryColor: "#990000",
-  secondaryColor: "#000000"
-};
+function currentDifficulty() { return difficulties[settings.difficultyIndex]; }
+function currentWeather() { return weathers[settings.weatherIndex]; }
 
+// -----------------------------------------------------
+//  TEAM / LEAGUE DATA
+// -----------------------------------------------------
 let playerTeam = {
-  name: teamIdentity.name,
+  name: "Drew North Carolina University Wolfpack",
+  conf: "ACC",
   rating: 80,
   wins: 0,
   losses: 0,
   goalsFor: 0,
   goalsAgainst: 0
 };
+<!-- PART 2 — continues inside the same <script> tag -->
 
-// current opponent index in D1_ACC (0 is you, so start at 1)
-let currentOpponentIndex = 1;
+// ===============================================
+//  ALL TEAMS SORTED BY CONFERENCE
+// ===============================================
+let conferences = {
+  "ACC": [
+    "NC State", "Virginia", "SMU", "Duke", "North Carolina",
+    "Syracuse", "Clemson", "Notre Dame", "Wake Forest",
+    "Boston College", "Pittsburgh", "Louisville", "Virginia Tech",
+    "California", "Stanford"
+  ],
 
-// opponent team object (pulled from D1_ACC)
-let opponentTeam = {
-  name: leagues.D1_ACC[currentOpponentIndex].name,
-  rating: leagues.D1_ACC[currentOpponentIndex].rating,
-  wins: 0,
-  losses: 0,
-  goalsFor: 0,
-  goalsAgainst: 0
-};
+  "Big Ten": [
+    "Washington", "Maryland", "Indiana", "Michigan",
+    "Rutgers", "Wisconsin", "Michigan St.", "Ohio St.",
+    "Penn St.", "UCLA"
+  ],
 
-// -----------------------------------------------------
-//  STAFF / ROSTER
-// -----------------------------------------------------
-let staff = {
-  headCoach: { name: "Coach Riley", rating: 80 },
-  assistant: { name: "Coach Adams", rating: 75 },
-  fitness: { name: "Coach Hill", rating: 78 },
-  scout: { name: "Coach Reed", rating: 82 }
-};
+  "Ivy League": [
+    "Princeton", "Cornell", "Brown", "Penn", "Harvard",
+    "Columbia", "Dartmouth", "Yale"
+  ],
 
-let roster = [
-  { name: "J. Carter", pos: "ST", rating: 82 },
-  { name: "M. Lopez", pos: "MF", rating: 80 },
-  { name: "T. Brown", pos: "DF", rating: 78 },
-  { name: "A. King", pos: "MF", rating: 79 },
-  { name: "R. Silva", pos: "MF", rating: 81 },
-  { name: "D. Young", pos: "DF", rating: 77 },
-  { name: "C. Green", pos: "DF", rating: 76 },
-  { name: "S. Hill", pos: "DF", rating: 75 },
-  { name: "L. Moore", pos: "ST", rating: 80 },
-  { name: "K. Davis", pos: "GK", rating: 83 },
-  { name: "B. Reed", pos: "ST", rating: 79 }
-];
+  "America East": [
+    "Vermont", "Bryant", "UMBC", "UAlbany", "UMass Lowell",
+    "Binghamton", "NJIT"
+  ],
+
+  "Big East": [
+    "Georgetown", "Seton Hall", "UConn", "Creighton",
+    "St. John's (NY)", "Providence", "Villanova",
+    "Marquette", "DePaul", "Butler
+    <!-- PART 3 — continues inside the same <script> tag -->
 
 // -----------------------------------------------------
-//  KITS (HOME / AWAY / THIRD)
+//  TOURNAMENT SYSTEM
 // -----------------------------------------------------
-let kits = {
-  home:  { primary: "#990000", secondary: "#000000" },
-  away:  { primary: "#ffffff", secondary: "#990000" },
-  third: { primary: "#333333", secondary: "#ff3333" }
-};
-
-const kitColors = [
-  "#ff0000","#00ff00","#0000ff","#ffff00","#ff00ff","#00ffff",
-  "#ffffff","#000000","#ff8800","#0088ff","#8800ff","#00aa44"
-];
-
-let kitEditor = {
-  kit: "home", // "home","away","third"
-  part: "primary", // "primary","secondary"
-  colorIndex: 0
-};
+let currentConferenceName = null;
+let currentConferenceTournament = null;
+let conferenceChampion = null;
+let nationalChampion = null;
+let nationalBracketLog = [];
 
 // -----------------------------------------------------
-//  YOUTH TEAM (GROW AFTER SEASON)
+//  UTILS
 // -----------------------------------------------------
-let youthTeam = [
-  { name: "L. King", age: 17, pos: "ST", potential: 88, current: 63 },
-  { name: "R. Silva Jr", age: 16, pos: "MF", potential: 90, current: 60 },
-  { name: "J. Carter Jr", age: 15, pos: "DF", potential: 85, current: 58 }
-];
-
-let selectedYouthIndex = 0;
-
-// -----------------------------------------------------
-//  SETTINGS (DIFFICULTY + WEATHER)
-// -----------------------------------------------------
-let settings = {
-  difficulty: "Normal", // "Easy","Normal","Hard"
-  weather: "Clear"      // "Clear","Rain","Snow","Windy"
-};
-
-const difficulties = ["Easy","Normal","Hard"];
-const weathers = ["Clear","Rain","Snow","Windy"];
-let difficultyIndex = 1;
-let weatherIndex = 0;
-
-// -----------------------------------------------------
-//  MATCH ENGINE (11v11, simplified)
-// -----------------------------------------------------
-const HOME = "home";
-const AWAY = "away";
-
-let match = {
-  time: 0,
-  duration: 60 * 6,
-  homeScore: 0,
-  awayScore: 0,
-  finished: false
-};
-
-let players = [];
-let ball = {
-  x: FIELD_W/2,
-  y: FIELD_H/2,
-  vx: 0,
-  vy: 0,
-  radius: 4,
-  holder: null
-};
-
-let controlledIndex = 0;
-
-// create 4-3-3 for each side
-function createTeamPlayers() {
-  players = [];
-  function addPlayer(x, y, team, role) {
-    players.push({
-      x, y,
-      vx: 0, vy: 0,
-      team,
-      role,
-      controlled: false,
-      speed: team === HOME ? 1.6 : 1.5
-    });
-  }
-
-  // HOME
-  addPlayer(60, FIELD_H/2, HOME, "GK");
-  addPlayer(120, 60, HOME, "DF");
-  addPlayer(120, FIELD_H/2 - 40, HOME, "DF");
-  addPlayer(120, FIELD_H/2 + 40, HOME, "DF");
-  addPlayer(120, FIELD_H - 60, HOME, "DF");
-  addPlayer(220, 60, HOME, "MF");
-  addPlayer(220, FIELD_H/2, HOME, "MF");
-  addPlayer(220, FIELD_H - 60, HOME, "MF");
-  addPlayer(320, 80, HOME, "ST");
-  addPlayer(320, FIELD_H/2, HOME, "ST");
-  addPlayer(320, FIELD_H - 80, HOME, "ST");
-
-  // AWAY
-  addPlayer(FIELD_W-60, FIELD_H/2, AWAY, "GK");
-  addPlayer(FIELD_W-120, 60, AWAY, "DF");
-  addPlayer(FIELD_W-120, FIELD_H/2 - 40, AWAY, "DF");
-  addPlayer(FIELD_W-120, FIELD_H/2 + 40, AWAY, "DF");
-  addPlayer(FIELD_W-120, FIELD_H - 60, AWAY, "DF");
-  addPlayer(FIELD_W-220, 60, AWAY, "MF");
-  addPlayer(FIELD_W-220, FIELD_H/2, AWAY, "MF");
-  addPlayer(FIELD_W-220, FIELD_H - 60, AWAY, "MF");
-  addPlayer(FIELD_W-320, 80, AWAY, "ST");
-  addPlayer(FIELD_W-320, FIELD_H/2, AWAY, "ST");
-  addPlayer(FIELD_W-320, FIELD_H - 80, AWAY, "ST");
-
-  controlledIndex = 9;
-  players[controlledIndex].controlled = true;
-
-  ball.holder = players[controlledIndex];
-  ball.x = ball.holder.x;
-  ball.y = ball.holder.y;
-  ball.vx = 0;
-  ball.vy = 0;
+function clamp(v, min, max) {
+  return Math.max(min, Math.min(max, v));
+}
+function randRange(a,b) {
+  return a + Math.random()*(b-a);
 }
 
-function startMatch() {
+// -----------------------------------------------------
+//  NEW SEASON
+// -----------------------------------------------------
+function newSeason() {
+  playerTeam.wins = 0;
+  playerTeam.losses = 0;
+  playerTeam.goalsFor = 0;
+  playerTeam.goalsAgainst = 0;
+  scheduleIndex = 0;
+  currentOpponent = opponents[scheduleIndex];
+}
+
+// -----------------------------------------------------
+//  MATCH SETUP
+// -----------------------------------------------------
+function setupMatch() {
   match.time = 0;
   match.homeScore = 0;
   match.awayScore = 0;
   match.finished = false;
-  createTeamPlayers();
-}
+  matchPaused = false;
 
-function dist(a, b) {
-  const dx = a.x - b.x;
-  const dy = a.y - b.y;
-  return Math.sqrt(dx*dx + dy*dy);
-}
+  players = [];
+  opponentsOnField = [];
 
-function switchPlayer() {
-  let bestIndex = controlledIndex;
-  let bestDist = Infinity;
-  for (let i = 0; i < players.length; i++) {
-    const p = players[i];
-    if (p.team !== HOME) continue;
-    const d = Math.hypot(p.x - ball.x, p.y - ball.y);
-    if (d < bestDist) {
-      bestDist = d;
-      bestIndex = i;
-    }
+  for (let i = 0; i < 7; i++) {
+    players.push({
+      x: 80 + i*40,
+      y: 140 + i*40,
+      vx: 0,
+      vy: 0,
+      speed: 2.0,
+      hasBall: i === 0
+    });
   }
-  players[controlledIndex].controlled = false;
-  controlledIndex = bestIndex;
-  players[controlledIndex].controlled = true;
-}
-
-function passBall() {
-  const holder = ball.holder;
-  if (!holder) return;
-  let best = null;
-  let bestScore = -Infinity;
-  for (const p of players) {
-    if (p.team !== holder.team) continue;
-    if (p === holder) continue;
-    const forward = holder.team === HOME ? (p.x > holder.x) : (p.x < holder.x);
-    if (!forward) continue;
-    const d = dist(holder, p);
-    if (d > 200) continue;
-    const score = 300 - d;
-    if (score > bestScore) {
-      bestScore = score;
-      best = p;
-    }
+  for (let i = 0; i < 7; i++) {
+    opponentsOnField.push({
+      x: W - 120 - i*40,
+      y: 140 + i*40,
+      vx: 0,
+      vy: 0,
+      speed: 1.8
+    });
   }
-  if (best) {
-    const dx = best.x - holder.x;
-    const dy = best.y - holder.y;
-    const len = Math.hypot(dx, dy) || 1;
-    const speed = 3.0;
-    ball.holder = null;
-    ball.vx = (dx/len) * speed;
-    ball.vy = (dy/len) * speed;
-  }
+
+  controlled
+  <!-- PART 4 — continues inside the same <script> tag -->
+
+// -----------------------------------------------------
+//  OPPONENT AI
+// -----------------------------------------------------
+function updateOpponentAI() {
+  const target = ball.holder || ball;
+  opponentsOnField.forEach(d => {
+    const dx = target.x - d.x;
+    const dy = target.y - d.y;
+    const dist = Math.hypot(dx, dy) || 1;
+    let speed = d.speed;
+    if (currentDifficulty() === "Easy") speed *= 0.9;
+    if (currentDifficulty() === "Hard") speed *= 1.1;
+    d.vx = (dx/dist)*speed*0.7;
+    d.vy = (dy/dist)*speed*0.7;
+  });
 }
 
-function shootBall() {
-  const holder = ball.holder;
-  if (!holder) return;
-  const targetX = holder.team === HOME ? FIELD_W - 10 : 10;
-  const targetY = FIELD_H/2;
-  const dx = targetX - holder.x;
-  const dy = targetY - holder.y;
-  const len = Math.hypot(dx, dy) || 1;
-  const speed = 4.0;
-  ball.holder = null;
-  ball.vx = (dx/len) * speed;
-  ball.vy = (dy/len) * speed;
-}
-
-// difficulty multipliers
-function getDifficultyMultiplier(team) {
-  if (settings.difficulty === "Easy") {
-    return team === HOME ? 1.1 : 0.9;
-  } else if (settings.difficulty === "Hard") {
-    return team === HOME ? 0.9 : 1.1;
-  }
-  return 1.0;
-}
-
-// weather effects
-function applyWeatherToBall() {
-  if (settings.weather === "Rain") {
-    ball.vx *= 0.97;
-    ball.vy *= 0.97;
-  } else if (settings.weather === "Snow") {
-    ball.vx *= 0.95;
-    ball.vy *= 0.95;
-  } else if (settings.weather === "Windy") {
-    ball.vx += (Math.random()-0.5)*0.05;
-    ball.vy += (Math.random()-0.5)*0.05;
+// -----------------------------------------------------
+//  WEATHER EFFECTS
+// -----------------------------------------------------
+function applyWeather() {
+  if (currentWeather() === "Rain") {
+    ball.vx *= 0.98;
+    ball.vy *= 0.98;
+  } else if (currentWeather() === "Snow") {
+    ball.vx *= 0.96;
+    ball.vy *= 0.96;
+  } else if (currentWeather() === "Windy") {
+    ball.vx += (Math.random()-0.5)*0.08;
+    ball.vy += (Math.random()-0.5)*0.08;
   }
 }
 
-function updateAI(p) {
-  if (p.team === HOME && p.controlled) return;
-
-  const diffMul = getDifficultyMultiplier(p.team);
-  const baseSpeed = p.speed * diffMul;
-
-  if (p.role === "GK") {
-    const targetX = p.team === HOME ? 40 : FIELD_W - 40;
-    const targetY = FIELD_H/2 + (ball.y - FIELD_H/2) * 0.2;
-    const dx = targetX - p.x;
-    const dy = targetY - p.y;
-    const len = Math.hypot(dx, dy) || 1;
-    p.vx = (dx/len) * 0.8 * diffMul;
-    p.vy = (dy/len) * 0.8 * diffMul;
-    return;
-  }
-
-  const dToBall = Math.hypot(p.x - ball.x, p.y - ball.y);
-  if (dToBall < 80) {
-    const dx = ball.x - p.x;
-    const dy = ball.y - p.y;
-    const len = Math.hypot(dx, dy) || 1;
-    p.vx = (dx/len) * baseSpeed;
-    p.vy = (dy/len) * baseSpeed;
-  } else {
-    const homeX = p.team === HOME ? (p.role === "DF" ? 120 : p.role === "MF" ? 220 : 320)
-                                  : (p.role === "DF" ? FIELD_W-120 : p.role === "MF" ? FIELD_W-220 : FIELD_W-320);
-    const dx = homeX - p.x;
-    p.vx = dx * 0.02 * diffMul;
-    p.vy *= 0.9;
-  }
-}
-
-function checkGoal() {
-  if (ball.x < 10 && ball.y > FIELD_H/2 - 30 && ball.y < FIELD_H/2 + 30) {
-    match.awayScore++;
-    resetAfterGoal(AWAY);
-  }
-  if (ball.x > FIELD_W-10 && ball.y > FIELD_H/2 - 30 && ball.y < FIELD_H/2 + 30) {
-    match.homeScore++;
-    resetAfterGoal(HOME);
-  }
-}
-
-function resetAfterGoal(scoringTeam) {
-  ball.vx = ball.vy = 0;
-  ball.holder = null;
-  ball.x = FIELD_W/2;
-  ball.y = FIELD_H/2;
-
-  const team = scoringTeam === HOME ? AWAY : HOME;
-  let best = null;
-  let bestDist = Infinity;
-  for (const p of players) {
-    if (p.team !== team) continue;
-    const d = Math.hypot(p.x - FIELD_W/2, p.y - FIELD_H/2);
-    if (d < bestDist) {
-      bestDist = d;
-      best = p;
-    }
-  }
-  if (best) {
-    ball.holder = best;
-    ball.x = best.x;
-    ball.y = best.y;
-  }
-}
-
+// -----------------------------------------------------
+//  MATCH UPDATE
+// -----------------------------------------------------
 function updateMatch() {
   if (match.finished) {
     if (keys["Enter"]) {
-      // update stats
-      playerTeam.goalsFor += match.homeScore;
-      playerTeam.goalsAgainst += match.awayScore;
-      opponentTeam.goalsFor += match.awayScore;
-      opponentTeam.goalsAgainst += match.homeScore;
-      if (match.homeScore > match.awayScore) {
-        playerTeam.wins++;
-        opponentTeam.losses++;
-      } else if (match.homeScore < match.awayScore) {
-        playerTeam.losses++;
-        opponentTeam.wins++;
-      }
-
-      // advance to next opponent in D1_ACC
-      currentOpponentIndex++;
-      if (currentOpponentIndex >= leagues.D1_ACC.length) {
-        currentOpponentIndex = 1; // loop (0 is your team)
-      }
-      opponentTeam.name = leagues.D1_ACC[currentOpponentIndex].name;
-      opponentTeam.rating = leagues.D1_ACC[currentOpponentIndex].rating;
-
-      state = "season";
+      endMatchToSeason();
       keys["Enter"] = false;
     }
     return;
   }
 
+  if (matchPaused) return;
+
   match.time++;
 
-  const controlled = players[controlledIndex];
-  controlled.vx = 0;
-  controlled.vy = 0;
-  const diffMulHome = getDifficultyMultiplier(HOME);
-  const baseSpeed = controlled.speed * diffMulHome;
-  const speed = keys["Shift"] ? baseSpeed * 1.4 : baseSpeed;
+  updateMatchInput();
+  updateOpponentAI();
 
-  if (keys["ArrowUp"] || keys["w"] || keys["W"]) controlled.vy = -speed;
-  if (keys["ArrowDown"] || keys["s"] || keys["S"]) controlled.vy = speed;
-  if (keys["ArrowLeft"] || keys["a"] || keys["A"]) controlled.vx = -speed;
-  if (keys["ArrowRight"] || keys["d"] || keys["D"]) controlled.vx = speed;
-
-  if (keys["q"] || keys["Q"]) {
-    switchPlayer();
-    keys["q"] = keys["Q"] = false;
-  }
-
-  if (keys["e"] || keys["E"]) {
-    passBall();
-    keys["e"] = keys["E"] = false;
-  }
-
-  if (keys[" "] || keys["Spacebar"]) {
-    shootBall();
-    keys[" "] = keys["Spacebar"] = false;
-  }
-
-  for (let i = 0; i < players.length; i++) {
-    const p = players[i];
-    if (i === controlledIndex) continue;
-    updateAI(p);
-  }
-
-  for (const p of players) {
+  players.forEach(p => {
     p.x += p.vx;
     p.y += p.vy;
-    p.x = Math.max(20, Math.min(FIELD_W-20, p.x));
-    p.y = Math.max(20, Math.min(FIELD_H-20, p.y));
-  }
+    p.x = clamp(p.x, 40, W-40);
+    p.y = clamp(p.y, 80, H-40);
+  });
 
-  if (ball.holder) {
-    const h = ball.holder;
-    ball.x = h.x + (h.team === HOME ? 4 : -4);
-    ball.y = h.y;
-  } else {
-    ball.x += ball.vx;
-    ball.y += ball.vy;
-    ball.vx *= 0.99;
-    ball.vy *= 0.99;
-    applyWeatherToBall();
-  }
-
-  if (!ball.holder) {
-    for (const p of players) {
-      const d = Math.hypot(ball.x - p.x, ball.y - p.y);
-      if (d < 8) {
-        ball.holder = p;
-        ball.vx = ball.vy = 0;
-        break;
-      }
-    }
-  }
-
-  checkGoal();
-
-  if (match.time >= match.duration) {
-    match.finished = true;
-  }
-}
+  opponentsOnField.forEach(d => {
+    d.x += d.vx;
+    d.y += d.vy;
+    d.x = clamp(d.x, 80, W-20);
+    d.y = clamp(d.y
+                <!-- PART 5 — continues inside the same <script> tag -->
 
 // -----------------------------------------------------
-//  GLOBAL BACK BUTTON (B -> PROFILE)
+//  TOURNAMENT HELPERS
 // -----------------------------------------------------
-function handleGlobalBack() {
-  if (keys["b"] || keys["B"]) {
-    if (state !== "match" && state !== "title") {
-      state = "profile";
-    }
+function simulateMatch(teamA, teamB) {
+  const scoreA = Math.floor(Math.random() * 4);
+  const scoreB = Math.floor(Math.random() * 4);
+  if (scoreA === scoreB) {
+    return Math.random() < 0.5 ? teamA : teamB;
   }
+  return scoreA > scoreB ? teamA : teamB;
 }
+
+function generateConferenceTournament(confName) {
+  const teams = conferences[confName] || [];
+  const seeded = teams.slice(0, Math.min(8, teams.length));
+  return {
+    conference: confName,
+    teams: seeded,
+    champion: null
+  };
+}
+
+function playConferenceTournament(t) {
+  let teams = t.teams.slice();
+  if (teams.length < 2) return teams[0] || null;
+
+  // Quarterfinals
+  let semi = [];
+  for (let i = 0; i < teams.length/2; i++) {
+    semi.push(simulateMatch(teams[i], teams[teams.length-1-i]));
+  }
+
+  // Semifinals
+  let finals = [];
+  finals.push(simulateMatch(semi[0], semi[semi.length-1]));
+  if (semi.length > 2) {
+    finals.push(simulateMatch(semi[1], semi[semi.length-2]));
+  } else if (semi.length === 2) {
+    finals.push(semi[1]);
+  }
+
+  // Final
+  let champion = simulateMatch(finals[0], finals[1] || finals[0]);
+  return champion;
+}
+
+function getNationalQualifiers() {
+  let qualifiers = [];
+  for (let conf in conferences) {
+    qualifiers.push(...conferences[conf].slice(0, 25));
+  }
+  return qualifiers;
+}
+
+function playNationalChampionship() {
+  let teams = getNationalQualifiers();
+  nationalBracketLog = [];
+  while (teams.length > 1) {
+    let next = [];
+    for (let i = 0; i < teams.length; i += 2) {
+      if (i+1 >= teams.length) {
+        next.push(teams[i]);
+      } else {
+        const winner = simulateMatch(teams[i], teams[i+1]);
+        nationalBracketLog.push(`${teams[i]} vs ${teams}
+        <!-- PART 6 — continues inside the same <script> tag -->
 
 // -----------------------------------------------------
-//  SEASON / PROFILE / MENU / SETTINGS / KITS / YOUTH
+//  TOURNAMENT STATE UPDATES
 // -----------------------------------------------------
-function updateTitle() {
-  if (keys["Enter"]) {
-    state = "menu";
-  }
-}
+let conferenceList = Object.keys(conferences);
+let selectedConferenceIndex = 0;
 
-function updateMenu() {
-  if (keys["1"]) {
-    playerTeam.wins = playerTeam.losses = 0;
-    playerTeam.goalsFor = playerTeam.goalsAgainst = 0;
-    opponentTeam.wins = opponentTeam.losses = 0;
-    opponentTeam.goalsFor = opponentTeam.goalsAgainst = 0;
-    currentOpponentIndex = 1;
-    opponentTeam.name = leagues.D1_ACC[currentOpponentIndex].name;
-    opponentTeam.rating = leagues.D1_ACC[currentOpponentIndex].rating;
-    state = "profile";
-  } else if (keys["2"]) {
-    state = "profile";
-  }
-}
-
-function updateProfile() {
-  if (keys["Enter"]) {
-    state = "season";
-  }
-  if (keys["s"] || keys["S"]) {
-    state = "settings";
-  }
-  if (keys["k"] || keys["K"]) {
-    state = "kits";
-  }
-  if (keys["y"] || keys["Y"]) {
-    state = "youth";
-  }
-}
-
-function updateSeason() {
-  if (keys["Enter"]) {
-    startMatch();
-    state = "match";
-  }
-  if (keys["r"] || keys["R"]) {
-    state = "seasonOver";
-  }
-}
-
-function updateSeasonOver() {
-  if (keys["r"] || keys["R"]) {
-    // youth growth after season
-    for (let y of youthTeam) {
-      const growth = 2 + Math.floor(Math.random() * 5); // +2 to +6
-      y.current = Math.min(y.potential, y.current + growth);
-      y.age += 1;
-    }
-
-    // reset team records for new season
-    playerTeam.wins = playerTeam.losses = 0;
-    playerTeam.goalsFor = playerTeam.goalsAgainst = 0;
-    opponentTeam.wins = opponentTeam.losses = 0;
-    opponentTeam.goalsFor = opponentTeam.goalsAgainst = 0;
-
-    // reset schedule to first opponent after you
-    currentOpponentIndex = 1;
-    opponentTeam.name = leagues.D1_ACC[currentOpponentIndex].name;
-    opponentTeam.rating = leagues.D1_ACC[currentOpponentIndex].rating;
-
-    state = "season";
-    keys["r"] = keys["R"] = false;
-  }
-}
-
-function updateSettings() {
-  if (keys["ArrowLeft"]) {
-    difficultyIndex = (difficultyIndex - 1 + difficulties.length) % difficulties.length;
-    settings.difficulty = difficulties[difficultyIndex];
-    keys["ArrowLeft"] = false;
-  }
-  if (keys["ArrowRight"]) {
-    difficultyIndex = (difficultyIndex + 1) % difficulties.length;
-    settings.difficulty = difficulties[difficultyIndex];
-    keys["ArrowRight"] = false;
-  }
+function updateConfTournamentSelect() {
   if (keys["ArrowUp"]) {
-    weatherIndex = (weatherIndex - 1 + weathers.length) % weathers.length;
-    settings.weather = weathers[weatherIndex];
+    selectedConferenceIndex = (selectedConferenceIndex - 1 + conferenceList.length) % conferenceList.length;
     keys["ArrowUp"] = false;
   }
   if (keys["ArrowDown"]) {
-    weatherIndex = (weatherIndex + 1) % weathers.length;
-    settings.weather = weathers[weatherIndex];
+    selectedConferenceIndex = (selectedConferenceIndex + 1) % conferenceList.length;
     keys["ArrowDown"] = false;
   }
-  if (keys["Escape"]) {
-    state = "profile";
+  if (keys["Enter"]) {
+    currentConferenceName = conferenceList[selectedConferenceIndex];
+    currentConferenceTournament = generateConferenceTournament(currentConferenceName);
+    conferenceChampion = playConferenceTournament(currentConferenceTournament);
+    state = "confTournament";
+    keys["Enter"] = false;
   }
 }
 
-function updateKits() {
-  if (keys["1"]) kitEditor.kit = "home";
-  if (keys["2"]) kitEditor.kit = "away";
-  if (keys["3"]) kitEditor.kit = "third";
-
-  if (keys["q"] || keys["Q"]) {
-    kitEditor.part = "primary";
-    keys["q"] = keys["Q"] = false;
-  }
-  if (keys["w"] || keys["W"]) {
-    kitEditor.part = "secondary";
-    keys["w"] = keys["W"] = false;
-  }
-
-  if (keys["ArrowLeft"]) {
-    kitEditor.colorIndex = (kitEditor.colorIndex - 1 + kitColors.length) % kitColors.length;
-    keys["ArrowLeft"] = false;
-  }
-  if (keys["ArrowRight"]) {
-    kitEditor.colorIndex = (kitEditor.colorIndex + 1) % kitColors.length;
-    keys["ArrowRight"] = false;
-  }
-
-  kits[kitEditor.kit][kitEditor.part] = kitColors[kitEditor.colorIndex];
-
-  if (keys["Escape"]) {
-    state = "profile";
+function updateConfTournament() {
+  if (keys["Enter"]) {
+    nationalChampion = playNationalChampionship();
+    state = "natTournament";
+    keys["Enter"] = false;
   }
 }
 
-function updateYouth() {
-  if (keys["ArrowUp"]) {
-    selectedYouthIndex = Math.max(0, selectedYouthIndex - 1);
-    keys["ArrowUp"] = false;
-  }
-  if (keys["ArrowDown"]) {
-    selectedYouthIndex = Math.min(youthTeam.length - 1, selectedYouthIndex + 1);
-    keys["ArrowDown"] = false;
-  }
-  if (keys["p"] || keys["P"]) {
-    const y = youthTeam[selectedYouthIndex];
-    if (y) {
-      roster.push({ name: y.name, pos: y.pos, rating: y.current });
-      youthTeam.splice(selectedYouthIndex, 1);
-      selectedYouthIndex = Math.max(0, selectedYouthIndex - 1);
-    }
-    keys["p"] = keys["P"] = false;
-  }
-  if (keys["Escape"]) {
-    state = "profile";
+function updateNatTournament() {
+  if (keys["Enter"]) {
+    state = "season";
+    keys["Enter"] = false;
   }
 }
 
 // -----------------------------------------------------
 //  DRAW HELPERS
 // -----------------------------------------------------
-function drawField() {
-  ctx.fillStyle = "#1b7f2f";
-  ctx.fillRect(0,0,W,H);
-
-  ctx.save();
-  const scaleX = W / FIELD_W;
-  const scaleY = H / FIELD_H;
-  const s = Math.min(scaleX, scaleY);
-  ctx.translate((W - FIELD_W*s)/2, (H - FIELD_H*s)/2);
-  ctx.scale(s, s);
-
-  ctx.strokeStyle = "#ffffff";
-  ctx.lineWidth = 1.5;
-  ctx.strokeRect(10, 10, FIELD_W-20, FIELD_H-20);
-
-  ctx.beginPath();
-  ctx.moveTo(FIELD_W/2, 10);
-  ctx.lineTo(FIELD_W/2, FIELD_H-10);
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.arc(FIELD_W/2, FIELD_H/2, 25, 0, Math.PI*2);
-  ctx.stroke();
-
-  ctx.strokeRect(10, FIELD_H/2 - 50, 40, 100);
-  ctx.strokeRect(FIELD_W-50, FIELD_H/2 - 50, 40, 100);
-
-  ctx.strokeRect(10, FIELD_H/2 - 25, 20, 50);
-  ctx.strokeRect(FIELD_W-30, FIELD_H/2 - 25, 20, 50);
-
-  ctx.beginPath();
-  ctx.moveTo(10, FIELD_H/2 - 15);
-  ctx.lineTo(5, FIELD_H/2 - 15);
-  ctx.lineTo(5, FIELD_H/2 + 15);
-  ctx.lineTo(10, FIELD_H/2 + 15);
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(FIELD_W-10, FIELD_H/2 - 15);
-  ctx.lineTo(FIELD_W-5, FIELD_H/2 - 15);
-  ctx.lineTo(FIELD_W-5, FIELD_H/2 + 15);
-  ctx.lineTo(FIELD_W-10, FIELD_H/2 + 15);
-  ctx.stroke();
-
-  for (const p of players) {
-    if (p.team === HOME) {
-      ctx.fillStyle = kits.home.primary;
-      ctx.strokeStyle = kits.home.secondary;
-    } else {
-      ctx.fillStyle = "#00bfff";
-      ctx.strokeStyle = "#ffffff";
-    }
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, 5, 0, Math.PI*2);
-    ctx.fill();
-    if (p.controlled) {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 7, 0, Math.PI*2);
-      ctx.stroke();
-    }
-  }
-
-  ctx.fillStyle = "#ffffff";
-  ctx.beginPath();
-  ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI*2);
-  ctx.fill();
-
-  ctx.restore();
-}
-
-function drawMatchHUD() {
-  ctx.fillStyle = "#000000aa";
-  ctx.fillRect(0,0,W,50);
-  ctx.fillStyle = "#fff";
-  ctx.font = "12px monospace";
-  ctx.fillText(playerTeam.name.slice(0,20), 10, 15);
-  ctx.fillText(opponentTeam.name.slice(0,20), 10, 30);
-  ctx.fillText(`${match.homeScore} - ${match.awayScore}`, W/2 - 10, 20);
-  ctx.fillText(`Time: ${Math.floor(match.time/60)}'`, W-80, 15);
-  ctx.fillText(`Diff: ${settings.difficulty}  Weather: ${settings.weather}`, W-220, 30);
-  ctx.fillText("WASD/Arrows=Move  Shift=Sprint  E=Pass  Space=Shoot  Q=Switch", 10, 65);
-}
-
-function drawBackButton() {
-  ctx.fillStyle = "#222";
-  ctx.fillRect(10, H-40, 140, 30);
+function drawPanel(x,y,w,h,color="#333") {
+  ctx.fillStyle = color;
+  ctx.fillRect(x,y,w,h);
   ctx.strokeStyle = "#fff";
-  ctx.strokeRect(10, H-40, 140, 30);
-  ctx.fillStyle = "#fff";
-  ctx.font = "12px monospace";
-  ctx.fillText("Back to Profile (B)", 18, H-20);
+  ctx.strokeRect(x,y,w,h);
+}
+
+function drawText(text,x,y,size=14,color="#fff") {
+  ctx.fillStyle = color;
+  ctx.font = size+"px monospace";
+  ctx.fillText(text,x,y);
 }
 
 // -----------------------------------------------------
 //  DRAW SCREENS
 // -----------------------------------------------------
 function drawTitle() {
-  ctx.fillStyle = "#000";
+  ctx.fillStyle = "#111";
   ctx.fillRect(0,0,W,H);
-  ctx.fillStyle = "#fff";
-  ctx.font = "24px monospace";
-  ctx.fillText("Wolfpack College Soccer", 120, 140);
-  ctx.font = "16px monospace";
-  ctx.fillText("Retro 11v11 Edition", 200, 170);
-  ctx.fillText("Press Enter", 250, 210);
+  drawText("Drews College Soccer", 320, 180, 32, "#fff");
+  drawText("COLLEGE SOCCER", 340, 220, 20, "#0f0");
+  drawText("Press Enter", 380, 280, 16, "#fff");
 }
 
-function drawMenu() {
-  ctx.fillStyle = "#000";
-  ctx.fillRect(0,0,W,H);
-  ctx.fillStyle = "#fff";
-  ctx.font = "22px monospace";
-  ctx.fillText("Main Menu", 250, 80);
-  ctx.font = "16px monospace";
-  ctx.fillText("1 - New Season", 220, 140);
-  ctx.fillText("2 - Continue (dummy)", 220, 170);
-  drawBackButton();
-}
+function drawMainMenu() {
+  ctx.fillStyle =<!-- PART 7 — continues inside the same <script> tag -->
 
-function drawProfile() {
-  ctx.fillStyle = "#000";
-  ctx.fillRect(0,0,W,H);
-  ctx.fillStyle = "#fff";
-  ctx.font = "20px monospace";
-  ctx.fillText("Profile", 280, 40);
-
-  ctx.font = "14px monospace";
-  ctx.fillText(`Team: ${teamIdentity.name}`, 20, 80);
-  ctx.fillText(`Colors: ${teamIdentity.primaryColor} / ${teamIdentity.secondaryColor}`, 20, 105);
-  ctx.fillText(`Record: ${playerTeam.wins}-${playerTeam.losses}`, 20, 130);
-  ctx.fillText(`GF/GA: ${playerTeam.goalsFor}/${playerTeam.goalsAgainst}`, 20, 155);
-
-  ctx.fillText("Staff:", 20, 190);
-  ctx.fillText(`Head Coach: ${staff.headCoach.name} (${staff.headCoach.rating})`, 20, 215);
-  ctx.fillText(`Assistant:  ${staff.assistant.name} (${staff.assistant.rating})`, 20, 235);
-  ctx.fillText(`Fitness:    ${staff.fitness.name} (${staff.fitness.rating})`, 20, 255);
-  ctx.fillText(`Scout:      ${staff.scout.name} (${staff.scout.rating})`, 20, 275);
-
-  ctx.fillText("Enter = Season Hub", 20, 315);
-  ctx.fillText("S = Settings  |  K = Kits  |  Y = Youth Team", 20, 335);
-
-  drawBackButton();
-}
-
-function drawSeason() {
-  ctx.fillStyle = "#000";
-  ctx.fillRect(0,0,W,H);
-  ctx.fillStyle = "#fff";
-  ctx.font = "20px monospace";
-  ctx.fillText("Season Hub", 250, 60);
-
-  ctx.font = "14px monospace";
-  ctx.fillText(`Team: ${playerTeam.name}`, 20, 110);
-  ctx.fillText(`Record: ${playerTeam.wins}-${playerTeam.losses}`, 20, 135);
-  ctx.fillText(`GF/GA: ${playerTeam.goalsFor}/${playerTeam.goalsAgainst}`, 20, 160);
-
-  ctx.fillText(`Next Match: vs ${opponentTeam.name}`, 20, 210);
-  ctx.fillText("Enter = Play Match", 20, 235);
-  ctx.fillText("R = End Season (demo)", 20, 260);
-
-  drawBackButton();
-}
-
+// -----------------------------------------------------
+//  DRAW MATCH
+// -----------------------------------------------------
 function drawMatch() {
-  drawField();
-  drawMatchHUD();
-
-  if (match.finished) {
-    ctx.fillStyle = "#000000cc";
-    ctx.fillRect(W/2-120, H/2-40, 240, 80);
-    ctx.fillStyle = "#fff";
-    ctx.font = "18px monospace";
-    ctx.fillText("Full Time", W/2-50, H/2-10);
-    ctx.fillText(`${match.homeScore} - ${match.awayScore}`, W/2-30, H/2+15);
-    ctx.font = "12px monospace";
-    ctx.fillText("Press Enter to return to Season", W/2-110, H/2+35);
-  }
-}
-
-function drawSeasonOver() {
-  ctx.fillStyle = "#000";
+  ctx.fillStyle = "#0b4f1a";
   ctx.fillRect(0,0,W,H);
-  ctx.fillStyle = "#fff";
-  ctx.font = "20px monospace";
-  ctx.fillText("Season Over", 260, 120);
-  ctx.font = "14px monospace";
-  ctx.fillText(`Final Record: ${playerTeam.wins}-${playerTeam.losses}`, 220, 160);
-  ctx.fillText("Youth players have grown!", 220, 185);
-  ctx.fillText("Press R to start a new season", 220, 210);
-  drawBackButton();
-}
 
-function drawSettings() {
-  ctx.fillStyle = "#000";
-  ctx.fillRect(0,0,W,H);
-  ctx.fillStyle = "#fff";
-  ctx.font = "20px monospace";
-  ctx.fillText("Settings", 270, 60);
+  ctx.strokeStyle = "#fff";
+  ctx.strokeRect(40, 60, W-80, H-120);
 
-  ctx.font = "14px monospace";
-  ctx.fillText("Difficulty (Left/Right):", 20, 120);
-  ctx.fillText(settings.difficulty, 260, 120);
+  ctx.beginPath();
+  ctx.moveTo(W/2, 60);
+  ctx.lineTo(W/2, H-60);
+  ctx.stroke();
 
-  ctx.fillText("Weather (Up/Down):", 20, 160);
-  ctx.fillText(settings.weather, 260, 160);
+  ctx.beginPath();
+  ctx.arc(W/2, H/2, 60, 0, Math.PI*2);
+  ctx.stroke();
 
-  ctx.fillText("Esc = Back to Profile", 20, 210);
-  drawBackButton();
-}
+  ctx.strokeRect(W-40, H/2-40, 20, 80);
 
-function drawKits() {
-  ctx.fillStyle = "#000";
-  ctx.fillRect(0,0,W,H);
-  ctx.fillStyle = "#fff";
-  ctx.font = "20px monospace";
-  ctx.fillText("Kit Editor", 260, 40);
-
-  ctx.font = "14px monospace";
-  ctx.fillText("1=Home  2=Away  3=Third", 20, 80);
-  ctx.fillText(`Editing: ${kitEditor.kit.toUpperCase()}`, 20, 105);
-  ctx.fillText("Q=Primary  W=Secondary", 20, 130);
-  ctx.fillText(`Part: ${kitEditor.part}`, 20, 155);
-  ctx.fillText("Left/Right = Change Color", 20, 180);
-  ctx.fillText("Esc = Back to Profile", 20, 205);
-
-  ctx.fillText("Preview:", 350, 80);
-
-  function drawKitPreview(x, y, kit) {
-    ctx.fillStyle = kit.primary;
-    ctx.fillRect(x, y, 20, 20);
-    ctx.fillStyle = kit.secondary;
-    ctx.fillRect(x+5, y+5, 10, 10);
-  }
-
-  ctx.fillText("Home", 350, 110);
-  drawKitPreview(400, 100, kits.home);
-  ctx.fillText("Away", 350, 150);
-  drawKitPreview(400, 140, kits.away);
-  ctx.fillText("Third", 350, 190);
-  drawKitPreview(400, 180, kits.third);
-
-  drawBackButton();
-}
-
-function drawYouth() {
-  ctx.fillStyle = "#000";
-  ctx.fillRect(0,0,W,H);
-  ctx.fillStyle = "#fff";
-  ctx.font = "20px monospace";
-  ctx.fillText("Youth Team", 250, 60);
-
-  ctx.font = "14px monospace";
-  ctx.fillText("Up/Down = Select  P = Promote  Esc = Back", 20, 90);
-
-  let y = 130;
-  youthTeam.forEach((p,i)=>{
-    const marker = i === selectedYouthIndex ? ">" : " ";
-    ctx.fillText(`${marker} ${p.name} (${p.pos}) Age:${p.age} OVR:${p.current} POT:${p.potential}`, 20, y);
-    y += 25;
+  players.forEach((p,i)=>{
+    ctx.fillStyle = i === controlledIndex ? "#ff0" : "#0ff";
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 10, 0, Math.PI*2);
+    ctx.fill();
+    ctx.strokeStyle = "#000";
+    ctx.stroke();
   });
 
-  drawBackButton();
+  opponentsOnField.forEach(d=>{
+    ctx.fillStyle = "#f00";
+    ctx.beginPath();
+    ctx.arc(d.x, d.y, 10, 0, Math.PI*2);
+    ctx.fill();
+    ctx.strokeStyle = "#000";
+    ctx.stroke();
+  });
+
+  ctx.fillStyle = "#fff";
+  ctx.beginPath();
+  ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI*2);
+  ctx.fill();
+
+  drawPanel(10, 10, W-20, 60, "#000000aa");
+  drawText(playerTeam.name, 20, 30, 14);
+  drawText(`vs ${currentOpponent.name}`, 20, 50, 14);
+  drawText(`${match.homeScore} - ${match.awayScore}`, W-120, 30, 20);
+  drawText(`Time: ${Math.floor(match.time/60)}'`, W-120, 50, 14);
+
+  drawText("Move: Arrows/WASD  •  C: Pass  •  X: Shoot  •  Q: Switch  •  P: Pause", 80, H-20, 14);
+
+  if (matchPaused) {
+    drawPanel(W/2-150, H/2-60, 300, 120, "#000000dd");
+    drawText("PAUSED", W/2-40, H/2-20, 20);
+    drawText("P = Resume • B = Back to Season", W/2-130, H/2+10, 14);
+  }
+
+  if (match.finished) {
+    drawPanel(W/2-150, H/2-60, 300, 120, "#000000dd");
+    drawText("FULL TIME", W/2-60, H/2-20, 20);
+    drawText(`Score: ${match.homeScore} - ${match.awayScore}`, W/2-90, H/2+5, 16);
+    drawText("Press Enter to continue", W/2-110, H/2+30, 14);
+  }
 }
 
 // -----------------------------------------------------
-//  MAIN LOOP
+//  DRAW TOURNAMENT SCREENS
+// -----------------------------------------------------
+function drawConfTournamentSelect() {
+  ctx.fillStyle = "#111";
+  ctx.fillRect(0,0,W,H);
+  drawText("CONFERENCE TOURNAMENT SELECT", 260, 80, 20);
+  drawText("Up/Down = Choose Conference • Enter
+           <!-- PART 8 — continues inside the same <script> tag -->
+
+// -----------------------------------------------------
+//  MAIN UPDATE / RENDER LOOP
 // -----------------------------------------------------
 function update() {
   if (state === "title") updateTitle();
-  else if (state === "menu") updateMenu();
-  else if (state === "profile") updateProfile();
+  else if (state === "mainMenu") updateMainMenu();
   else if (state === "season") updateSeason();
+  else if (state === "roster") updateRoster();
+  else if (state === "recruit") updateRecruit();
+  else if (state === "youth") updateYouth();
+  else if (state === "settings") updateSettings();
   else if (state === "match") updateMatch();
   else if (state === "seasonOver") updateSeasonOver();
-  else if (state === "settings") updateSettings();
-  else if (state === "kits") updateKits();
-  else if (state === "youth") updateYouth();
+  else if (state === "confTournamentSelect") updateConfTournamentSelect();
+  else if (state === "confTournament") updateConfTournament();
+  else if (state === "natTournament") updateNatTournament();
 
-  handleGlobalBack();
+  handleBack();
 }
 
-function render() {
+function draw() {
   if (state === "title") drawTitle();
-  else if (state === "menu") drawMenu();
-  else if (state === "profile") drawProfile();
+  else if (state === "mainMenu") drawMainMenu();
   else if (state === "season") drawSeason();
+  else if (state === "roster") drawRoster();
+  else if (state === "recruit") drawRecruit();
+  else if (state === "youth") drawYouth();
+  else if (state === "settings") drawSettings();
   else if (state === "match") drawMatch();
   else if (state === "seasonOver") drawSeasonOver();
-  else if (state === "settings") drawSettings();
-  else if (state === "kits") drawKits();
-  else if (state === "youth") drawYouth();
+  else if (state === "confTournamentSelect") drawConfTournamentSelect();
+  else if (state === "confTournament") drawConfTournament();
+  else if (state === "natTournament") drawNatTournament();
 }
 
+// -----------------------------------------------------
+//  GAME LOOP
+// -----------------------------------------------------
 function loop() {
   update();
-  render();
+  draw();
   requestAnimationFrame(loop);
 }
 
 loop();
+<!-- PART 9 — closes the script and HTML -->
+
 </script>
+
 </body>
 </html>
