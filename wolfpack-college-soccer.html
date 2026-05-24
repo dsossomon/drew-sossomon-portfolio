@@ -32,7 +32,7 @@
 //  - Youth players grow after each season
 // =====================================================
 
-// -----------------------------------------------------
+
 //  BASIC SETUP
 // -----------------------------------------------------
 const canvas = document.getElementById("game");
@@ -44,7 +44,7 @@ const H = canvas.height;
 const FIELD_W = 600;
 const FIELD_H = 320;
 
-// -----------------------------------------------------
+
 //  INPUT
 // -----------------------------------------------------
 let keys = {};
@@ -55,7 +55,7 @@ document.addEventListener("keyup", e => {
   keys[e.key] = false;
 });
 
-// -----------------------------------------------------
+
 //  GAME STATE
 // -----------------------------------------------------
 // states: "title","menu","profile","season","match","seasonOver","settings","kits","youth"
@@ -73,7 +73,7 @@ canvas.addEventListener("click", e => {
   }
 });
 
-// -----------------------------------------------------
+
 //  LEAGUES / DIVISIONS (SAMPLE, EXTENSIBLE)
 // -----------------------------------------------------
 let leagues = {
