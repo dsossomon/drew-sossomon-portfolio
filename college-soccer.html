@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Retro College Soccer - Enhanced</title>
+<style>
+  body {
+    margin: 0;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: monospace;
+    color: #fff;
+  }
+  canvas {
+    border: 4px solid #fff;
+    image-rendering: pixelated;
+    background: #1b7f2f;
+  }
+</style>
+</head>
+<body>
+<canvas id="game" width="480" height="800"></canvas>
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+const W = canvas.width;
+const H = canvas.height;
+
+let keys = {};
+document.addEventListener("keydown", e => {
+  keys[e.key] = true;
+});
+document.addEventListener("keyup", e => {
+  keys[e.key] = false;
+});
+
+// ---------- GAME STATES ----------
+let state = "title"; 
+// "title", "colorSelect", "menu", "season", "match", "recruit", "customize", "tournament", "tournamentMatch", "seasonOver"
+
+let customizeTab = "players"; // "players", "staff", "team"
+
+// ---------- TEAM IDENTITY (PLAYER TEAM) ----------
+let teamIdentity = {
+  name: "Carolina Tech Falcons",
+  primaryColor: "#ffd700",
+  secondaryColor: "#0033aa",
+  colorsLocked: false // becomes true after New Game color selection
+};
+
+// ---------- STAFF ----------
+let staff = {
+  headCoach: { name: "Coach Riley", rating: 80 },
+  assistant: { name: "Coach Adams", rating: 75 },
+  fitness: { name: "Coach Hill", rating: 78 },
+  scout: { name: "Coach Reed", rating: 82 }
+};
+
+// ---------- ROSTER (SIMPLE) ----------
+let roster = [
+  { name: "J. Carter", pos: "ST", speed: 80, shot: 82, pass: 75, def: 40, year: 2 },
+  { name: "M. Lopez", pos: "MF", speed: 78, shot: 70, pass: 84, def: 55, year: 3 },
+  { name: "T. Brown", pos: "DF", speed: 72, shot: 60, pass: 70, def: 82, year: 4 }
+];
+
+// ---------- TEAMS / LEAGUE ----------
+function makeTeam(name, conf, color) {
+  return {
+    name,
+    conf,
+    color,
+    rating: 70 + Math.floor(Math.random()*20),
+    wins: 0,
+    losses: 0,
+    goalsFor: 0,
+    goalsAgainst: 0
+  };
+}
+
+let teams = [
+  makeTeam(teamIdentity.name, "Coastal", teamIdentity.primaryColor),
+  makeTeam("Atlantic Coast Sharks", "Coastal", "#00bfff"),
+  makeTeam("Tidewater State Mariners", "Coastal", "#ff8844"),
+  makeTeam("Great Plains Bison", "Heartland", "#ffdd55"),
+  makeTeam("Midwest Valley Hawks", "Heartland", "#55ddff"),
+  makeTeam("Central Ridge Wolves", "Heartland", "#ff5555"),
+  makeTeam("Rocky Summit Rams", "Mountain", "#ddff55"),
+  makeTeam("Western Ridge Bears", "Mountain", "#ffaa00"),
+  makeTeam("High Peak Eagles", "Mountain", "#55ff99")
+];
+
+const playerTeamIndex = 0;
+let playerTeam = teams[playerTeamIndex];
+
+// schedule: play each other team once
+let schedule = [];
+let currentGameIndex = 0;
+
+function buildSchedule() {
+  schedule = [];
+  for (let i = 0; i < teams.length; i++) {
+    if (i === playerTeamIndex) continue;
+    schedule.push(i);
+  }
+  currentGameIndex = 0;
+}
+buildSchedule();
+
+// ---------- TOURNAMENT ----------
+let tournamentTeams = [];
+let tournamentRound = 0; // 0=semis,1=final,2=done
+let tournamentMatchups = [];
+let tournamentResults = [];
+
+// ---------- RECRUITING ----------
+function randomName() {
+  const first = ["J.","K.","L.","M.","A.","D.","T.","C.","R.","S."];
+  const last = ["Carter","Lopez","Nguyen","Brown","Davis","King","Moore","Young","Hill","Green"];
+  return first[Math.floor(Math.random()*first.length)] + " " +
+         last[Math.floor(Math.random()*last.length)];
+}
+function rand(min, max) {
+  return Math.floor(Math.random()*(max-min+1))+min;
+}
+
+let recruits = [];
+function generateRecruits() {
+  recruits = [];
+  for (let i = 0; i < 3; i++) {
+    recruits.push({
+      name: randomName(),
+      stars: rand(2,5),
+      boost: rand(3,10)
+    });
+  }
+}
+generateRecruits();
+
+// ---------- MATCH ENGINE ----------
+const match = {
+  time: 0,
+  duration: 60 * 10,
+  playerScore: 0,
+  oppScore: 0,
+  opponentIndex: null,
+  finished: false
+};
+
+function simChance(teamRating, oppRating) {
+  const base = 1 / (1 + Math.pow(10, (oppRating - teamRating)/40));
+  return base;
+}
+
+// ---------- FIELD ENTITIES ----------
+const player = {
+  x: W/2,
+  y: H - 150,
+  w: 16,
+  h: 16,
+  speed: 3
+};
+
+const ball = {
+  x: player.x,
+  y: player.y,
+  r: 5,
+  vx: 0,
+  vy: 0,
+  free: false
+};
+
+const defenders = [];
+function resetDefenders() {
+  defenders.length = 0;
+  for (let i = 0; i < 5; i++) {
+    defenders.push({
+      x: 80 + i*70,
+      y: 200 + i*40,
+      w: 16,
+      h: 16,
+      color: "#ff4444",
+      vx: (Math.random() < 0.5 ? -1 : 1) * 1.2
+    });
+  }
+}
+
+// drag shooting
+let dragging = false;
+let dragStart = null;
+let dragEnd = null;
+
+canvas.addEventListener("mousedown", e => {
+  if (state !== "match" && state !== "tournamentMatch") return;
+  dragging = true;
+  const r = canvas.getBoundingClientRect();
+  dragStart = { x: e.clientX - r.left, y: e.clientY - r.top };
+  dragEnd = { ...dragStart };
+});
+
+canvas.addEventListener("mousemove", e => {
+  if (!dragging) return;
+  const r = canvas.getBoundingClientRect();
+  dragEnd = { x: e.clientX - r.left, y: e.clientY - r.top };
+});
+
+canvas.addEventListener("mouseup", () => {
+  if (!dragging) return;
+  dragging = false;
+  const dx = dragEnd.x - dragStart.x;
+  const dy = dragEnd.y - dragStart.y;
+  const power = Math.min(Math.hypot(dx, dy), 150);
+  if (power > 10) {
+    const angle = Math.atan2(dy, dx);
+    ball.vx = Math.cos(angle) * (power / 10);
+    ball.vy = Math.sin(angle) * (power / 10);
+    ball.free = true;
+  }
+});
+
+// ---------- COLLISION ----------
+function collide(a, b) {
+  return (
+    a.x < b.x + b.w &&
+    a.x + a.w > b.x &&
+    a.y < b.y + b.h &&
+    a.y + a.h > b.y
+  );
+}
+
+// ---------- MATCH CONTROL ----------
+function startMatch(opponentIndex, isTournament=false) {
+  match.time = 0;
+  match.playerScore = 0;
+  match.oppScore = 0;
+  match.opponentIndex = opponentIndex;
+  match.finished = false;
+
+  player.x = W/2;
+  player.y = H - 150;
+  ball.free = false;
+  ball.x = player.x + 6;
+  ball.y = player.y + 6;
+  resetDefenders();
+
+  state = isTournament ? "tournamentMatch" : "match";
+}
+
+// ---------- SAVE / LOAD ----------
+const SAVE_KEY = "retro_college_soccer_save";
+
+function saveGame() {
+  const data = {
+    teamIdentity,
+    staff,
+    roster,
+    teams,
+    schedule,
+    currentGameIndex,
+    recruits,
+    stateAfterLoad: "menu"
+  };
+  localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+}
+
+function loadGame() {
+  const raw = localStorage.getItem(SAVE_KEY);
+  if (!raw) return false;
+  try {
+    const data = JSON.parse(raw);
+    teamIdentity = data.teamIdentity;
+    staff = data.staff;
+    roster = data.roster;
+    teams = data.teams;
+    playerTeam = teams[playerTeamIndex];
+    schedule = data.schedule;
+    currentGameIndex = data.currentGameIndex;
+    recruits = data.recruits;
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+// ---------- COLOR SELECTION (NEW GAME ONLY) ----------
+let colorSelectStep = 0; // 0=primary,1=secondary
+let tempPrimary = "#ffd700";
+let tempSecondary = "#0033aa";
+
+const colorOptions = [
+  { name: "Gold & Navy", primary: "#ffd700", secondary: "#0033aa" },
+  { name: "Red & Black", primary: "#ff3333", secondary: "#111111" },
+  { name: "Green & White", primary: "#00aa44", secondary: "#ffffff" },
+  { name: "Purple & Silver", primary: "#9933ff", secondary: "#cccccc" }
+];
+
+function startNewGameColorSelect() {
+  colorSelectStep = 0;
+  tempPrimary = teamIdentity.primaryColor;
+  tempSecondary = teamIdentity.secondaryColor;
+  state = "colorSelect";
+}
+
+function applySelectedColors() {
+  teamIdentity.primaryColor = tempPrimary;
+  teamIdentity.secondaryColor = tempSecondary;
+  teamIdentity.colorsLocked = true;
+
+  teams[0].name = teamIdentity.name;
+  teams[0].color = teamIdentity.primaryColor;
+}
+
+// ---------- TOURNAMENT ----------
+function setupTournament() {
+  const sorted = [...teams].sort((a,b) => b.wins - a.wins);
+  tournamentTeams = sorted.slice(0,4);
+  tournamentRound = 0;
+  tournamentResults = [];
+  tournamentMatchups = [
+    [tournamentTeams[0], tournamentTeams[3]],
+    [tournamentTeams[1], tournamentTeams[2]]
+  ];
+}
+
+function matchTournamentSetup(oppTeam) {
+  const oppIndex = teams.indexOf(oppTeam);
+  startMatch(oppIndex, true);
+}
+
+function simTournamentRound() {
+  const winners = [];
+  for (const [a,b] of tournamentMatchups) {
+    const chanceA = simChance(a.rating, b.rating);
+    const aWins = Math.random() < chanceA;
+    winners.push(aWins ? a : b);
+  }
+  tournamentResults.push(winners);
+  if (tournamentRound === 0) {
+    tournamentMatchups = [[winners[0], winners[1]]];
+    tournamentRound = 1;
+  } else {
+    tournamentRound = 2;
+  }
+}
+
+function finishTournamentMatch() {
+  const opp = teams[match.opponentIndex];
+  const youWin = match.playerScore >= match.oppScore;
+  const winners = [];
+  for (const [a,b] of tournamentMatchups) {
+    if ((a === playerTeam && b === opp) || (a === opp && b === playerTeam)) {
+      winners.push(youWin ? playerTeam : opp);
+    } else {
+      const chanceA = simChance(a.rating, b.rating);
+      const aWins = Math.random() < chanceA;
+      winners.push(aWins ? a : b);
+    }
+  }
+  tournamentResults.push(winners);
+  if (tournamentRound === 0) {
+    tournamentMatchups = [[winners[0], winners[1]]];
+    tournamentRound = 1;
+  } else {
+    tournamentRound = 2;
+  }
+  state = "tournament";
+}
+
+// ---------- SEASON / RESULTS ----------
+function finishSeasonMatch() {
+  const opp = teams[match.opponentIndex];
+  playerTeam.goalsFor += match.playerScore;
+  playerTeam.goalsAgainst += match.oppScore;
+  opp.goalsFor += match.oppScore;
+  opp.goalsAgainst += match.playerScore;
+
+  if (match.playerScore > match.oppScore) {
+    playerTeam.wins++;
+    opp.losses++;
+  } else if (match.playerScore < match.oppScore) {
+    playerTeam.losses++;
+    opp.wins++;
+  } else {
+    playerTeam.rating = Math.min(99, playerTeam.rating + 1);
+    opp.rating = Math.min(99, opp.rating + 1);
+  }
+
+  currentGameIndex++;
+  saveGame();
+  state = "season";
+}
+
+function updateSeasonOver() {
+  if (keys["r"] || keys["R"]) {
+    teams.forEach((t,i) => {
+      t.wins = t.losses = t.goalsFor = t.goalsAgainst = 0;
+      if (i !== 0) t.rating = 70 + Math.floor(Math.random()*20);
+    });
+    buildSchedule();
+    generateRecruits();
+    saveGame();
+    state = "season";
+  }
+}
+
+// ---------- RECRUITING ----------
+function signRecruit(i) {
+  const rec = recruits[i];
+  if (!rec) return;
+  playerTeam.rating = Math.min(99, playerTeam.rating + rec.boost);
+  generateRecruits();
+  saveGame();
+  state = "season";
+}
+
+// ---------- CUSTOMIZATION ----------
+let selectedPlayerIndex = 0;
+
+function editPlayerStat(p, stat, delta) {
+  p[stat] = Math.max(40, Math.min(99, p[stat] + delta));
+}
+
+function editStaffStat(role, delta) {
+  staff[role].rating = Math.max(50, Math.min(99, staff[role].rating + delta));
+}
+
+function applyStaffEffectsToTeam() {
+  const avgStaff = Math.round(
+    (staff.headCoach.rating + staff.assistant.rating + staff.fitness.rating + staff.scout.rating) / 4
+  );
+  playerTeam.rating = Math.min(99, Math.max(60, 70 + Math.floor((avgStaff - 70)/2)));
+}
+
+// ---------- UPDATE STATES ----------
+function updateTitle() {
+  if (keys["Enter"]) {
+    // try load
+    const loaded = loadGame();
+    state = "menu";
+    if (!loaded) {
+      // no save, go to menu anyway
+    }
+  }
+}
+
+function updateMenu() {
+  // 1 = New Game (with color select), 2 = Continue (if save), 3 = Quit (no-op)
+  if (keys["1"]) {
+    // new game: reset everything, allow color selection
+    teams = [
+      makeTeam(teamIdentity.name, "Coastal", teamIdentity.primaryColor),
+      makeTeam("Atlantic Coast Sharks", "Coastal", "#00bfff"),
+      makeTeam("Tidewater State Mariners", "Coastal", "#ff8844"),
+      makeTeam("Great Plains Bison", "Heartland", "#ffdd55"),
+      makeTeam("Midwest Valley Hawks", "Heartland", "#55ddff"),
+      makeTeam("Central Ridge Wolves", "Heartland", "#ff5555"),
+      makeTeam("Rocky Summit Rams", "Mountain", "#ddff55"),
+      makeTeam("Western Ridge Bears", "Mountain", "#ffaa00"),
+      makeTeam("High Peak Eagles", "Mountain", "#55ff99")
+    ];
+    playerTeam = teams[playerTeamIndex];
+    teams.forEach(t => {
+      t.wins = t.losses = t.goalsFor = t.goalsAgainst = 0;
+    });
+    buildSchedule();
+    generateRecruits();
+    teamIdentity.colorsLocked = false;
+    startNewGameColorSelect();
+  } else if (keys["2"]) {
+    const loaded = loadGame();
+    if (loaded) {
+      state = "season";
+    }
+  }
+}
+
+function updateColorSelect() {
+  // choose from colorOptions with 1-4, confirm with Enter
+  if (keys["1"]) {
+    tempPrimary = colorOptions[0].primary;
+    tempSecondary = colorOptions[0].secondary;
+  } else if (keys["2"]) {
+    tempPrimary = colorOptions[1].primary;
+    tempSecondary = colorOptions[1].secondary;
+  } else if (keys["3"]) {
+    tempPrimary = colorOptions[2].primary;
+    tempSecondary = colorOptions[2].secondary;
+  } else if (keys["4"]) {
+    tempPrimary = colorOptions[3].primary;
+    tempSecondary = colorOptions[3].secondary;
+  }
+
+  if (keys["Enter"]) {
+    applySelectedColors();
+    teams[0].color = teamIdentity.primaryColor;
+    saveGame();
+    state = "season";
+  }
+}
+
+function updateSeason() {
+  if (currentGameIndex >= schedule.length) {
+    setupTournament();
+    state = "tournament";
+    return;
+  }
+
+  if (keys["Enter"]) {
+    const oppIndex = schedule[currentGameIndex];
+    startMatch(oppIndex, false);
+  } else if (keys["r"] || keys["R"]) {
+    state = "recruit";
+  } else if (keys["c"] || keys["C"]) {
+    state = "customize";
+  }
+}
+
+function updateRecruit() {
+  if (keys["1"]) signRecruit(0);
+  else if (keys["2"]) signRecruit(1);
+  else if (keys["3"]) signRecruit(2);
+  else if (keys["Escape"]) state = "season";
+}
+
+function updateCustomize() {
+  if (keys["1"]) customizeTab = "players";
+  if (keys["2"]) customizeTab = "staff";
+  if (keys["3"]) customizeTab = "team";
+
+  if (customizeTab === "players") {
+    if (keys["ArrowUp"]) {
+      selectedPlayerIndex = Math.max(0, selectedPlayerIndex - 1);
+    }
+    if (keys["ArrowDown"]) {
+      selectedPlayerIndex = Math.min(roster.length - 1, selectedPlayerIndex + 1);
+    }
+    const p = roster[selectedPlayerIndex];
+    if (keys["a"]) editPlayerStat(p, "speed", 1);
+    if (keys["z"]) editPlayerStat(p, "speed", -1);
+    if (keys["s"]) editPlayerStat(p, "shot", 1);
+    if (keys["x"]) editPlayerStat(p, "shot", -1);
+    if (keys["d"]) editPlayerStat(p, "pass", 1);
+    if (keys["c"]) editPlayerStat(p, "pass", -1);
+    if (keys["f"]) editPlayerStat(p, "def", 1);
+    if (keys["v"]) editPlayerStat(p, "def", -1);
+  } else if (customizeTab === "staff") {
+    if (keys["h"]) editStaffStat("headCoach", 1);
+    if (keys["j"]) editStaffStat("headCoach", -1);
+    if (keys["a"]) editStaffStat("assistant", 1);
+    if (keys["z"]) editStaffStat("assistant", -1);
+    if (keys["f"]) editStaffStat("fitness", 1);
+    if (keys["v"]) editStaffStat("fitness", -1);
+    if (keys["s"]) editStaffStat("scout", 1);
+    if (keys["x"]) editStaffStat("scout", -1);
+    applyStaffEffectsToTeam();
+  } else if (customizeTab === "team") {
+    // team name change: simple preset cycle with N
+    if (keys["n"] || keys["N"]) {
+      const names = [
+        "Carolina Tech Falcons",
+        "Carolina Tech Eagles",
+        "Carolina Tech Lions",
+        "Carolina Tech Knights"
+      ];
+      const idx = names.indexOf(teamIdentity.name);
+      teamIdentity.name = names[(idx + 1 + names.length) % names.length];
+      teams[0].name = teamIdentity.name;
+    }
+    // colors cannot be changed here if locked
+    if (!teamIdentity.colorsLocked) {
+      if (keys["p"] || keys["P"]) {
+        tempPrimary = teamIdentity.primaryColor === "#ffd700" ? "#ff3333" : "#ffd700";
+        teamIdentity.primaryColor = tempPrimary;
+        teams[0].color = teamIdentity.primaryColor;
+      }
+    }
+  }
+
+  if (keys["Escape"]) {
+    saveGame();
+    state = "season";
+  }
+}
+
+function updateMatch(isTournament=false) {
+  if (match.finished) {
+    if (keys["Enter"]) {
+      if (isTournament) {
+        finishTournamentMatch();
+      } else {
+        finishSeasonMatch();
+      }
+    }
+    return;
+  }
+
+  match.time += 1;
+
+  if (match.time % 300 === 0) {
+    const opp = teams[match.opponentIndex];
+    const chance = 1 - simChance(playerTeam.rating, opp.rating);
+    if (Math.random() < chance * 0.3) {
+      match.oppScore++;
+    }
+  }
+
+  if (!ball.free) {
+    if (keys["ArrowLeft"]) player.x -= player.speed;
+    if (keys["ArrowRight"]) player.x += player.speed;
+    if (keys["ArrowUp"]) player.y -= player.speed;
+    if (keys["ArrowDown"]) player.y += player.speed;
+
+    ball.x = player.x + 6;
+    ball.y = player.y + 6;
+  }
+
+  player.x = Math.max(20, Math.min(W - 36, player.x));
+  player.y = Math.max(120, Math.min(H - 36, player.y));
+
+  if (ball.free) {
+    ball.x += ball.vx;
+    ball.y += ball.vy;
+    ball.vx *= 0.98;
+    ball.vy *= 0.98;
+    if (Math.hypot(ball.vx, ball.vy) < 0.2) {
+      ball.free = false;
+    }
+  }
+
+  defenders.forEach(d => {
+    d.x += d.vx;
+    if (d.x < 20 || d.x + d.w > W - 20) d.vx *= -1;
+    if (collide({x:ball.x-5,y:ball.y-5,w:10,h:10}, d)) {
+      ball.free = false;
+      ball.x = player.x + 6;
+      ball.y = player.y + 6;
+    }
+  });
+
+  if (ball.y < 130 && ball.x > W/2 - 60 && ball.x < W/2 + 60) {
+    match.playerScore++;
+    ball.free = false;
+    player.x = W/2;
+    player.y = H - 150;
+    ball.x = player.x + 6;
+    ball.y = player.y + 6;
+  }
+
+  if (match.time >= match.duration) {
+    match.finished = true;
+  }
+}
+
+function updateTournament() {
+  if (tournamentRound >= 2) {
+    if (keys["Enter"]) state = "seasonOver";
+    return;
+  }
+
+  if (keys["Enter"]) {
+    const yourIn = tournamentTeams.includes(playerTeam);
+    if (tournamentRound === 0) {
+      const semiWithYou = tournamentMatchups.findIndex(m => m[0] === playerTeam || m[1] === playerTeam);
+      if (semiWithYou !== -1) {
+        const opp = tournamentMatchups[semiWithYou][0] === playerTeam ?
+                    tournamentMatchups[semiWithYou][1] :
+                    tournamentMatchups[semiWithYou][0];
+        matchTournamentSetup(opp);
+      } else {
+        simTournamentRound();
+      }
+    } else if (tournamentRound === 1) {
+      const finalWithYou = tournamentMatchups[0][0] === playerTeam || tournamentMatchups[0][1] === playerTeam;
+      if (finalWithYou) {
+        const opp = tournamentMatchups[0][0] === playerTeam ?
+                    tournamentMatchups[0][1] :
+                    tournamentMatchups[0][0];
+        matchTournamentSetup(opp);
+      } else {
+        simTournamentRound();
+      }
+    }
+  }
+}
+
+// ---------- DRAW ----------
+function drawField() {
+  ctx.fillStyle = "#1b7f2f";
+  ctx.fillRect(0, 0, W, H);
+
+  ctx.strokeStyle = "#ffffffaa";
+  ctx.lineWidth = 3;
+  ctx.strokeRect(20, 120, W - 40, H - 160);
+
+  ctx.beginPath();
+  ctx.moveTo(20, H/2);
+  ctx.lineTo(W - 20, H/2);
+  ctx.stroke();
+
+  ctx.fillStyle = "#ffffff55";
+  ctx.fillRect(W/2 - 60, 120, 120, 10);
+}
+
+function drawMatchHUD(isTournament=false) {
+  ctx.fillStyle = "#000000aa";
+  ctx.fillRect(0, 0, W, 80);
+  ctx.fillStyle = "#fff";
+  ctx.font = "16px monospace";
+  const opp = teams[match.opponentIndex];
+  ctx.fillText(playerTeam.name.slice(0,20), 10, 25);
+  ctx.fillText("vs", 10, 45);
+  ctx.fillText(opp.name.slice(0,20), 10, 65);
+  ctx.fillText(`${match.playerScore} - ${match.oppScore}`, 320, 35);
+  ctx.fillText(`Time: ${Math.floor(match.time/60)}'`, 320, 60);
+  if (isTournament) ctx.fillText("Tournament", 180, 20);
+}
+
+function drawMatch(isTournament=false) {
+  drawField();
+
+  ctx.fillStyle = teamIdentity.primaryColor;
+  ctx.fillRect(player.x, player.y, player.w, player.h);
+
+  ctx.fillStyle = "#fff";
+  ctx.beginPath();
+  ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI*2);
+  ctx.fill();
+
+  defenders.forEach(d => {
+    ctx.fillStyle = d.color;
+    ctx.fillRect(d.x, d.y, d.w, d.h);
+  });
+
+  drawMatchHUD(isTournament);
+
+  if (dragging) {
+    ctx.strokeStyle = "#ffff00";
+    ctx.beginPath();
+    ctx.moveTo(dragStart.x, dragStart.y);
+    ctx.lineTo(dragEnd.x, dragEnd.y);
+    ctx.stroke();
+  }
+
+  if (match.finished) {
+    ctx.fillStyle = "#000000cc";
+    ctx.fillRect(60, H/2 - 60, W-120, 120);
+    ctx.fillStyle = "#fff";
+    ctx.font = "20px monospace";
+    ctx.fillText("Full Time", 170, H/2 - 20);
+    ctx.fillText(`${match.playerScore} - ${match.oppScore}`, 190, H/2 + 10);
+    ctx.font = "14px monospace";
+    ctx.fillText("Press Enter", 190, H/2 + 40);
+  }
+}
+
+function drawTitle() {
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0,0,W,H);
+  ctx.fillStyle = "#fff";
+  ctx.font = "28px monospace";
+  ctx.fillText("Retro College Soccer", 60, 220);
+  ctx.font = "18px monospace";
+  ctx.fillText("Press Enter", 170, 280);
+}
+
+function drawMenu() {
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0,0,W,H);
+  ctx.fillStyle = "#fff";
+  ctx.font = "26px monospace";
+  ctx.fillText("Main Menu", 160, 120);
+  ctx.font = "18px monospace";
+  ctx.fillText("1 - New Game (choose colors)", 80, 200);
+  ctx.fillText("2 - Continue (load save)", 80, 230);
+}
+
+function drawColorSelect() {
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0,0,W,H);
+  ctx.fillStyle = "#fff";
+  ctx.font = "22px monospace";
+  ctx.fillText("Choose Team Colors", 110, 80);
+  ctx.font = "16px monospace";
+  let y = 140;
+  colorOptions.forEach((opt,i)=>{
+    ctx.fillStyle = "#fff";
+    ctx.fillText(`${i+1}. ${opt.name}`, 60, y);
+    ctx.fillStyle = opt.primary;
+    ctx.fillRect(300, y-12, 20, 20);
+    ctx.fillStyle = opt.secondary;
+    ctx.fillRect(330, y-12, 20, 20);
+    y += 40;
+  });
+
+  ctx.fillStyle = "#fff";
+  ctx.fillText("Current:", 60, 320);
+  ctx.fillText(teamIdentity.name, 60, 345);
+  ctx.fillText("Primary / Secondary", 60, 370);
+  ctx.fillStyle = tempPrimary;
+  ctx.fillRect(260, 360, 20, 20);
+  ctx.fillStyle = tempSecondary;
+  ctx.fillRect(290, 360, 20, 20);
+
+  ctx.fillStyle = "#fff";
+  ctx.fillText("Press 1-4 to pick, Enter to confirm", 60, 420);
+}
+
+function drawSeason() {
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0,0,W,H);
+  ctx.fillStyle = "#fff";
+  ctx.font = "22px monospace";
+  ctx.fillText("Season", 190, 40);
+
+  ctx.font = "16px monospace";
+  ctx.fillText(`Team: ${playerTeam.name}`, 20, 80);
+  ctx.fillText(`Rating: ${playerTeam.rating}`, 20, 105);
+  ctx.fillText(`Record: ${playerTeam.wins}-${playerTeam.losses}`, 20, 130);
+
+  ctx.fillText("Standings (Wins-Losses)", 20, 170);
+  let y = 195;
+  const sorted = [...teams].sort((a,b)=>b.wins-a.wins);
+  sorted.forEach(t => {
+    ctx.fillText(`${t.name.slice(0,20)}  ${t.wins}-${t.losses}`, 20, y);
+    y += 20;
+  });
+
+  if (currentGameIndex < schedule.length) {
+    const opp = teams[schedule[currentGameIndex]];
+    ctx.fillText("Next Match:", 20, 430);
+    ctx.fillText(opp.name, 20, 455);
+    ctx.fillText("Enter = Play  |  R = Recruiting  |  C = Customize", 20, 490);
+  } else {
+    ctx.fillText("Regular season finished!", 20, 430);
+    ctx.fillText("Press Enter for Tournament", 20, 455);
+  }
+}
+
+function drawRecruit() {
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0,0,W,H);
+  ctx.fillStyle = "#fff";
+  ctx.font = "22px monospace";
+  ctx.fillText("Recruiting", 170, 60);
+  ctx.font = "16px monospace";
+  ctx.fillText(`Current Rating: ${playerTeam.rating}`, 20, 100);
+  ctx.fillText("Choose a recruit to sign:", 20, 140);
+
+  let y = 180;
+  recruits.forEach((r,i)=>{
+    ctx.fillText(`${i+1}. ${r.name}  ${r.stars}★  +${r.boost} rating`, 20, y);
+    y += 30;
+  });
+
+  ctx.fillText("Press 1/2/3 to sign, Esc to cancel", 20, 280);
+}
+
+function drawCustomize() {
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0,0,W,H);
+  ctx.fillStyle = "#fff";
+  ctx.font = "22px monospace";
+  ctx.fillText("Customization", 150, 60);
+
+  ctx.font = "16px monospace";
+  ctx.fillText(`Tab: ${customizeTab}`, 20, 100);
+  ctx.fillText("1=Players  2=Staff  3=Team", 20, 130);
+
+  if (customizeTab === "players") {
+    let y = 180;
+    roster.forEach((p,i)=>{
+      const marker = (i === selectedPlayerIndex) ? ">" : " ";
+      ctx.fillText(`${marker} ${p.name} (${p.pos}) SPD:${p.speed} SH:${p.shot} PS:${p.pass} DF:${p.def}`, 20, y);
+      y += 25;
+    });
+    ctx.fillText("Use Up/Down to select", 20, 500);
+    ctx.fillText("A/Z SPD  S/X SHOT  D/C PASS  F/V DEF", 20, 525);
+  } else if (customizeTab === "staff") {
+    ctx.fillText(`Head Coach: ${staff.headCoach.name} (${staff.headCoach.rating})  H/J +/-`, 20, 180);
+    ctx.fillText(`Assistant:  ${staff.assistant.name} (${staff.assistant.rating})  A/Z +/-`, 20, 210);
+    ctx.fillText(`Fitness:    ${staff.fitness.name} (${staff.fitness.rating})  F/V +/-`, 20, 240);
+    ctx.fillText(`Scout:      ${staff.scout.name} (${staff.scout.rating})  S/X +/-`, 20, 270);
+    ctx.fillText("Staff affects team rating", 20, 320);
+  } else if (customizeTab === "team") {
+    ctx.fillText(`Team Name: ${teamIdentity.name}`, 20, 180);
+    ctx.fillText("Press N to cycle preset names", 20, 210);
+    ctx.fillText(`Primary Color: ${teamIdentity.primaryColor}`, 20, 250);
+    ctx.fillText(`Secondary Color: ${teamIdentity.secondaryColor}`, 20, 275);
+    if (teamIdentity.colorsLocked) {
+      ctx.fillText("Colors locked (only set at New Game)", 20, 310);
+    } else {
+      ctx.fillText("P to toggle primary (only if not locked)", 20, 310);
+    }
+  }
+
+  ctx.fillText("Esc to return", 20, 750);
+}
+
+function drawTournament() {
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0,0,W,H);
+  ctx.fillStyle = "#fff";
+  ctx.font = "22px monospace";
+  ctx.fillText("Tournament", 170, 40);
+
+  ctx.font = "16px monospace";
+  ctx.fillText("Top 4 Teams:", 20, 80);
+  let y = 110;
+  tournamentTeams.forEach(t=>{
+    ctx.fillText(`${t.name.slice(0,22)}  (${t.wins}-${t.losses})`, 20, y);
+    y += 20;
+  });
+
+  if (tournamentRound === 0) {
+    ctx.fillText("Round: Semifinals", 20, 220);
+  } else if (tournamentRound === 1) {
+    ctx.fillText("Round: Final", 20, 220);
+  } else {
+    const champ = tournamentResults[tournamentResults.length-1][0];
+    ctx.fillText("Champion:", 20, 220);
+    ctx.fillText(champ.name, 20, 245);
+    ctx.fillText("Press Enter to continue", 20, 280);
+    return;
+  }
+
+  ctx.fillText("Matchups:", 20, 260);
+  let yy = 290;
+  tournamentMatchups.forEach(([a,b])=>{
+    ctx.fillText(`${a.name.slice(0,18)} vs ${b.name.slice(0,18)}`, 20, yy);
+    yy += 25;
+  });
+
+  ctx.fillText("Press Enter to play/sim round", 20, 360);
+}
+
+function drawSeasonOver() {
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0,0,W,H);
+  ctx.fillStyle = "#fff";
+  ctx.font = "24px monospace";
+  ctx.fillText("Season Over", 150, 200);
+  ctx.font = "18px monospace";
+  ctx.fillText(`Final Record: ${playerTeam.wins}-${playerTeam.losses}`, 110, 240);
+  ctx.fillText("Press R to start a new season", 80, 300);
+}
+
+// ---------- MAIN LOOP ----------
+function update() {
+  if (state === "title") updateTitle();
+  else if (state === "menu") updateMenu();
+  else if (state === "colorSelect") updateColorSelect();
+  else if (state === "season") updateSeason();
+  else if (state === "recruit") updateRecruit();
+  else if (state === "customize") updateCustomize();
+  else if (state === "match") updateMatch(false);
+  else if (state === "tournament") updateTournament();
+  else if (state === "tournamentMatch") updateMatch(true);
+  else if (state === "seasonOver") updateSeasonOver();
+}
+
+function render() {
+  if (state === "title") drawTitle();
+  else if (state === "menu") drawMenu();
+  else if (state === "colorSelect") drawColorSelect();
+  else if (state === "season") drawSeason();
+  else if (state === "recruit") drawRecruit();
+  else if (state === "customize") drawCustomize();
+  else if (state === "match") drawMatch(false);
+  else if (state === "tournament") drawTournament();
+  else if (state === "tournamentMatch") drawMatch(true);
+  else if (state === "seasonOver") drawSeasonOver();
+}
+
+function loop() {
+  update();
+  render();
+  requestAnimationFrame(loop);
+}
+
+loop();
+</script>
+</body>
