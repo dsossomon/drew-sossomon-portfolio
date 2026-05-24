@@ -507,6 +507,13 @@ function loop() {
 
 loop();
 <!-- PART 9 — closes the script and HTML -->
+function loop() {
+  update();
+  draw();
+  requestAnimationFrame(loop);
+}
+
+loop(); // ← THIS is the fix
 
 </script>
 
