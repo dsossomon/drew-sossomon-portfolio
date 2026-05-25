@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>College Hockey Game</title>
+<title>Drew University Hockey Manager</title>
 <style>
     body {
         background: #0b1e3d;
@@ -9,53 +9,71 @@
         font-family: Arial, sans-serif;
         color: white;
         display: flex;
-        justify-content: center;
-        align-items: center;
         height: 100vh;
     }
 
-    #menu {
-        width: 350px;
-        height: 90vh;
-        overflow-y: auto;
-        padding: 20px;
-        border-radius: 15px;
-        background: rgba(255,255,255,0.1);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 0 20px rgba(0,0,0,0.4);
-        animation: fadeIn 0.8s ease-out;
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    .teamButton {
-        width: 100%;
+    #leftPanel {
+        width: 35%;
         padding: 15px;
-        margin: 10px 0;
-        font-size: 18px;
-        border: none;
+        box-sizing: border-box;
+        overflow-y: auto;
+        background: rgba(0,0,0,0.4);
+    }
+
+    #rightPanel {
+        width: 65%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    h2 {
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+
+    .sectionBox {
+        background: rgba(255,255,255,0.05);
+        padding: 10px;
         border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    .playerCard {
+        background: rgba(255,255,255,0.05);
+        padding: 6px;
+        border-radius: 6px;
+        margin-bottom: 4px;
+        font-size: 12px;
+    }
+
+    #controls {
+        margin-bottom: 10px;
+    }
+
+    button {
+        padding: 8px 14px;
+        margin: 4px;
+        border: none;
+        border-radius: 8px;
         cursor: pointer;
+        font-size: 14px;
+    }
+
+    #playButton {
+        background: #1abc9c;
         color: white;
-        transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .teamButton:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 10px rgba(255,255,255,0.4);
-    }
-
-    #gameContainer {
-        display: none;
-        text-align: center;
+    #advanceButton {
+        background: #3498db;
+        color: white;
     }
 
     #scoreboard {
-        font-size: 26px;
-        margin-bottom: 10px;
+        font-size: 22px;
+        margin-bottom: 8px;
     }
 
     canvas {
@@ -67,77 +85,143 @@
 </head>
 <body>
 
-<div id="menu">
-    <h2>Select Your Team</h2>
-    <div id="teamList"></div>
+<div id="leftPanel">
+    <h1>Drew University Hockey</h1>
+    <div class="sectionBox">
+        <h2>Season Info</h2>
+        <div id="seasonInfo">Games Played: 0</div>
+    </div>
+
+    <div class="sectionBox">
+        <h2>College Roster (15–22)</h2>
+        <div id="collegeRosterView"></div>
+    </div>
+
+    <div class="sectionBox">
+        <h2>Youth Academy (10–14)</h2>
+        <div id="youthRosterView"></div>
+    </div>
 </div>
 
-<div id="gameContainer">
-    <div id="scoreboard"></div>
+<div id="rightPanel">
+    <div id="controls">
+        <button id="playButton">Play Game</button>
+        <button id="advanceButton">Advance Without Playing</button>
+    </div>
+    <div id="scoreboard">Drew University 0 - 0 Hawks</div>
     <canvas id="gameCanvas" width="800" height="400"></canvas>
 </div>
 
 <script>
-const teams = [
-    {name:"NC State Wolfpack", color:"red"},
-    {name:"Duke University", color:"#0033A0"},
-    {name:"Drew University", color:"#003366"},
-    {name:"UNC Tar Heels", color:"#4B9CD3"},
-    {name:"Wake Forest", color:"#B89D29"},
-    {name:"Clemson", color:"orange"},
-    {name:"Virginia", color:"navy"},
-    {name:"Virginia Tech", color:"#630031"},
-    {name:"Georgia Tech", color:"#B3A369"},
-    {name:"Miami", color:"green"},
-    {name:"Florida State", color:"#782F40"},
-    {name:"Louisville", color:"darkred"},
-    {name:"Pitt", color:"#003594"},
-    {name:"Syracuse", color:"darkorange"},
-    {name:"Notre Dame", color:"#0C2340"},
-    {name:"Maryland", color:"red"},
-    {name:"Ohio State", color:"#BB0000"},
-    {name:"Michigan", color:"#00274C"},
-    {name:"Michigan State", color:"green"},
-    {name:"Penn State", color:"#1E407C"},
-    {name:"Iowa", color:"black"},
-    {name:"Minnesota", color:"#7A0019"},
-    {name:"Wisconsin", color:"red"},
-    {name:"Illinois", color:"#13294B"},
-    {name:"Nebraska", color:"red"},
-    {name:"Kansas", color:"#0051BA"},
-    {name:"Oklahoma", color:"#841617"},
-    {name:"Texas", color:"#BF5700"},
-    {name:"Baylor", color:"#154734"},
-    {name:"TCU", color:"#4D1979"}
-];
+// ---------- PLAYER / ROSTER SYSTEM ----------
 
-let selectedTeam = null;
+function createPlayer(age) {
+    const firstNames = ["Mason", "Ethan", "Noah", "Liam", "Aiden", "Logan", "Caleb", "Owen", "Hunter", "Jackson", "Carter", "Wyatt", "Grayson", "Landon"];
+    const lastNames = ["Smith", "Johnson", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor", "Anderson", "Thomas", "Jackson", "White", "Harris", "Martin"];
 
-const teamList = document.getElementById("teamList");
-
-teams.forEach(team => {
-    const btn = document.createElement("button");
-    btn.className = "teamButton";
-    btn.style.background = team.color;
-    btn.innerText = team.name;
-    btn.onclick = () => startGame(team);
-    teamList.appendChild(btn);
-});
-
-function startGame(team) {
-    selectedTeam = team;
-    document.getElementById("menu").style.display = "none";
-    document.getElementById("gameContainer").style.display = "block";
-    document.getElementById("scoreboard").innerText =
-        `${team.name} 0 - 0 Hawks`;
-    gameLoop();
+    return {
+        name: firstNames[Math.floor(Math.random() * firstNames.length)] + " " +
+              lastNames[Math.floor(Math.random() * lastNames.length)],
+        age: age,
+        speed: Math.floor(Math.random() * 40) + 60,
+        shooting: Math.floor(Math.random() * 40) + 60,
+        passing: Math.floor(Math.random() * 40) + 60,
+        defense: Math.floor(Math.random() * 40) + 60
+    };
 }
+
+let youthAcademy = [];
+let collegeRoster = [];
+let gamesPlayed = 0;
+
+// initial players
+for (let i = 0; i < 6; i++) {
+    collegeRoster.push(createPlayer(15 + Math.floor(Math.random() * 5))); // 15–19
+}
+for (let i = 0; i < 8; i++) {
+    youthAcademy.push(createPlayer(10 + Math.floor(Math.random() * 5))); // 10–14
+}
+
+function addNewYouthPlayers() {
+    const newPlayers = Math.floor(Math.random() * 3) + 2; // 2–4
+    for (let i = 0; i < newPlayers; i++) {
+        youthAcademy.push(createPlayer(10 + Math.floor(Math.random() * 5)));
+    }
+}
+
+function agePlayers() {
+    youthAcademy.forEach(p => p.age++);
+    const promoted = youthAcademy.filter(p => p.age >= 15);
+    collegeRoster.push(...promoted);
+    youthAcademy = youthAcademy.filter(p => p.age < 15);
+
+    collegeRoster.forEach(p => p.age++);
+    collegeRoster = collegeRoster.filter(p => p.age < 23);
+}
+
+function growPlayers() {
+    youthAcademy.forEach(p => {
+        p.speed += Math.random() * 2;
+        p.shooting += Math.random() * 2;
+        p.passing += Math.random() * 2;
+        p.defense += Math.random() * 2;
+    });
+
+    collegeRoster.forEach(p => {
+        p.speed += Math.random() * 1;
+        p.shooting += Math.random() * 1;
+        p.passing += Math.random() * 1;
+        p.defense += Math.random() * 1;
+    });
+}
+
+function endOfGameUpdate() {
+    gamesPlayed++;
+    addNewYouthPlayers();
+    agePlayers();
+    growPlayers();
+    renderRosters();
+}
+
+function renderRosters() {
+    const collegeDiv = document.getElementById("collegeRosterView");
+    const youthDiv = document.getElementById("youthRosterView");
+    const seasonInfo = document.getElementById("seasonInfo");
+
+    seasonInfo.textContent = "Games Played: " + gamesPlayed;
+
+    collegeDiv.innerHTML = "";
+    collegeRoster.forEach(p => {
+        const div = document.createElement("div");
+        div.className = "playerCard";
+        div.textContent = `${p.name} | Age ${p.age} | SPD ${p.speed.toFixed(0)} | SH ${p.shooting.toFixed(0)} | PAS ${p.passing.toFixed(0)} | DEF ${p.defense.toFixed(0)}`;
+        collegeDiv.appendChild(div);
+    });
+
+    youthDiv.innerHTML = "";
+    youthAcademy.forEach(p => {
+        const div = document.createElement("div");
+        div.className = "playerCard";
+        div.textContent = `${p.name} | Age ${p.age} | SPD ${p.speed.toFixed(0)} | SH ${p.shooting.toFixed(0)} | PAS ${p.passing.toFixed(0)} | DEF ${p.defense.toFixed(0)}`;
+        youthDiv.appendChild(div);
+    });
+}
+
+renderRosters();
+
+// ---------- GAME / HOCKEY PART ----------
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
-let teamScore = 0;
+let drewScore = 0;
 let hawksScore = 0;
+let gameRunning = false;
+
+const team = {
+    name: "Drew University",
+    color: "#003366"
+};
 
 const player = {
     x: 100,
@@ -154,6 +238,15 @@ const puck = {
     dy: 0,
     friction: 0.98
 };
+
+function resetPositions() {
+    player.x = 100;
+    player.y = 200;
+    puck.x = 400;
+    puck.y = 200;
+    puck.dx = 0;
+    puck.dy = 0;
+}
 
 function drawRink() {
     ctx.fillStyle = "#e8f4ff";
@@ -172,12 +265,13 @@ function drawRink() {
     ctx.stroke();
 
     ctx.strokeStyle = "red";
+    ctx.lineWidth = 3;
     ctx.strokeRect(0, 150, 20, 100);
     ctx.strokeRect(780, 150, 20, 100);
 }
 
 function drawPlayer() {
-    ctx.fillStyle = selectedTeam.color;
+    ctx.fillStyle = team.color;
     ctx.beginPath();
     ctx.arc(player.x, player.y, player.size, 0, Math.PI * 2);
     ctx.fill();
@@ -203,7 +297,6 @@ function movePuck() {
 
 function checkCollision() {
     const dist = Math.hypot(player.x - puck.x, player.y - puck.y);
-
     if (dist < player.size + puck.size) {
         puck.dx = (puck.x - player.x) * 0.2;
         puck.dy = (puck.y - player.y) * 0.2;
@@ -211,44 +304,70 @@ function checkCollision() {
 }
 
 function checkGoal() {
+    let goalScored = false;
+
     if (puck.x < 10 && puck.y > 150 && puck.y < 250) {
         hawksScore++;
-        resetPositions();
+        goalScored = true;
     }
     if (puck.x > 790 && puck.y > 150 && puck.y < 250) {
-        teamScore++;
-        resetPositions();
+        drewScore++;
+        goalScored = true;
     }
 
-    document.getElementById("scoreboard").innerText =
-        `${selectedTeam.name} ${teamScore} - ${hawksScore} Hawks`;
+    if (goalScored) {
+        document.getElementById("scoreboard").innerText =
+            `${team.name} ${drewScore} - ${hawksScore} Hawks`;
+        resetPositions();
+
+        if (drewScore >= 3 || hawksScore >= 3) {
+            gameRunning = false;
+            endOfGameUpdate();
+            alert(`Game over! ${team.name} ${drewScore} - ${hawksScore} Hawks\nRosters updated!`);
+            drewScore = 0;
+            hawksScore = 0;
+            document.getElementById("scoreboard").innerText =
+                `${team.name} 0 - 0 Hawks`;
+        }
+    }
 }
 
-function resetPositions() {
-    player.x = 100;
-    player.y = 200;
-    puck.x = 400;
-    puck.y = 200;
-    puck.dx = 0;
-    puck.dy = 0;
+function gameLoop() {
+    drawRink();
+    drawPlayer();
+    drawPuck();
+    if (gameRunning) {
+        movePuck();
+        checkCollision();
+        checkGoal();
+    }
+    requestAnimationFrame(gameLoop);
 }
 
 document.addEventListener("keydown", (e) => {
+    if (!gameRunning) return;
     if (e.key === "ArrowUp") player.y -= player.speed;
     if (e.key === "ArrowDown") player.y += player.speed;
     if (e.key === "ArrowLeft") player.x -= player.speed;
     if (e.key === "ArrowRight") player.x += player.speed;
 });
 
-function gameLoop() {
-    drawRink();
-    drawPlayer();
-    drawPuck();
-    movePuck();
-    checkCollision();
-    checkGoal();
-    requestAnimationFrame(gameLoop);
-}
+document.getElementById("playButton").addEventListener("click", () => {
+    resetPositions();
+    drewScore = 0;
+    hawksScore = 0;
+    document.getElementById("scoreboard").innerText =
+        `${team.name} 0 - 0 Hawks`;
+    gameRunning = true;
+});
+
+document.getElementById("advanceButton").addEventListener("click", () => {
+    endOfGameUpdate();
+    alert("Time advanced. Rosters updated (youth, aging, growth).");
+});
+
+gameLoop();
 </script>
 
 </body>
+</html>
