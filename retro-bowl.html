@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Retro Bowl College - Browser Edition</title>
+  <style>
+    body { font-family: Arial, background:#222; color:white; padding:20px; }
+    button { padding:10px 20px; margin:5px; font-size:16px; cursor:pointer; }
+    .box { background:#333; padding:15px; margin:10px 0; border-radius:8px; }
+    .section-title { margin-top:0; }
+    ul { padding-left:20px; }
+  </style>
+</head>
+<body>
+
+<h1>Retro Bowl College (Simple Edition)</h1>
+
+<div id="game"></div>
+
+<script>
+let week = 1;
+
+let team = {
+  name: "Franklinton State",
+  prestige: 2,
+  roster: [],
+  wins: 0,
+  losses: 0
+};
+
+// Academy holds youth players
+let academy = [];
+
+function rand(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function genPlayer(position, prestige, isYouth=false) {
+  let base = 55 + prestige * 5 + rand(-10, 10);
+  if (isYouth) base -= 5; // youth slightly weaker but with potential (you can expand later)
+  return {
+    name: (isYouth ? "Youth " : "") + position + " Recruit " + rand(1, 99),
+    position: position,
+    ovr: Math.max(50, Math.min(99, base))
+  };
+}
+
+function teamOVR(t) {
+  if (t.roster.length === 0) return 50;
+  let sum = t.roster.reduce((a, p) => a + p.ovr, 0);
+  return Math.floor(sum / t.roster.length);
+}
+
+function generateOpponent() {
+  return {
+    name: "College " + rand(100, 999),
+    prestige: rand(1, 4),
+    ovr: rand(60, 90)
+  };
+}
+
+let opponent = generateOpponent();
+
+function simulateGame() {
+  let user = teamOVR(team);
+  let opp = opponent.ovr;
+
+  let userScore = rand(10, 35) + Math.floor((user - opp) / 5);
+  let oppScore = rand(10, 35) + Math.floor((opp - user) / 5);
+
+  if (userScore > oppScore) team.wins++;
+  else team.losses++;
+
+  return { userScore, oppScore };
+}
+
+function recruitMainTeam() {
+  let pos = ["QB", "RB", "WR", "CB", "LB"][rand(0, 4)];
+  let p = genPlayer(pos, team.prestige, false);
+  team.roster.push(p);
+  return p;
+}
+
+// Academy functions
+function recruitYouth() {
+  let pos = ["QB", "RB", "WR", "CB", "LB"][rand(0, 4)];
+  let p = genPlayer(pos, team.prestige, true);
+  academy.push(p);
+  return p;
+}
+
+function promoteYouth(index) {
+  if (index < 0 || index >= academy.length) return null;
+  let p = academy.splice(index, 1)[0];
+  team.roster.push(p);
+  return p;
+}
+
+function render() {
+  let rosterHTML = team.roster.length === 0
+    ? "<p>No players yet.</p>"
+    : "<ul>" + team.roster.map(p =>
+        `<li>${p.name} - ${p.position} (OVR ${p.ovr})</li>`
+      ).join("") + "</ul>";
+
+  let academyHTML = academy.length === 0
+    ? "<p>No youth players in academy.</p>"
+    : "<ul>" + academy.map((p, i) =>
+        `<li>#${i+1} ${p.name} - ${p.position} (OVR ${p.ovr})</li>`
+      ).join("") + "</ul>";
+
+  document.getElementById("game").innerHTML = `
+    <div class="box">
+      <h2 class="section-title">Week ${week}</h2>
+      <p><b>Your Team:</b> ${team.name}</p>
+      <p>Record: ${team.wins}-${team.losses}</p>
+      <p>Team OVR: ${teamOVR(team)}</p>
+    </div>
+
+    <div class="box">
+      <h3 class="section-title">Upcoming Opponent</h3>
+      <p>${opponent.name}</p>
+      <p>OVR: ${opponent.ovr}</p>
+      <button onclick="playGame()">Play Game</button>
+    </div>
+
+    <div class="box">
+      <h3 class="section-title">Main Team Roster</h3>
+      ${rosterHTML}
+      <button onclick="doRecruitMain()">Recruit (College)</button>
+    </div>
+
+    <div class="box">
+      <h3 class="section-title">Academy (Youth Players)</h3>
+      ${academyHTML}
+      <button onclick="doRecruitYouth()">Recruit Youth Player</button>
+      <br><br>
+      <label>Promote youth # to main team: </label>
+      <input id="promoteIndex" type="number" min="1" style="width:60px;">
+      <button onclick="doPromoteYouth()">Promote</button>
+    </div>
+  `;
+}
+
+function playGame() {
+  let result = simulateGame();
+  alert(`Final Score:\nYou: ${result.userScore}\nOpponent: ${result.oppScore}`);
+  week++;
+  opponent = generateOpponent();
+  render();
+}
+
+function doRecruitMain() {
+  let p = recruitMainTeam();
+  alert(`You recruited a ${p.position} (OVR ${p.ovr}) to your college team.`);
+  render();
+}
+
+function doRecruitYouth() {
+  let p = recruitYouth();
+  alert(`You recruited a youth ${p.position} (OVR ${p.ovr}) to your academy.`);
+  render();
+}
+
+function doPromoteYouth() {
+  let input = document.getElementById("promoteIndex");
+  let idx = parseInt(input.value, 10);
+  if (isNaN(idx) || idx < 1 || idx > academy.length) {
+    alert("Invalid youth number.");
+    return;
+  }
+  let p = promoteYouth(idx - 1);
+  alert(`Promoted ${p.name} (${p.position}, OVR ${p.ovr}) to the main team!`);
+  input.value = "";
+  render();
+}
+
+// Start with a couple of players and youth so it feels alive
+team.roster.push(genPlayer("QB", team.prestige));
+team.roster.push(genPlayer("RB", team.prestige));
+academy.push(genPlayer("WR", team.prestige, true));
+academy.push(genPlayer("CB", team.prestige, true));
+
+render();
+</script>
+
+</body>
+</html>
