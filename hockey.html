@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>College Hockey Game</title>
+<style>
+    body {
+        background: #0b1e3d;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    #menu {
+        width: 350px;
+        height: 90vh;
+        overflow-y: auto;
+        padding: 20px;
+        border-radius: 15px;
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .teamButton {
+        width: 100%;
+        padding: 15px;
+        margin: 10px 0;
+        font-size: 18px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        color: white;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .teamButton:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 10px rgba(255,255,255,0.4);
+    }
+
+    #gameContainer {
+        display: none;
+        text-align: center;
+    }
+
+    #scoreboard {
+        font-size: 26px;
+        margin-bottom: 10px;
+    }
+
+    canvas {
+        background: #e8f4ff;
+        border: 8px solid #1a3a6e;
+        border-radius: 20px;
+    }
+</style>
+</head>
+<body>
+
+<div id="menu">
+    <h2>Select Your Team</h2>
+    <div id="teamList"></div>
+</div>
+
+<div id="gameContainer">
+    <div id="scoreboard"></div>
+    <canvas id="gameCanvas" width="800" height="400"></canvas>
+</div>
+
+<script>
+const teams = [
+    {name:"NC State Wolfpack", color:"red"},
+    {name:"Duke University", color:"#0033A0"},
+    {name:"Drew University", color:"#003366"},
+    {name:"UNC Tar Heels", color:"#4B9CD3"},
+    {name:"Wake Forest", color:"#B89D29"},
+    {name:"Clemson", color:"orange"},
+    {name:"Virginia", color:"navy"},
+    {name:"Virginia Tech", color:"#630031"},
+    {name:"Georgia Tech", color:"#B3A369"},
+    {name:"Miami", color:"green"},
+    {name:"Florida State", color:"#782F40"},
+    {name:"Louisville", color:"darkred"},
+    {name:"Pitt", color:"#003594"},
+    {name:"Syracuse", color:"darkorange"},
+    {name:"Notre Dame", color:"#0C2340"},
+    {name:"Maryland", color:"red"},
+    {name:"Ohio State", color:"#BB0000"},
+    {name:"Michigan", color:"#00274C"},
+    {name:"Michigan State", color:"green"},
+    {name:"Penn State", color:"#1E407C"},
+    {name:"Iowa", color:"black"},
+    {name:"Minnesota", color:"#7A0019"},
+    {name:"Wisconsin", color:"red"},
+    {name:"Illinois", color:"#13294B"},
+    {name:"Nebraska", color:"red"},
+    {name:"Kansas", color:"#0051BA"},
+    {name:"Oklahoma", color:"#841617"},
+    {name:"Texas", color:"#BF5700"},
+    {name:"Baylor", color:"#154734"},
+    {name:"TCU", color:"#4D1979"}
+];
+
+let selectedTeam = null;
+
+const teamList = document.getElementById("teamList");
+
+teams.forEach(team => {
+    const btn = document.createElement("button");
+    btn.className = "teamButton";
+    btn.style.background = team.color;
+    btn.innerText = team.name;
+    btn.onclick = () => startGame(team);
+    teamList.appendChild(btn);
+});
+
+function startGame(team) {
+    selectedTeam = team;
+    document.getElementById("menu").style.display = "none";
+    document.getElementById("gameContainer").style.display = "block";
+    document.getElementById("scoreboard").innerText =
+        `${team.name} 0 - 0 Hawks`;
+    gameLoop();
+}
+
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+
+let teamScore = 0;
+let hawksScore = 0;
+
+const player = {
+    x: 100,
+    y: 200,
+    size: 20,
+    speed: 4
+};
+
+const puck = {
+    x: 400,
+    y: 200,
+    size: 10,
+    dx: 0,
+    dy: 0,
+    friction: 0.98
+};
+
+function drawRink() {
+    ctx.fillStyle = "#e8f4ff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.strokeStyle = "#1a3a6e";
+    ctx.lineWidth = 4;
+
+    ctx.beginPath();
+    ctx.moveTo(400, 0);
+    ctx.lineTo(400, 400);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(400, 200, 60, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.strokeStyle = "red";
+    ctx.strokeRect(0, 150, 20, 100);
+    ctx.strokeRect(780, 150, 20, 100);
+}
+
+function drawPlayer() {
+    ctx.fillStyle = selectedTeam.color;
+    ctx.beginPath();
+    ctx.arc(player.x, player.y, player.size, 0, Math.PI * 2);
+    ctx.fill();
+}
+
+function drawPuck() {
+    ctx.fillStyle = "black";
+    ctx.beginPath();
+    ctx.arc(puck.x, puck.y, puck.size, 0, Math.PI * 2);
+    ctx.fill();
+}
+
+function movePuck() {
+    puck.x += puck.dx;
+    puck.y += puck.dy;
+
+    puck.dx *= puck.friction;
+    puck.dy *= puck.friction;
+
+    if (puck.x < puck.size || puck.x > canvas.width - puck.size) puck.dx *= -1;
+    if (puck.y < puck.size || puck.y > canvas.height - puck.size) puck.dy *= -1;
+}
+
+function checkCollision() {
+    const dist = Math.hypot(player.x - puck.x, player.y - puck.y);
+
+    if (dist < player.size + puck.size) {
+        puck.dx = (puck.x - player.x) * 0.2;
+        puck.dy = (puck.y - player.y) * 0.2;
+    }
+}
+
+function checkGoal() {
+    if (puck.x < 10 && puck.y > 150 && puck.y < 250) {
+        hawksScore++;
+        resetPositions();
+    }
+    if (puck.x > 790 && puck.y > 150 && puck.y < 250) {
+        teamScore++;
+        resetPositions();
+    }
+
+    document.getElementById("scoreboard").innerText =
+        `${selectedTeam.name} ${teamScore} - ${hawksScore} Hawks`;
+}
+
+function resetPositions() {
+    player.x = 100;
+    player.y = 200;
+    puck.x = 400;
+    puck.y = 200;
+    puck.dx = 0;
+    puck.dy = 0;
+}
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowUp") player.y -= player.speed;
+    if (e.key === "ArrowDown") player.y += player.speed;
+    if (e.key === "ArrowLeft") player.x -= player.speed;
+    if (e.key === "ArrowRight") player.x += player.speed;
+});
+
+function gameLoop() {
+    drawRink();
+    drawPlayer();
+    drawPuck();
+    movePuck();
+    checkCollision();
+    checkGoal();
+    requestAnimationFrame(gameLoop);
+}
+</script>
+
+</body>
