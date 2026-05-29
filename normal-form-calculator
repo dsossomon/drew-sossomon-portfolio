@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Normal Form Nash Equilibrium Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: black;
+        color: #0aa7ff;
+        text-align: center;
+    }
+
+    h1 {
+        margin-top: 20px;
+        color: #0aa7ff;
+    }
+
+    .controls {
+        margin: 20px auto;
+    }
+
+    .controls label {
+        margin: 0 10px;
+    }
+
+    input[type="number"] {
+        width: 60px;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #0aa7ff;
+        background: #111;
+        color: #0aa7ff;
+        text-align: center;
+    }
+
+    button {
+        margin: 10px;
+        padding: 8px 16px;
+        font-size: 14px;
+        cursor: pointer;
+        background: #0aa7ff;
+        color: black;
+        border: none;
+        border-radius: 6px;
+    }
+
+    button:hover {
+        background: #0088d6;
+    }
+
+    #matrixContainer {
+        margin: 20px auto;
+        display: inline-block;
+        border: 2px solid #0aa7ff;
+        padding: 10px;
+        border-radius: 8px;
+        background: #111;
+    }
+
+    table {
+        border-collapse: collapse;
+        margin: 0 auto;
+    }
+
+    td {
+        width: 70px;
+        height: 40px;
+        border: 1px solid #0aa7ff;
+        background: white;
+        color: black;
+        text-align: center;
+        font-size: 13px;
+        padding: 4px;
+    }
+
+    td.ne {
+        background: #0aa7ff;
+        color: black;
+        font-weight: bold;
+    }
+
+    #result {
+        margin-top: 15px;
+        color: #0aa7ff;
+        font-size: 14px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        white-space: pre-wrap;
+    }
+</style>
+</head>
+<body>
+
+<h1>Normal Form Nash Equilibrium Calculator</h1>
+
+<div class="controls">
+    <label>
+        Rows (Player 1 strategies):
+        <input type="number" id="rows" min="1" max="10" value="3">
+    </label>
+    <label>
+        Columns (Player 2 strategies):
+        <input type="number" id="cols" min="1" max="10" value="3">
+    </label>
+    <br>
+    <button onclick="generateRandomGame()">Randomize Payoffs</button>
+    <button onclick="computeNash()">Compute Nash Equilibria</button>
+</div>
+
+<div id="matrixContainer"></div>
+
+<div id="result"></div>
+
+<script>
+    let payoffs = []; // payoffs[r][c] = {p1, p2}
+    let currentRows = 0;
+    let currentCols = 0;
+
+    function generateRandomGame() {
+        const rows = parseInt(document.getElementById('rows').value, 10);
+        const cols = parseInt(document.getElementById('cols').value, 10);
+
+        if (isNaN(rows) || isNaN(cols) || rows < 1 || cols < 1 || rows > 10 || cols > 10) {
+            alert("Rows and columns must be between 1 and 10.");
+            return;
+        }
+
+        currentRows = rows;
+        currentCols = cols;
+        payoffs = [];
+
+        for (let r = 0; r < rows; r++) {
+            const rowArr = [];
+            for (let c = 0; c < cols; c++) {
+                // Random integers between -9 and 9
+                const p1 = Math.floor(Math.random() * 19) - 9;
+                const p2 = Math.floor(Math.random() * 19) - 9;
+                rowArr.push({ p1, p2 });
+            }
+            payoffs.push(rowArr);
+        }
+
+        renderMatrix();
+        document.getElementById('result').textContent = "Random game generated. Click \"Compute Nash Equilibria\" to analyze.";
+    }
+
+    function renderMatrix(neSet = []) {
+        const container = document.getElementById('matrixContainer');
+        container.innerHTML = "";
+
+        if (currentRows === 0 || currentCols === 0) return;
+
+        const table = document.createElement('table');
+
+        for (let r = 0; r < currentRows; r++) {
+            const tr = document.createElement('tr');
+            for (let c = 0; c < currentCols; c++) {
+                const td = document.createElement('td');
+                const cell = payoffs[r][c];
+                td.textContent = "(" + cell.p1 + ", " + cell.p2 + ")";
+
+                // Highlight if this cell is a Nash equilibrium
+                if (neSet.some(ne => ne.row === r && ne.col === c)) {
+                    td.classList.add('ne');
+                }
+
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+        }
+
+        container.appendChild(table);
+    }
+
+    function computeNash() {
+        if (currentRows === 0 || currentCols === 0) {
+            alert("Generate a game first.");
+            return;
+        }
+
+        // Best responses for Player 1 (rows) to each column
+        const bestForP1 = Array.from({ length: currentCols }, () => []);
+        for (let c = 0; c < currentCols; c++) {
+            let maxP1 = -Infinity;
+            for (let r = 0; r < currentRows; r++) {
+                if (payoffs[r][c].p1 > maxP1) {
+                    maxP1 = payoffs[r][c].p1;
+                }
+            }
+            for (let r = 0; r < currentRows; r++) {
+                if (payoffs[r][c].p1 === maxP1) {
+                    bestForP1[c].push(r);
+                }
+            }
+        }
+
+        // Best responses for Player 2 (cols) to each row
+        const bestForP2 = Array.from({ length: currentRows }, () => []);
+        for (let r = 0; r < currentRows; r++) {
+            let maxP2 = -Infinity;
+            for (let c = 0; c < currentCols; c++) {
+                if (payoffs[r][c].p2 > maxP2) {
+                    maxP2 = payoffs[r][c].p2;
+                }
+            }
+            for (let c = 0; c < currentCols; c++) {
+                if (payoffs[r][c].p2 === maxP2) {
+                    bestForP2[r].push(c);
+                }
+            }
+        }
+
+        // Nash equilibria = cells that are best response for both players
+        const nashEquilibria = [];
+        for (let r = 0; r < currentRows; r++) {
+            for (let c = 0; c < currentCols; c++) {
+                const isBestForP1 = bestForP1[c].includes(r);
+                const isBestForP2 = bestForP2[r].includes(c);
+                if (isBestForP1 && isBestForP2) {
+                    nashEquilibria.push({ row: r, col: c, p1: payoffs[r][c].p1, p2: payoffs[r][c].p2 });
+                }
+            }
+        }
+
+        renderMatrix(nashEquilibria);
+
+        const resultDiv = document.getElementById('result');
+        if (nashEquilibria.length === 0) {
+            resultDiv.textContent = "No pure-strategy Nash equilibria found.";
+        } else {
+            let text = "Pure-strategy Nash equilibria (row, column):\n";
+            nashEquilibria.forEach(ne => {
+                text += `• (r=${ne.row + 1}, c=${ne.col + 1}) with payoffs (${ne.p1}, ${ne.p2})\n`;
+            });
+            resultDiv.textContent = text;
+        }
+    }
+</script>
+
+</body>
+</html>
