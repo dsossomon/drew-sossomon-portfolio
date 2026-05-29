@@ -8,11 +8,13 @@
     body {
         font-family: Arial, sans-serif;
         text-align: center;
-        background: #f0f0f0;
+        background: black; /* NEW */
+        color: #0aa7ff; /* Light energy blue */
     }
 
     h1 {
         margin-top: 20px;
+        color: #0aa7ff;
     }
 
     #board {
@@ -22,12 +24,13 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 5px;
+        position: relative;
     }
 
     .cell {
         width: 100px;
         height: 100px;
-        background: white;
+        background: white; /* NEW: white tiles */
         display: flex;
         justify-content: center;
         align-items: center;
@@ -35,14 +38,34 @@
         cursor: pointer;
         border-radius: 10px;
         user-select: none;
+        border: 2px solid #0aa7ff; /* Blue border */
+    }
+
+    .cell:hover {
+        background: #d4f0ff; /* Light blue hover */
     }
 
     .x { color: red; }
-    .o { color: blue; }
+    .o { color: #0aa7ff; }
+
+    /* Strike-through line */
+    #strike {
+        position: absolute;
+        width: 0;
+        height: 6px;
+        background: #0aa7ff;
+        top: 0;
+        left: 0;
+        border-radius: 5px;
+        transform-origin: left center;
+        transition: 0.4s ease;
+        display: none;
+    }
 
     #scoreboard {
         margin-top: 20px;
         font-size: 20px;
+        color: #0aa7ff;
     }
 
     button {
@@ -50,6 +73,14 @@
         padding: 10px 20px;
         font-size: 18px;
         cursor: pointer;
+        background: #0aa7ff;
+        color: black; /* NEW: readable on blue */
+        border: none;
+        border-radius: 8px;
+    }
+
+    button:hover {
+        background: #0088d6;
     }
 </style>
 </head>
@@ -58,7 +89,9 @@
 
 <h1>Tic Tac Toe</h1>
 
-<div id="board"></div>
+<div id="board">
+    <div id="strike"></div>
+</div>
 
 <div id="scoreboard">
     <p><strong>X Wins:</strong> <span id="xWins">0</span></p>
@@ -70,15 +103,30 @@
 
 <script>
     const board = document.getElementById("board");
+    const strike = document.getElementById("strike");
     let cells = [];
     let currentPlayer = "X";
     let xWins = 0;
     let oWins = 0;
     let ties = 0;
 
+    const winLines = [
+        { combo: [0,1,2], x: 10, y: 50, length: 280, rotate: 0 },
+        { combo: [3,4,5], x: 10, y: 150, length: 280, rotate: 0 },
+        { combo: [6,7,8], x: 10, y: 250, length: 280, rotate: 0 },
+
+        { combo: [0,3,6], x: 50, y: 10, length: 280, rotate: 90 },
+        { combo: [1,4,7], x: 150, y: 10, length: 280, rotate: 90 },
+        { combo: [2,5,8], x: 250, y: 10, length: 280, rotate: 90 },
+
+        { combo: [0,4,8], x: 10, y: 10, length: 400, rotate: 45 },
+        { combo: [2,4,6], x: 290, y: 10, length: 400, rotate: 135 }
+    ];
+
     function createBoard() {
-        board.innerHTML = "";
+        board.innerHTML = '<div id="strike"></div>';
         cells = [];
+        strike.style.display = "none";
 
         for (let i = 0; i < 9; i++) {
             const cell = document.createElement("div");
@@ -95,13 +143,17 @@
         cells[i].textContent = currentPlayer;
         cells[i].classList.add(currentPlayer.toLowerCase());
 
-        if (checkWin(currentPlayer)) {
+        const winLine = checkWin(currentPlayer);
+        if (winLine) {
+            drawStrike(winLine);
             if (currentPlayer === "X") xWins++;
             else oWins++;
 
             updateScoreboard();
-            alert(currentPlayer + " wins!");
-            resetBoard();
+            setTimeout(() => {
+                alert(currentPlayer + " wins!");
+                resetBoard();
+            }, 500);
             return;
         }
 
@@ -117,15 +169,20 @@
     }
 
     function checkWin(player) {
-        const combos = [
-            [0,1,2], [3,4,5], [6,7,8],
-            [0,3,6], [1,4,7], [2,5,8],
-            [0,4,8], [2,4,6]
-        ];
+        for (let line of winLines) {
+            if (line.combo.every(i => cells[i].textContent === player)) {
+                return line;
+            }
+        }
+        return null;
+    }
 
-        return combos.some(combo =>
-            combo.every(index => cells[index].textContent === player)
-        );
+    function drawStrike(line) {
+        strike.style.display = "block";
+        strike.style.width = line.length + "px";
+        strike.style.top = line.y + "px";
+        strike.style.left = line.x + "px";
+        strike.style.transform = `rotate(${line.rotate}deg)`;
     }
 
     function updateScoreboard() {
