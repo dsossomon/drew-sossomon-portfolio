@@ -82,7 +82,7 @@ body {
 ">
     <div style="display: flex; align-items: center; gap: 10px;">
         <div style="width: 18px; height: 18px; background:#007bff; border-radius:4px;"></div>
-        <span style="font-weight:700; color:#0a192f;">You</span>
+        <span style="font-weight:700; color:#0a192f;">Drew Sossomon</span>
     </div>
 
     <div style="display: flex; align-items: center; gap: 10px;">
@@ -143,18 +143,18 @@ body {
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 40px;">
 
     <div class="card">
-        <h3 style="color: #000000;">USMNT GK Pool vs You</h3>
+        <h3 style="color: #000000;">USMNT GK Pool vs Drew Sossomon</h3>
         <canvas id="usmntVsMeChart"></canvas>
     </div>
 
     <div class="card">
-        <h3 style="color: #000000;">USMNT Now vs If You Were In Goal</h3>
+        <h3 style="color: #000000;">USMNT Now vs If Drew Sossomon Were In Goal</h3>
         <canvas id="teamImpactChart"></canvas>
     </div>
 
 </div>
 
-<!-- NEW SECTION ADDED BELOW  DASHBOARD -->
+<!-- ⭐ NEW SECTION ADDED BELOW YOUR DASHBOARD ⭐ -->
 <h2 class="section-label">Professional GK Style Compatibility Chart</h2>
 
 <!-- Radar Chart -->
@@ -171,7 +171,7 @@ body {
 
 <!-- Bar Chart -->
 <div class="card">
-    <h2>Drew Sossomon Style Match vs Top Clubs (You = 100)</h2>
+    <h2>Drew Sossomon Style Match vs Top Clubs (100%)</h2>
     <canvas id="youVsClubsChart"></canvas>
 </div>
 
@@ -212,17 +212,17 @@ const proColor = "#94a3b8";
 /* ORIGINAL DASHBOARD CHARTS */
 new Chart(saveChart, {
     type: "bar",
-    data: { labels:["You","Pro GK Avg"], datasets:[{ data:[93.6,78], backgroundColor:[drewColor,proColor] }] }
+    data: { labels:["Drew Sossomon","Pro GK Avg"], datasets:[{ data:[93.6,78], backgroundColor:[drewColor,proColor] }] }
 });
 
 new Chart(shutoutChart, {
     type: "pie",
-    data: { labels:["You","Pro GK Avg"], datasets:[{ data:[82,15], backgroundColor:[drewColor,proColor] }] }
+    data: { labels:["Drew Sossomon","Pro GK Avg"], datasets:[{ data:[82,15], backgroundColor:[drewColor,proColor] }] }
 });
 
 new Chart(pkChart, {
     type: "line",
-    data: { labels:["You","Pro GK Avg"], datasets:[{ data:[100,28], borderColor:drewColor, backgroundColor:"rgba(0,123,255,0.2)" }] }
+    data: { labels:["Drew Sossomon","Pro GK Avg"], datasets:[{ data:[100,28], borderColor:drewColor, backgroundColor:"rgba(0,123,255,0.2)" }] }
 });
 
 new Chart(radarChart1, {
@@ -230,7 +230,7 @@ new Chart(radarChart1, {
     data: {
         labels:["Save %","PK Saves","Shutouts","Consistency","Shot Volume"],
         datasets:[
-            { label:"You", data:[93.6,100,82,95,2446], backgroundColor:"rgba(0,123,255,0.2)", borderColor:drewColor },
+            { label:"Drew Sossomon", data:[93.6,100,82,95,2446], backgroundColor:"rgba(0,123,255,0.2)", borderColor:drewColor },
             { label:"Pro GK Avg", data:[78,28,15,70,900], backgroundColor:"rgba(148,163,184,0.2)", borderColor:proColor }
         ]
     }
@@ -241,7 +241,7 @@ new Chart(impactChart, {
     data: {
         labels:["Shots Faced","Saves"],
         datasets:[
-            { label:"You", data:[2446,2290], backgroundColor:drewColor },
+            { label:"Drew Sossomon", data:[2446,2290], backgroundColor:drewColor },
             { label:"Pro GK Avg", data:[900,700], backgroundColor:proColor }
         ]
     }
@@ -252,7 +252,7 @@ new Chart(domChart, {
     data: {
         labels:["Dominance Score"],
         datasets:[
-            { label:"You", data:[98], backgroundColor:drewColor },
+            { label:"Drew Sossomon", data:[98], backgroundColor:drewColor },
             { label:"Pro GK Avg", data:[65], backgroundColor:proColor }
         ]
     }
@@ -264,7 +264,7 @@ new Chart(usmntVsMeChart, {
         labels:["PK Saves","Pressure Control","Shot Volume","Consistency","Distribution","Clutch"],
         datasets:[
             { label:"USMNT GK Pool", data:[40,55,30,60,50,45], backgroundColor:"rgba(148,163,184,0.2)", borderColor:proColor },
-            { label:"You", data:[100,95,98,93,70,100], backgroundColor:"rgba(0,123,255,0.2)", borderColor:drewColor }
+            { label:"Drew Sossomon", data:[100,95,98,93,70,100], backgroundColor:"rgba(0,123,255,0.2)", borderColor:drewColor }
         ]
     }
 });
@@ -275,7 +275,7 @@ new Chart(teamImpactChart, {
         labels:["Goals Allowed","PK Success","Defensive Confidence","Counterattack Potential","Late-Game Stability"],
         datasets:[
             { label:"USMNT Now", data:[60,40,55,50,45], backgroundColor:proColor },
-            { label:"You In Goal", data:[30,100,85,75,95], backgroundColor:drewColor }
+            { label:"Drew Sossomon In Goal", data:[30,100,85,75,95], backgroundColor:drewColor }
         ]
     }
 });
@@ -286,7 +286,7 @@ new Chart(radarChart2, {
     data: {
         labels:["Shot-Stopping","Distribution","Pressure","PK Ability","Consistency","Sweeper Keeper"],
         datasets:[
-            { label:"You", data:[100,95,97,98,96,93], backgroundColor:"rgba(0,123,255,0.25)", borderColor:"#007bff" },
+            { label:"Drew Sossomon", data:[100,95,97,98,96,93], backgroundColor:"rgba(0,123,255,0.25)", borderColor:"#007bff" },
             { label:"FC Barcelona", data:[95,100,94,85,96,98], backgroundColor:"rgba(255,204,0,0.15)", borderColor:"#ffcc00" }
         ]
     }
@@ -304,7 +304,7 @@ new Chart(youVsClubsChart, {
     type: "bar",
     data: {
         labels:[
-            "YOU","FC Barcelona","Real Madrid","Inter Miami","Charlotte FC",
+            "Drew Sossomon","FC Barcelona","Real Madrid","Inter Miami","Charlotte FC",
             "Manchester City","Liverpool","Chelsea","Arsenal","Manchester United",
             "Atlético Madrid","Sevilla","Villarreal",
             "LAFC","Atlanta United","NYCFC","Seattle","Portland","Sporting KC"
