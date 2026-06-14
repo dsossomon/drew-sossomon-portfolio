@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://dsossomon.github.io/drew-sossomon-portfolio/</loc>
+  </url>
+
+  <url>
+    <loc>https://dsossomon.github.io/drew-sossomon-portfolio/about.html</loc>
+  </url>
+
+  <url>
+    <loc>https://dsossomon.github.io/drew-sossomon-portfolio/projects.html</loc>
+  </url>
+
+  <url>
+    <loc>https://dsossomon.github.io/drew-sossomon-portfolio/soccer.html</loc>
+  </url>
+
+  <url>
+    <loc>https://dsossomon.github.io/drew-sossomon-portfolio/hockey.html</loc>
+  </url>
+
+  <!-- Add more pages if you want -->
+</urlset>
