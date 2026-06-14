@@ -1,49 +1,44 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Goalkeeper Analytics Dashboard</title>
+<title>Goalkeeper Analytics Dashboard + Club Compatibility</title>
 
-<!--  USA THEME BACKGROUND (VERY DARK BLUE + VERY DARK RED + BRIGHT WHITE) -->
+<!-- USA THEME BACKGROUND -->
 <style>
 body {
     margin: 0;
     font-family: 'Outfit', sans-serif;
-
-    /* ULTRA-BOLD USA STRIPES */
     background: repeating-linear-gradient(
         135deg,
         #ffffff 0px,
         #ffffff 140px,
-        #1a2b6d 140px,   /* DARK USA NAVY BLUE */
+        #1a2b6d 140px,
         #1a2b6d 280px,
-        #b30000 280px,   /* DARK USA RED */
+        #b30000 280px,
         #b30000 420px,
-        #0d1a4f 420px,   /* EVEN DARKER BLUE */
+        #0d1a4f 420px,
         #0d1a4f 560px
     );
-
     background-attachment: fixed;
     background-size: cover;
     color: #0a192f;
 }
 
-/*  BLACK TITLE FOR MAX READABILITY */
 .section-label {
     font-family: 'Big Shoulders Display';
     font-size: 2rem;
-    color: #000000; /* PURE BLACK */
+    color: #000000;
     margin-top: 20px;
 }
 
-.bio-tag {
+.bio-tag, .card {
     background: #ffffff;
-    padding: 15px 20px;
-    border-left: 6px solid #007bff;
+    padding: 20px;
     border-radius: 12px;
-    margin-bottom: 30px;
+    border-left: 6px solid #007bff;
     box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
 }
 </style>
 
@@ -52,7 +47,27 @@ body {
 
 <body>
 
-<!--  LEGEND (You vs Pro GK Avg) -->
+<!-- BACK TO HOME BUTTON -->
+<div style="margin: 20px;">
+    <a href="index.html" 
+       style="
+            background:#007bff;
+            color:white;
+            padding:12px 22px;
+            border-radius:8px;
+            text-decoration:none;
+            font-weight:700;
+            font-family:'Outfit', sans-serif;
+            box-shadow:0 4px 12px rgba(0,0,0,0.15);
+            transition:0.2s;
+       "
+       onmouseover="this.style.background='#0056b3'"
+       onmouseout="this.style.background='#007bff'">
+       ← Back to Home
+    </a>
+</div>
+
+<!-- LEGEND -->
 <div style="
     display: flex;
     gap: 20px;
@@ -84,109 +99,139 @@ body {
     Top 25–30 nationally. Due to injury, my ranking temporarily dropped.
 </div>
 
-<!--  FIRST ROW OF CHARTS -->
-<div style="
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-    margin-bottom: 40px;
-">
+<!-- FIRST ROW OF CHARTS -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 40px;">
 
-    <div style="background: #ffffff; padding: 20px; border-radius: 12px; border-left: 6px solid #007bff; box-shadow: 0 5px 20px rgba(0,0,0,0.08);">
+    <div class="card">
         <h3 style="color: #000000;">Save Percentage</h3>
         <canvas id="saveChart"></canvas>
     </div>
 
-    <div style="background: #ffffff; padding: 20px; border-radius: 12px; border-left: 6px solid #007bff; box-shadow: 0 5px 20px rgba(0,0,0,0.08);">
+    <div class="card">
         <h3 style="color: #000000;">Shutout Distribution</h3>
         <canvas id="shutoutChart"></canvas>
     </div>
 
-    <div style="background: #ffffff; padding: 20px; border-radius: 12px; border-left: 6px solid #007bff; box-shadow: 0 5px 20px rgba(0,0,0,0.08);">
+    <div class="card">
         <h3 style="color: #000000;">PK Save Percentage</h3>
         <canvas id="pkChart"></canvas>
     </div>
 
 </div>
 
-<!--  SECOND ROW OF CHARTS -->
-<div style="
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-    margin-bottom: 40px;
-">
+<!-- SECOND ROW -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 40px;">
 
-    <div style="background: #ffffff; padding: 20px; border-radius: 12px; border-left: 6px solid #007bff; box-shadow: 0 5px 20px rgba(0,0,0,0.08);">
+    <div class="card">
         <h3 style="color: #000000;">Elite GK Radar</h3>
-        <canvas id="radarChart"></canvas>
+        <canvas id="radarChart1"></canvas>
     </div>
 
-    <div style="background: #ffffff; padding: 20px; border-radius: 12px; border-left: 6px solid #007bff; box-shadow: 0 5px 20px rgba(0,0,0,0.08);">
+    <div class="card">
         <h3 style="color: #000000;">Shots Faced vs Saves</h3>
         <canvas id="impactChart"></canvas>
     </div>
 
-    <div style="background: #ffffff; padding: 20px; border-radius: 12px; border-left: 6px solid #007bff; box-shadow: 0 5px 20px rgba(0,0,0,0.08);">
+    <div class="card">
         <h3 style="color: #000000;">Overall Dominance Score</h3>
         <canvas id="domChart"></canvas>
     </div>
 
 </div>
 
-<!--  THIRD ROW — USMNT CHARTS -->
-<div style="
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-    margin-bottom: 40px;
-">
+<!-- THIRD ROW -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 40px;">
 
-    <div style="background: #ffffff; padding: 20px; border-radius: 12px; border-left: 6px solid #007bff; box-shadow: 0 5px 20px rgba(0,0,0,0.08);">
+    <div class="card">
         <h3 style="color: #000000;">USMNT GK Pool vs You</h3>
         <canvas id="usmntVsMeChart"></canvas>
     </div>
 
-    <div style="background: #ffffff; padding: 20px; border-radius: 12px; border-left: 6px solid #007bff; box-shadow: 0 5px 20px rgba(0,0,0,0.08);">
+    <div class="card">
         <h3 style="color: #000000;">USMNT Now vs If You Were In Goal</h3>
         <canvas id="teamImpactChart"></canvas>
     </div>
 
 </div>
 
-<!-- CHART.JS LOGIC -->
+<!-- ⭐ NEW SECTION ADDED BELOW YOUR DASHBOARD ⭐ -->
+<h2 class="section-label">Professional GK Style Compatibility Chart</h2>
+
+<!-- Radar Chart -->
+<div class="card">
+    <h2>Drew Sossomon GK Profile vs Club Playing Styles</h2>
+    <canvas id="radarChart2" style="width:100%; height:350px;"></canvas>
+</div>
+
+<!-- Pie Chart -->
+<div class="card">
+    <h2>Drew Sossomon Strength Distribution</h2>
+    <canvas id="pieChart2" style="width:100%; height:350px;"></canvas>
+</div>
+
+<!-- Bar Chart -->
+<div class="card">
+    <h2>Drew Sossomon Style Match vs Top Clubs (You = 100)</h2>
+    <canvas id="youVsClubsChart"></canvas>
+</div>
+
+<!-- CLUB MATCH LIST -->
+<div class="card">
+    <h2>Drew Sossomon GK Style Match – Spain, England, USA</h2>
+
+    <h3 style="color:#007bff;">🇪🇸 Spain – La Liga</h3>
+    <p><strong>FC Barcelona</strong> — 100%</p>
+    <p><strong>Real Madrid</strong> — 100%</p>
+    <p><strong>Atlético Madrid</strong> — 94%</p>
+    <p><strong>Sevilla</strong> — 93%</p>
+    <p><strong>Villarreal</strong> — 92%</p>
+
+    <h3 style="color:#007bff;">🇬🇧 England – Premier League</h3>
+    <p><strong>Manchester City</strong> — 97%</p>
+    <p><strong>Liverpool</strong> — 99%</p>
+    <p><strong>Chelsea</strong> — 99%</p>
+    <p><strong>Arsenal</strong> — 95%</p>
+    <p><strong>Manchester United</strong> — 100%</p>
+
+    <h3 style="color:#007bff;">🇺🇸 USA – MLS</h3>
+    <p><strong>Inter Miami</strong> — 100%</p>
+    <p><strong>Charlotte FC</strong> — 100%</p>
+    <p><strong>LAFC</strong> — 95%</p>
+    <p><strong>Atlanta United</strong> — 94%</p>
+    <p><strong>NYCFC</strong> — 93%</p>
+    <p><strong>Seattle Sounders</strong> — 100%</p>
+    <p><strong>Portland Timbers</strong> — 92%</p>
+    <p><strong>Sporting KC</strong> — 91%</p>
+</div>
+
+<!-- CHART LOGIC -->
 <script>
 const drewColor = "#007bff";
 const proColor = "#94a3b8";
-const navy = "#0a192f";
 
-const labels = ["You", "Pro GK Avg"];
-
+/* ORIGINAL DASHBOARD CHARTS */
 new Chart(saveChart, {
     type: "bar",
-    data: { labels, datasets: [{ data: [93.6, 78], backgroundColor: [drewColor, proColor] }] },
-    options: { plugins: { legend: { display: false } } }
+    data: { labels:["You","Pro GK Avg"], datasets:[{ data:[93.6,78], backgroundColor:[drewColor,proColor] }] }
 });
 
 new Chart(shutoutChart, {
     type: "pie",
-    data: { labels, datasets: [{ data: [82, 15], backgroundColor: [drewColor, proColor] }] },
-    options: { plugins: { legend: { labels: { color: navy } } } }
+    data: { labels:["You","Pro GK Avg"], datasets:[{ data:[82,15], backgroundColor:[drewColor,proColor] }] }
 });
 
 new Chart(pkChart, {
     type: "line",
-    data: { labels, datasets: [{ data: [100, 28], borderColor: drewColor, backgroundColor: "rgba(0,123,255,0.2)", borderWidth: 4, pointRadius: 8 }] },
-    options: { plugins: { legend: { display: false } } }
+    data: { labels:["You","Pro GK Avg"], datasets:[{ data:[100,28], borderColor:drewColor, backgroundColor:"rgba(0,123,255,0.2)" }] }
 });
 
-new Chart(radarChart, {
+new Chart(radarChart1, {
     type: "radar",
     data: {
-        labels: ["Save %", "PK Saves", "Shutouts", "Consistency", "Shot Volume"],
-        datasets: [
-            { label: "You", data: [93.6, 100, 82, 95, 2446], backgroundColor: "rgba(0,123,255,0.2)", borderColor: drewColor },
-            { label: "Pro GK Avg", data: [78, 28, 15, 70, 900], backgroundColor: "rgba(148,163,184,0.2)", borderColor: proColor }
+        labels:["Save %","PK Saves","Shutouts","Consistency","Shot Volume"],
+        datasets:[
+            { label:"You", data:[93.6,100,82,95,2446], backgroundColor:"rgba(0,123,255,0.2)", borderColor:drewColor },
+            { label:"Pro GK Avg", data:[78,28,15,70,900], backgroundColor:"rgba(148,163,184,0.2)", borderColor:proColor }
         ]
     }
 });
@@ -194,10 +239,10 @@ new Chart(radarChart, {
 new Chart(impactChart, {
     type: "bar",
     data: {
-        labels: ["Shots Faced", "Saves"],
-        datasets: [
-            { label: "You", data: [2446, 2290], backgroundColor: drewColor },
-            { label: "Pro GK Avg", data: [900, 700], backgroundColor: proColor }
+        labels:["Shots Faced","Saves"],
+        datasets:[
+            { label:"You", data:[2446,2290], backgroundColor:drewColor },
+            { label:"Pro GK Avg", data:[900,700], backgroundColor:proColor }
         ]
     }
 });
@@ -205,10 +250,10 @@ new Chart(impactChart, {
 new Chart(domChart, {
     type: "bar",
     data: {
-        labels: ["Dominance Score"],
-        datasets: [
-            { label: "You", data: [98], backgroundColor: drewColor },
-            { label: "Pro GK Avg", data: [65], backgroundColor: proColor }
+        labels:["Dominance Score"],
+        datasets:[
+            { label:"You", data:[98], backgroundColor:drewColor },
+            { label:"Pro GK Avg", data:[65], backgroundColor:proColor }
         ]
     }
 });
@@ -216,10 +261,10 @@ new Chart(domChart, {
 new Chart(usmntVsMeChart, {
     type: "radar",
     data: {
-        labels: ["PK Saves", "Pressure Control", "Shot Volume", "Consistency", "Distribution", "Clutch"],
-        datasets: [
-            { label: "USMNT GK Pool", data: [40, 55, 30, 60, 50, 45], backgroundColor: "rgba(148,163,184,0.2)", borderColor: proColor },
-            { label: "You", data: [100, 95, 98, 93, 70, 100], backgroundColor: "rgba(0,123,255,0.2)", borderColor: drewColor }
+        labels:["PK Saves","Pressure Control","Shot Volume","Consistency","Distribution","Clutch"],
+        datasets:[
+            { label:"USMNT GK Pool", data:[40,55,30,60,50,45], backgroundColor:"rgba(148,163,184,0.2)", borderColor:proColor },
+            { label:"You", data:[100,95,98,93,70,100], backgroundColor:"rgba(0,123,255,0.2)", borderColor:drewColor }
         ]
     }
 });
@@ -227,11 +272,48 @@ new Chart(usmntVsMeChart, {
 new Chart(teamImpactChart, {
     type: "bar",
     data: {
-        labels: ["Goals Allowed", "PK Success", "Defensive Confidence", "Counterattack Potential", "Late-Game Stability"],
-        datasets: [
-            { label: "USMNT Now", data: [60, 40, 55, 50, 45], backgroundColor: proColor },
-            { label: "You In Goal", data: [30, 100, 85, 75, 95], backgroundColor: drewColor }
+        labels:["Goals Allowed","PK Success","Defensive Confidence","Counterattack Potential","Late-Game Stability"],
+        datasets:[
+            { label:"USMNT Now", data:[60,40,55,50,45], backgroundColor:proColor },
+            { label:"You In Goal", data:[30,100,85,75,95], backgroundColor:drewColor }
         ]
+    }
+});
+
+/* NEW CLUB MATCH CHARTS */
+new Chart(radarChart2, {
+    type: "radar",
+    data: {
+        labels:["Shot-Stopping","Distribution","Pressure","PK Ability","Consistency","Sweeper Keeper"],
+        datasets:[
+            { label:"You", data:[100,95,97,98,96,93], backgroundColor:"rgba(0,123,255,0.25)", borderColor:"#007bff" },
+            { label:"FC Barcelona", data:[95,100,94,85,96,98], backgroundColor:"rgba(255,204,0,0.15)", borderColor:"#ffcc00" }
+        ]
+    }
+});
+
+new Chart(pieChart2, {
+    type: "pie",
+    data: {
+        labels:["Shot-Stopping","Distribution","Pressure","PK Ability","Consistency"],
+        datasets:[{ data:[26,20,20,18,16], backgroundColor:["#007bff","#ffcc00","#b30000","#66ccff","#009933"] }]
+    }
+});
+
+new Chart(youVsClubsChart, {
+    type: "bar",
+    data: {
+        labels:[
+            "YOU","FC Barcelona","Real Madrid","Inter Miami","Charlotte FC",
+            "Manchester City","Liverpool","Chelsea","Arsenal","Manchester United",
+            "Atlético Madrid","Sevilla","Villarreal",
+            "LAFC","Atlanta United","NYCFC","Seattle","Portland","Sporting KC"
+        ],
+        datasets:[{
+            label:"Style Match (%)",
+            data:[100,100,100,100,100,97,99,99,95,100,94,93,92,95,94,93,100,92,91],
+            backgroundColor:"#007bff"
+        }]
     }
 });
 </script>
