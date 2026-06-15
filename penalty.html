@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FIFA-Style Goalkeeper Penalty Game</title>
+  
+<meta charset="UTF-8">
+<title>Drew Sossomon – Why He Never Misses</title>
+
+<style>
+  body {
+    background: #02040a;
+    color: #f5f5f5;
+    font-family: system-ui, sans-serif;
+    padding: 40px;
+    text-align: center;
+  }
+
+  #toggleDrew {
+    padding: 12px 22px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    transition: background 0.2s ease;
+  }
+
+  #toggleDrew:hover {
+    background: rgba(255,255,255,0.18);
+  }
+
+  #drew-panel {
+    width: 100%;
+    max-width: 700px;
+    margin: 20px auto 0;
+    background: rgba(8,12,24,0.95);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease;
+  }
+
+  #drew-panel.open {
+    max-height: 2000px;
+  }
+
+  #drew-content {
+    padding: 20px 30px;
+    text-align: left;
+  }
+
+  #drew-content h2 {
+    color: #e3c46f;
+    margin-bottom: 10px;
+    letter-spacing: 0.08em;
+  }
+
+  #drew-content h3 {
+    margin-top: 18px;
+    color: #fff;
+  }
+
+  #drew-content p, #drew-content li {
+    opacity: 0.9;
+    line-height: 1.5;
+  }
+
+  ul {
+    margin-left: 20px;
+  }
+</style>
+
+</head>
+<body>
+
+<button id="toggleDrew">Learn Why Drew Never Misses</button>
+
+<div id="drew-panel">
+  <div id="drew-content">
+    <h2>Drew Sossomon – Why He Never Misses</h2>
+
+    <p>I am known for being one of the most reliable penalty stoppers in the game. Here’s what makes Me elite:</p>
+
+    <h3>1. Reading Body Language</h3>
+    <ul>
+      <li>Hip angle reveals final shot direction</li>
+      <li>Plant foot shows height and side</li>
+      <li>Run‑up speed hints at power vs placement</li>
+      <li>Shoulder drop shows across‑goal shots</li>
+      <li>Last step length predicts top‑corner attempts</li>
+    </ul>
+
+    <h3>2. Reaction‑Based Diving</h3>
+    <p>I wait until the exact moment the shooter strikes the ball.  I then react and I never guess.</p>
+
+    <h3>3. Studying Shooter Tendencies</h3>
+    <ul>
+      <li>Left‑footers often shoot across goal</li>
+      <li>Nervous players go low and safe</li>
+      <li>Confident shooters aim high corners</li>
+    </ul>
+
+    <h3>4. Positioning Mastery</h3>
+    <p> I stand slightly off‑center to bait shooters into my stronger side.</p>
+
+    <h3>5. Micro‑Movements</h3>
+    <p>Small hops keep me explosive and ready for any direction.</p>
+
+    <h3>6. Hand Technique</h3>
+    <p> I Use a “ Diamond‑shape” hand form for clean catches and fewer rebounds.</p>
+
+    <h3>7. Mental Strength</h3>
+    <p> I stay Calm, focused, and unbothered by pressure.</p>
+  </div>
+</div>
+
+<script>
+  const toggleDrewBtn = document.getElementById("toggleDrew");
+  const drewPanel = document.getElementById("drew-panel");
+
+  toggleDrewBtn.addEventListener("click", () => {
+    const open = drewPanel.classList.contains("open");
+
+    if (open) {
+      drewPanel.classList.remove("open");
+      toggleDrewBtn.textContent = "Learn Why Drew Never Misses";
+    } else {
+      drewPanel.classList.add("open");
+      toggleDrewBtn.textContent = "Hide Drew's Secrets";
+    }
+  });
+</script>
+
+
+  
+  
+  
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #02040a;
+      color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 6px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 1.4rem;
+    }
+
+    .subtitle {
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+
+    .hero-banner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #f5f5f5, #e3c46f);
+      color: #111;
+      box-shadow: 0 0 24px rgba(227, 196, 111, 0.5);
+    }
+
+    .hero-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fff, #e3c46f);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.8rem;
+      color: #111;
+    }
+
+    .hero-text {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .layout {
+      display: flex;
+      flex-direction: row;
+      gap: 18px;
+      align-items: flex-start;
+      justify-content: center;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    canvas {
+      border-radius: 16px;
+      background: radial-gradient(circle at 50% 0%, #1b3b6f 0, #0b5c1f 40%, #0f7a2b 70%, #02040a 100%);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    .side-panel {
+      width: 280px;
+      background: rgba(8, 12, 24, 0.95);
+      border-radius: 16px;
+      padding: 14px 16px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .side-panel h2 {
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .scorebug {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+    }
+
+    .team {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .team-name {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.9;
+    }
+
+    .team-score {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .score-center {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      opacity: 0.8;
+    }
+
+    .stats {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.85rem;
+    }
+
+    .stat-line {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .label {
+      opacity: 0.8;
+    }
+
+    .value {
+      font-weight: 600;
+    }
+
+    .controls {
+      margin-top: 12px;
+      font-size: 0.8rem;
+      opacity: 0.85;
+      line-height: 1.4;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    button {
+      flex: 1;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: linear-gradient(135deg, #e3c46f, #ffffff);
+      color: #111;
+      box-shadow: 0 0 14px rgba(227, 196, 111, 0.6);
+      transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.08s ease;
+    }
+
+    button.secondary {
+      background: linear-gradient(135deg, #4b8cff, #1b3b6f);
+      color: #f5f5f5;
+      box-shadow: 0 0 14px rgba(75, 140, 255, 0.6);
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 0 18px rgba(227, 196, 111, 0.8);
+    }
+
+    button.secondary:hover {
+      box-shadow: 0 0 18px rgba(75, 140, 255, 0.8);
+    }
+
+    .event-log {
+      margin-top: 12px;
+      font-size: 0.8rem;
+      max-height: 140px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .event-log p {
+      margin-bottom: 4px;
+      opacity: 0.9;
+    }
+
+    .event-save {
+      color: #e3c46f;
+    }
+
+    .event-goal {
+      color: #ff4b4b;
+    }
+
+    .event-info {
+      color: #4b8cff;
+    }
+
+    /* Broadcast overlay on canvas */
+    .overlay {
+      position: relative;
+    }
+
+    .broadcast-bar {
+      position: absolute;
+      top: 10px;
+      left: 16px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: rgba(8, 12, 24, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .broadcast-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #e3c46f;
+    }
+
+    .broadcast-label {
+      opacity: 0.9;
+    }
+
+    .broadcast-legends {
+      position: absolute;
+      bottom: 10px;
+      left: 16px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: rgba(8, 12, 24, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+    }
+
+    .replay-tag {
+      position: absolute;
+      top: 10px;
+      right: 16px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: rgba(227, 196, 111, 0.9);
+      color: #111;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      display: none;
+    }
+
+    .replay-tag.active {
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Goalkeeper Penalty – Broadcast Edition</h1>
+  <p class="subtitle">FIFA-style presentation. Real pressure. Read the shooter. React like a pro.</p>
+
+  <div class="hero-banner">
+    <div class="hero-badge">DS</div>
+    <div class="hero-text">
+      Drew Sossomon has saved over 60+ pens and has never missed.
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="overlay">
+      <canvas id="game" width="720" height="420"></canvas>
+      <div class="broadcast-bar">
+        <div class="broadcast-dot"></div>
+        <span class="broadcast-label">Live</span>
+        <span>Penalty Shootout</span>
+      </div>
+      <div class="broadcast-legends">
+        Legend: Drew Sossomon • Save rate: 100% career
+      </div>
+      <div class="replay-tag" id="replayTag">Replay</div>
+    </div>
+
+    <div class="side-panel">
+      <h2>Match Center</h2>
+
+      <div class="scorebug">
+        <div class="team">
+          <span class="team-name">Drew Sossomon</span>
+          <span class="team-score" id="keeperScore">0</span>
+        </div>
+        <div class="score-center">
+          Penalties
+        </div>
+        <div class="team">
+          <span class="team-name">Shooters</span>
+          <span class="team-score" id="shooterScore">0</span>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat-line">
+          <span class="label">Saves</span>
+          <span class="value" id="saves">0</span>
+        </div>
+        <div class="stat-line">
+          <span class="label">Goals Conceded</span>
+          <span class="value" id="goals">0</span>
+        </div>
+        <div class="stat-line">
+          <span class="label">Total Pens</span>
+          <span class="value" id="total">0</span>
+        </div>
+        <div class="stat-line">
+          <span class="label">Save Rate</span>
+          <span class="value" id="rate">0%</span>
+        </div>
+      </div>
+
+      <div class="controls">
+        Controls:<br />
+        • Move keeper: <strong>A / D</strong> or <strong>Left / Right</strong><br />
+        • Dive: <strong>W</strong> or <strong>Up</strong><br />
+        Tip: Wait for the shooter’s last step before diving.
+      </div>
+
+      <div class="btn-row">
+        <button id="nextKick">Next Kick</button>
+        <button id="reset" class="secondary">Reset Match</button>
+      </div>
+
+      <div class="event-log" id="log"></div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("game");
+    const ctx = canvas.getContext("2d");
+
+    const savesEl = document.getElementById("saves");
+    const goalsEl = document.getElementById("goals");
+    const totalEl = document.getElementById("total");
+    const rateEl = document.getElementById("rate");
+    const keeperScoreEl = document.getElementById("keeperScore");
+    const shooterScoreEl = document.getElementById("shooterScore");
+    const logEl = document.getElementById("log");
+    const replayTag = document.getElementById("replayTag");
+
+    const nextKickBtn = document.getElementById("nextKick");
+    const resetBtn = document.getElementById("reset");
+
+    const WIDTH = canvas.width;
+    const HEIGHT = canvas.height;
+
+    const goal = {
+      x: WIDTH / 2 - 140,
+      y: 70,
+      width: 280,
+      height: 70
+    };
+
+    const penaltySpot = {
+      x: WIDTH / 2,
+      y: 280
+    };
+
+    const keeper = {
+      x: WIDTH / 2,
+      y: goal.y + goal.height + 12,
+      width: 42,
+      height: 42,
+      vx: 0,
+      vy: 0,
+      speed: 4.2,
+      diving: false,
+      divePower: 6.5,
+      diveCooldown: 0
+    };
+
+    const shooter = {
+      x: WIDTH / 2,
+      y: penaltySpot.y + 46,
+      runUp: 0,
+      directionHint: 0,
+      lastStepTime: 0
+    };
+
+    const ball = {
+      active: false,
+      x: penaltySpot.x,
+      y: penaltySpot.y,
+      radius: 8,
+      vx: 0,
+      vy: 0,
+      curve: 0,
+      speed: 0,
+      shotTime: 0
+    };
+
+    let saves = 0;
+    let goals = 0;
+    let totalPens = 0;
+
+    const keys = {};
+    window.addEventListener("keydown", (e) => {
+      keys[e.key.toLowerCase()] = true;
+    });
+    window.addEventListener("keyup", (e) => {
+      keys[e.key.toLowerCase()] = false;
+    });
+
+    function logEvent(text, type = "info") {
+      const p = document.createElement("p");
+      p.textContent = text;
+      if (type === "save") p.classList.add("event-save");
+      if (type === "goal") p.classList.add("event-goal");
+      if (type === "info") p.classList.add("event-info");
+      logEl.prepend(p);
+    }
+
+    function updateStats() {
+      savesEl.textContent = saves;
+      goalsEl.textContent = goals;
+      totalPens = saves + goals;
+      totalEl.textContent = totalPens;
+      const rate = totalPens === 0 ? 0 : Math.round((saves / totalPens) * 100);
+      rateEl.textContent = rate + "%";
+      keeperScoreEl.textContent = saves;
+      shooterScoreEl.textContent = goals;
+    }
+
+    function resetMatch() {
+      saves = 0;
+      goals = 0;
+      totalPens = 0;
+      updateStats();
+      logEvent("Match reset. Drew Sossomon steps up again.", "info");
+      prepareNextKick();
+    }
+
+    function prepareNextKick() {
+      ball.active = false;
+      ball.x = penaltySpot.x;
+      ball.y = penaltySpot.y;
+      ball.vx = 0;
+      ball.vy = 0;
+      ball.curve = 0;
+      ball.speed = 0;
+      ball.shotTime = 0;
+
+      shooter.x = penaltySpot.x;
+      shooter.y = penaltySpot.y + 46;
+      shooter.runUp = 0;
+
+      const r = Math.random();
+      if (r < 0.33) shooter.directionHint = -1;
+      else if (r < 0.66) shooter.directionHint = 1;
+      else shooter.directionHint = 0;
+
+      keeper.x = WIDTH / 2;
+      keeper.y = goal.y + goal.height + 12;
+      keeper.vx = 0;
+      keeper.vy = 0;
+      keeper.diving = false;
+      keeper.diveCooldown = 0;
+
+      replayTag.classList.remove("active");
+      logEvent("New penalty. Watch the run-up and hips.", "info");
+    }
+
+    function shootBall() {
+      ball.active = true;
+      ball.x = penaltySpot.x;
+      ball.y = penaltySpot.y;
+
+      const targetX = goal.x + 18 + Math.random() * (goal.width - 36);
+      const targetY = goal.y + 12 + Math.random() * (goal.height - 24);
+
+      const dx = targetX - ball.x;
+      const dy = targetY - ball.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      const baseSpeed = 8 + Math.random() * 3;
+      ball.speed = baseSpeed;
+
+      ball.vx = (dx / distance) * baseSpeed;
+      ball.vy = (dy / distance) * baseSpeed;
+
+      ball.curve = (Math.random() * 0.35 + 0.1) * (Math.random() < 0.5 ? 1 : -1);
+      ball.shotTime = performance.now();
+
+      logEvent("Shooter strikes! Time your dive.", "info");
+    }
+
+    function updateKeeper() {
+      if (keys["a"] || keys["arrowleft"]) {
+        keeper.vx = -keeper.speed;
+      } else if (keys["d"] || keys["arrowright"]) {
+        keeper.vx = keeper.speed;
+      } else {
+        keeper.vx = 0;
+      }
+
+      const now = performance.now();
+      const canDive = now - shooter.lastStepTime < 600 && now - shooter.lastStepTime > 50;
+
+      if ((keys["w"] || keys["arrowup"]) && !keeper.diving && keeper.diveCooldown <= 0 && canDive) {
+        keeper.diving = true;
+        keeper.vy = -keeper.divePower;
+        keeper.diveCooldown = 70;
+      }
+
+      if (keeper.diving) {
+        keeper.vy += 0.45;
+        if (keeper.y >= goal.y + goal.height + 12) {
+          keeper.y = goal.y + goal.height + 12;
+          keeper.vy = 0;
+          keeper.diving = false;
+        }
+      } else {
+        keeper.vy = 0;
+      }
+
+      keeper.x += keeper.vx;
+      keeper.y += keeper.vy;
+
+      const leftLimit = goal.x + 14;
+      const rightLimit = goal.x + goal.width - 14;
+      if (keeper.x < leftLimit) keeper.x = leftLimit;
+      if (keeper.x > rightLimit) keeper.x = rightLimit;
+
+      if (keeper.diveCooldown > 0) keeper.diveCooldown--;
+    }
+
+    function updateShooter() {
+      if (!ball.active && shooter.runUp < 1) {
+        shooter.runUp += 0.012;
+        shooter.y -= 0.42;
+
+        if (shooter.runUp > 0.8 && shooter.lastStepTime === 0) {
+          shooter.lastStepTime = performance.now();
+        }
+
+        if (shooter.runUp >= 1) {
+          setTimeout(shootBall, 260);
+        }
+      }
+    }
+
+    function updateBall() {
+      if (!ball.active) return;
+
+      ball.vx += ball.curve * 0.02;
+      ball.x += ball.vx;
+      ball.y += ball.vy;
+
+      if (ball.y <= goal.y + goal.height + 4) {
+        const kLeft = keeper.x - keeper.width / 2;
+        const kRight = keeper.x + keeper.width / 2;
+        const kTop = keeper.y - keeper.height / 2;
+        const kBottom = keeper.y + keeper.height / 2;
+
+        const inGoalX = ball.x > goal.x && ball.x < goal.x + goal.width;
+        const inGoalY = ball.y > goal.y && ball.y < goal.y + goal.height;
+
+        const hitKeeper =
+          ball.x + ball.radius > kLeft &&
+          ball.x - ball.radius < kRight &&
+          ball.y + ball.radius > kTop &&
+          ball.y - ball.radius < kBottom;
+
+        if (hitKeeper) {
+          saves++;
+          updateStats();
+          logEvent("WORLD-CLASS SAVE! Broadcast replay incoming.", "save");
+          triggerReplay(true);
+          ball.active = false;
+          setTimeout(prepareNextKick, 900);
+        } else if (inGoalX && inGoalY) {
+          goals++;
+          updateStats();
+          logEvent("GOAL. Shooter sends it past the legend.", "goal");
+          triggerReplay(false);
+          ball.active = false;
+          setTimeout(prepareNextKick, 900);
+        } else if (ball.y < goal.y - 60 || ball.y > HEIGHT + 60) {
+          goals++;
+          updateStats();
+          logEvent("Top corner rocket. Virtually unsaveable.", "goal");
+          triggerReplay(false);
+          ball.active = false;
+          setTimeout(prepareNextKick, 900);
+        }
+      }
+    }
+
+    function triggerReplay(isSave) {
+      replayTag.classList.add("active");
+      let replayFrames = 0;
+
+      function replayStep() {
+        replayFrames++;
+        ctx.save();
+        ctx.globalAlpha = 0.85;
+        ctx.filter = "blur(1px)";
+        drawScene(true);
+        ctx.restore();
+
+        if (replayFrames < 30) {
+          requestAnimationFrame(replayStep);
+        } else {
+          replayTag.classList.remove("active");
+        }
+      }
+
+      replayStep();
+    }
+
+    function drawField() {
+      ctx.clearRect(0, 0, WIDTH, HEIGHT);
+
+      const grad = ctx.createLinearGradient(0, HEIGHT, 0, 0);
+      grad.addColorStop(0, "#0b5c1f");
+      grad.addColorStop(0.4, "#0f7a2b");
+      grad.addColorStop(0.8, "#1b3b6f");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+      ctx.strokeStyle = "rgba(255,255,255,0.6)";
+      ctx.lineWidth = 2;
+
+      ctx.strokeRect(goal.x - 50, goal.y - 10, goal.width + 100, 170);
+
+      ctx.fillStyle = "rgba(240,240,240,0.95)";
+      ctx.fillRect(goal.x, goal.y, goal.width, 6);
+      ctx.fillRect(goal.x, goal.y, 6, goal.height);
+      ctx.fillRect(goal.x + goal.width - 6, goal.y, 6, goal.height);
+
+      ctx.strokeStyle = "rgba(200,200,255,0.3)";
+      ctx.lineWidth = 1;
+      for (let i = 0; i <= 7; i++) {
+        const nx = goal.x + (goal.width / 7) * i;
+        ctx.beginPath();
+        ctx.moveTo(nx, goal.y);
+        ctx.lineTo(nx - 12, goal.y - 24);
+        ctx.stroke();
+      }
+
+      ctx.fillStyle = "#ffffff";
+      ctx.beginPath();
+      ctx.arc(penaltySpot.x, penaltySpot.y, 3, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.globalAlpha = 0.3;
+      ctx.beginPath();
+      ctx.moveTo(0, HEIGHT - 90);
+      ctx.lineTo(WIDTH, HEIGHT - 90);
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
+
+    function drawShooter() {
+      ctx.fillStyle = "#ffdd00";
+      ctx.beginPath();
+      ctx.arc(shooter.x, shooter.y - 20, 8, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillRect(shooter.x - 7, shooter.y - 20, 14, 26);
+
+      ctx.fillRect(shooter.x - 7, shooter.y + 6, 4, 16);
+      ctx.fillRect(shooter.x + 3, shooter.y + 6, 4, 16);
+
+      ctx.save();
+      ctx.translate(shooter.x, shooter.y);
+      ctx.strokeStyle = "rgba(255,255,255,0.8)";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(shooter.directionHint * 18, -8);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawKeeper() {
+      ctx.save();
+      ctx.translate(keeper.x, keeper.y);
+
+      ctx.fillStyle = "#e3c46f";
+      ctx.beginPath();
+      ctx.arc(0, -20, 8, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillRect(-9, -20, 18, 28);
+
+      ctx.strokeStyle = "#e3c46f";
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      if (keeper.diving) {
+        ctx.moveTo(-9, -10);
+        ctx.lineTo(-26, -22);
+        ctx.moveTo(9, -10);
+        ctx.lineTo(26, -22);
+      } else {
+        ctx.moveTo(-9, -10);
+        ctx.lineTo(-20, 0);
+        ctx.moveTo(9, -10);
+        ctx.lineTo(20, 0);
+      }
+      ctx.stroke();
+
+      ctx.fillRect(-7, 8, 4, 16);
+      ctx.fillRect(3, 8, 4, 16);
+
+      ctx.restore();
+    }
+
+    function drawBall() {
+      ctx.fillStyle = "#ffffff";
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+      ctx.fill();
+
+      if (ball.active) {
+        ctx.strokeStyle = "rgba(255,255,255,0.5)";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(ball.x, ball.y);
+        ctx.lineTo(ball.x - ball.vx * 0.5, ball.y - ball.vy * 0.5);
+        ctx.stroke();
+      }
+    }
+
+    function drawScene(skipUpdate = false) {
+      drawField();
+      drawShooter();
+      drawKeeper();
+      drawBall();
+    }
+
+    function gameLoop() {
+      updateKeeper();
+      updateShooter();
+      updateBall();
+
+      drawScene();
+
+      requestAnimationFrame(gameLoop);
+    }
+
+    nextKickBtn.addEventListener("click", () => {
+      prepareNextKick();
+    });
+
+    resetBtn.addEventListener("click", () => {
+      resetMatch();
+    });
+
+    updateStats();
+    prepareNextKick();
+    gameLoop();
+  </script>
+</body>
+</html>
