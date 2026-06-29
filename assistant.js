@@ -1,33 +1,116 @@
 (function() {
-  // 1. Inject the styles into the webpage automatically
+  // 1. Inject the cool modern dark-mode styles into the webpage automatically
   const style = document.createElement('style');
   style.textContent = `
-    #drew-chat-window { position: fixed; bottom: 20px; right: 20px; width: 350px; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); overflow: hidden; font-family: sans-serif; z-index: 999999; }
-    #drew-chat-header { background: #007bff; color: white; padding: 15px; font-weight: bold; text-align: center; }
-    #drew-chat-logs { height: 280px; padding: 15px; overflow-y: auto; background: #fafafa; border-bottom: 1px solid #eee; }
-    #drew-chat-input-area { display: flex; padding: 10px; background: white; }
-    #drew-user-box { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 6px; outline: none; }
-    #drew-chat-window button { background: #007bff; color: white; border: none; padding: 8px 14px; margin-left: 5px; border-radius: 6px; cursor: pointer; font-weight: bold; }
-    .drew-msg { margin-bottom: 10px; padding: 8px 12px; border-radius: 8px; max-width: 80%; font-size: 14px; line-height: 1.4; }
-    .drew-user { background: #007bff; color: white; margin-left: auto; text-align: right; }
-    .drew-ai { background: #e9ecef; color: #333; margin-right: auto; text-align: left; }
+    #drew-chat-window { 
+      position: fixed; 
+      bottom: 25px; 
+      right: 25px; 
+      width: 360px; 
+      background: rgba(24, 26, 32, 0.95); 
+      backdrop-filter: blur(10px);
+      border-radius: 16px; 
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); 
+      overflow: hidden; 
+      font-family: 'Segoe UI', Roboto, sans-serif; 
+      z-index: 999999; 
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
+    }
+    #drew-chat-header { 
+      background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%); 
+      color: #0f1115; 
+      padding: 16px; 
+      font-weight: 700; 
+      text-align: center;
+      letter-spacing: 0.5px;
+      font-size: 16px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 15px rgba(0, 242, 254, 0.2);
+    }
+    #drew-chat-logs { 
+      height: 300px; 
+      padding: 16px; 
+      overflow-y: auto; 
+      background: #13151a; 
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+    }
+    #drew-chat-input-area { 
+      display: flex; 
+      padding: 12px; 
+      background: #181a20;
+    }
+    #drew-user-box { 
+      flex: 1; 
+      padding: 12px; 
+      background: #222630;
+      border: 1px solid rgba(255, 255, 255, 0.1); 
+      border-radius: 8px; 
+      outline: none; 
+      color: #ffffff;
+      font-size: 14px;
+      transition: border 0.2s;
+    }
+    #drew-user-box:focus {
+      border: 1px solid #00f2fe;
+    }
+    #drew-chat-window button { 
+      background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%); 
+      color: #0f1115; 
+      border: none; 
+      padding: 0 18px; 
+      margin-left: 8px; 
+      border-radius: 8px; 
+      cursor: pointer; 
+      font-weight: 700;
+      font-size: 14px;
+      transition: transform 0.1s, opacity 0.2s;
+    }
+    #drew-chat-window button:hover {
+      opacity: 0.9;
+    }
+    #drew-chat-window button:active {
+      transform: scale(0.95);
+    }
+    .drew-msg { 
+      margin-bottom: 12px; 
+      padding: 10px 14px; 
+      border-radius: 12px; 
+      max-width: 75%; 
+      font-size: 14px; 
+      line-height: 1.5; 
+    }
+    .drew-user { 
+      background: linear-gradient(135deg, #7f00ff 0%, #e100ff 100%); 
+      color: white; 
+      margin-left: auto; 
+      text-align: right; 
+      box-shadow: 0 4px 12px rgba(225, 0, 255, 0.15);
+    }
+    .drew-ai { 
+      background: #222630; 
+      color: #e2e8f0; 
+      margin-right: auto; 
+      text-align: left; 
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
   `;
   document.head.appendChild(style);
 
-  // 2. Create the HTML layout on the page automatically
+  // 2. Create the visual chat window layout on the screen
   const chatWin = document.createElement('div');
   chatWin.id = 'drew-chat-window';
   chatWin.innerHTML = `
-    <div id="drew-chat-header">Drew's Website Assistant</div>
+    <div id="drew-chat-header">⚡ Kelly AI Assistant</div>
     <div id="drew-chat-logs"></div>
     <div id="drew-chat-input-area">
-      <input type="text" id="drew-user-box" placeholder="Ask me a question...">
+      <input type="text" id="drew-user-box" placeholder="Ask Kelly a question...">
       <button id="drew-send-btn">Send</button>
     </div>
   `;
   document.body.appendChild(chatWin);
 
-  // 3. Set up the local brain logic
+  // 3. Setup the custom local brain logic
   const inputEl = document.getElementById('drew-user-box');
   const logsEl = document.getElementById('drew-chat-logs');
   const btnEl = document.getElementById('drew-send-btn');
@@ -36,29 +119,43 @@
     const text = inputEl.value.trim();
     if (!text) return;
 
-    logsEl.innerHTML += `<div class="drew-msg drew-user"><b>You:</b> ${text}</div>`;
+    // Show your user text bubble
+    logsEl.innerHTML += `<div class="drew-msg drew-user">${text}</div>`;
     inputEl.value = '';
     logsEl.scrollTop = logsEl.scrollHeight;
 
     const userMessage = text.toLowerCase();
     let aiReply = "";
 
+    // Kelly's Brain Keyword Rules
     if (userMessage.includes("hello") || userMessage.includes("hi")) {
-        aiReply = "Hello there! I am your custom AI companion built entirely by Drew Sossomon. How can I help you today?";
+        aiReply = "Hi there! I'm Kelly, your custom AI assistant built by Drew Sossomon. How can I help you today?";
     } else if (userMessage.includes("who built you") || userMessage.includes("creator")) {
         aiReply = "I was built entirely by the brilliant developer Drew Sossomon using custom coding architecture!";
     } else if (userMessage.includes("website") || userMessage.includes("help")) {
         aiReply = "I can absolutely help you manage your website! Just let me know what features you want to add next.";
-    } else {
-        aiReply = `I received your message: "${text}". I am processing it right now! What else would you like to ask?`;
+    } 
+    
+   // include questions
+    
+    else if (userMessage.includes("your key phrase here")) {
+        aiReply = "Type Kelly's custom answer here.";
+    }
+    
+   stop questions and answers
+     
+    else {
+        aiReply = `I received your message: "${text}". I don't know the exact answer yet, but Drew is teaching me new rules every day!`;
     }
 
+    // Tiny simulated delay so it feels like a real chat system
     setTimeout(() => {
-      logsEl.innerHTML += `<div class="drew-msg drew-ai"><b>AI:</b> ${aiReply}</div>`;
+      logsEl.innerHTML += `<div class="drew-msg drew-ai"><b>Kelly:</b> ${aiReply}</div>`;
       logsEl.scrollTop = logsEl.scrollHeight;
     }, 400);
   }
 
+  // Connect the buttons and keyboard enter keys to the send logic
   btnEl.onclick = handleSend;
   inputEl.onkeypress = function(e) { if (e.key === 'Enter') handleSend(); };
 })();
