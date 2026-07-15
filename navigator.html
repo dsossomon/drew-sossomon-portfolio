@@ -1,220 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Drew Sossomon | Goalkeeper Interactive Navigator</title>
-  <style>
-    /* Clean dark theme layout designed to match your GitHub portfolio style */
-    body {
-      background-color: #0d1117;
-      color: #ffffff;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1250">
+    <title>Match Highlights | Drew Sossomon</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* NAVIGATOR GAME STYLING */
+        .game-overlay-card {
+            width: 100%;
+            max-width: 900px;
+            background-color: #161b22;
+            border: 2px solid #30363d;
+            border-radius: 8px;
+            padding: 25px;
+            box-sizing: border-box;
+            text-align: center;
+            margin: 30px auto;
+        }
 
-    h2 {
-      margin-bottom: 5px;
-      font-weight: 600;
-      color: #c9d1d9;
-    }
+        .step-indicator {
+            font-size: 0.85rem;
+            color: #58a6ff;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
 
-    .subtitle {
-      color: #8b949e;
-      margin-bottom: 25px;
-      font-size: 0.95rem;
-      text-align: center;
-    }
+        .prompt-headline {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #ffffff;
+            line-height: 1.5;
+        }
 
-    /* Video Frame Display Container */
-    .navigator-container {
-      position: relative;
-      width: 100%;
-      max-width: 720px;
-      aspect-ratio: 16 / 9;
-      background-color: #000000;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid #30363d;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
-      margin-bottom: 20px;
-    }
+        .options-stack {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
+        .decision-btn {
+            flex: 1;
+            min-width: 250px;
+            background-color: #21262d;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            padding: 16px 24px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
 
-    /* Challenge Panel UI Card */
-    .game-overlay-card {
-      width: 100%;
-      max-width: 720px;
-      background-color: #161b22;
-      border: 1px solid #30363d;
-      border-radius: 8px;
-      padding: 20px;
-      box-sizing: border-box;
-      text-align: center;
-    }
+        .decision-btn:hover {
+            background-color: #30363d;
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
 
-    .step-indicator {
-      font-size: 0.8rem;
-      color: #58a6ff;
-      font-weight: bold;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
-    }
-
-    .prompt-headline {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-
-    .options-stack {
-      display: flex;
-      gap: 15px;
-      width: 100%;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .decision-btn {
-      flex: 1;
-      min-width: 200px;
-      background-color: #21262d;
-      color: #c9d1d9;
-      border: 1px solid #30363d;
-      padding: 14px 20px;
-      font-size: 1rem;
-      font-weight: 600;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .decision-btn:hover {
-      background-color: #30363d;
-      color: #ffffff;
-      transform: translateY(-2px);
-    }
-
-    .feedback {
-      margin-top: 15px;
-      font-size: 1rem;
-      font-weight: 600;
-      min-height: 24px;
-    }
-    .correct-flash { color: #56d364; }
-    .wrong-flash { color: #f85149; }
-  </style>
+        .feedback {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            min-height: 26px;
+            line-height: 1.4;
+        }
+        .correct-flash { color: #56d364; }
+        .wrong-flash { color: #f85149; }
+    </style>
 </head>
-<body>
 
-  <h2>Drew Sossomon: Tactical Navigator</h2>
-  <p class="subtitle">Watch the highlight video, then answer the questions below to test your goalkeeper IQ!</p>
+<body class="stats-page">
 
-  <div class="navigator-container">
-    <!-- Correctly formatted Google Drive preview stream -->
-    <iframe 
-      id="highlights-frame"
-      src="https://google.com" 
-      allow="autoplay" 
-      allowfullscreen>
-    </iframe>
-  </div>
+    <!-- NAVIGATION -->
+    <nav id="nav-menu">
+        <div class="logo">DREW <span class="last-name">SOSSOMON</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li> 
+            <li class="dropdown">
+                <a href="stats.html" class="dropbtn">Stats & Film ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="stats.html">Full Career Stats</a></li>
+                    <li><a href="highlights.html">Match Highlights</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
 
-  <!-- Interactive Control Panel Layout -->
-  <div class="game-overlay-card">
-    <div class="step-indicator">SCENARIO <span id="current-step">1</span> OF 3</div>
-    <div class="prompt-headline" id="question-text">Loading tactical challenge...</div>
-    <div class="options-stack" id="buttons-box"></div>
-    <div id="feedback-msg" class="feedback"></div>
-  </div>
+    <!-- MAIN CONTENT -->
+    <main class="container" style="padding: 0 50px;">
 
-  <script>
-    const displayQuestion = document.getElementById('question-text');
-    const displayButtons = document.getElementById('buttons-box');
-    const currentStepUI = document.getElementById('current-step');
-    const feedbackUI = document.getElementById('feedback-msg');
+        <div style="margin-bottom: 30px;">
+            <a href="index.html" class="btn-primary">← Back to Home</a>
+        </div>
 
-    // =========================================================================
-    // GOALKEEPER SCENARIOS CONFIGURATION
-    // Feel free to rewrite these questions or add more steps to match your clips!
-    // =========================================================================
-    const tacticalScenarios = [
-      {
-        step: 1,
-        prompt: "Scenario 1: A high cross is driven right into your 6-yard box traffic. What's the play?",
-        choices: [
-          { text: "Punch clear over oncoming strikers", isCorrect: true, note: "Correct! Claiming space protects your defensive line." },
-          { text: "Drop deep onto the baseline goal line", isCorrect: false, note: "Incorrect. Backing up gives attackers a dangerous close-range target window." }
-        ]
-      },
-      {
-        step: 2,
-        prompt: "Scenario 2: The opponent's striker breaks past your centerbacks on an open break. What do you do?",
-        choices: [
-          { text: "Sprint forward to narrow down the target angle", isCorrect: true, note: "Correct! Rushing out cuts shooting angles and forces errors." },
-          { text: "Stay stationary on the goal mark", isCorrect: false, note: "Incorrect. Sitting back allows them to cleanly pick an open corner spot." }
-        ]
-      },
-      {
-        step: 3,
-        prompt: "Scenario 3: You cleanly claim an opponent corner kick. Where do you start your distribution?",
-        choices: [
-          { text: "Throw a fast distribution line out to the wide winger", isCorrect: true, note: "Correct! Quick distribution catches transition lines off-balance." },
-          { text: "Boot a blind clearance down the field center", isCorrect: false, note: "Incorrect. Blind drops frequently return team possession back to them." }
-        ]
-      }
-    ];
+        <h1 class="stats-title" style="text-align: center; font-size: 3.5rem; margin-bottom: 10px;">
+            MATCH HIGHLIGHTS & FILM
+        </h1>
 
-    let activeScenarioIndex = 0;
+        <p class="stats-subtitle" style="text-align: center; color: var(--blue-dark); font-weight: 700; text-transform: uppercase; margin-bottom: 40px;">
+            Wake FC 2009 NPL | "The U.S. Wall"
+        </p>
 
-    function runGameEngine() {
-      if (activeScenarioIndex >= tacticalScenarios.length) {
-        displayQuestion.innerText = "🎉 Navigator Complete! You've matched Drew's goalkeeper vision.";
-        displayButtons.innerHTML = '';
-        return;
-      }
+        <!-- VIDEO FRAME -->
+        <div class="highlight-video-frame" style="display: flex; justify-content: center;">
+            <iframe 
+                src="https://drive.google.com/file/d/15y-CXV1IeFJYpgqGfCcqg6Qf6r_eQhGDgbRgw7nAC3Y/preview" 
+                width="900" 
+                height="506" 
+                allow="autoplay"
+                style="border: none; display: block;">
+            </iframe>
+        </div>
 
-      feedbackUI.innerText = '';
-      const currentStage = tacticalScenarios[activeScenarioIndex];
-      currentStepUI.innerText = currentStage.step;
-      displayQuestion.innerText = currentStage.prompt;
-      displayButtons.innerHTML = '';
+        <!-- TACTICAL NAVIGATOR GAME INTERFACE -->
+        <div class="game-overlay-card">
+            <div class="step-indicator">Tactical Navigator Challenge <span id="current-step">1</span> of 3</div>
+            <div class="prompt-headline" id="question-text">Loading tactical challenge...</div>
+            <div class="options-stack" id="buttons-box"></div>
+            <div id="feedback-msg" class="feedback"></div>
+        </div>
 
-      currentStage.choices.forEach(btnChoice => {
-        const choiceButton = document.createElement('button');
-        choiceButton.className = 'decision-btn';
-        choiceButton.innerText = btnChoice.text;
+        <!-- FILM NOTES -->
+        <div class="film-notes-box">
+            <h3>Film Analysis Notes:</h3>
+            <ul>
+                <li><strong>Shot Stopping:</strong> High-volume save capacity with elite reaction times and post-save recovery.</li>
+                <li><strong>Distribution:</strong> Dominant left-footed distribution (Long-ball accuracy and tactical build-up).</li>
+                <li><strong>Penalty Record:</strong> 100% Career PK Save Rate (60/60) in tournament play.</li>
+                <li>
+                    <strong>Scary Save in Video:</strong>
+                    At 8:05, I make a high‑danger aerial intervention during a match played immediately after a college ID combine session 
+                    against older, taller MLS NEXT goalkeepers. A looping ball drifted under the bar, and after neutralizing the first threat 
+                    with a controlled punch, I recognized the second‑phase danger and launched into a full‑extension recovery dive—beating a 
+                    sprinting attacker to the ball, securing the catch midair, and maintaining possession through heavy contact and a violent 
+                    landing out of bounds. A high‑bravery, high‑IQ save made under fatigue and pressure, before returning directly to the ID camp.
+                </li>
+                <li><strong>Current Status:</strong> Archive includes 2017–2025 footage. Currently in elite rehab for ACL (Expected return: Late 2026).</li>
+            </ul>
+        </div>
 
-        choiceButton.onclick = () => {
-          if (btnChoice.isCorrect) {
-            feedbackUI.className = "feedback correct-flash";
-            feedbackUI.innerText = btnChoice.note;
-            setTimeout(() => {
-              activeScenarioIndex++;
-              runGameEngine();
-            }, 2500);
-          } else {
-            feedbackUI.className = "feedback wrong-flash";
-            feedbackUI.innerText = btnChoice.note;
-          }
-        };
-        displayButtons.appendChild(choiceButton);
-      });
-    }
+        <!-- COMING SOON SECTION -->
+        <div class="coming-soon-box">
+            <h4>Coming Soon — Fully Recovered & Back in Net</h4>
+            <div class="coming-soon-placeholder">
+                <em>New highlight film will be uploaded here after full recovery.</em>
+            </div>
+        </div>
 
-    runGameEngine();
-  </script>
+        <!-- RECRUITING CTA -->
+        <div class="recruit-cta">
+            <h4>Interested in Drew? Want to see him live?</h4>
+            <p>Request a match‑day evaluation or schedule an in‑person viewing opportunity.</p>
 
-</body>
-</html>
+            <a 
+                href="mailto:dsossomon@gmail.com?subject=Request%20to%20See%20You%20Play&body=Hello%20Drew,%0D%0A%0D%0AI%20would%20like%20to%20request%20a%20match%20to%20watch%20you%20play.%0D%0A%0D%0AThank%20you."
+                class="btn-request-match">
+                Request to Watch a Match
+            </a>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Drew Sossomon | Goalkeeper Career Portfolio</p>
+    </footer>
+
+    <!-- INTERACTIVE NAVIGATOR LOGIC ENGINE -->
+    <script>
+        const displayQuestion = document.getElementById('question-text');
+        const displayButtons = document.getElementById('buttons-box');
+        const currentStepUI = document.getElementById('current-step');
+        const feedbackUI = document.getElementById('feedback-msg');
+
+        // Configured game flows matching match film attributes
+        const tacticalScenarios = [
+            {
+                step: 1,
+                prompt: "Scenario 1 (See Video at 8:05): A looping ball drifts under the crossbar. You punch clear, but the ball breaks loose. A second‑phase attacker sprints toward the rebound. What is your choice?",
+                choices: [
+                    { text: "Launch a full-extension recovery dive & claim midair", isCorrect: true, note: "Correct! Your bravery and midair adjustment secure possession through heavy impact." },
+                    { text: "Recover to the goal line and brace for the shot", isCorrect: false, note: "Incorrect. Sitting back allows the crashing attacker a close-range volley option." }
+                ]
+            },
+            {
+                step: 2,
+                prompt: "Scenario 2: An opposing forward cleanly splits the backline defense on a direct 1v1 breakaway run. How do you respond?",
+                choices: [
+                    { text: "Sprint forward dynamically to close down shooting windows", isCorrect: true, note: "Correct! Closing down space panics the striker and minimizes available angles." },
+                    { text: "Hold deep position on the 6-yard marker line", isCorrect: false, note: "Incorrect. Standing still gives the forward time to pick a clean corner space." }
+                ]
+            },
+            {
+                step: 3,
+                prompt: "Scenario 3: You cleanly claim an active corner kick under heavy traffic pressure. Where do you initialize distribution?",
+                choices: [
+                    { text: "Deliver a fast, precise hand-throw out wide to an isolated winger", isCorrect: true, note: "Correct! Rapid distribution catches transition defenses unorganized." },
+                    { text: "Boot a high, blind clearance down the field center-line", isCorrect: false, note: "Incorrect. Clearances through the middle frequently recycle possession to the opposition." }
+                ]
+            }
+        ];
+
+        let activeScenarioIndex = 0;
+
+        function runGameEngine() {
+            if (activeScenarioIndex >= tacticalScenarios.length) {
+                displayQuestion.innerText = "🎉 Tactical Navigator Complete! You've matched Drew's goalkeeper vision and soccer IQ.";
+                displayButtons.innerHTML = '';
+                return;
+            }
+
+            feedbackUI.innerText = '';
+            const currentStage = tacticalScenarios[activeScenarioIndex];
+            currentStepUI.innerText = currentStage.step;
+            displayQuestion.innerText = currentStage.prompt;
+            displayButtons.innerHTML = '';
+
+            currentStage.choices.forEach(btnChoice => {
