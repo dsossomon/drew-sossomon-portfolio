@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drew Sossomon | Goalkeeper Interactive Navigator</title>
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    h2 {
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #c9d1d9;
+    }
+
+    .subtitle {
+      color: #8b949e;
+      margin-bottom: 25px;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    .navigator-container {
+      position: relative;
+      width: 100%;
+      max-width: 720px;
+      aspect-ratio: 16 / 9;
+      background-color: #000000;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #30363d;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .game-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(13, 17, 23, 0.95);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease-in-out;
+      z-index: 10;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .game-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .prompt-headline {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .options-stack {
+      display: flex;
+      gap: 15px;
+      width: 100%;
+      justify-content: center;
+      max-width: 500px;
+      flex-wrap: wrap;
+    }
+
+    .decision-btn {
+      flex: 1;
+      min-width: 200px;
+      background-color: #238636;
+      color: #ffffff;
+      border: 1px solid rgba(240, 246, 252, 0.1);
+      padding: 14px 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+      text-align: center;
+    }
+
+    .decision-btn:hover {
+      background-color: #2ea44f;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Drew Sossomon: Goalkeeper Play Zone</h2>
+  <p class="subtitle">Read the field positions, analyze the match tape, and make your tactical choice!</p>
+
+  <div class="navigator-container">
+    <video id="preview-player" controls playsinline>
+      <source src="https://google.com" type="video/mp4">
+    </video>
+
+    <div id="decision-layer" class="game-overlay">
+      <div class="prompt-headline" id="question-text">Tactical play needed...</div>
+      <div class="options-stack" id="buttons-box"></div>
+    </div>
+  </div>
+
+  <script>
+    const videoElement = document.getElementById('preview-player');
+    const overlayLayer = document.getElementById('decision-layer');
+    const displayQuestion = document.getElementById('question-text');
+    const displayButtons = document.getElementById('buttons-box');
+
+    // =========================================================================
+    // STARTING QUESTIONS TIMELINE
+    // These generic placeholders are ready for testing.
+    // =========================================================================
+    const gameTimeline = [
+      {
+        stopTime: 6.0, // Pauses at 6 seconds
+        promptText: "Play 1: Opponent hits a high cross into the box. What do you do?",
+        choices: [
+          { label: "Punch Clear Through Traffic", skipTo: 6.1 },
+          { label: "Stay Grounded on the Goal Line", skipTo: 14.0 }
+        ]
+      },
+      {
+        stopTime: 20.0, // Pauses at 20 seconds
+        promptText: "Play 2: The striker breaks clear on a 1v1 path. What is your choice?",
+        choices: [
+          { label: "Rush Forward & Close Down Angle", skipTo: 20.1 },
+          { label: "Drop Deep Into the Net Frame", skipTo: 28.0 }
+        ]
+      }
+    ];
+
+    let currentScenarioTracker = 0;
+
+    videoElement.addEventListener('timeupdate', () => {
+      if (currentScenarioTracker < gameTimeline.length) {
+        const activeStage = gameTimeline[currentScenarioTracker];
+        
+        if (videoElement.currentTime >= activeStage.stopTime) {
+          videoElement.pause();
+          videoElement.controls = false; 
+          renderOverlayUI(activeStage);
+        }
+      }
+    });
+
+    function renderOverlayUI(stageData) {
+      displayButtons.innerHTML = ''; 
+      displayQuestion.innerText = stageData.promptText;
+
+      stageData.choices.forEach(item => {
+        const choiceButton = document.createElement('button');
+        choiceButton.className = 'decision-btn';
+        choiceButton.innerText = item.label;
+
+        choiceButton.onclick = () => {
+          overlayLayer.classList.remove('active');
+          videoElement.currentTime = item.skipTo;
+          videoElement.controls = true; 
+          videoElement.play();
+          currentScenarioTracker++; 
+        };
+
+        displayButtons.appendChild(choiceButton);
+      });
+
+      overlayLayer.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
