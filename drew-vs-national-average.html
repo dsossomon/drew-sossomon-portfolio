@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drew Sossomon vs GK National Average</title>
+    <style>
+        :root {
+            --drew-blue-brand: #0c3c59;
+            --national-avg-grey: #9ea3a6;
+            --site-dark-bg: #ffffff; /* white background */
+            --site-card-bg: #f7f7f7; /* light card background */
+            --text-main: #181818;
+            --text-secondary: #555555;
+            --text-labels: #444444;
+            --axis-border: #cccccc;
+        }
+        *, *::before, *::after { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--site-dark-bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.5;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 {
+            text-align: center;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--drew-blue-brand);
+            padding-bottom: 15px;
+        }
+        .chart-card {
+            background-color: var(--site-card-bg);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            margin-bottom: 35px;
+            position: relative;
+            overflow: hidden;
+        }
+        .chart-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: 0.5px;
+        }
+        .chart-container-horizontal {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            padding: 10px 0;
+        }
+        .chart-row {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        .row-label {
+            width: 160px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-labels);
+        }
+        .bar-track-wrapper {
+            flex-grow: 1;
+            background: rgba(0,0,0,0.04);
+            border-radius: 4px;
+            margin-right: 15px;
+            overflow: hidden;
+            height: 45px;
+        }
+        .h-bar-fill {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 15px;
+            font-weight: bold;
+            color: #ffffff;
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+        .drew-fill { background-color: var(--drew-blue-brand); }
+        .national-fill {
+            background-color: var(--national-avg-grey);
+            color: #1a1a1a !important;
+        }
+        .row-value-end {
+            font-size: 1.05rem;
+            font-weight: bold;
+            min-width: 80px;
+        }
+        .h-axis-scale {
+            display: flex;
+            justify-content: space-between;
+            margin-left: 160px;
+            padding-top: 10px;
+            border-top: 1px solid var(--axis-border);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        .h-axis-title {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .analysis-takeaway-footer {
+            background: linear-gradient(135deg, #e4ebf3 0%, #f7fafc 100%);
+            border-left: 5px solid var(--drew-blue-brand);
+            padding: 22px;
+            border-radius: 4px;
+            line-height: 1.6;
+            margin-top: 60px;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            color: var(--text-main);
+        }
+        @media (max-width: 768px) {
+            body { padding: 20px 10px; }
+            .chart-card { padding: 20px 15px; }
+            .row-label { width: 110px; font-size: 0.85rem; }
+            .h-axis-scale { margin-left: 110px; font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+  <h1>Drew Sossomon vs GK National Average</h1>
+  
+  <!-- Games Played -->
+  <div class="chart-card">
+    <div class="chart-title">Career Games Played</div>
+    <div class="chart-container-horizontal">
+      <div class="chart-row">
+        <span class="row-label">Drew Sossomon</span>
+        <div class="bar-track-wrapper">
+          <div class="h-bar-fill drew-fill" style="width: 100%;">133</div>
+        </div>
+      </div>
+      <div class="chart-row">
+        <span class="row-label">National Average</span>
+        <div class="bar-track-wrapper">
+          <div class="h-bar-fill national-fill" style="width: 30%;">40</div>
+        </div>
+      </div>
+    </div>
+    <div class="h-axis-title">Total Games Played</div>
+    <div class="h-axis-scale">
+      <span>0</span><span>20</span><span>40</span><span>60</span><span>100</span><span>140</span>
+    </div>
+  </div>
+
+  <!-- Wins -->
+  <div class="chart-card">
+    <div class="chart-title">Wins</div>
+    <div class="chart-container-horizontal">
+      <div class="chart-row">
+        <span class="row-label">Drew Sossomon</span>
+        <div class="bar-track-wrapper">
+          <div class="h-bar-fill drew-fill" style="width: 100%;">92</div>
+        </div>
+      </div>
+      <div class="chart-row">
+        <span class="row-label">National Average</span>
+        <div class="bar-track-wrapper">
+          <div class="h-bar-fill national-fill" style="width: 30%;">28</div>
+        </div>
+      </div>
+    </div>
+    <div class="h-axis-title">Wins (Career)</div>
+    <div class="h-axis-scale">
+      <span>0</span><span>20</span><span>40</span><span>60</span><span>80</span><span>100</span>
+    </div>
+  </div>
+
+  <!-- Losses -->
+  <div class="chart-card">
+    <div class="chart-title">Losses</div>
+    <div class="chart-container-horizontal">
+      <div class="chart-row">
+        <span class="row-label">Drew Sossomon</span>
+        <div class="bar-track-wrapper">
+          <div class="h-bar-fill drew-fill" style="width: 100%;">41</div>
+        </div>
+      </div>
+      <div class="chart-row">
+        <span class="row-label">National Average</span>
+        <div class="bar-track-wrapper">
+          <div class="h-bar-fill national-fill" style="width: 29%;">12</div>
+        </div>
+      </div>
+    </div>
+    <div class="h-axis-title">Losses (Career)</div>
+    <div class="h-axis-scale">
+      <span>0</span><span>5</span><span>10</span><span>20</span><span>40</span><span>50</span>
+    </div>
+  </div>
+
+  <!-- Minutes Played -->
+  <div class="chart-card">
+    <div class="chart-title">Minutes Played</div>
+    <div class="chart-container-horizontal">
+      <div class="chart-row">
+        <span class="row-label">Drew Sossomon</span>
+        <div class="bar-track-wrapper">
+          <div class="h-bar-fill drew-fill" style="width: 100%;">11,970</div>
+        </div>
+      </div>
+      <div class="chart-row">
+        <span class="row-label">National Average</span>
+        <div class="bar-track-wrapper">
+          <div class="h-bar-fill national-fill" style="width: 25%;">3,000</div>
+        </div>
+      </div>
+    </div>
+    <div class="h-axis-title">Total Minutes Played</div>
+    <div class="h-axis-scale">
+      <span>0</span><span>2,000</span><span>4,000</span><span>6,000</span><span>10,000</span><span>12,000</span>
+    </div>
+  </div>
+  
+  <!-- Shots Faced & Saves -->
+  <div class="chart-card">
+    <div class="chart-title">Saves & Shots Faced</div>
+    <div class="chart-container-horizontal">
+      <div class="chart-row">
+        <span class="row-label">Saves</span>
+        <div class="bar-track-wrapper">
+          <div class="h-bar-fill drew-fill" style="width: 100%;">2,290</div>
+        </div>
+      </div>
+      <div class="chart-row">
+        <span class="row-label">Shots Faced</span>
+        <div class="bar-track-wrapper">
+          <div class="h-bar-fill national-fill" style="width: 15%;">338</div>
+        </div>
+      </div>
+    </div>
+    <div class="h-axis-title">Career Totals</div>
+    <div class="h-axis-scale">
+      <span>0</span><span>500</span><span>1,000</span><span>1,500</span><span>2,000</span><span>2,500</span>
+    </div>
+  </div>
+  
+  <!-- Save Percentage -->
+  <div class="chart-card">
+    <div class="chart-title">Save Percentage</div>
+    <div class="chart-container-horizontal">
+      <div class="chart-row">
+        <span class="row-label">Drew Sossomon</span>
+        <div class="bar-track-wrapper">
+          <div class="h-bar-fill drew-fill" style="width: 94%;">93.6%</div>
+        </div>
+      </div>
+      <div class="chart-row">
+        <span class="row-label">National Average</span>
+        <div class="bar-track-wrapper">
+          <div class="h-bar-fill national-fill" style="width: 70%;">70.0%</div>
+        </div>
+      </div>
+    </div>
+    <div class="h-axis-title">Save Percentage (Higher is better)</div>
+    <div class="h-axis-scale">
+      <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
+    </div>
+  </div>
+  
+  <!-- Goals Against -->
+  <div class="chart-card">
+    <div class="chart-title">Goals Against (Career)</div>
+    <div class="chart-container-horizontal">
+      <div class="chart-row">
+        <span class="row-label">Drew Sossomon</span>
+        <div class="bar-track-wrapper">
+          <div class="h-bar-fill drew-fill" style="width: 18%;">156</div>
+        </div>
+      </div>
+      <div class="chart-row">
+        <span class="row-label">National Average</span>
+        <div class="bar-track-wrapper">
+          <div class="h-bar-fill national-fill" style="width: 86%;">734</div>
+        </div>
+      </div>
+    </div>
+    <div class="h-axis-title">Lower is better</div>
+    <div class="h-axis-scale">
+      <span>0</span><span>200</span><span>400</span><span>600</span><span>800</span>
+    </div>
+  </div>
+  
+  <!-- Penalty Saves -->
+  <div class="chart-card">
+    <div class="chart-title">Penalty Saves</div>
+    <div style="text-align:center; font-size:1.15em; padding:20px;">
+      <span style="color:var(--drew-blue-brand); font-weight:bold;">60/60 penalties saved</span> <br>
+      <span style="color:var(--text-secondary); font-size:0.96em;">
+        (except one, during a pre-season tournament while guesting for another NPL Wake FC team)
+      </span>
+    </div>
+  </div>
+  
+  <!-- Insight / Recruiter Evaluation -->
+  <div class="analysis-takeaway-footer">
+    <strong>Recruiter Evaluation Summary:</strong>
+    Drew Sossomon has played more than 3× the career games and managed over 7× the national average workload, with an elite 93.6% save rate and unmatched penalty record. This demonstrates exceptional endurance, consistency, and athletic longevity—even saving every penalty faced except one, and that occurred while guesting for a different Wake FC 2009  team during pre-season.
+  </div>
+</div>
+</body>
+</html>
