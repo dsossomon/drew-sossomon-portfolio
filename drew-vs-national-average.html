@@ -8,8 +8,8 @@
         :root {
             --drew-blue-brand: #0c3c59;
             --national-avg-grey: #9ea3a6;
-            --site-dark-bg: #ffffff; /* white background */
-            --site-card-bg: #f7f7f7; /* light card background */
+            --site-dark-bg: #ffffff;
+            --site-card-bg: #f7f7f7;
             --text-main: #181818;
             --text-secondary: #555555;
             --text-labels: #444444;
@@ -123,52 +123,63 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             color: var(--text-main);
         }
+
+        /* Back to Home Button */
+        .back-home-btn {
+            display: block;
+            margin: 32px auto 32px auto;
+            padding: 0;
+            border: none;
+            background: linear-gradient(90deg, #57c7fa 0%, #00e4ff 100%);
+            border-radius: 32px;
+            width: 240px;
+            height: 55px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.10);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .back-home-btn-center {
+            background: #181818;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            padding: 12px 0;
+            width: 180px;
+            text-align: center;
+            margin: 0 auto;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            letter-spacing: 1px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .back-home-btn:hover .back-home-btn-center {
+            background: #000;
+            color: #57c7fa;
+        }
+
         @media (max-width: 768px) {
             body { padding: 20px 10px; }
             .chart-card { padding: 20px 15px; }
             .row-label { width: 110px; font-size: 0.85rem; }
             .h-axis-scale { margin-left: 110px; font-size: 0.75rem; }
+            .back-home-btn { width: 180px; height: 44px; }
+            .back-home-btn-center { width: 125px; font-size: 1rem; padding: 8px 0; }
         }
- .back-home-btn {
-    display: block;
-    margin: 32px auto 32px auto;
-    padding: 0;
-    border: none;
-    background: linear-gradient(90deg, #57c7fa 0%, #00e4ff 100%);
-    border-radius: 32px;
-    width: 240px;
-    height: 55px;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.10);
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-}
-.back-home-btn-center {
-    background: #181818;
-    color: #fff;
-    font-weight: bold;
-    font-size: 1.2rem;
-    border-radius: 25px;
-    padding: 12px 0;
-    width: 180px;
-    text-align: center;
-    margin: 0 auto;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    letter-spacing: 1px;
-    transition: background 0.2s, color 0.2s;
-}
-.back-home-btn:hover .back-home-btn-center {
-    background: #000;
-    color: #57c7fa;
-}
     </style>
 </head>
 <body>
 <div class="container">
+
+  <!-- Back to Home Button -->
+  <a href="index.html" class="back-home-btn">
+    <span class="back-home-btn-center">Back to Home</span>
+  </a>
+
   <h1>Drew Sossomon vs GK National Average</h1>
   
   <!-- Games Played -->
@@ -326,43 +337,42 @@
         </div>
       </div>
     </div>
-   <div class="h-axis-title">Goals Against</div>
+    <div class="h-axis-title">Goals Against</div>
     <div class="h-axis-scale">
       <span>0</span><span>200</span><span>400</span><span>600</span><span>800</span>
     </div>
   </div>
-  
- 
-    <!-- Penalty Saves Comparison -->
-<div class="chart-card">
-  <div class="chart-title">Penalty Saves (Career)</div>
-  <div class="chart-container-horizontal">
-    <div class="chart-row">
-      <span class="row-label">Drew Sossomon</span>
-      <div class="bar-track-wrapper">
-        <div class="h-bar-fill drew-fill" style="width: 100%;">60/60 (100%)</div>
+
+  <!-- Penalty Saves Bar Chart -->
+  <div class="chart-card">
+    <div class="chart-title">Penalty Saves (Career)</div>
+    <div class="chart-container-horizontal">
+      <div class="chart-row">
+        <span class="row-label">Drew Sossomon</span>
+        <div class="bar-track-wrapper">
+          <div class="h-bar-fill drew-fill" style="width: 100%;">60/60 (100%)</div>
+        </div>
+      </div>
+      <div class="chart-row">
+        <span class="row-label">National Average</span>
+        <div class="bar-track-wrapper">
+          <div class="h-bar-fill national-fill" style="width: 53%;">8/15 (53%)</div>
+        </div>
       </div>
     </div>
-    <div class="chart-row">
-      <span class="row-label">National Average</span>
-      <div class="bar-track-wrapper">
-        <div class="h-bar-fill national-fill" style="width: 53%;">8/15 (53%)</div>
-      </div>
+    <div class="h-axis-title">Penalty Save Percentage</div>
+    <div class="h-axis-scale">
+      <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
+    </div>
+    <div style="text-align:center; color:var(--text-secondary); font-size:0.96em; margin-top:15px;">
+      *Drew's only miss was while guesting for another NPL Wake FC team during a pre-season tournament.
     </div>
   </div>
-  <div class="h-axis-title">Penalty Save Percentage</div>
-  <div class="h-axis-scale">
-    <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
-  </div>
-  <div style="text-align:center; color:var(--text-secondary); font-size:0.96em; margin-top:15px;">
-    Drew's only miss was while guesting for another NPL Wake FC team during a pre-season tournament.
-  </div>
-</div>
   
   <!-- Insight / Recruiter Evaluation -->
   <div class="analysis-takeaway-footer">
     <strong>Recruiter Evaluation Summary:</strong>
-    Drew Sossomon has played more than 3× the career games and managed over 7× the national average workload, with an elite 93.6% save rate and unmatched penalty record. This demonstrates exceptional endurance, consistency, and athletic longevity—even saving every penalty faced except one, and that occurred while guesting for a different Wake FC 2009  team during pre-season.
+    Drew Sossomon has played more than 3× the career games and managed over 7× the national average workload, with an elite 93.6% save rate and unmatched penalty record. This demonstrates exceptional endurance, consistency, and athletic longevity—even saving every penalty faced except one, and that occurred while guesting for a different team during pre-season.
   </div>
 </div>
 </body>
