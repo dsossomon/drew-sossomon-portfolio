@@ -113,6 +113,16 @@
 </head>
 <body>
 
+    <!-- SECURE PASSWORD GATE LAYER -->
+    <script>
+        // Demands your custom admin key passcode straight away on page load
+        var password = prompt("Enter Admin Secure Passcode:");
+        if (password !== "Wall2026") {
+            alert("Access Denied. Redirecting to home page...");
+            window.location.href = "index.html"; 
+        }
+    </script>
+
     <main class="container">
 
         <a href="index.html" class="btn-back">← Exit to Public Site</a>
@@ -150,10 +160,10 @@ dsossomon@gmail.com</textarea>
 
     </main>
 
-    <!-- INTERACTIVE BROADCATOR SCRIPTS -->
+    <!-- INTERACTIVE BROADCASTER SCRIPTS -->
     <script>
         function launchEmailBroadcast() {
-            // All BCC emails go here with programming quotes:
+            // Your clean, formatted list of subscribers
             const subscriberList = [
                 // Friends
                 "Sylverwolf7@gmail.com",
@@ -178,7 +188,7 @@ dsossomon@gmail.com</textarea>
             const bccString = subscriberList.join(',');
 
             // Launch default computer mail client using backtick literals
-            window.location.href = `mailto:dsossomon@gmail.com?bcc=${bccString}&subject=${subjectText}&body=${bodyText}`;
+            window.location.href = `mailto:dsossomon@://gmail.com{bccString}&subject=${subjectText}&body=${bodyText}`;
         }
     </script>
 
