@@ -108,13 +108,13 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.6);
         }
 
-        .video-wrapper iframe { 
+        /* Forces any dynamic iframe code you drop in to fill the screen correctly */
+        .video-wrapper iframe, .video-wrapper video { 
             position: absolute; 
             top: 0; 
             left: 0; 
             width: 100%; 
             height: 100%; 
-            border: none; 
         }
 
         /* Boxes for Notes & CTA */
@@ -188,17 +188,23 @@
         <!-- VIDEO CARDS LAYER -->
         <div class="highlight-video-frame">
             
-            <!-- Main Video with Embedded Preview Link Fix -->
+            <!-- Main Video Panel -->
             <div id="season-all" class="video-card-item">
                 <div class="video-wrapper">
-                    <iframe src="https://google.com" allow="autoplay" allowfullscreen></iframe>
+                    
+                    <!-- ============================================ -->
+                    <!--     PASTE YOUR EXAWT VIDEO CODE RIGHT HERE   -->
+                    <!-- ============================================ -->
+                    
                 </div>
             </div>
 
             <!-- Future Video Placeholder -->
             <div id="season-future" class="video-card-item hidden">
                 <div class="video-wrapper">
-                    <iframe src="" allow="autoplay" allowfullscreen></iframe>
+                    <em style="color: var(--text-muted); display: block; padding: 40px; text-align: center;">
+                        Post-recovery match clips will be updated here.
+                    </em>
                 </div>
             </div>
 
