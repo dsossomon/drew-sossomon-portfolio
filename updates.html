@@ -1,90 +1,288 @@
-<div class="updates-wrapper">
-  <h1>Updates & Coming Soon</h1>
-  <p class="subtitle">A clean timeline of what’s new, what’s coming, and future pages in development.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1250">
+    <title>Site Log & Roadmap | Drew Sossomon</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    
+    <style>
+        /* Color Variables matching your portfolio dashboard branding */
+        :root {
+            --bg-dark-navy: #0a1128;
+            --card-navy: #131f42;
+            --electric-blue: #00d2ff;
+            --text-white: #ffffff;
+            --text-muted: #94a3b8;
+            --border-glow: #1e2d5a;
+        }
 
-  <!-- Added Section -->
- <h2>What Was Added</h2>
-  <div class="timeline">
-    <div class="entry">
-      <div class="dot"></div>
-      <div class="content">
-        <h3>Recovery Progress Bar</h3>
-        <p class="date">Added on 4/6/2026</p>
-      </div>
+        body { 
+            background-color: var(--bg-dark-navy); 
+            color: var(--text-white); 
+            font-family: 'Outfit', sans-serif; 
+            margin: 0; 
+            padding: 40px 20px;
+        }
+
+        .updates-wrapper { 
+            max-width: 850px; 
+            margin: 0 auto; 
+            background-color: rgba(19, 31, 66, 0.4);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            font-family: 'Big Shoulders Display', sans-serif;
+            font-size: 3.5rem;
+            letter-spacing: 1px;
+            margin-top: 0;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+
+        h2 {
+            font-family: 'Big Shoulders Display', sans-serif;
+            font-size: 2rem;
+            color: var(--electric-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border-glow);
+            padding-bottom: 5px;
+        }
+
+        /* Modern Sports Timeline Grid Track Layout */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 30px;
+        }
+
+        /* Center vertical linking track bar line layer */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: var(--border-glow);
+        }
+
+        .entry {
+            position: relative;
+            margin-bottom: 20px;
+            background: var(--card-navy);
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .entry:hover {
+            border-color: var(--electric-blue);
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.15);
+        }
+
+        /* Interactive active glowing milestone marker node nodes */
+        .dot {
+            position: absolute;
+            left: -30px;
+            top: 22px;
+            width: 12px;
+            height: 12px;
+            background-color: #00ff88; /* Success green marker */
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ff88;
+            z-index: 2;
+        }
+
+        /* Pending placeholder upcoming target node nodes layer */
+        .dot.soon {
+            background-color: var(--electric-blue);
+            box-shadow: 0 0 10px var(--electric-blue);
+        }
+
+        .content h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.2rem;
+            color: var(--text-white);
+        }
+
+        .date {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge-new {
+            display: inline-block;
+            background-color: rgba(0, 210, 255, 0.15);
+            color: var(--electric-blue);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            margin-left: 8px;
+            vertical-align: middle;
+            border: 1px solid var(--electric-blue);
+        }
+
+        /* Private back navigation anchors wrapper panel elements */
+        .btn-home {
+            display: inline-block;
+            color: var(--electric-blue);
+            text-decoration: none;
+            border: 2px solid var(--electric-blue);
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .btn-home:hover {
+            background-color: var(--electric-blue);
+            color: var(--bg-dark-navy);
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="updates-wrapper">
+        
+        <a href="index.html" class="btn-home">← Back to Portfolio</a>
+
+        <h1>Updates & Coming Soon</h1>
+        <p class="subtitle">A clean timeline tracking live modifications, upcoming development milestones, and future scouting pages built for "The U.S. Wall" portfolio infrastructure.</p>
+
+        <!-- ADDED LOG SECTION -->
+        <h2>What Was Added</h2>
+        <div class="timeline">
+            <div class="entry">
+                <div class="dot"></div>
+                <div class="content">
+                    <h3>Recovery Progress Bar</h3>
+                    <p class="date">Added on 4/6/2026</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- UPDATED LOG SECTION -->
+        <h2>What Was Updated</h2>
+        <div class="timeline">
+            <div class="entry">
+                <div class="dot"></div>
+                <div class="content">
+                    <h3>Homepage Configuration Layout</h3>
+                    <p class="date">Optimized Core Branding Structure</p>
+                </div>
+            </div>
+
+            <div class="entry">
+                <div class="dot"></div>
+                <div class="content">
+                    <h3>Match Highlights Interactive Section</h3>
+                    <p class="date">Integrated Season Filters & Video Frame Logic</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMING SOON ENGINE TRACKER PIPELINE -->
+        <h2>Coming Soon Blueprint</h2>
+        <div class="timeline">
+
+            <div class="entry">
+                <div class="dot soon"></div>
+                <div class="content">
+                    <h3>Match Day Calendar</h3>
+                </div>
+            </div>
+
+            <div class="entry">
+                <div class="dot soon"></div>
+                <div class="content">
+                    <h3>Daily Routine & Training Regimen</h3>
+                </div>
+            </div>
+
+            <div class="entry">
+                <div class="dot soon"></div>
+                <div class="content">
+                    <h3>Photos / Athletic Performance Gallery</h3>
+                </div>
+            </div>
+
+            <div class="entry">
+                <div class="dot soon"></div>
+                <div class="content">
+                    <h3>Academic Portfolio & School Projects</h3>
+                </div>
+            </div>
+
+            <div class="entry">
+                <div class="dot soon"></div>
+                <div class="content">
+                    <h3>Physical Therapy (PT) Clearance Calendar</h3>
+                </div>
+            </div>
+
+            <div class="entry">
+                <div class="dot soon"></div>
+                <div class="content">
+                    <h3>Colleges & Target Universities I Want to Attend <span class="badge-new">New Page</span></h3>
+                </div>
+            </div>
+
+            <div class="entry">
+                <div class="dot soon"></div>
+                <div class="content">
+                    <h3>Professional Soccer Clubs I Want to Play For <span class="badge-new">New Page</span></h3>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- PRIVATE ADMIN PORTAL CONTROL SHORTCUT GATE -->
+        <div style="text-align: center; margin-top: 60px; padding-top: 25px; border-top: 1px dashed var(--border-glow);">
+            <a href="#" onclick="checkAdminAccess(event)" style="color: var(--text-muted); text-decoration: none; font-size: 0.85rem; opacity: 0.4; letter-spacing: 1px; transition: opacity 0.2s;">
+                [ SYSTEM ADMINISTRATOR LOGIN TERMINAL ]
+            </a>
+        </div>
+
     </div>
-  </div>
 
-  <!-- Updated Section -->
-  <h2>What Was Updated</h2>
-  <div class="timeline">
-    <div class="entry">
-      <div class="dot"></div>
-      <div class="content">
-        <h3>Homepage</h3>
-      </div>
-    </div>
+    <!-- SECURE MASTER LOGIC GATEWAY CONTROLLER -->
+    <script>
+        function checkAdminAccess(event) {
+            event.preventDefault(); 
+            
+            var passcode = prompt("Enter Admin Secure Passcode:");
+            if (passcode === "Wall2026") {
+                window.location.href = "admin.html"; 
+            } else if (passcode !== null) {
+                alert("Access Denied. Incorrect Admin Passcode.");
+            }
+        }
+    </script>
 
-    <div class="entry">
-      <div class="dot"></div>
-      <div class="content">
-        <h3>Match Highlights</h3>
-      </div>
-    </div>
-  </div>
-
-  <!-- Coming Soon Section -->
-  <h2>Coming Soon</h2>
-  <div class="timeline">
-
-    <div class="entry">
-      <div class="dot soon"></div>
-      <div class="content">
-        <h3>Match Day Calendar</h3>
-      </div>
-    </div>
-
-    <div class="entry">
-      <div class="dot soon"></div>
-      <div class="content">
-        <h3>Daily Routine</h3>
-      </div>
-    </div>
-
-    <div class="entry">
-      <div class="dot soon"></div>
-      <div class="content">
-        <h3>Photos / Gallery</h3>
-      </div>
-    </div>
-
-    <div class="entry">
-      <div class="dot soon"></div>
-      <div class="content">
-        <h3>School Projects</h3>
-      </div>
-    </div>
-
-    <div class="entry">
-      <div class="dot soon"></div>
-      <div class="content">
-        <h3>PT Calendar</h3>
-      </div>
-    </div>
-
-    <!-- NEW PAGES COMING SOON -->
-    <div class="entry">
-      <div class="dot soon"></div>
-      <div class="content">
-        <h3>Colleges / Universities I Want to Attend (New Page)</h3>
-      </div>
-    </div>
-
-    <div class="entry">
-      <div class="dot soon"></div>
-      <div class="content">
-        <h3>Professional Soccer Teams I Want to Play For (New Page)</h3>
-      </div>
-    </div>
-
-  </div>
-</div>
+</body>
+</html>
