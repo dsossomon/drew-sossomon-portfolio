@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Broadcaster | Drew Sossomon Admin</title>
+    <!-- Add Google Fonts properly -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark-navy: #0a1128;
+            --card-navy: #131f42;
+            --electric-blue: #00d2ff;
+            --text-white: #ffffff;
+            --text-muted: #94a3b8;
+        }
+        body { 
+            background-color: var(--bg-dark-navy); 
+            color: var(--text-white); 
+            font-family: 'Outfit', sans-serif; 
+            margin: 0; 
+            padding: 40px 20px;
+        }
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+        }
+        .btn-back { 
+            display: inline-block; 
+            color: var(--text-muted); 
+            text-decoration: none; 
+            border: 1px solid var(--text-muted); 
+            padding: 8px 16px; 
+            border-radius: 4px; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            margin-bottom: 30px;
+            transition: all 0.2s;
+        }
+        .btn-back:hover {
+            color: var(--text-white);
+            border-color: var(--text-white);
+        }
+        .admin-title { 
+            color: var(--text-white); 
+            font-family: 'Big Shoulders Display', sans-serif; 
+            font-size: 3rem; 
+            margin-bottom: 5px;
+        }
+        .admin-subtitle { 
+            color: var(--electric-blue); 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
+        .dashboard-card {
+            background-color: var(--card-navy);
+            border: 2px dashed var(--electric-blue); 
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+        .dashboard-card h3 { 
+            color: var(--electric-blue); 
+            margin-top: 0; 
+            font-size: 1.5rem;
+        }
+        .dashboard-form { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px; 
+        }
+        .dashboard-form label {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .dash-input {
+            padding: 14px;
+            border: 2px solid #1e2d5a;
+            background-color: #0a1128;
+            color: #ffffff;
+            border-radius: 6px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        .dash-input:focus { 
+            border-color: var(--electric-blue); 
+            outline: none; 
+        }
+        .btn-broadcast {
+            background-color: var(--electric-blue);
+            color: #0a1128;
+            border: none;
+            padding: 16px;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            transition: opacity 0.2s;
+            margin-top: 10px;
+        }
+        .btn-broadcast:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="container">
+
+        <a href="index.html" class="btn-back">← Exit to Public Site</a>
+
+        <h1 class="admin-title">PRIVATE BROADCAST STATION</h1>
+        <p class="admin-subtitle">Secure Admin Control Panel | Drew Sossomon Portfolio</p>
+
+        <div class="dashboard-card">
+
+            <h3>Custom Distribution Broadcaster</h3>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">Type your status update below. Clicking the button automatically loads your computer's mail application with your contacts protected inside the BCC field line layer.</p>
+
+            <div class="dashboard-form">
+
+                <label for="update-subject">Email Subject Line:</label>
+                <input type="text" id="update-subject" value="Drew Sossomon Career Update | National One League & Recovery" class="dash-input">
+
+                <label for="update-body">Email Body Text Message Content:</label>
+                <textarea id="update-body" rows="10" class="dash-input">Hello,
+
+I wanted to share a quick update regarding my recovery progress and soccer career.
+
+[Type your new milestone or update text details right here…]
+
+You can view my interactive highlights tracker online at:
+https://github.io
+
+Thank you for your support,
+Drew Sossomon
+dsossomon@gmail.com</textarea>
+
+                <button onclick="launchEmailBroadcast()" class="btn-broadcast">Launch Email Broadcast</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- INTERACTIVE BROADCATOR SCRIPTS -->
+    <script>
+        function launchEmailBroadcast() {
+            // All BCC emails go here with programming quotes:
+            const subscriberList = [
+                // Friends
+                "Sylverwolf7@gmail.com",
+                "6sossomons@gmail.com",
+                "tylerpuetzer@gmail.com",
+                "crhill1707@gmail.com",
+                "nugentm1212@gmail.com",
+                "javier56ochoa@gmail.com",
+                // Former teachers/friends
+                "wanda.evans@youngsvilleacademy.org",
+                "nathanael.stamp@youngsvilleacademy.org",
+                "elizabeth@cpsfc.org",
+                "joshua@cpsfc.org",
+                "karen@cpsfc.org",
+                // Coaches
+                "apuetzer@gmail.com",
+                "coachdgillespie@ncsasports.org"
+            ];
+
+            const subjectText = encodeURIComponent(document.getElementById('update-subject').value);
+            const bodyText = encodeURIComponent(document.getElementById('update-body').value);
+            const bccString = subscriberList.join(',');
+
+            // Launch default computer mail client using backtick literals
+            window.location.href = `mailto:dsossomon@gmail.com?bcc=${bccString}&subject=${subjectText}&body=${bodyText}`;
+        }
+    </script>
+
+</body>
+</html>
