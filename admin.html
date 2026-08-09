@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1250">
     <title>Email Broadcaster | Drew Sossomon Admin</title>
     <!-- Add Google Fonts properly -->
     <link href="https://googleapis.com" rel="stylesheet">
+    
     <style>
+        /* Color Variables matching your dark navy theme */
         :root {
             --bg-dark-navy: #0a1128;
             --card-navy: #131f42;
@@ -14,6 +16,7 @@
             --text-white: #ffffff;
             --text-muted: #94a3b8;
         }
+
         body { 
             background-color: var(--bg-dark-navy); 
             color: var(--text-white); 
@@ -21,10 +24,12 @@
             margin: 0; 
             padding: 40px 20px;
         }
+
         .container { 
             max-width: 800px; 
             margin: 0 auto; 
         }
+
         .btn-back { 
             display: inline-block; 
             color: var(--text-muted); 
@@ -37,16 +42,19 @@
             margin-bottom: 30px;
             transition: all 0.2s;
         }
+
         .btn-back:hover {
             color: var(--text-white);
             border-color: var(--text-white);
         }
+
         .admin-title { 
             color: var(--text-white); 
             font-family: 'Big Shoulders Display', sans-serif; 
             font-size: 3rem; 
             margin-bottom: 5px;
         }
+
         .admin-subtitle { 
             color: var(--electric-blue); 
             font-weight: 700; 
@@ -55,6 +63,7 @@
             font-size: 0.95rem;
             letter-spacing: 1px;
         }
+
         .dashboard-card {
             background-color: var(--card-navy);
             border: 2px dashed var(--electric-blue); 
@@ -62,22 +71,26 @@
             padding: 30px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         }
+
         .dashboard-card h3 { 
             color: var(--electric-blue); 
             margin-top: 0; 
             font-size: 1.5rem;
         }
+
         .dashboard-form { 
             display: flex; 
             flex-direction: column; 
             gap: 15px; 
         }
+
         .dashboard-form label {
             font-weight: 700;
             text-transform: uppercase;
             font-size: 0.85rem;
             color: var(--text-muted);
         }
+
         .dash-input {
             padding: 14px;
             border: 2px solid #1e2d5a;
@@ -88,10 +101,12 @@
             font-size: 1rem;
             transition: border-color 0.2s;
         }
+
         .dash-input:focus { 
             border-color: var(--electric-blue); 
             outline: none; 
         }
+
         .btn-broadcast {
             background-color: var(--electric-blue);
             color: #0a1128;
@@ -106,6 +121,7 @@
             transition: opacity 0.2s;
             margin-top: 10px;
         }
+
         .btn-broadcast:hover {
             opacity: 0.9;
         }
@@ -113,12 +129,11 @@
 </head>
 <body>
 
-    <!-- SECURE PASSWORD GATE LAYER -->
+    <!-- SECURE GATEWAY BACKUP LAYER -->
     <script>
-        // Demands your custom admin key passcode straight away on page load
         var password = prompt("Enter Admin Secure Passcode:");
         if (password !== "Wall2026") {
-            alert("Access Denied. Redirecting to home page...");
+            alert("Access Denied.");
             window.location.href = "index.html"; 
         }
     </script>
@@ -163,7 +178,7 @@ dsossomon@gmail.com</textarea>
     <!-- INTERACTIVE BROADCASTER SCRIPTS -->
     <script>
         function launchEmailBroadcast() {
-            // Your clean, formatted list of subscribers
+            // Secure array list storage parameters
             const subscriberList = [
                 // Friends
                 "Sylverwolf7@gmail.com",
@@ -187,7 +202,7 @@ dsossomon@gmail.com</textarea>
             const bodyText = encodeURIComponent(document.getElementById('update-body').value);
             const bccString = subscriberList.join(',');
 
-            // Launch default computer mail client using backtick literals
+            // Launch default operating platform email wizard application 
             window.location.href = `mailto:dsossomon@://gmail.com{bccString}&subject=${subjectText}&body=${bodyText}`;
         }
     </script>
