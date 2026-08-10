@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1250">
+    <title>Scouting Packet & Recruiting Profile | Drew Sossomon</title>
+    <!-- Correct Google Fonts links -->
+    <link href="https://fonts.googleapis.com/css?family=Outfit:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Big+Shoulders+Display:700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark-navy: #0a1128;
+            --card-navy: #131f42;
+            --electric-blue: #00d2ff;
+            --text-white: #ffffff;
+            --text-muted: #94a3b8;
+            --border-glow: #1e2d5a;
+        }
+        body { 
+            background-color: var(--bg-dark-navy); 
+            color: var(--text-white); 
+            font-family: 'Outfit', sans-serif; 
+            margin: 0; 
+            padding: 40px 20px;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .btn-primary { 
+            display: inline-block; 
+            color: var(--electric-blue); 
+            text-decoration: none; 
+            border: 2px solid var(--electric-blue); 
+            padding: 10px 20px; 
+            border-radius: 6px; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            margin-bottom: 30px;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background-color: var(--electric-blue);
+            color: var(--bg-dark-navy);
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
+        }
+        .page-title { 
+            font-family: 'Big Shoulders Display', sans-serif; 
+            text-align: center; 
+            font-size: 3.5rem; 
+            margin-top: 0;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        .page-subtitle { 
+            color: var(--electric-blue); 
+            text-align: center; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+        .analytics-card {
+            background-color: var(--card-navy);
+            border: 1px solid var(--border-glow);
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+        .analytics-card h2 {
+            font-family: 'Big Shoulders Display', sans-serif;
+            font-size: 2.2rem;
+            color: var(--electric-blue);
+            text-transform: uppercase;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .section-desc {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+            text-align: center;
+        }
+        .packet-preview {
+            background-color: #0a1128;
+            border: 2px dashed var(--electric-blue);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: left;
+            margin-top: 20px;
+        }
+        .packet-header {
+            border-bottom: 2px solid var(--electric-blue);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        .packet-header h2 {
+            font-family: 'Big Shoulders Display', sans-serif;
+            font-size: 2.5rem;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .packet-header p {
+            margin: 5px 0 0 0;
+            color: var(--electric-blue);
+            font-weight: 700;
+        }
+        .packet-bio-statement {
+            background-color: var(--card-navy);
+            border-left: 4px solid var(--electric-blue);
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-white);
+        }
+        .packet-details {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .packet-details li {
+            margin-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-white);
+        }
+        .packet-details li:last-child {
+            margin-bottom: 0;
+        }
+        .packet-details strong {
+            color: var(--electric-blue);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            display: block;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+        .packet-data-text {
+            display: block;
+            color: var(--text-white);
+        }
+        @media print {
+            body { background: #fff !important; color: #000 !important; padding: 0 !important; }
+            .btn-primary, .page-subtitle, .page-title, .section-desc { display: none !important; }
+            .analytics-card { border: none !important; box-shadow: none !important; background: #fff !important; padding: 0 !important; }
+            .packet-preview { border: none !important; background: #fff !important; padding: 0 !important; }
+            .packet-header h2, .packet-column { color: #000 !important; background: #fff !important; border: none !important; }
+            .packet-bio-statement { background: #fff !important; color: #000 !important; border-left-color: #000 !important; }
+            .packet-details li { color: #000 !important; }
+            .packet-details strong { color: #000 !important; font-weight: bold; }
+            .packet-data-text { color: #000 !important; }
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <div>
+            <a href="index.html" class="btn-primary">← Back to Home</a>
+        </div>
+        <h1 class="page-title">Scouting Profile Packet</h1>
+        <p class="page-subtitle">Official Technical Resumé & Recruitment Summary | Class of 2028</p>
+        <div class="analytics-card">
+            <h2>Coach's Recruiting Packet Download</h2>
+            <p class="section-desc">Clicking the button opens an optimized print configuration to save a single-page scouting sheet cleanly to a physical printer or local PDF document.</p>
+            <button onclick="window.print()" class="btn-primary">Download Coach's Packet (PDF)</button>
+            <div class="packet-preview">
+                <div class="packet-header">
+                    <div>
+                        <h2>Andrew "Drew" Sossomon</h2>
+                        <p>"The U.S. Wall" | Left-Footed Goalkeeper</p>
+                    </div>
+                    <div>
+                        <span style="font-weight:700; color: var(--electric-blue); font-family: 'Big Shoulders Display', sans-serif; font-size: 1.5rem;">Class of 2028</span>
+                    </div>
+                </div>
+                <div class="packet-bio-statement">
+                    <strong>Athlete Profile:</strong>
+                    Competing with Cerebral Palsy & Left Hemiplegia. A resilient American goalkeeper specializing in penalty efficiency and high-volume shot-stopping. Nicknamed "The US Wall" for elite performance under pressure.
+                </div>
+                <ul class="packet-details">
+                    <li>
+                        <strong>Athletic Pedigree:</strong>
+                        <span class="packet-data-text">Wake FC 2009 NPL North Academy<br>2026-2027 National One League Squad</span>
+                    </li>
+                    <li>
+                        <strong>Total Roster Footprint:</strong>
+                        <span class="packet-data-text">133 Games Played / 82 Clean Sheets<br>106 Career Man of the Match Honors</span>
+                    </li>
+                    <li>
+                        <strong>Goalkeeper Metrics:</strong>
+                        <span class="packet-data-text">Career Save Percentage: 93.6% Avg</span>
+                    </li>
+                    <li>
+                        <strong>Physical Profile:</strong>
+                        <span class="packet-data-text">Age: 16 | Nationality: American<br>Height: 5'6" - 5'7" | Foot: Left</span>
+                    </li>
+                    <li>
+                        <strong>Injury & Recovery Tracking:</strong>
+                        <span class="packet-data-text">ACL, Meniscus, & Internal Lateral Ligament (ILL) Surgery (Nov 2025)<br>50% Recovered (6/12 Mo) | Return-to-Play: Late 2026</span>
+                    </li>
+                    <li>
+                        <strong>Academic Profile & Contact:</strong>
+                        <span class="packet-data-text">Youngsville Academy | GPA: 2.6<br>Email: dsossomon@gmail.com</span>
+                    </li>
+                </ul>
+                <div style="margin-top:30px;">
+                    <strong style="color: var(--electric-blue);text-transform:uppercase;">Portfolio:</strong>
+                    <span class="packet-data-text">https://dsossomon.github.io/drew-sossomon-portfolio/index.html</span>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
