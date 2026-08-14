@@ -4,15 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GK Analytics Dashboard | Drew Sossomon</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&family=Big+Shoulders+Display:wght@800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <link href="https://googleapis.com" rel="stylesheet">
+    <link rel="stylesheet" href="https://cloudflare.com">
     <style>
         /* --- CSS VARIABLES (Matching your Branding) --- */
         :root {
             --navy: #0a192f;
-            --blue: #007bff; 
+            --blue: #007bff;
             --white: #ffffff;
             --bg-gray: #f8fafc;
             --border-gray: #e2e8f0;
@@ -153,7 +151,9 @@
             border-bottom: 1px solid var(--border-gray);
         }
 
-        .stat-item:last-child { border-bottom: none; }
+        .stat-item:last-child {
+            border-bottom: none;
+        }
 
         .stat-item span {
             font-weight: 700;
@@ -168,15 +168,18 @@
 
         /* Mobile Adjustments */
         @media (max-width: 600px) {
-            header h1 { font-size: 2.2rem; }
-            .dashboard-container { padding: 15px; }
+            header h1 {
+                font-size: 2.2rem;
+            }
+            .dashboard-container {
+                padding: 15px;
+            }
         }
     </style>
 </head>
 <body>
 
 <div class="dashboard-container">
-    
     <a href="index.html" class="back-home">
         <i class="fas fa-arrow-left"></i> Back to Portfolio
     </a>
@@ -192,22 +195,22 @@
             <div class="input-group">
                 <label>Total Minutes Played:</label>
                 <input type="number" id="minutesPlayed" placeholder="e.g. 900">
-                
+
                 <label>Goals Against:</label>
                 <input type="number" id="goalsAgainst" placeholder="e.g. 10">
-                
+
                 <label>Total Saves:</label>
                 <input type="number" id="saves" placeholder="e.g. 45">
-                
+
                 <label>Shots on Goal Faced:</label>
                 <input type="number" id="shotsOnGoal" placeholder="e.g. 55">
-                
+
                 <label>Games Played:</label>
                 <input type="number" id="gamesPlayed" placeholder="e.g. 10">
-                
+
                 <label>Clean Sheets:</label>
                 <input type="number" id="cleanSheets" placeholder="e.g. 4">
-                
+
                 <button onclick="calculateGKStats()" class="calc-btn">Calculate My Stats</button>
             </div>
         </section>
@@ -223,6 +226,14 @@
                 <strong id="svResult">0%</strong>
             </div>
             <div class="stat-item">
+                <span>Saved Shots %:</span>
+                <strong id="shotsFacedResult">0%</strong>
+            </div>
+            <div class="stat-item">
+                <span>Avg Shots Faced / Match:</span>
+                <strong id="avgShotsResult">0.0</strong>
+            </div>
+            <div class="stat-item">
                 <span>Clean Sheet %:</span>
                 <strong id="csResult">0%</strong>
             </div>
@@ -234,38 +245,48 @@
 </div>
 
 <script>
-    function calculateGKStats() {
-        let goals = parseFloat(document.getElementById("goalsAgainst").value) || 0;
-        let minutes = parseFloat(document.getElementById("minutesPlayed").value) || 0;
-        let saves = parseFloat(document.getElementById("saves").value) || 0;
-        let shots = parseFloat(document.getElementById("shotsOnGoal").value) || 0;
-        let cleanSheets = parseFloat(document.getElementById("cleanSheets").value) || 0;
-        let games = parseFloat(document.getElementById("gamesPlayed").value) || 0;
+function calculateGKStats() {
+    let goals = parseFloat(document.getElementById("goalsAgainst").value) || 0;
+    let minutes = parseFloat(document.getElementById("minutesPlayed").value) || 0;
+    let saves = parseFloat(document.getElementById("saves").value) || 0;
+    let shots = parseFloat(document.getElementById("shotsOnGoal").value) || 0;
+    let cleanSheets = parseFloat(document.getElementById("cleanSheets").value) || 0;
+    let games = parseFloat(document.getElementById("gamesPlayed").value) || 0;
 
-        // GAA (Goals * 90 / Minutes)
-        if (minutes > 0) {
-            let gaa = (goals * 90) / minutes;
-            document.getElementById("gaaResult").textContent = gaa.toFixed(2);
-        } else {
-            document.getElementById("gaaResult").textContent = "0.00";
-        }
-
-        // Save Percentage (Saves / Shots * 100)
-        if (shots > 0) {
-            let sv = (saves / shots) * 100;
-            document.getElementById("svResult").textContent = sv.toFixed(1) + "%";
-        } else {
-            document.getElementById("svResult").textContent = "0%";
-        }
-
-        // Clean Sheet Percentage (CS / Games * 100)
-        if (games > 0) {
-            let cs = (cleanSheets / games) * 100;
-            document.getElementById("csResult").textContent = cs.toFixed(1) + "%";
-        } else {
-            document.getElementById("csResult").textContent = "0%";
-        }
+    // GAA (Goals * 90 / Minutes)
+    if (minutes > 0) {
+        let gaa = (goals * 90) / minutes;
+        document.getElementById("gaaResult").textContent = gaa.toFixed(2);
+    } else {
+        document.getElementById("gaaResult").textContent = "0.00";
     }
+
+    // Save Percentage & Shots Saved Tracking
+    if (shots > 0) {
+        let sv = (saves / shots) * 100;
+        document.getElementById("svResult").textContent = sv.toFixed(1) + "%";
+        document.getElementById("shotsFacedResult").textContent = sv.toFixed(1) + "%";
+    } else {
+        document.getElementById("svResult").textContent = "0%";
+        document.getElementById("shotsFacedResult").textContent = "0%";
+    }
+
+    // Average Shots Faced Per Match (Shots Faced / Games Played)
+    if (games > 0) {
+        let avgShots = shots / games;
+        document.getElementById("avgShotsResult").textContent = avgShots.toFixed(1);
+    } else {
+        document.getElementById("avgShotsResult").textContent = "0.0";
+    }
+
+    // Clean Sheet Percentage (CS / Games * 100)
+    if (games > 0) {
+        let cs = (cleanSheets / games) * 100;
+        document.getElementById("csResult").textContent = cs.toFixed(1) + "%";
+    } else {
+        document.getElementById("csResult").textContent = "0%";
+    }
+}
 </script>
 
 </body>
