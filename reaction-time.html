@@ -1,133 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Reaction Time Game</title>
-<style>
-  body {
-    background: #0d0d0d;
-    color: white;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin-top: 40px;
-  }
+  <meta charset="UTF-8">
+  <title>Goalkeeper Reflex & Anticipation Tests</title>
+  <style>
+    /* 🧤 Original signature black background color */
+    body {
+      background: #0d0d0d;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 40px;
+    }
 
-  h1 {
-    font-size: 40px;
-    letter-spacing: 2px;
-  }
+    h1 {
+      font-size: 40px;
+      letter-spacing: 2px;
+    }
 
-  /* 🔥 Cool glowing paragraph */
-  #drewInfo {
-    font-size: 22px;
-    margin: 10px auto 30px;
-    width: 70%;
-    color: #00ffee;
-    text-shadow: 0 0 12px #00ffee;
-    animation: pulse 2s infinite ease-in-out;
-  }
+    /* 🔥 Original pulse glow paragraph styling */
+    #drewInfo {
+      font-size: 22px;
+      margin: 10px auto 30px;
+      width: 70%;
+      color: #00ffee;
+      text-shadow: 0 0 12px #00ffee;
+      animation: pulse 2s infinite ease-in-out;
+    }
 
-  @keyframes pulse {
-    0% { opacity: 0.7; }
-    50% { opacity: 1; }
-    100% { opacity: 0.7; }
-  }
+    @keyframes pulse {
+      0% { opacity: 0.7; }
+      50% { opacity: 1; }
+      100% { opacity: 0.7; }
+    }
 
-  #box {
-    width: 260px;
-    height: 260px;
-    background: #ff3b3b;
-    margin: 40px auto;
-    border-radius: 25px;
-    cursor: pointer;
-    display: none;
-    transition: background 0.2s, transform 0.2s;
-    box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
-  }
+    /* 🎮 Game Mode Tab Selectors */
+    .tabs {
+      margin: 20px auto;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
 
-  #box.ready {
-    background: #00ff62;
-    transform: scale(1.08);
-    box-shadow: 0 0 35px rgba(0, 255, 100, 0.7);
-  }
+    .tab-btn {
+      padding: 12px 24px;
+      font-size: 18px;
+      border: 2px solid #00ffee;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.2s;
+    }
 
-  #startBtn {
-    padding: 14px 30px;
-    font-size: 20px;
-    border-radius: 12px;
-    border: none;
-    background: #0078ff;
-    color: white;
-    cursor: pointer;
-    transition: 0.2s;
-  }
+    .tab-btn.active {
+      background: #00ffee;
+      color: #0d0d0d;
+      box-shadow: 0 0 15px #00ffee;
+    }
 
-  #startBtn:hover {
-    transform: scale(1.05);
-    background: #0a8bff;
-  }
+    .game-section {
+      display: none;
+    }
 
-  #result {
-    font-size: 40px;
-    margin-top: 20px;
-    font-weight: bold;
-    color: #00ffea;
-    text-shadow: 0 0 10px #00ffee;
-  }
-</style>
+    .game-section.active {
+      display: block;
+    }
+
+    /* 🟥 Original box size, border radius, and transitions */
+    #box, #penaltyBox {
+      width: 260px;
+      height: 260px;
+      background: #ff3b3b;
+      margin: 40px auto;
+      border-radius: 25px;
+      cursor: pointer;
+      display: none;
+      transition: background 0.2s, transform 0.2s;
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+    }
+
+    /* 🟩 Original scaling green box state */
+    #box.ready, #penaltyBox.ready {
+      background: #00ff62;
+      transform: scale(1.08);
+      box-shadow: 0 0 35px rgba(0, 255, 100, 0.7);
+    }
+
+    /* 🔵 Original button styling */
+    .start-btn {
+      padding: 14px 30px;
+      font-size: 20px;
+      border-radius: 12px;
+      border: none;
+      background: #0078ff;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .start-btn:hover {
+      transform: scale(1.05);
+      background: #0a8bff;
+    }
+
+    /* ✨ Original light cyan neon outputs */
+    .result-text {
+      font-size: 40px;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #00ffea;
+      text-shadow: 0 0 10px #00ffee;
+    }
+
+    .tier-text {
+      font-size: 22px;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .record-note {
+      font-size: 15px;
+      color: #888;
+      margin-top: 25px;
+      font-style: italic;
+    }
+  </style>
 </head>
 <body>
 
-<h1>Reaction Time Test </h1>
+  <h1>Reaction Time Test</h1>
+  
+  <p id="drewInfo">
+    Drew Sossomon’s normal reaction time during penalty shootouts is typically between <strong>0.15 seconds=150ms and 0.10 seconds=100ms</strong> — which makes him unbeatable in shootouts
+  </p>
 
-<!-- ⭐ Your cool paragraph -->
-<p id="drewInfo">
-  Drew Sossomon’s normal reaction time during penalty shootouts is typically between 
-  <strong>0.15 seconds=150ms and 0.10 seconds=100ms</strong> — which makes him unbeatable in shootouts 
-</p>
+  <!-- 🎛️ Mode Switches -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('reflex')">1. Reflex Reaction Game</button>
+    <button class="tab-btn" onclick="switchTab('anticipation')">2. Penalty Anticipation Test</button>
+  </div>
 
-<p id="message">Click START and wait for green...</p>
-<button id="startBtn">START</button>
-<div id="box"></div>
-<p id="result"></p>
+  <!-- ⚡ GAME 1: ORIGINAL REFLEX TEST -->
+  <div id="reflexSection" class="game-section active">
+    <p id="message">Click START and wait for green...</p>
+    <button id="startBtn" class="start-btn">START</button>
+    <div id="box"></div>
+    <p id="result" class="result-text"></p>
+    <p id="reflexTier" class="tier-text"></p>
+    <p class="record-note">* Drew's portfolio benchmark: 137 ms</p>
+  </div>
 
-<script>
-  const box = document.getElementById("box");
-  const message = document.getElementById("message");
-  const result = document.getElementById("result");
-  const startBtn = document.getElementById("startBtn");
+  <!-- 🧠 GAME 2: NEW PENALTY ANTICIPATION TEST -->
+  <div id="anticipationSection" class="game-section">
+    <p style="font-size: 18px; max-width: 600px; margin: 0 auto 15px; color: #ccc;">
+      <strong>Goal:</strong> Read the kicker! Hit the button the instant you spot the opening. Can you lock your choice in under Drew's <strong>0.13 seconds (130 ms)</strong> record?
+    </p>
+    <p id="penaltyMessage">Click START CHALLENGE to prepare...</p>
+    <button id="penaltyStartBtn" class="start-btn">START CHALLENGE</button>
+    <div id="penaltyBox"></div>
+    <p id="penaltyResult" class="result-text"></p>
+    <p id="anticipationTier" class="tier-text"></p>
+    <p class="record-note">* Drew's tactical prediction speed: 0.13s (130 ms)</p>
+  </div>
 
-  let startTime;
-  let timeout;
-
-  startBtn.onclick = () => {
-    result.textContent = "";
-    message.textContent = "Wait for green...";
-    box.style.display = "block";
-    box.classList.remove("ready");
-
-    const delay = Math.random() * 3000 + 1000;
-
-    timeout = setTimeout(() => {
-      box.classList.add("ready");
-      message.textContent = "CLICK!";
-      startTime = Date.now();
-    }, delay);
-  };
-
-  box.onclick = () => {
-    if (!box.classList.contains("ready")) {
-      message.textContent = "Too soon!";
-      clearTimeout(timeout);
-      return;
+  <script>
+    // Tab Switching Logic
+    function switchTab(mode) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.game-section').forEach(sec => sec.classList.remove('active'));
+      
+      if(mode === 'reflex') {
+        event.target.classList.add('active');
+        document.getElementById('reflexSection').classList.add('active');
+      } else {
+        event.target.classList.add('active');
+        document.getElementById('anticipationSection').classList.add('active');
+      }
     }
 
-    const reaction = Date.now() - startTime;
-    result.textContent = reaction + " ms";
-    message.textContent = "Click START to try again!";
-    box.classList.remove("ready");
-  };
-</script>
+    // --- GAME 1: REFLEX LOGIC ---
+    const box = document.getElementById("box");
+    const message = document.getElementById("message");
+    const result = document.getElementById("result");
+    const reflexTier = document.getElementById("reflexTier");
+    const startBtn = document.getElementById("startBtn");
+    let startTime, timeout;
 
+    startBtn.onclick = () => {
+      result.textContent = "";
+      reflexTier.textContent = "";
+      message.textContent = "Wait for green...";
+      startBtn.style.display = "none";
+      box.style.display = "block";
+      box.classList.remove("ready");
+      
+      const delay = Math.random() * 3000 + 1000;
+      timeout = setTimeout(() => {
+        box.classList.add("ready");
+        message.textContent = "CLICK!";
+        startTime = performance.now(); 
+      }, delay);
+    };
+
+    box.onclick = () => {
+      if (!box.classList.contains("ready")) {
+        message.textContent = "Too soon!";
+        clearTimeout(timeout);
+        box.style.display = "none";
+        startBtn.style.display = "inline-block";
+        return;
+      }
+      const reaction = Math.round(performance.now() - startTime);
+      result.textContent = reaction + " ms";
+      message.textContent = "Click START to try again!";
+      box.classList.remove("ready");
+      box.style.display = "none";
+      startBtn.style.display = "inline-block";
+
+      if (reaction < 150) {
+        reflexTier.textContent = "🏆 Superhuman Tier (Drew Level!)";
+        reflexTier.style.color = "#00ffee";
+      } else if (reaction <= 190) {
+        reflexTier.textContent = "⚡ Elite Varsity Reflexes";
+        reflexTier.style.color = "#00ff62";
+      } else {
+        reflexTier.textContent = "🟢 Standard Reaction Time";
+        reflexTier.style.color = "#ffcc00";
+      }
+    };
+
+    // --- GAME 2: PENALTY ANTICIPATION LOGIC ---
+    const penaltyBox = document.getElementById("penaltyBox");
+    const penaltyMessage = document.getElementById("penaltyMessage");
+    const penaltyResult = document.getElementById("penaltyResult");
+    const anticipationTier = document.getElementById("anticipationTier");
+    const penaltyStartBtn = document.getElementById("penaltyStartBtn");
+    let pStartTime, pTimeout;
+
+    penaltyStartBtn.onclick = () => {
+      penaltyResult.textContent = "";
+      anticipationTier.textContent = "";
+      penaltyMessage.textContent = "The striker is walking up to the ball... Watch closely...";
+      penaltyStartBtn.style.display = "none";
+      penaltyBox.style.display = "block";
+      penaltyBox.classList.remove("ready");
+
+      const delay = Math.random() * 2500 + 2000;
+      pTimeout = setTimeout(() => {
+        penaltyBox.classList.add("ready");
+        penaltyMessage.textContent = "SHOOT! CHOOSE YOUR SIDE!";
+        pStartTime = performance.now();
+      }, delay);
+    };
+
+    penaltyBox.onclick = () => {
+      if (!penaltyBox.classList.contains("ready")) {
+        penaltyMessage.textContent = "You jumped off your line early! Penalty retake.";
+        clearTimeout(pTimeout);
+        penaltyBox.style.display = "none";
+        penaltyStartBtn.style.display = "inline-block";
+        return;
+      }
+      const timeTaken = Math.round(performance.now() - pStartTime);
+      penaltyResult.textContent = (timeTaken / 1000).toFixed(3) + " seconds (" + timeTaken + " ms)";
+      penaltyMessage.textContent = "Challenge complete! Try again?";
+      penaltyBox.classList.remove("ready");
+      penaltyBox.style.display = "none";
+      penaltyStartBtn.style.display = "inline-block";
+
+      // Fixed decimal tier check: Target is now 130 ms (0.13s)
+      if (timeTaken <= 130) {
+        anticipationTier.textContent = "🧠 Elite Match Read! Beat Drew's 0.13s Record!";
+        anticipationTier.style.color = "#ffcc00";
+      } else {
+        anticipationTier.textContent = "🧤 Good try, but it's tough to match a 0.13s reflex.";
+        anticipationTier.style.color = "#00ffea";
+      }
+    };
+  </script>
 </body>
 </html>
