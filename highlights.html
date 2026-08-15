@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=1250">
     <title>Match Highlights | Drew Sossomon</title>
     <link href="https://googleapis.com" rel="stylesheet">
-    
     <style>
         /* Color Variables */
         :root {
@@ -16,29 +15,29 @@
             --text-muted: #94a3b8;
         }
 
-        body { 
-            background-color: var(--bg-dark-navy); 
-            color: var(--text-white); 
-            font-family: 'Outfit', sans-serif; 
-            margin: 0; 
+        body {
+            background-color: var(--bg-dark-navy);
+            color: var(--text-white);
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
         }
 
-        .container { 
-            max-width: 950px; 
-            margin: 0 auto; 
-            padding: 40px 50px; 
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 40px 50px;
         }
 
         /* Navigation and Buttons */
-        .btn-primary { 
-            display: inline-block; 
-            color: var(--electric-blue); 
-            text-decoration: none; 
-            border: 2px solid var(--electric-blue); 
-            padding: 10px 20px; 
-            border-radius: 6px; 
-            font-weight: 700; 
-            text-transform: uppercase; 
+        .btn-primary {
+            display: inline-block;
+            color: var(--electric-blue);
+            text-decoration: none;
+            border: 2px solid var(--electric-blue);
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
             margin-bottom: 30px;
             transition: all 0.2s ease-in-out;
         }
@@ -49,95 +48,94 @@
             box-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
         }
 
-        .stats-title { 
-            color: var(--text-white); 
-            font-family: 'Big Shoulders Display', sans-serif; 
-            text-align: center; 
-            font-size: 3.5rem; 
+        .stats-title {
+            color: var(--text-white);
+            font-family: 'Big Shoulders Display', sans-serif;
+            text-align: center;
+            font-size: 3.5rem;
             margin-bottom: 10px;
         }
 
-        .stats-subtitle { 
-            color: var(--electric-blue); 
-            text-align: center; 
-            font-weight: 700; 
-            text-transform: uppercase; 
+        .stats-subtitle {
+            color: var(--electric-blue);
+            text-align: center;
+            font-weight: 700;
+            text-transform: uppercase;
             margin-bottom: 40px;
         }
 
         /* Interactive Filter Tabs */
-        .video-filter-container { 
-            display: flex; 
-            justify-content: center; 
-            gap: 15px; 
-            margin-bottom: 30px; 
+        .video-filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
         }
 
-        .filter-btn { 
-            background-color: var(--card-navy); 
-            color: var(--text-white); 
-            border: 2px solid transparent; 
-            padding: 12px 26px; 
-            cursor: pointer; 
-            border-radius: 6px; 
-            font-weight: 700; 
-            text-transform: uppercase; 
+        .filter-btn {
+            background-color: var(--card-navy);
+            color: var(--text-white);
+            border: 2px solid transparent;
+            padding: 12px 26px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
             font-family: 'Outfit', sans-serif;
             transition: all 0.2s ease-in-out;
         }
 
-        .filter-btn.active, .filter-btn:hover { 
-            border-color: var(--electric-blue); 
-            color: var(--electric-blue); 
+        .filter-btn.active, .filter-btn:hover {
+            border-color: var(--electric-blue);
+            color: var(--electric-blue);
             box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
         }
 
         /* Video Frame Box */
-        .highlight-video-frame { 
-            max-width: 900px; 
-            margin: 0 auto 40px auto; 
+        .highlight-video-frame {
+            max-width: 900px;
+            margin: 0 auto 40px auto;
         }
 
-        .video-wrapper { 
-            position: relative; 
-            padding-bottom: 56.25%; 
-            height: 0; 
-            overflow: hidden; 
-            border-radius: 8px; 
-            background: #000; 
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #000;
             box-shadow: 0 4px 20px rgba(0,0,0,0.6);
         }
 
         /* Forces any dynamic iframe code you drop in to fill the screen correctly */
-        .video-wrapper iframe, .video-wrapper video { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
+        .video-wrapper iframe, .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%; height: 100%;
         }
 
         /* Boxes for Notes & CTA */
-        .film-notes-box, .coming-soon-box, .recruit-cta { 
-            background-color: var(--card-navy); 
-            border-radius: 8px; 
-            padding: 25px; 
-            margin-top: 25px; 
+        .film-notes-box, .coming-soon-box, .recruit-cta {
+            background-color: var(--card-navy);
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 25px;
             border: 1px solid #1e2d5a;
         }
 
-        .film-notes-box h3, .coming-soon-box h4, .recruit-cta h4 { 
-            color: var(--electric-blue); 
+        .film-notes-box h3, .coming-soon-box h4, .recruit-cta h4 {
+            color: var(--electric-blue);
             margin-top: 0;
         }
 
-        .film-notes-box ul { 
-            padding-left: 20px; 
+        .film-notes-box ul {
+            padding-left: 20px;
             margin: 0;
         }
 
-        .film-notes-box li { 
-            margin-bottom: 12px; 
+        .film-notes-box li {
+            margin-bottom: 12px;
             line-height: 1.6;
             color: var(--text-white);
         }
@@ -147,14 +145,14 @@
             font-style: italic;
         }
 
-        .btn-request-match { 
+        .btn-request-match {
             display: inline-block;
-            background-color: var(--electric-blue); 
-            color: var(--bg-dark-navy); 
-            padding: 12px 24px; 
-            text-decoration: none; 
-            border-radius: 6px; 
-            font-weight: 700; 
+            background-color: var(--electric-blue);
+            color: var(--bg-dark-navy);
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 700;
             margin-top: 15px;
             transition: opacity 0.2s;
         }
@@ -163,106 +161,101 @@
             opacity: 0.9;
         }
 
-        .hidden { 
-            display: none !important; 
+        .hidden {
+            display: none !important;
         }
     </style>
 </head>
 <body>
 
-    <main class="container">
-        
-        <div>
-            <a href="index.html" class="btn-primary">← Back to Home</a>
-        </div>
+<main class="container">
+    <div>
+        <a href="index.html" class="btn-primary">← Back to Home</a>
+    </div>
 
-        <h1 class="stats-title">MATCH HIGHLIGHTS & FILM</h1>
-        <p class="stats-subtitle">Wake FC 2009 NPL | "The U.S. Wall"</p>
+    <h1 class="stats-title">MATCH HIGHLIGHTS & FILM</h1>
+    <p class="stats-subtitle">Wake FC 2009 NPL | "The U.S. Wall"</p>
 
-        <!-- INTERACTIVE FILTER TABS -->
-        <div class="video-filter-container">
-            <button class="filter-btn active" onclick="filterSeason('all')">Full Career Reel (2018-Pres.)</button>
-            <button class="filter-btn" onclick="filterSeason('future')">Future Season Clips</button>
-        </div>
+    <!-- INTERACTIVE FILTER TABS -->
+    <div class="video-filter-container">
+        <button class="filter-btn active" onclick="filterSeason('all')">Full Career Reel (2018-Pres.)</button>
+        <button class="filter-btn" onclick="filterSeason('remix')">Career Reel (New Music)</button>
+        <button class="filter-btn" onclick="filterSeason('future')">Future Season Clips</button>
+    </div>
 
-        <!-- VIDEO CARDS LAYER -->
-        <div class="highlight-video-frame">
-            
-            <!-- Main Video Panel -->
-            <div id="season-all" class="video-card-item">
-                <div class="video-wrapper">
-                    <!-- Cleaned up your working embedded player logic frame -->
-                    <iframe 
-                        src="https://drive.google.com/file/d/15y-CXV1IeFJYpgqGfCcqg6Qf6r_eQhGDgbRgw7nAC3Y/preview" 
-                        allow="autoplay"
-                        allowfullscreen
-                        style="border: none;">
-                    </iframe>
-                </div>
-            </div>
-
-            <!-- Future Video Placeholder -->
-            <div id="season-future" class="video-card-item hidden">
-                <div class="video-wrapper">
-                    <em style="color: var(--text-muted); display: block; padding: 40px; text-align: center;">
-                        Post-recovery match clips will be updated here.
-                    </em>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- COMPLETE FILM NOTES BOX -->
-        <div class="film-notes-box">
-            <h3>Film Analysis Notes:</h3>
-            <ul>
-                <li><strong>Shot Stopping:</strong> High-volume save capacity, elite reaction times, and quick post-save recovery.</li>
-                <li><strong>Distribution:</strong> Dominant left-footed distribution, focused on long-ball accuracy and tactical build-up.</li>
-                <li><strong>Penalty Record:</strong> 100% Career PK Save Rate (60/60) in tournament play.</li>
-                <li><strong>Key Highlight (8:05):</strong> High-danger aerial intervention and full-extension recovery dive, demonstrating bravery and IQ under fatigue against older MLS NEXT attackers.</li>
-                <li><strong>Current Status:</strong> Archive includes 2017–2025 footage. Roster secured for the <strong>2026-2027 National One League</strong> season (Returning player reservation). Currently in elite rehabilitation following ACL, meniscus, and MCL surgery. Expected return to play: Late 2026.</li>
-            </ul>
-        </div>
-
-        <!-- COMING SOON BOX -->
-        <div class="coming-soon-box">
-            <h4>Coming Soon — 2026-2027 National One League</h4>
-            <div class="coming-soon-placeholder">
-                New match film and training logs will be uploaded here immediately following full clearance and return-to-play with the National One League squad.
+    <!-- VIDEO CARDS LAYER -->
+    <div class="highlight-video-frame">
+        <!-- Main Video Panel (First Google Vids Link) -->
+        <div id="season-all" class="video-card-item">
+            <div class="video-wrapper">
+                <iframe src="https://google.com" allow="autoplay" allowfullscreen style="border: none;"></iframe>
             </div>
         </div>
 
-        <!-- RECRUITING CALL TO ACTION -->
-        <div class="recruit-cta" style="text-align: center;">
-            <h4>Interested in Drew? Want to see him live?</h4>
-            <p style="color: var(--text-muted);">Request a match‑day evaluation or schedule an in‑person viewing opportunity.</p>
-            <a href="mailto:dsossomon@://gmail.com." class="btn-request-match">
-                Request to Watch a Match
-            </a>
+        <!-- New Video Panel (Second Google Vids Link) -->
+        <div id="season-remix" class="video-card-item hidden">
+            <div class="video-wrapper">
+                <iframe src="https://docs.google.com/videos/d/1vNQzi0XUHh8Nnmad17XEhcrAOBAGiFBFi9UR8KemuqE/play?usp=sharing" allow="autoplay" allowfullscreen style="border: none;"></iframe>
+            </div>
         </div>
 
-    </main>
+        <!-- Future Video Placeholder -->
+        <div id="season-future" class="video-card-item hidden">
+            <div class="video-wrapper">
+                <em style="color: var(--text-muted); display: block; padding: 40px; text-align: center;">
+                    Post-recovery match clips will be updated here.
+                </em>
+            </div>
+        </div>
+    </div>
 
-    <!-- TAB SWITCHING INTERACTIVE JAVASCRIPT -->
-    <script>
-        function filterSeason(seasonType) {
-            // Remove active highlighting from buttons
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            
-            // Highlight the clicked filter button safely
-            window.event.target.classList.add('active');
-            
-            // Switch display configuration layers
-            if (seasonType === 'all') {
-                document.getElementById('season-all').classList.remove('hidden');
-                document.getElementById('season-future').classList.add('hidden');
-            } else if (seasonType === 'future') {
-                document.getElementById('season-all').classList.add('hidden');
-                document.getElementById('season-future').classList.remove('hidden');
-            }
-        }
-    </script>
+    <!-- COMPLETE FILM NOTES BOX -->
+    <div class="film-notes-box">
+        <h3>Film Analysis Notes:</h3>
+        <ul>
+            <li><strong>Shot Stopping:</strong> High-volume save capacity, elite reaction times, and quick post-save recovery.</li>
+            <li><strong>Distribution:</strong> Dominant left-footed distribution, focused on long-ball accuracy and tactical build-up.</li>
+            <li><strong>Penalty Record:</strong> 100% Career PK Save Rate (60/60) in tournament play.</li>
+            <li><strong>Key Highlight (8:05):</strong> High-danger aerial intervention and full-extension recovery dive, demonstrating bravery and IQ under fatigue against older MLS NEXT attackers.</li>
+            <li><strong>Current Status:</strong> Archive includes 2017–2025 footage. Roster secured for the <strong>2026-2027 National One League</strong> season (Returning player reservation). Currently in elite rehabilitation following ACL, meniscus, and MCL surgery. Expected return to play: Late 2026.</li>
+        </ul>
+    </div>
 
+    <!-- COMING SOON BOX -->
+    <div class="coming-soon-box">
+        <h4>Coming Soon — 2026-2027 National One League</h4>
+        <div class="coming-soon-placeholder">
+            New match film and training logs will be uploaded here immediately following full clearance and return-to-play with the National One League squad.
+        </div>
+    </div>
+
+    <!-- RECRUITING CALL TO ACTION -->
+    <div class="recruit-cta" style="text-align: center;">
+        <h4>Interested in Drew? Want to see him live?</h4>
+        <p style="color: var(--text-muted);">Request a match‑day evaluation or schedule an in‑person viewing opportunity.</p>
+        <a href="mailto:dsossomon@gmail.com" class="btn-request-match">
+            Request to Watch a Match
+        </a>
+    </div>
+</main>
+
+<!-- TAB SWITCHING INTERACTIVE JAVASCRIPT -->
+<script>
+function filterSeason(seasonType) {
+    // Remove active highlighting from buttons
+    const buttons = document.querySelectorAll('.filter-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    
+    // Highlight the clicked filter button safely
+    window.event.target.classList.add('active');
+    
+    // Hide all video cards first
+    const videoCards = document.querySelectorAll('.video-card-item');
+    videoCards.forEach(card => card.classList.add('hidden'));
+    
+    // Show only the target video card layer
+    document.getElementById('season-' + seasonType).classList.remove('hidden');
+}
+</script>
 </body>
 </html>
