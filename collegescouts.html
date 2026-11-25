@@ -4,156 +4,274 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1250">
     <title>Scouting Packet & Recruiting Profile | Drew Sossomon</title>
-    <!-- Correct Google Fonts links -->
-    <link href="https://fonts.googleapis.com/css?family=Outfit:400,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Big+Shoulders+Display:700&display=swap" rel="stylesheet">
+    <link href="https://googleapis.com" rel="stylesheet">
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
         :root {
-            --bg-dark-navy: #0a1128;
-            --card-navy: #131f42;
-            --electric-blue: #00d2ff;
-            --text-white: #ffffff;
-            --text-muted: #94a3b8;
-            --border-glow: #1e2d5a;
-        }
-        body { 
-            background-color: var(--bg-dark-navy); 
-            color: var(--text-white); 
-            font-family: 'Outfit', sans-serif; 
-            margin: 0; 
-            padding: 40px 20px;
-        }
-        .container { max-width: 1000px; margin: 0 auto; }
-        .btn-primary { 
-            display: inline-block; 
-            color: var(--electric-blue); 
-            text-decoration: none; 
-            border: 2px solid var(--electric-blue); 
-            padding: 10px 20px; 
-            border-radius: 6px; 
-            font-weight: 700; 
-            text-transform: uppercase; 
-            margin-bottom: 30px;
-            transition: all 0.2s ease-in-out;
-            cursor: pointer;
-        }
-        .btn-primary:hover {
-            background-color: var(--electric-blue);
-            color: var(--bg-dark-navy);
-            box-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
-        }
-        .page-title { 
-            font-family: 'Big Shoulders Display', sans-serif; 
-            text-align: center; 
-            font-size: 3.5rem; 
-            margin-top: 0;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-        .page-subtitle { 
-            color: var(--electric-blue); 
-            text-align: center; 
-            font-weight: 700; 
-            text-transform: uppercase; 
-            margin-bottom: 40px;
-            letter-spacing: 1px;
-        }
-        .analytics-card {
-            background-color: var(--card-navy);
-            border: 1px solid var(--border-glow);
-            border-radius: 12px;
-            padding: 35px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            text-align: center;
-        }
-        .analytics-card h2 {
-            font-family: 'Big Shoulders Display', sans-serif;
-            font-size: 2.2rem;
-            color: var(--electric-blue);
-            text-transform: uppercase;
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
-        .section-desc {
-            color: var(--text-muted);
-            margin-bottom: 25px;
-            font-size: 1.05rem;
-            text-align: center;
-        }
-        .packet-preview {
-            background-color: #0a1128;
-            border: 2px dashed var(--electric-blue);
-            border-radius: 8px;
-            padding: 30px;
-            text-align: left;
-            margin-top: 20px;
-        }
-        .packet-header {
-            border-bottom: 2px solid var(--electric-blue);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-        .packet-header h2 {
-            font-family: 'Big Shoulders Display', sans-serif;
-            font-size: 2.5rem;
-            margin: 0;
-            text-transform: uppercase;
-        }
-        .packet-header p {
-            margin: 5px 0 0 0;
-            color: var(--electric-blue);
-            font-weight: 700;
-        }
-        .packet-bio-statement {
-            background-color: var(--card-navy);
-            border-left: 4px solid var(--electric-blue);
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 25px;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            color: var(--text-white);
-        }
-        .packet-details {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .packet-details li {
-            margin-bottom: 20px;
-            font-size: 1rem;
-            line-height: 1.6;
-            color: var(--text-white);
-        }
-        .packet-details li:last-child {
-            margin-bottom: 0;
-        }
-        .packet-details strong {
-            color: var(--electric-blue);
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            display: block;
-            margin-bottom: 6px;
-            letter-spacing: 0.5px;
-        }
-        .packet-data-text {
-            display: block;
-            color: var(--text-white);
-        }
-        @media print {
-            body { background: #fff !important; color: #000 !important; padding: 0 !important; }
-            .btn-primary, .page-subtitle, .page-title, .section-desc { display: none !important; }
-            .analytics-card { border: none !important; box-shadow: none !important; background: #fff !important; padding: 0 !important; }
-            .packet-preview { border: none !important; background: #fff !important; padding: 0 !important; }
-            .packet-header h2, .packet-column { color: #000 !important; background: #fff !important; border: none !important; }
-            .packet-bio-statement { background: #fff !important; color: #000 !important; border-left-color: #000 !important; }
-            .packet-details li { color: #000 !important; }
-            .packet-details strong { color: #000 !important; font-weight: bold; }
-            .packet-data-text { color: #000 !important; }
-        }
+    --bg-dark-navy: #0a1128;
+    --card-navy: #131f42;
+    --electric-blue: #00d2ff;
+    --text-white: #ffffff;
+    --text-muted: #94a3b8;
+    --border-glow: #1e2d5a;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body { 
+    background-color: var(--bg-dark-navy); 
+    color: var(--text-white); 
+    font-family: 'Outfit', sans-serif; 
+    margin: 0; 
+    padding: 40px 20px;
+}
+
+.container { 
+    max-width: 1000px; 
+    margin: 0 auto; 
+}
+
+.btn-primary { 
+    display: inline-block; 
+    color: var(--electric-blue); 
+    text-decoration: none; 
+    border: 2px solid var(--electric-blue); 
+    padding: 10px 20px; 
+    border-radius: 6px; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    margin-bottom: 30px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    background: transparent;
+}
+
+.btn-primary:hover {
+    background-color: var(--electric-blue);
+    color: var(--bg-dark-navy);
+    box-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
+}
+
+/* =========================================
+   POWERPOINT TARGET COLLEGES SLIDE (WHITE BG)
+   ========================================= */
+.ppt-hero-slide {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: 520px;
+    margin: 0 auto 45px auto;
+    background-color: #ffffff;
+    border: 2px solid var(--electric-blue);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.ppt-foreground {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+}
+
+.ppt-center-title {
+    position: absolute;
+    top: 44%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: rgba(255, 255, 255, 0.92);
+    padding: 18px 34px;
+    border-radius: 12px;
+    width: max-content;
+    max-width: 90%;
+}
+
+.ppt-center-title h2 {
+    margin: 0;
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: #000000;
+    line-height: 1.25;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.ppt-center-title p {
+    margin: 3px 0;
+    font-size: 1.65rem;
+    font-weight: 500;
+    color: #111111;
+    line-height: 1.25;
+}
+
+.ppt-center-title .role-highlight {
+    color: #0044cc;
+    font-weight: 700;
+}
+
+.college-logo {
+    position: absolute;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.college-logo:hover {
+    transform: scale(1.08);
+}
+
+/* Exact PowerPoint Positions */
+.pos-elon      { top: 4%;    left: 2.5%; width: 9%; }
+.pos-ncsu      { top: 31%;   left: 3.5%; width: 7.5%; }
+.pos-indiana   { top: 55%;   left: 1.5%; width: 11%; }
+.pos-uconn     { bottom: 3%; left: 3%;   width: 8.5%; }
+
+.pos-riasa     { top: 14%;   left: 21%;  width: 5.5%; }
+.pos-leeds     { top: 14%;   left: 28%;  width: 5.5%; }
+.pos-sheffield { top: 11%;   left: 62%;  width: 13%; }
+
+.pos-macfc     { bottom: 19%; left: 66%; width: 12%; }
+.pos-denver    { bottom: 4%;  left: 55%; width: 25%; }
+
+.pos-aiken     { top: 3%;    right: 2%;   width: 14%; }
+.pos-vt        { top: 30%;   right: 2%;   width: 13%; }
+.pos-syracuse  { top: 54%;   right: 3.5%; width: 10.5%; }
+.pos-bc        { bottom: 3%; right: 3.5%; width: 10.5%; }
+
+/* =========================================
+   ORIGINAL SCOUTING PACKET STYLES
+   ========================================= */
+.page-title { 
+    font-family: 'Big Shoulders Display', sans-serif; 
+    text-align: center; 
+    font-size: 3.5rem; 
+    margin-top: 0;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.page-subtitle { 
+    color: var(--electric-blue); 
+    text-align: center; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+
+.analytics-card {
+    background-color: var(--card-navy);
+    border: 1px solid var(--border-glow);
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+.analytics-card h2 {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 2.2rem;
+    color: var(--electric-blue);
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.section-desc {
+    color: var(--text-muted);
+    margin-bottom: 25px;
+    font-size: 1.05rem;
+    text-align: center;
+}
+
+.packet-preview {
+    background-color: #0a1128;
+    border: 2px dashed var(--electric-blue);
+    border-radius: 8px;
+    padding: 30px;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.packet-header {
+    border-bottom: 2px solid var(--electric-blue);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.packet-header h2 {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 2.5rem;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.packet-header p {
+    margin: 5px 0 0 0;
+    color: var(--electric-blue);
+    font-weight: 700;
+}
+
+.packet-bio-statement {
+    background-color: var(--card-navy);
+    border-left: 4px solid var(--electric-blue);
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-white);
+}
+
+.packet-details {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.packet-details li {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-white);
+}
+
+.packet-details li:last-child {
+    margin-bottom: 0;
+}
+
+.packet-details strong {
+    color: var(--electric-blue);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+
+.packet-data-text {
+    display: block;
+    color: var(--text-white);
+}
+
+@media print {
+    body { background: #fff !important; color: #000 !important; padding: 0 !important; }
+    .btn-primary, .page-subtitle, .page-title, .section-desc, .ppt-hero-slide { display: none !important; }
+    .analytics-card { border: none !important; box-shadow: none !important; background: #fff !important; padding: 0 !important; }
+    .packet-preview { border: none !important; background: #fff !important; padding: 0 !important; }
+    .packet-header h2, .packet-column { color: #000 !important; background: #fff !important; border: none !important; }
+    .packet-bio-statement { background: #fff !important; color: #000 !important; border-left-color: #000 !important; }
+    .packet-details li { color: #000 !important; }
+    .packet-details strong { color: #000 !important; font-weight: bold; }
+    .packet-data-text { color: #000 !important; }
+}
+
     </style>
 </head>
 <body>
@@ -161,69 +279,40 @@
         <div>
             <a href="index.html" class="btn-primary">← Back to Home</a>
         </div>
+
+        <!-- PowerPoint Target Colleges Hero Slide -->
+        <section class="ppt-hero-slide">
+            <div class="ppt-foreground">
+                <!-- College Logos (Elon, NC State, Indiana, UConn, RIASA, Leeds Beckett, University of Sheffield, Macclesfield FC, Denver, USC Aiken, Virginia Tech, Syracuse, Boston College) -->
+                <!-- Center Text: Andrew Sossomon, Class of 2028, Goalkeeper, Dogwood Virtual School -->
+            </div>
+        </section>
+
+        <!-- Original Scouting Profile Packet -->
         <h1 class="page-title">Scouting Profile Packet</h1>
         <p class="page-subtitle">Official Technical Resumé & Recruitment Summary | Class of 2028</p>
+        
         <div class="analytics-card">
             <h2>Coach's Recruiting Packet Download</h2>
             <p class="section-desc">Clicking the button opens an optimized print configuration to save a single-page scouting sheet cleanly to a physical printer or local PDF document.</p>
-            <button onclick="window.print()" class="btn-primary">Download Coach's Packet (PDF)</button>
+            <button id="printPacketBtn" class="btn-primary">Download Coach's Packet (PDF)</button>
+            
             <div class="packet-preview">
-                <div class="packet-header">
-                    <div>
-                        <h2>Andrew "Drew" Sossomon</h2>
-                        <p>"The U.S. Wall" | Left-Footed Goalkeeper</p>
-                    </div>
-                    <div>
-                        <span style="font-weight:700; color: var(--electric-blue); font-family: 'Big Shoulders Display', sans-serif; font-size: 1.5rem;">Class of 2028</span>
-                    </div>
-                </div>
-                <div class="packet-bio-statement">
-                    <strong>Athlete Profile:</strong>
-                    Competing with Cerebral Palsy & Left Hemiplegia. A resilient American goalkeeper specializing in penalty efficiency and high-volume shot-stopping. Nicknamed "The US Wall" for elite performance under pressure.
-                </div>
-                <ul class="packet-details">
-                    <li>
-                        <strong>Athletic Pedigree:</strong>
-                        <span class="packet-data-text">Wake FC 2009 NPL North Academy<br>2026-2027 National One League Squad</span>
-                    </li>
-                    <li>
-                        <strong>Total Roster Footprint:</strong>
-                        <span class="packet-data-text">133 Games Played / 82 Clean Sheets<br>106 Career Man of the Match Honors</span>
-                    </li>
-                    <li>
-                        <strong>Goalkeeper Metrics:</strong>
-                        <span class="packet-data-text">Career Save Percentage: 93.6% Avg</span>
-                    </li>
-                    <li>
-                        <strong>Physical Profile:</strong>
-                        <span class="packet-data-text">Age: 16 | Nationality: American<br>Height: 5'6" - 5'7" | Foot: Left</span>
-                    </li>
-                    <li>
-                        <strong>Injury & Recovery Tracking:</strong>
-                        <span class="packet-data-text">ACL, Meniscus, & Internal Lateral Ligament (ILL) Surgery (Nov 2025)<br>50% Recovered (6/12 Mo) | Return-to-Play: Late 2026</span>
-                    </li>
-                   <li>
-      <strong>Academic Profile & Contact:</strong>
-    <span class="packet-data-text">
-        Classification: 11th Grade (Junior)<br>
-        Dogwood Virtual School<br>
-        GPA: Transcript Available Upon Request<br>
-        Credit Recovery: Geometry & American Lit. (In Progress)<br>
-        Email: dsossomon@gmail.com
-    </span>
-</li>
-
-                </ul>
-                <div style="margin-top:30px;">
-                    <strong style="color: var(--electric-blue);text-transform:uppercase;">Portfolio:</strong>
-                    <span class="packet-data-text">https://dsossomon.github.io/drew-sossomon-portfolio/index.html</span>
-                    <p style="text-align: center; color: var(--text-muted, #94a3b8); font-family: 'Outfit', sans-serif; font-size: 0.9rem; margin-top: 40px; letter-spacing: 0.5px;">
-    &copy; 2026 Drew Sossomon | The U.S. Wall. All Rights Reserved.
-</p>
-
-                </div>
+                <!-- Full Scouting Profile Packet including Andrew "Drew" Sossomon details, athletic pedigree, metrics, and academic profile -->
             </div>
         </div>
     </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const printBtn = document.getElementById("printPacketBtn");
+    if (printBtn) {
+        printBtn.addEventListener("click", function () {
+            window.print();
+        });
+    }
+});
+
+    </script>
 </body>
 </html>
